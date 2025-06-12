@@ -1,0 +1,16 @@
+* {
+  font-family: "Cormorant", sans-serif;
+}
+@import "./data/modern-normolize";
+@import "./data/reset";
+@import "./data/variables";
+@import "./data/fonts";
+@import "./utils/preloder";
+
+@import "./data/fontello";
+@import "./utils/container";
+@import "./utils/title";
+@import "./utils/button";
+@import "./components/header";
+@import "./components/hero";
+@import "./components/about";

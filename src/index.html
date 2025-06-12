@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Website for Monovision Studio" />
+    <meta name="author" content="Awesome student" />
+    <title>Monovision Studio</title>
+    <link rel="stylesheet" href="css/modern-normalize.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.min.css" />
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="preloader">
+      <div class="preloader-top"></div>
+      <div class="preloader-bottom"></div>
+      <div class="preloader-bar"></div>
+      <img src="./logo/logoLight.webp" alt="Logo" class="preloder-logo" />
+      <div class="preloader-bar-two"></div>
+    </div>
+
+    <header class="header">
+      <div class="container">
+        <div class="header__wrapper">
+          <div class="header__top">
+            <ul class="social">
+              <li class="social__item">
+                <a href="#" class="social__instagram"
+                  ><span class="icon-instagram"></span
+                ></a>
+              </li>
+              <li class="social__item">
+                <a href="#" class="social__rest">
+                  <span class="icon-forward-outline"></span
+                ></a>
+              </li>
+            </ul>
+            <div class="logo title title__logo">
+              <a href="#" class="logo__link"
+                ><img src="./logo/logoBlack.webp" alt="Olesia Herashchenko"
+              /></a>
+              | Olesia Herashchenko
+            </div>
+
+            <button class="button">Забронювати сеанс</button>
+          </div>
+          <div class="header__bottom fixed-top nav-down">
+            <nav>
+              <ul>
+                <li>
+                  <a href="#about" class="nav-link nav-active">Про мене</a>
+                </li>
+                <li><a href="#portfolio" class="nav-link">Портфоліо</a></li>
+                <li><a href="#testimonials" class="nav-link">Відгуки</a></li>
+                <!-- <li><a href="#booking" class="nav-link">Бронювання</a></li> -->
+                <li>
+                  <a href="#account" class="nav-link">Послугии та ціни</a>
+                </li>
+                <li><a href="#contact" class="nav-link">Контакти</a></li>
+                <!-- <li class="theme-toggle">
+                  <label for="darkSwitch">🌙</label>
+                  <input type="checkbox" id="darkSwitch" />
+                </li> -->
+                <!-- <li class="theme-toggle">
+                  <label class="switch">
+                    <input type="checkbox" id="darkSwitch" />
+                    <span class="slider">
+                      <span class="icon">☀</span>
+                      <span class="icon">🌙</span>
+                    </span>
+                  </label>
+                </li> -->
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="slider" id="slider">
+            <div class="slide-bg current" id="current-bg"></div>
+            <div class="slide-bg next" id="next-bg"></div>
+
+            <div class="slider-content">
+              <h1 class="tittle hero__title">Моменти для спогадів</h1>
+              <p class="hero__descr">Створимо Вашу історію кохання</p>
+              <a href="#contact" class="button__hero"
+                ><span>Замовити фотосесію</span></a
+              >
+            </div>
+
+            <button class="nav__hero left" id="prev">&#10094;</button>
+            <button class="nav__hero right" id="next">&#10095;</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="about">
+        <div class="container">
+          <h2 class="about__title">Про мене</h2>
+          <p>
+            Привіт! Мене звати Олеся, я — фотограф з пристрастю до миттєвостей,
+            які говорять більше за тисячу слів. Моя мета — не просто створювати
+            зображення, а розповідати історії через світло, тіні та емоції.
+            Працюю у різних жанрах. Кожна зйомка — це унікальний досвід, який я
+            намагаюся зробити особливим для кожного із Вас. Вірю, що найкращі
+            кадри народжуються у щирості. Тому створюю атмосферу, де ви можете
+            бути собою — без напруги та постановочності. Якщо ви шукаєте
+            фотографа, який допоможе вам зберегти емоції на все життя — запрошую
+            переглянути мої роботи та зв’язатися для бронювання.
+          </p>
+          <button class="button about__button">скажи привіт</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="social">
+        <ul class="social__list">
+          <li class="social__item">
+            <a href="" class="social__link"
+              ><img
+                src="./icons/facebook.svg"
+                alt="facebook"
+                class="social__logo"
+            /></a>
+          </li>
+          <li class="social__item">
+            <a href="" class="social__link"
+              ><img src="./icons/tg.svg" alt="tg" class="social__logo"
+            /></a>
+          </li>
+          <li class="social__item">
+            <a href="" class="social__link"
+              ><img
+                src="./icons/whatsapp.svg"
+                alt="whatsapp"
+                class="social__logo"
+            /></a>
+          </li>
+        </ul>
+      </div>
+      <address class="footer__address">
+        Everton Park, Block 2, Singapore 081002
+      </address>
+      <a class="footer__tel" href="tel:+">+6569964725</a>
+    </footer>
+    <script src="./js/preloder.js"></script>
+    <script src="./js/slider.js"></script>
+    <script src="./js/scroll.js"></script>
+  </body>
+</html>

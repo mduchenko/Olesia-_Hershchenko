@@ -1,0 +1,90 @@
+.header {
+  padding-top: 20px;
+
+  &__top {
+    height: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: centers;
+  }
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .social {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    &__item {
+      width: 16px;
+      height: 16px;
+      span {
+        font-size: 20px;
+        color: var(--light-dark);
+      }
+    }
+  }
+  &__bottom {
+    padding: 20px 0;
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      li {
+        position: relative;
+      }
+      a {
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--light-dark);
+        transition: color 0.3s ease;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 2px;
+          width: 100%;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.4s ease;
+          background-color: var(--light-btn);
+        }
+        &:visited::after {
+          transform: scaleX(1);
+        }
+        &:hover::after {
+          color: var(--light-btn);
+          transform: scaleX(1);
+          transform-origin: left; /* Виїзд зліва */
+        }
+        &:not(:hover)::after {
+          transform-origin: right; /* Заїзд справа */
+        }
+        &.nav-active {
+          color: var(--light-btn);
+          &::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+        }
+      }
+    }
+  }
+
+  .fixed-top {
+    position: absolute;
+    top: 70px;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background: var(--light-bg);
+  }
+
+  .nav-up {
+    position: fixed;
+    top: 0;
+  }
+}
