@@ -16,6 +16,17 @@ function showPreloader(callback) {
   bar.style.animation = "flashLine 1s forwards ease-in-out";
   barTwo.style.animation = "flashLine 1s forwards ease-in-out";
 
+  if (window.innerWidth <= 768) {
+    bar.style.animation = "flashLineMobile 1s forwards ease-in-out";
+    barTwo.style.animation = "flashLineMobile 1s forwards ease-in-out";
+  } else if (window.innerWidth <= 1240) {
+    bar.style.animation = "flashLineLaptop 1s forwards ease-in-out";
+    barTwo.style.animation = "flashLineLaptop 1s forwards ease-in-out";
+  } else {
+    bar.style.animation = "flashLine 1s forwards ease-in-out";
+    barTwo.style.animation = "flashLine 1s forwards ease-in-out";
+  }
+
   document.body.style.overflow = "hidden";
 
   setTimeout(() => {
