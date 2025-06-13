@@ -1,0 +1,55 @@
+.menu-btn {
+  display: none;
+  // position: absolute;
+  // top: 50%;
+  // transform: translateY(-50%);
+  // right: 20px;
+  position: relative;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1001;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-self: center;
+  }
+}
+
+.menu-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--light-dark);
+  transition: transform 0.5s ease, opacity 0.3s ease;
+  transform-origin: center;
+  position: absolute;
+  left: 0;
+}
+
+/* початкові позиції */
+.menu-btn span:nth-child(1) {
+  top: 0;
+}
+.menu-btn span:nth-child(2) {
+  top: 10px;
+}
+.menu-btn span:nth-child(3) {
+  top: 20px;
+}
+
+/* активний стан */
+.menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 10px;
+}
+
+.menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  top: 10px;
+}

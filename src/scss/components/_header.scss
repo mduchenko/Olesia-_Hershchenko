@@ -2,6 +2,7 @@
   padding-top: 20px;
 
   &__top {
+    position: relative;
     height: 52px;
     display: flex;
     justify-content: space-between;
@@ -23,6 +24,14 @@
         font-size: 20px;
         color: var(--light-dark);
       }
+    }
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+  &__button {
+    @media screen and (max-width: 768px) {
+      display: none;
     }
   }
   &__bottom {
@@ -70,6 +79,11 @@
             transform-origin: left;
           }
         }
+      }
+    }
+    nav {
+      @media screen and (max-width: 768px) {
+        display: none;
       }
     }
   }

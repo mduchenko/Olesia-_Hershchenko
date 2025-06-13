@@ -2,6 +2,9 @@
   font-family: "Cormorant", sans-serif;
   &__logo {
     font-size: 32px;
+    @media screen and (max-width: 768px) {
+      font-size: 22px;
+    }
   }
   img {
     height: 42px;
