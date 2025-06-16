@@ -2,7 +2,7 @@ let lastScrollTop = 0;
 const delta = 5;
 const header = document.querySelector(".header__bottom");
 // const headerMain = document.querySelector(".hero");
-const pseudoHeader = document.querySelector(".header-pseudo");
+// const pseudoHeader = document.querySelector(".header-pseudo");
 const navbarHeight = header ? header.offsetHeight * 4 : 0;
 
 function hasScrolled() {

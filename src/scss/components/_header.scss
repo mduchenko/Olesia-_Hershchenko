@@ -1,3 +1,6 @@
+body.menu-open {
+  overflow: hidden;
+}
 .header {
   padding-top: 20px;
   .social {
@@ -98,29 +101,45 @@
         }
       }
     }
-
-    @media screen and (max-width: 768px) {
-      display: none;
+    .fixed-top {
+      position: absolute;
+      top: 70px;
+      right: 0;
+      left: 0;
+      z-index: 1030;
+      background: var(--light-bg);
     }
     @media screen and (max-width: 768px) {
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-in-out;
+      display: none;
       &.active {
+        // position: fixed; /* Фіксує меню */
+        // top: 70px;
+        // left: 0;
         display: flex;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
+        background-color: var(--light-bg);
+        z-index: 10000;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+        transform: translateY(0);
       }
     }
   }
-
-  .fixed-top {
-    position: absolute;
-    top: 70px;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-    background: var(--light-bg);
+  @media screen and (max-width: 768px) {
+    &.active {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10000;
+      background-color: var(--light-bg);
+    }
   }
-
   .nav-up {
     position: fixed;
     top: 0;
