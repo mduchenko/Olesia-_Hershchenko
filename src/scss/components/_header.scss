@@ -36,11 +36,15 @@
   }
   &__bottom {
     padding: 20px 0;
+
     ul {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 25px;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+      }
       li {
         position: relative;
       }
@@ -81,9 +85,16 @@
         }
       }
     }
-    nav {
-      @media screen and (max-width: 768px) {
-        display: none;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+    @media screen and (max-width: 768px) {
+      &.active {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
