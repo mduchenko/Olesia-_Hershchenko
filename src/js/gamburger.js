@@ -3,7 +3,9 @@ let navLink = document.querySelector(".nav-link");
 const navMenu = document.querySelector(".header__bottom");
 let headerMenu = document.querySelector(".header");
 const socialMenu = document.querySelector(".social__menu");
-const socialBtn = document.querySelector(".social__rest");
+const socialOpen = document.querySelectorAll(".social__rest");
+const socialClose = document.querySelector(".social__close");
+
 menuBtn.addEventListener("click", () => {
   menuBtn.classList.toggle("active");
   navMenu.classList.toggle("active");
@@ -12,9 +14,24 @@ menuBtn.addEventListener("click", () => {
   document.body.classList.toggle("menu-open");
 });
 
-socialBtn.addEventListener("click", () => {
-  socialMenu.classList.toggle("active");
-});
+function openSocial(el) {
+  el.forEach((i) => {
+    i.addEventListener("click", () => {
+      socialMenu.classList.toggle("active");
+    });
+  });
+  //   el.addEventListener("click", () => {
+  //     socialMenu.classList.toggle("active");
+  //   });
+}
+openSocial(socialOpen);
+
+function closeSocial(el) {
+  el.addEventListener("click", () => {
+    socialMenu.classList.toggle("active");
+  });
+}
+closeSocial(socialClose);
 
 navLink.addEventListener("click", () => {
   menuBtn.classList.toggle("active");

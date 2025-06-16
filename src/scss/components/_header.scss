@@ -165,20 +165,47 @@ body.menu-open {
 //   transition: transform 0.3s ease;
 // }
 .social__menu {
+  position: absolute;
+  top: 0;
+  width: 30%;
+  height: 30%;
   transform: translateX(-100%);
+  margin: 0;
   transition: all 1s ease;
+  background-color: rgba(167, 160, 160, 0.156);
+  box-shadow: 5px 5px 5px var(--light-bg);
+  z-index: 100000;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    background-color: rgba(167, 160, 160, 0.504);
+  }
+  .social__char {
+    width: 50px;
+    height: 50px;
+    border: 1px solid var(--light-dark);
+    box-shadow: 5px 5px 5px var(--light-bg);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+  }
+  .social__close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
   &.active {
-    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100px;
-    height: 35px;
-    border: 1px solid red;
-    z-index: 100000;
-    width: 30%;
-    height: 30%;
-    border-radius: 20px;
   }
 }
