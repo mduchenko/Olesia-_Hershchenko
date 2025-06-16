@@ -1,18 +1,5 @@
 .header {
   padding-top: 20px;
-
-  &__top {
-    position: relative;
-    height: 52px;
-    display: flex;
-    justify-content: space-between;
-    align-items: centers;
-  }
-  .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
   .social {
     display: flex;
     align-items: center;
@@ -25,10 +12,25 @@
         color: var(--light-dark);
       }
     }
+  }
+  &__top {
+    position: relative;
+    height: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: centers;
     @media screen and (max-width: 768px) {
-      display: none;
+      .social {
+        display: none;
+      }
     }
   }
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   &__button {
     @media screen and (max-width: 768px) {
       display: none;
@@ -36,7 +38,18 @@
   }
   &__bottom {
     padding: 20px 0;
-
+    @media screen and (min-width: 768px) {
+      .social {
+        display: none;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      .social {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+      }
+    }
     ul {
       display: flex;
       justify-content: center;
