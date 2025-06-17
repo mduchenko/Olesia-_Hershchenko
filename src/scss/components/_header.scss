@@ -4,6 +4,7 @@ body.menu-open {
 }
 .header {
   padding-top: 20px;
+  overflow: hidden;
   .social {
     display: flex;
     align-items: center;
@@ -23,7 +24,7 @@ body.menu-open {
     height: 52px;
     display: flex;
     justify-content: space-between;
-    align-items: centers;
+    align-items: center;
     @media screen and (max-width: 768px) {
       .social {
         display: none;
@@ -87,6 +88,11 @@ body.menu-open {
           transition: transform 0.4s ease;
           background-color: var(--light-btn);
         }
+        @media screen and (max-width: 768px) {
+          &::after {
+            display: none;
+          }
+        }
 
         &:visited::after {
           transform: scaleX(1);
@@ -95,15 +101,9 @@ body.menu-open {
           color: var(--light-btn);
           transform: scaleX(1);
           transform-origin: left; /* Виїзд зліва */
-          @media screen and (min-width: 768px) {
-            transform: scaleX(0);
-          }
         }
         &:not(:hover)::after {
           transform-origin: right; /* Заїзд справа */
-          @media screen and (min-width: 768px) {
-            transform: scaleX(0);
-          }
         }
         &.nav-active {
           color: var(--light-btn);
@@ -176,7 +176,7 @@ body.menu-open {
   top: 0;
   width: 45%;
   height: 30%;
-  transform: translateX(calc(-100% - 5px));
+  transform: translateX(calc(-100% - 10px));
   margin: 0;
   transition: all 1s ease;
   background-color: rgba(167, 160, 160, 0.156);
