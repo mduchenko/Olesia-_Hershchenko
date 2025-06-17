@@ -126,6 +126,7 @@ body.menu-open {
       transition: transform 0.3s ease-in-out;
       display: none;
       &.active {
+        margin: 20px 0;
         // position: fixed; /* Фіксує меню */
         // top: 70px;
         // left: 0;
