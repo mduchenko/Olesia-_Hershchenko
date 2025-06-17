@@ -10,8 +10,8 @@ menuBtn.addEventListener("click", () => {
   menuBtn.classList.toggle("active");
   navMenu.classList.toggle("active");
   headerMenu.classList.toggle("active");
-
   document.body.classList.toggle("menu-open");
+  socialMenu.classList.remove("active");
 });
 
 function openSocial(el) {
