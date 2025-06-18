@@ -1,42 +1,51 @@
-let lastScrollTop = 0;
-const delta = 5;
-const header = document.querySelector(".header__bottom");
-const navbarHeight = header ? header.offsetHeight * 4 : 0;
+const headerBottom = document.querySelector(".header__bottom");
+const headerMain = document.querySelector(".header");
+function isHeaderScroll(header) {
+  let lastScrollTop = 0;
+  const delta = 5;
 
-// Відстеження скролу
-function hasScrolled() {
-  if (!header) return;
+  const navbarHeight = header ? header.offsetHeight * 4 : 0;
 
-  // Не ховаємо хедер, якщо активне мобільне меню
-  if (document.body.classList.contains("menu-open")) return;
+  // Відстеження скролу
+  function hasScrolled() {
+    if (!header) return;
 
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    // Не ховаємо хедер, якщо активне мобільне меню
+    if (document.body.classList.contains("menu-open")) return;
 
-  if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-  const scrollingDown = scrollTop > lastScrollTop && scrollTop > navbarHeight;
-  const notAtBottom =
-    scrollTop + window.innerHeight < document.documentElement.scrollHeight;
+    if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
 
-  if (scrollingDown) {
-    header.classList.remove("nav-down");
-    header.classList.add("nav-up");
-  } else if (notAtBottom) {
-    header.classList.remove("nav-up");
-    header.classList.add("nav-down");
+    const scrollingDown = scrollTop > lastScrollTop && scrollTop > navbarHeight;
+    const notAtBottom =
+      scrollTop + window.innerHeight < document.documentElement.scrollHeight;
+
+    if (scrollingDown) {
+      header.classList.remove("nav-down");
+      header.classList.add("nav-up");
+    } else if (notAtBottom) {
+      header.classList.remove("nav-up");
+      header.classList.add("nav-down");
+    }
+
+    lastScrollTop = scrollTop;
   }
 
-  lastScrollTop = scrollTop;
+  // requestAnimationFrame throttling
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        hasScrolled();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
 }
-
-// requestAnimationFrame throttling
-let ticking = false;
-window.addEventListener("scroll", () => {
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      hasScrolled();
-      ticking = false;
-    });
-    ticking = true;
-  }
-});
+const currentHeader =
+  document.documentElement.clientWidth <= 768 ? headerMain : headerBottom;
+if (currentHeader) {
+  isHeaderScroll(currentHeader);
+}

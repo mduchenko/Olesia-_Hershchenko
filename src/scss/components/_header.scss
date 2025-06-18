@@ -7,7 +7,6 @@ body.menu-open {
   .social {
     display: flex;
     align-items: center;
-
     gap: 30px;
     &__item {
       width: 16px;
@@ -141,6 +140,9 @@ body.menu-open {
         transform: translateY(0);
       }
     }
+    // &.nav-down {
+    //   position: static;
+    // }
     &.nav-up {
       position: fixed;
       top: 0;
@@ -161,6 +163,13 @@ body.menu-open {
       z-index: 10000;
       background-color: var(--light-bg);
     }
+  }
+  &.nav-up {
+    position: fixed;
+    top: 0;
+    background-color: var(--light-bg);
+    width: 100%;
+    z-index: 10000;
   }
 }
 // .header__bottom.nav-up {
