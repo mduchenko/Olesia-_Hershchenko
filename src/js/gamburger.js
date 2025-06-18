@@ -1,5 +1,5 @@
 const menuBtn = document.getElementById("menu-btn");
-let navLink = document.querySelector(".nav-link");
+let navLink = document.querySelectorAll(".nav-link");
 const navMenu = document.querySelector(".header__bottom");
 let headerMenu = document.querySelector(".header");
 const socialMenu = document.querySelector(".social__menu");
@@ -33,9 +33,16 @@ function closeSocial(el) {
 }
 closeSocial(socialClose);
 
-navLink.addEventListener("click", () => {
-  menuBtn.classList.toggle("active");
-  navMenu.classList.toggle("active");
-  headerMenu.classList.toggle("active");
-  document.body.classList.toggle("menu-open");
-});
+function clickNavLink(el) {
+  el.forEach((i) => {
+    i.addEventListener("click", () => {
+      menuBtn.classList.remove("active");
+      navMenu.classList.remove("active");
+      headerMenu.classList.remove("active");
+      document.body.classList.remove("menu-open");
+      headerMain.classList.remove("nav-up");
+    });
+  });
+}
+
+clickNavLink(navLink);
