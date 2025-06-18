@@ -2,7 +2,7 @@ const headerBottom = document.querySelector(".header__bottom");
 const headerMain = document.querySelector(".header");
 function isHeaderScroll(header) {
   let lastScrollTop = 0;
-  const delta = 5;
+  const delta = window.innerWidth < 768 ? 2 : 5;
 
   const navbarHeight = header ? header.offsetHeight * 4 : 0;
 
