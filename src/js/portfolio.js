@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox1.classList.add("hidden");
     document.body.classList.remove("menu-open"); // Дозволити скрол
   });
+  lightbox1.addEventListener("click", () => {
+    lightbox1.classList.add("hidden");
+    document.body.classList.remove("menu-open"); // Дозволити скрол
+  });
 
   prevBtn1.addEventListener("click", () => {
     showImage(currentIndex1 - 1);
