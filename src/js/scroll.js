@@ -45,7 +45,30 @@ function isHeaderScroll(header) {
     }
   });
 }
-const currentHeader = window.innerWidth <= 768 ? headerMain : headerBottom;
-if (currentHeader) {
-  isHeaderScroll(currentHeader);
+const currentHeader =
+  window.innerWidth <= 768
+    ? isMobileScroll(headerMain)
+    : isHeaderScroll(headerBottom);
+
+function isMobileScroll(header) {
+  let lastScrollTop = 0;
+  const delta = 5;
+  window.addEventListener("scroll", () => {
+    const currentScroll =
+      window.pageYOffset || document.documentElement.scrollTop;
+
+    if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
+
+    if (currentScroll > lastScrollTop) {
+      // Скрол вниз — ховати
+      header.classList.add("nav-down");
+      header.classList.remove("nav-up");
+    } else {
+      // Скрол вгору — показати
+      header.classList.add("nav-up");
+      header.classList.remove("nav-down");
+    }
+
+    lastScrollTop = currentScroll;
+  });
 }
