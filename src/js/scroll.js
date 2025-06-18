@@ -44,8 +44,7 @@ function isHeaderScroll(header) {
     }
   });
 }
-const currentHeader =
-  document.documentElement.clientWidth <= 768 ? headerMain : headerBottom;
+const currentHeader = window.innerWidth <= 768 ? headerMain : headerBottom;
 if (currentHeader) {
   isHeaderScroll(currentHeader);
 }
