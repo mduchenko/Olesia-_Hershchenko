@@ -29,19 +29,20 @@ document.addEventListener("DOMContentLoaded", () => {
     lightbox1.classList.add("hidden");
     document.body.classList.remove("menu-open"); // Дозволити скрол
   });
+
+  prevBtn1.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showImage(currentIndex1 - 1);
+  });
+
+  nextBtn1.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showImage(currentIndex1 + 1);
+  });
   lightbox1.addEventListener("click", () => {
     lightbox1.classList.add("hidden");
     document.body.classList.remove("menu-open"); // Дозволити скрол
   });
-
-  prevBtn1.addEventListener("click", () => {
-    showImage(currentIndex1 - 1);
-  });
-
-  nextBtn1.addEventListener("click", () => {
-    showImage(currentIndex1 + 1);
-  });
-
   // ESC закриває
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
