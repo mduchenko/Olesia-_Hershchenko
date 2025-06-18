@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentIndex1 = index;
     lightboxImg1.src = images1[currentIndex1].src;
     lightbox1.classList.remove("hidden");
+    document.body.classList.add("menu-open"); // Заборонити скрол
   }
 
   images1.forEach((img, index) => {
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   closeBtn1.addEventListener("click", () => {
     lightbox1.classList.add("hidden");
+    document.body.classList.remove("menu-open"); // Дозволити скрол
   });
 
   prevBtn1.addEventListener("click", () => {
@@ -38,6 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ESC закриває
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") lightbox1.classList.add("hidden");
+    if (e.key === "Escape") {
+      lightbox1.classList.add("hidden");
+      document.body.classList.remove("menu-open"); // Дозволити скрол
+    }
   });
 });
