@@ -40,7 +40,8 @@ function clickNavLink(el) {
       navMenu.classList.remove("active");
       headerMenu.classList.remove("active");
       document.body.classList.remove("menu-open");
-      headerMain.classList.remove("nav-up");
+      headerMenu.classList.toggle("nav-down");
+      headerMenu.classList.remove("nav-up");
     });
   });
 }
