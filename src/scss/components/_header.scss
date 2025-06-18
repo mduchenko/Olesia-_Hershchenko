@@ -4,6 +4,7 @@ body.menu-open {
 }
 .header {
   padding-top: 20px;
+  transition: all 0.625s ease-in-out;
   .social {
     display: flex;
     align-items: center;

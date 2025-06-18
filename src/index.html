@@ -174,6 +174,26 @@
           <button class="button about__button">скажи привіт</button>
         </div>
       </section>
+      <section class="portfolio" id="portfolio">
+        <h2 class="portfolio__title">Моє портфоліо</h2>
+        <div class="portfolio__gallery">
+          <img src="./img/фото1.webp" alt="Фото 1" class="portfolio__img" />
+          <img src="./img/фото2.webp" alt="Фото 2" class="portfolio__img" />
+          <img src="./img/фото2.webp" alt="Фото 3" class="portfolio__img" />
+          <img src="./img/фото2.webp" alt="Фото 4" class="portfolio__img" />
+          <!-- Додай більше фото за потреби -->
+        </div>
+
+        <!-- Lightbox / Слайдер -->
+        <div class="lightbox hidden">
+          <span class="lightbox__close">&times;</span>
+          <img class="lightbox__img" src="" alt="" />
+          <div class="lightbox__controls">
+            <span class="prev">&#10094;</span>
+            <span class="next">&#10095;</span>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
@@ -207,6 +227,7 @@
       </address>
       <a class="footer__tel" href="tel:+">+6569964725</a>
     </footer>
+    <script src="./js/portfolio.js"></script>
     <script src="./js/preloder.js"></script>
     <script src="./js/slider.js"></script>
     <script src="./js/scroll.js"></script>
