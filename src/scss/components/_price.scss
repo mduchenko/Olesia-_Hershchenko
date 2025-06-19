@@ -1,0 +1,194 @@
+/* Контейнер для центрування і максимальна ширина */
+.price {
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  /* Ліва частина (послуги) */
+  &__services {
+    flex: 0 1 calc(66.666% - 2rem); /* 2/3 ширини */
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 1024px) {
+      flex: 0 1 100%;
+    }
+  }
+  &__title {
+    margin-bottom: 1.5rem;
+    text-align: left;
+    @media (max-width: 1024px) {
+      text-align: center;
+    }
+  }
+}
+
+/* Форма послуг */
+.services-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Кожен блок послуги */
+.service-item {
+  background-color: transparent;
+  // border: 1px solid var(--dark-btn);
+  // filter: drop-shadow(3px 3px 17px #f9a8d4) invert(40%);
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  // flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+// @media (min-width: 640px) {
+//   .service-item {
+//     flex-direction: row;
+//     align-items: center;
+//   }
+// }
+
+.service-info {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .service-info {
+    margin-bottom: 0;
+  }
+}
+
+.service-label {
+  font-weight: 600;
+  display: block;
+}
+
+.service-desc {
+  font-size: 1rem;
+  color: var(--light-dark); /* сіро-блакитний */
+}
+
+/* Контрол елементів (чекбокс, input number) */
+.service-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle-switch {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.service-number-input {
+  width: 4rem;
+  padding: 0.25rem 0.5rem;
+  text-align: right;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Прості елементи без input number */
+.service-item.simple {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Вибір дати */
+.date-picker {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.date-input {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  font-size: 1rem;
+}
+
+/* Права частина (ціна) */
+.price-summary {
+  flex: 0 1 33.333%; /* 1/3 ширини */
+}
+
+.summary-box {
+  background-color: #fff;
+  border: 2px solid #f9a8d4; /* рожевий */
+  padding: 2rem;
+  text-align: center;
+  border-radius: 24px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+}
+
+.total-price {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.duration {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.order-button {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  padding: 0.75rem 0;
+  font-weight: 600;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+  background-color: #333;
+}
+
+/* Адаптивність */
+@media (max-width: 1023px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .services-block,
+  .price-summary {
+    flex: 1 1 100%;
+  }
+}
+
+/* Приховуємо стандартні стрілки */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

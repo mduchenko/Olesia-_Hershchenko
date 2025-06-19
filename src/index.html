@@ -29,7 +29,6 @@
       href="./favicon-16x16.png"
     />
     <link rel="manifest" href="./site.webmanifest" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.min.css" />
   </head>
   <body>
@@ -195,150 +194,133 @@
         </div>
       </section>
 
-      <section class="py-12 bg-white" id="pricing">
-        <div
-          class="max-w-5xl mx-auto px-4 flex flex-col gap-8 lg:flex-row lg:gap-8"
-        >
-          <!-- Блок вибору послуг -->
-          <div class="w-full lg:w-2/3">
-            <h2 class="text-4xl font-bold mb-6 text-center lg:text-left">
-              Custom
-            </h2>
-            <form id="services-form" class="space-y-6">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <!-- Послуга -->
-                <div
-                  class="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-50 border px-4 py-3 rounded-xl"
-                >
-                  <div class="mb-2 sm:mb-0">
-                    <label class="font-semibold">📷 Фотозйомка</label>
-                    <p class="text-sm text-gray-500">1000 грн / година</p>
+      <section class="price" id="pricing">
+        <div class="container">
+          <div class="price__wrapper">
+            <!-- Блок вибору послуг -->
+            <div class="price__services">
+              <h2 class="title price__title">Послуги та ціни</h2>
+              <form id="services-form" class="services-form">
+                <div class="services-grid">
+                  <!-- Послуга -->
+                  <div class="service-item">
+                    <div class="service-info">
+                      <label class="service-label">📷 Фотозйомка</label>
+                      <p class="service-desc">1000 грн / година</p>
+                    </div>
+                    <div class="service-controls">
+                      <input
+                        type="checkbox"
+                        name="photoshoot-toggle"
+                        data-input="photoshoot"
+                        class="toggle-switch"
+                        value="0"
+                      />
+                      <input
+                        type="number"
+                        min="0"
+                        value="0"
+                        name="photoshoot"
+                        data-price="1000"
+                        class="service-number-input hidden"
+                      />
+                    </div>
                   </div>
-                  <div class="flex items-center gap-2">
+
+                  <!-- Студія -->
+                  <div class="service-item">
+                    <div class="service-info">
+                      <label class="service-label">🏢 Оренда фотостудії</label>
+                      <p class="service-desc">800 грн / година</p>
+                    </div>
+                    <div class="service-controls">
+                      <input
+                        type="checkbox"
+                        name="studio-toggle"
+                        data-input="studio"
+                        class="toggle-switch"
+                      />
+                      <input
+                        type="number"
+                        min="0"
+                        value="0"
+                        name="studio"
+                        data-price="800"
+                        class="service-number-input hidden"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Ретуш -->
+                  <div class="service-item simple">
+                    <div>
+                      <label class="service-label">🖼️ Додаткова ретуш</label>
+                      <p class="service-desc">150 грн</p>
+                    </div>
                     <input
                       type="checkbox"
-                      name="photoshoot-toggle"
-                      data-input="photoshoot"
-                      class="toggle-switch h-5 w-5"
-                    />
-                    <input
-                      type="number"
-                      min="0"
-                      value="0"
-                      name="photoshoot"
-                      data-price="1000"
-                      class="w-16 text-right border rounded px-2 py-1 hidden"
+                      name="retouch"
+                      data-price="150"
+                      class="toggle-switch"
                     />
                   </div>
-                </div>
 
-                <!-- Студія -->
-                <div
-                  class="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-50 border px-4 py-3 rounded-xl"
-                >
-                  <div class="mb-2 sm:mb-0">
-                    <label class="font-semibold">🏢 Оренда фотостудії</label>
-                    <p class="text-sm text-gray-500">800 грн / година</p>
-                  </div>
-                  <div class="flex items-center gap-2">
+                  <!-- Прискорена обробка -->
+                  <div class="service-item simple">
+                    <div>
+                      <label class="service-label">⚡ Прискорена обробка</label>
+                      <p class="service-desc">300 грн</p>
+                    </div>
                     <input
                       type="checkbox"
-                      name="studio-toggle"
-                      data-input="studio"
-                      class="toggle-switch h-5 w-5"
+                      name="fast-editing"
+                      data-price="300"
+                      class="toggle-switch"
                     />
+                  </div>
+
+                  <!-- Сертифікат -->
+                  <div class="service-item simple">
+                    <div>
+                      <label class="service-label"
+                        >🎁 Подарунковий сертифікат</label
+                      >
+                      <p class="service-desc">500 грн</p>
+                    </div>
                     <input
-                      type="number"
-                      min="0"
-                      value="0"
-                      name="studio"
-                      data-price="800"
-                      class="w-16 text-right border rounded px-2 py-1 hidden"
+                      type="checkbox"
+                      name="certificate"
+                      data-price="500"
+                      class="toggle-switch"
                     />
                   </div>
                 </div>
 
-                <!-- Ретуш -->
-                <div
-                  class="flex items-center justify-between bg-gray-50 border px-4 py-3 rounded-xl"
-                >
-                  <div>
-                    <label class="font-semibold">🖼️ Додаткова ретуш</label>
-                    <p class="text-sm text-gray-500">150 грн</p>
-                  </div>
+                <!-- Вибір дати -->
+                <div class="date-picker">
+                  <label for="date" class="date-label"
+                    >Оберіть дату зйомки:</label
+                  >
                   <input
-                    type="checkbox"
-                    name="retouch"
-                    data-price="150"
-                    class="h-5 w-5"
+                    type="date"
+                    id="date"
+                    name="date"
+                    class="date-input"
+                    required
                   />
                 </div>
+              </form>
+            </div>
 
-                <!-- Прискорена обробка -->
-                <div
-                  class="flex items-center justify-between bg-gray-50 border px-4 py-3 rounded-xl"
-                >
-                  <div>
-                    <label class="font-semibold">⚡ Прискорена обробка</label>
-                    <p class="text-sm text-gray-500">300 грн</p>
-                  </div>
-                  <input
-                    type="checkbox"
-                    name="fast-editing"
-                    data-price="300"
-                    class="h-5 w-5"
-                  />
-                </div>
-
-                <!-- Сертифікат -->
-                <div
-                  class="flex items-center justify-between bg-gray-50 border px-4 py-3 rounded-xl"
-                >
-                  <div>
-                    <label class="font-semibold"
-                      >🎁 Подарунковий сертифікат</label
-                    >
-                    <p class="text-sm text-gray-500">500 грн</p>
-                  </div>
-                  <input
-                    type="checkbox"
-                    name="certificate"
-                    data-price="500"
-                    class="h-5 w-5"
-                  />
-                </div>
+            <!-- Блок загальної ціни -->
+            <div class="price-summary">
+              <div class="summary-box">
+                <p class="total-price" id="total-price">0 ₴</p>
+                <p class="duration">1 година</p>
+                <button type="submit" form="services-form" class="order-button">
+                  Замовити фотосесію
+                </button>
               </div>
-
-              <!-- Вибір дати -->
-              <div class="mt-6">
-                <label class="block font-medium mb-1" for="date"
-                  >Оберіть дату зйомки:</label
-                >
-                <input
-                  type="date"
-                  id="date"
-                  name="date"
-                  class="border w-full px-3 py-2 rounded"
-                  required
-                />
-              </div>
-            </form>
-          </div>
-
-          <!-- Блок загальної ціни -->
-          <div class="w-full lg:w-1/3">
-            <div
-              class="bg-white border-2 border-pink-300 p-8 text-center rounded-2xl shadow-sm"
-            >
-              <p class="text-5xl font-semibold mb-2" id="total-price">0 ₴</p>
-              <p class="text-gray-500">1 година</p>
-              <button
-                type="submit"
-                form="services-form"
-                class="mt-6 w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition"
-              >
-                Замовити фотосесію
-              </button>
             </div>
           </div>
         </div>
@@ -353,7 +335,7 @@
           const inputs = form.querySelectorAll("[data-price]");
 
           inputs.forEach((input) => {
-            const price = parseFloat(input.dataset.price);
+            const price = parseFloat(input.dataset.price) || 0;
             if (input.type === "checkbox") {
               if (input.checked) total += price;
             } else if (
@@ -369,20 +351,34 @@
         }
 
         function toggleInputVisibility() {
-          const toggles = form.querySelectorAll(".toggle-switch");
+          const toggles = form.querySelectorAll(".toggle-switch[data-input]");
           toggles.forEach((toggle) => {
             const inputName = toggle.dataset.input;
             const input = form.querySelector(`[name="${inputName}"]`);
             if (input) {
-              input.classList.toggle("hidden", !toggle.checked);
-              if (!toggle.checked) input.value = 0;
+              if (toggle.checked) {
+                input.classList.remove("hidden");
+              } else {
+                input.classList.add("hidden");
+                input.value = 0;
+              }
             }
           });
           calculateTotal();
         }
 
+        // Заборона від’ємних чисел у input[type=number]
+        form.querySelectorAll('input[type="number"]').forEach((input) => {
+          input.addEventListener("input", () => {
+            if (parseFloat(input.value) < 0 || isNaN(parseFloat(input.value))) {
+              input.value = 0;
+            }
+          });
+        });
+
         form.addEventListener("input", calculateTotal);
         form.addEventListener("change", toggleInputVisibility);
+
         window.addEventListener("load", () => {
           toggleInputVisibility();
           calculateTotal();

@@ -1,7 +1,10 @@
 .title {
+  font-size: 32px;
   font-family: "Cormorant", sans-serif;
+  text-transform: uppercase;
   &__logo {
     font-size: 32px;
+    text-transform: capitalize;
     @media screen and (max-width: 768px) {
       font-size: 22px;
     }
