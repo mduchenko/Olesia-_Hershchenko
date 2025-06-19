@@ -556,15 +556,15 @@
       modal.addEventListener("click", (e) => {
         e.stopPropagation();
       });
-      // openBtnModal.addEventListener("click", () => {
-      //   modal.style.display = "block";
-      //   document.body.classList.toggle("menu-open");
-      // });
-      orderBtn.addEventListener("click", (e) => {
-        e.preventDefault();
+      openBtnModal.addEventListener("click", () => {
         modal.style.display = "block";
         document.body.classList.toggle("menu-open");
       });
+      // orderBtn.addEventListener("click", (e) => {
+      //   e.preventDefault();
+      //   modal.style.display = "block";
+      //   document.body.classList.toggle("menu-open");
+      // });
       openBtnModalHero.addEventListener("click", () => {
         modal.style.display = "block";
         document.body.classList.toggle("menu-open");
