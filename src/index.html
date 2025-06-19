@@ -505,6 +505,7 @@
 
       closeBtnModal.onclick = () => {
         modal.style.display = "none";
+        document.body.classList.remove("menu-open");
       };
       window.onclick = (e) => {
         if (e.target === modal) modal.style.display = "none";
