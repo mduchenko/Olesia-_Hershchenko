@@ -537,6 +537,10 @@
     <script src="./js/gamburger.js"></script>
     <script src="./js/scroll.js"></script>
     <script>
+      // const orderBtn = querySelector(".order-button");
+      // console.log(orderBtn);
+      // const totalPrice1 = querySelector(".total-price");
+      // console.log(totalPrice1);
       const modal = document.getElementById("bookingModal");
       const openBtnModal = document.querySelector(".button.header__button");
       const openBtnModalHero = document.querySelector(".button__hero");
@@ -552,7 +556,12 @@
       modal.addEventListener("click", (e) => {
         e.stopPropagation();
       });
-      openBtnModal.addEventListener("click", () => {
+      // openBtnModal.addEventListener("click", () => {
+      //   modal.style.display = "block";
+      //   document.body.classList.toggle("menu-open");
+      // });
+      orderBtn.addEventListener("click", (e) => {
+        e.preventDefault();
         modal.style.display = "block";
         document.body.classList.toggle("menu-open");
       });
@@ -584,16 +593,16 @@
 
         switch (type) {
           case "studio":
-            price = 1500;
-            break;
-          case "outdoor":
-            price = 1800;
-            break;
-          case "event":
             price = 2500;
             break;
+          case "outdoor":
+            price = 1500;
+            break;
+          case "event":
+            price = 1500;
+            break;
           case "family":
-            price = 2000;
+            price = 1500;
             break;
           default:
             price = 0;
