@@ -11,6 +11,7 @@ menuBtn.addEventListener("click", () => {
   navMenu.classList.toggle("active");
   headerMenu.classList.toggle("active");
   document.body.classList.toggle("menu-open");
+  console.log(document.body);
   socialMenu.classList.remove("active");
 });
 
@@ -40,6 +41,7 @@ function clickNavLink(el) {
       navMenu.classList.remove("active");
       headerMenu.classList.remove("active");
       document.body.classList.remove("menu-open");
+      console.log(document.body);
       headerMenu.classList.toggle("nav-down");
       headerMenu.classList.remove("nav-up");
     });
