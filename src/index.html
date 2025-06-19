@@ -148,7 +148,7 @@
                 <li>
                   <a href="#pricing" class="nav-link">Послугии та ціни</a>
                 </li>
-                <li><a href="#contact" class="nav-link">Контакти</a></li>
+                <li><a href="#contacs" class="nav-link">Контакти</a></li>
                 <!-- <li class="theme-toggle">
                   <label for="darkSwitch">🌙</label>
                   <input type="checkbox" id="darkSwitch" />
@@ -220,22 +220,24 @@
         </div>
       </section>
       <section class="portfolio" id="portfolio">
-        <h2 class="portfolio__title">Моє портфоліо</h2>
-        <div class="portfolio__gallery">
-          <img src="./img/фото1.webp" alt="Фото 1" class="portfolio__img1" />
-          <img src="./img/фото2.webp" alt="Фото 2" class="portfolio__img1" />
-          <img src="./img/фото1.webp" alt="Фото 3" class="portfolio__img1" />
-          <img src="./img/фото2.webp" alt="Фото 4" class="portfolio__img1" />
-          <!-- Додай більше фото за потреби -->
-        </div>
+        <div class="container">
+          <h2 class="portfolio__title">Моє портфоліо</h2>
+          <div class="portfolio__gallery">
+            <img src="./img/фото1.webp" alt="Фото 1" class="portfolio__img1" />
+            <img src="./img/фото2.webp" alt="Фото 2" class="portfolio__img1" />
+            <img src="./img/фото1.webp" alt="Фото 3" class="portfolio__img1" />
+            <img src="./img/фото2.webp" alt="Фото 4" class="portfolio__img1" />
+            <!-- Додай більше фото за потреби -->
+          </div>
 
-        <!-- Lightbox / Слайдер -->
-        <div class="lightbox hidden">
-          <span class="lightbox__close">&times;</span>
-          <img class="lightbox__img" src="" alt="" />
-          <div class="lightbox__controls">
-            <span class="prev1">&#10094;</span>
-            <span class="next1">&#10095;</span>
+          <!-- Lightbox / Слайдер -->
+          <div class="lightbox hidden">
+            <span class="lightbox__close">&times;</span>
+            <img class="lightbox__img" src="" alt="" />
+            <div class="lightbox__controls">
+              <span class="prev1">&#10094;</span>
+              <span class="next1">&#10095;</span>
+            </div>
           </div>
         </div>
       </section>
@@ -441,6 +443,62 @@
           calculateTotal();
         });
       </script>
+      <section class="contact-section" id="contacs">
+        <div class="container">
+          <h2 class="title title__contact">Контакти</h2>
+          <div class="contact-wrapper">
+            <!-- Ліва частина -->
+            <div class="contact-info">
+              <h3>Як ми можемо зв'язатися</h3>
+              <p>
+                Для мене важливо, щоб кожна взаємодія була комфортною для вас.
+                Саме тому ви можете звернутись у будь-який зручний спосіб —
+                через месенджери, e-mail або заповнивши форму на сайті. Я завжди
+                на зв’язку.
+              </p>
+
+              <ul class="contact-details">
+                <li><span>📍</span> Україна, м. Київ</li>
+                <li>
+                  <span>✉️</span>
+                  <a href="mailto:olesia">olesia</a>
+                </li>
+                <li>
+                  <span>📞</span>
+                  <a href="tel:+380971067972">+38 (097) 106 79 72</a>
+                </li>
+              </ul>
+
+              <div class="social-icons">
+                <a href="#"><span class="icon-facebook"></span></a>
+                <a href="#"><span class="icon-facebook"></span></a>
+                <a href="#"><span class="icon-facebook"></span></a>
+                <a href="#"><span class="icon-facebook"></span></a>
+              </div>
+            </div>
+
+            <!-- Права частина -->
+            <div class="contact-form">
+              <h2>Відправити запит</h2>
+              <form>
+                <label>Ваше ім’я*</label>
+                <input type="text" required />
+
+                <label>Номер телефону*</label>
+                <input type="tel" placeholder="+380" required />
+
+                <label>Електронна пошта</label>
+                <input type="email" />
+
+                <label>Повідомлення</label>
+                <textarea rows="4"></textarea>
+
+                <button type="submit">Відправити</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
