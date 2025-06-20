@@ -470,10 +470,18 @@
               </ul>
 
               <div class="social-icons">
-                <a href="#"><span class="icon-facebook"></span></a>
-                <a href="#"><span class="icon-facebook"></span></a>
-                <a href="#"><span class="icon-facebook"></span></a>
-                <a href="#"><span class="icon-facebook"></span></a>
+                <ul class="social">
+                  <li class="social__item">
+                    <a href="#" class="social__instagram"
+                      ><span class="icon-instagram"></span
+                    ></a>
+                  </li>
+                  <li class="social__item">
+                    <a href="#" class="social__rest">
+                      <span class="icon-forward-outline"></span
+                    ></a>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -501,118 +509,10 @@
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="social">
-        <ul class="social__list">
-          <li class="social__item">
-            <a href="" class="social__link"
-              ><img
-                src="./icons/facebook.svg"
-                alt="facebook"
-                class="social__logo"
-            /></a>
-          </li>
-          <li class="social__item">
-            <a href="" class="social__link"
-              ><img src="./icons/tg.svg" alt="tg" class="social__logo"
-            /></a>
-          </li>
-          <li class="social__item">
-            <a href="" class="social__link"
-              ><img
-                src="./icons/whatsapp.svg"
-                alt="whatsapp"
-                class="social__logo"
-            /></a>
-          </li>
-        </ul>
-      </div>
-      <address class="footer__address">
-        Everton Park, Block 2, Singapore 081002
-      </address>
-      <a class="footer__tel" href="tel:+">+6569964725</a>
-    </footer>
-
     <script src="./js/preloder.js"></script>
     <script src="./js/gamburger.js"></script>
     <script src="./js/scroll.js"></script>
-    <script>
-      // const orderBtn = querySelector(".order-button");
-      // console.log(orderBtn);
-      // const totalPrice1 = querySelector(".total-price");
-      // console.log(totalPrice1);
-      const modal = document.getElementById("bookingModal");
-      const openBtnModal = document.querySelector(".button.header__button");
-      const openBtnModalHero = document.querySelector(".button__hero");
-      console.log(openBtnModal);
-      const closeBtnModal = document.querySelector(".modal .close");
-      const priceToggle = document.getElementById("priceToggle");
-      const priceSection = document.getElementById("priceSection");
-      const sessionSelect = document.querySelector(
-        "select[name='sessionType']"
-      );
-      const priceResult = document.getElementById("priceResult");
-
-      modal.addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-      openBtnModal.addEventListener("click", () => {
-        modal.style.display = "block";
-        document.body.classList.toggle("menu-open");
-      });
-      // orderBtn.addEventListener("click", (e) => {
-      //   e.preventDefault();
-      //   modal.style.display = "block";
-      //   document.body.classList.toggle("menu-open");
-      // });
-      openBtnModalHero.addEventListener("click", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        modal.style.display = "block";
-        document.body.classList.toggle("menu-open");
-      });
-
-      closeBtnModal.onclick = () => {
-        modal.style.display = "none";
-        document.body.classList.remove("menu-open");
-      };
-      window.onclick = (e) => {
-        if (e.target === modal) modal.style.display = "none";
-      };
-
-      priceToggle.addEventListener("change", () => {
-        priceSection.style.display = priceToggle.checked ? "block" : "none";
-        if (priceToggle.checked) calculatePrice();
-      });
-
-      sessionSelect.addEventListener("change", () => {
-        if (priceToggle.checked) calculatePrice();
-      });
-
-      function calculatePrice() {
-        const type = sessionSelect.value;
-        let price = 0;
-
-        switch (type) {
-          case "studio":
-            price = 2500;
-            break;
-          case "outdoor":
-            price = 1500;
-            break;
-          case "event":
-            price = 1500;
-            break;
-          case "family":
-            price = 1500;
-            break;
-          default:
-            price = 0;
-        }
-
-        priceResult.textContent = price;
-      }
-    </script>
+    <script src="./js/modal.js"></script>
     <script src="./js/slider.js"></script>
     <script src="./js/portfolio.js"></script>
   </body>

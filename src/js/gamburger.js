@@ -17,8 +17,9 @@ menuBtn.addEventListener("click", () => {
 
 function openSocial(el) {
   el.forEach((i) => {
-    i.addEventListener("click", () => {
+    i.addEventListener("click", (e) => {
       socialMenu.classList.toggle("active");
+      document.body.classList.add("menu-open");
     });
   });
   //   el.addEventListener("click", () => {
@@ -30,6 +31,7 @@ openSocial(socialOpen);
 function closeSocial(el) {
   el.addEventListener("click", () => {
     socialMenu.classList.toggle("active");
+    document.body.classList.remove("menu-open");
   });
 }
 closeSocial(socialClose);

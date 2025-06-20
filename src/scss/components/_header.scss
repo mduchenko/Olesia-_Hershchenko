@@ -2,22 +2,23 @@ body.menu-open {
   overflow: hidden !important;
   height: 100vh;
 }
+.social {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  &__item {
+    width: 16px;
+    height: 16px;
+    span {
+      font-size: 20px;
+      color: var(--light-dark);
+    }
+  }
+}
 .header {
   padding-top: 20px;
   transition: all 0.625s ease-in-out;
-  .social {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    &__item {
-      width: 16px;
-      height: 16px;
-      span {
-        font-size: 20px;
-        color: var(--light-dark);
-      }
-    }
-  }
+
   &__top {
     position: relative;
     height: 52px;
