@@ -9,6 +9,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000023;
   transition: all 1.5 ease-in-out;
+  .gen-price {
+    display: flex;
+    height: 20px;
+  }
 }
 
 .modal-content {
