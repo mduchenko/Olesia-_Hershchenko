@@ -9,14 +9,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!menuBtn || !navMenu || !headerMenu || !socialMenu) return;
 
+  // збережи позицію перед відкриттям меню й віднови після закриття
+  let scrollY = 0;
+
+  function openMenu() {
+    scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.classList.add("menu-open");
+  }
+
+  function closeMenu() {
+    document.body.classList.remove("menu-open");
+    document.body.style.position = "";
+    document.body.style.top = "";
+    window.scrollTo(0, scrollY);
+  }
+
   function updateBodyScrollState() {
     const isMainMenuOpen = navMenu.classList.contains("active");
     const isSocialOpen = socialMenu.classList.contains("active");
 
     if (isMainMenuOpen || isSocialOpen) {
-      document.body.classList.add("menu-open");
+      openMenu();
     } else {
-      document.body.classList.remove("menu-open");
+      closeMenu();
     }
   }
 
@@ -29,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function openSocial(el) {
+    console.log(el);
     el.forEach((i) => {
       i.addEventListener("click", (e) => {
         e.stopPropagation();

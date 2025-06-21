@@ -1,21 +1,16 @@
-body.menu-open {
+body.menu-open,
+html.menu-open {
   overflow: hidden !important;
-  touch-action: none;
+}
+body.menu-open {
+  position: fixed;
+  overflow: hidden !important;
+  width: 100%;
+  top: 0;
+  left: 0;
   height: 100vh;
 }
-.social {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  &__item {
-    width: 16px;
-    height: 16px;
-    span {
-      font-size: 20px;
-      color: var(--light-dark);
-    }
-  }
-}
+
 .header {
   padding-top: 20px;
   transition: all 0.625s ease-in-out;
@@ -184,12 +179,27 @@ body.menu-open {
 //   transform: translateY(0);
 //   transition: transform 0.3s ease;
 // }
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  &__item {
+    width: 16px;
+    height: 16px;
+    span {
+      font-size: 20px;
+      color: var(--light-dark);
+    }
+  }
+}
+
 .social__menu {
-  position: absolute;
+  position: fixed;
   top: 50%;
+  left: -100%;
   width: 45%;
   height: 30%;
-  transform: translateX(calc(-100% - 1px));
   margin: 0;
   transition: all 1s ease;
   background-color: var(--light-bg);
@@ -226,7 +236,6 @@ body.menu-open {
     right: 20px;
   }
   &.active {
-    position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
   }
