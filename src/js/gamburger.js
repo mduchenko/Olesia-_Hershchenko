@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         menuBtn.classList.remove("active");
         navMenu.classList.remove("active");
         headerMenu.classList.remove("active");
-        headerMenu.classList.remove("nav-down", "nav-down", "nav-up");
+        headerMenu.classList.remove("nav-down", "nav-up");
         updateBodyScrollState();
       });
     });
