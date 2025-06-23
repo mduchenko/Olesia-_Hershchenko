@@ -18,12 +18,28 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.top = `-${scrollY}px`;
     document.body.classList.add("menu-open");
   }
+  // function openMenu() {
+  //   scrollY = window.scrollY;
+  //   document.body.dataset.scrollY = scrollY;
+  //   document.body.style.position = "fixed";
+  //   document.body.style.top = `-${scrollY}px`;
+  //   document.body.classList.add("menu-open");
+  // }
 
+  // function closeMenu() {
+  //   document.body.classList.remove("menu-open");
+  //   document.body.style.position = "";
+  //   document.body.style.top = "";
+  //   window.scrollTo(0, scrollY);
+  // }
   function closeMenu() {
     document.body.classList.remove("menu-open");
     document.body.style.position = "";
     document.body.style.top = "";
-    window.scrollTo(0, scrollY);
+
+    if (typeof scrollY !== "undefined" && scrollY !== null) {
+      window.scrollTo(0, scrollY);
+    }
   }
 
   function updateBodyScrollState() {
@@ -32,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isMainMenuOpen || isSocialOpen) {
       openMenu();
-    } else {
+    } else if (document.body.classList.contains("menu-open")) {
       closeMenu();
     }
   }
@@ -54,9 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
         updateBodyScrollState();
       });
     });
-    //   el.addEventListener("click", () => {
-    //     socialMenu.classList.toggle("active");
-    //   });
   }
   openSocial(socialOpen);
 

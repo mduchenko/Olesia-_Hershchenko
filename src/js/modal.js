@@ -15,7 +15,8 @@ const priceResult = document.getElementById("priceResult");
 modal.addEventListener("click", (e) => {
   e.stopPropagation();
 });
-openBtnModal.addEventListener("click", () => {
+openBtnModal.addEventListener("click", (e) => {
+  e.stopPropagation();
   modal.style.display = "block";
   document.body.classList.toggle("menu-open");
 });

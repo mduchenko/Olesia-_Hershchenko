@@ -193,7 +193,7 @@ body.menu-open {
 .social__menu {
   position: fixed;
   top: 50%;
-  left: -100%;
+  left: calc(-100% - 2px);
   width: 45%;
   height: 30%;
   margin: 0;
@@ -232,7 +232,7 @@ body.menu-open {
     right: 20px;
   }
   &.active {
-    left: 50%;
+    left: calc(50% + 2px);
     transform: translate(-50%, -50%);
   }
 }
