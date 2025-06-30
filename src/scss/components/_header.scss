@@ -4,9 +4,9 @@ body.menu-open {
   width: 100%;
   top: 0;
   left: 0;
-  @media screen and (max-width: 768px) {
-    height: 100vh;
-  }
+  // @media screen and (max-width: 768px) {
+  //   height: 100vh;
+  // }
 }
 
 .header {
@@ -245,5 +245,8 @@ body.menu-open {
     transform: translateX(50%) translateY(-50%);
     display: flex;
     border: 1px solid #ccc;
+    @media screen and (max-width: 768px) {
+      transform: translateX(0) translateY(-50%);
+    }
   }
 }
