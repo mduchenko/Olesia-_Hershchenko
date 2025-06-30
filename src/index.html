@@ -518,6 +518,96 @@
           </div>
         </div>
       </section>
+      <section class="advantages">
+        <div class="container">
+          <h2 class="advantages__title">Наші переваги</h2>
+          <div class="advantages__list">
+            <div class="advantage">
+              <span class="icon-money"></span>
+              <h3>Доступна вартість</h3>
+              <p>Чесне та прозоре ціноутворення — якість за розумну ціну.</p>
+            </div>
+            <div class="advantage">
+              <span class="icon-gauge"></span>
+              <h3>Висока швидкість</h3>
+              <p>Швидка обробка фото та зручна передача результату.</p>
+            </div>
+            <div class="advantage">
+              <span class="icon-edit"></span>
+              <h3>Висока якість</h3>
+              <p>Професійне обладнання та ретуш кожного кадру.</p>
+            </div>
+            <div class="advantage">
+              <span class="icon-location"></span>
+              <h3>Географія зйомок</h3>
+              <p>Працюю в Україні та за кордоном.</p>
+            </div>
+            <div class="advantage">
+              <span class="icon-smile"></span>
+              <h3>Справжні емоції</h3>
+              <p>Фотографую не просто людей, а їх почуття.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <style>
+        .advantages {
+          background-color: #fff;
+          padding: 60px 20px;
+          font-family: "Georgia", serif;
+          color: #222;
+          text-align: center;
+        }
+
+        .advantages__title {
+          font-size: 28px;
+          margin-bottom: 40px;
+          font-weight: bold;
+        }
+
+        .advantages__list {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 30px;
+        }
+
+        .advantage {
+          max-width: 260px;
+          padding: 20px;
+          border: 1px solid #eee;
+          border-radius: 12px;
+          background-color: #f8f4f1;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .advantage__icon {
+          width: 40px;
+          height: 40px;
+          margin-bottom: 15px;
+        }
+
+        .advantage h3 {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+
+        .advantage p {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+          .advantages__list {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .advantage {
+            width: 90%;
+          }
+        }
+      </style>
     </main>
 
     <footer class="footer">
