@@ -212,6 +212,7 @@ body.menu-open {
   @media screen and (max-width: 768px) {
     width: 100%;
     background-color: rgba(167, 160, 160, 0.91);
+    box-shadow: none;
   }
   .social__char {
     width: 50px;
