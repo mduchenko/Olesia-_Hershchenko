@@ -192,6 +192,7 @@ body.menu-open {
 }
 
 .social__menu {
+  display: none;
   position: fixed;
   top: 50%;
   // left: calc(-100% - 2px);
@@ -240,5 +241,6 @@ body.menu-open {
     // left: calc(50% + 2px);
     // transform: translate(-50%, -50%);
     transform: translateX(0) translateY(-50%);
+    display: flex;
   }
 }
