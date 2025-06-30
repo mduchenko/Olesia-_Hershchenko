@@ -1,6 +1,9 @@
 * {
   font-family: "Cormorant", sans-serif;
 }
+body {
+  overflow-x: hidden;
+}
 @import "./data/modern-normolize";
 @import "./data/reset";
 @import "./data/variables";
