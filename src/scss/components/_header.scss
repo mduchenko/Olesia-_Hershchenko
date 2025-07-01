@@ -166,13 +166,13 @@ body.menu-open {
     &.nav-down {
       display: none;
     }
-  }
-  &.nav-up {
-    position: fixed;
-    top: 0;
-    background-color: var(--light-bg);
-    width: 100%;
-    z-index: 10000;
+    &.nav-up {
+      position: fixed;
+      top: 0;
+      background-color: var(--light-bg);
+      width: 100%;
+      z-index: 10000;
+    }
   }
 }
 // .header__bottom.nav-up {
