@@ -51,7 +51,7 @@ const currentHeader =
     : isHeaderScroll(headerBottom);
 
 function isMobileScroll(header) {
-  let lastScrollTop = 0;
+  let lastScrollTop = 72;
   const delta = 5;
   window.addEventListener("scroll", () => {
     const currentScroll =
