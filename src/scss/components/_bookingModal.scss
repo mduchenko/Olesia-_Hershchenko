@@ -8,7 +8,11 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000023;
-  transition: all 1.5 ease-in-out;
+  opacity: 0;
+  transition: opacity 6s ease-in-out;
+  // &.active {
+  //   opacity: 1;
+  // }
   .gen-price {
     display: flex;
     height: 20px;
