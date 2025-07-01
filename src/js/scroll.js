@@ -51,7 +51,7 @@ const currentHeader =
     : isHeaderScroll(headerBottom);
 
 function isMobileScroll(header) {
-  let lastScrollTop = 72;
+  let lastScrollTop = 0;
   const delta = 5;
   window.addEventListener("scroll", () => {
     const currentScroll =
@@ -61,7 +61,7 @@ function isMobileScroll(header) {
 
     if (currentScroll > lastScrollTop) {
       // Скрол вниз — ховати
-      header.classList.add("nav-down");
+      header.classList.remove("nav-down");
       header.classList.remove("nav-up");
     } else {
       // Скрол вгору — показати
