@@ -608,6 +608,299 @@
           }
         }
       </style>
+      <section class="workflow">
+        <div class="workflow__wave-top">
+          <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+            <path
+              d="M0,80 C360,0 1080,150 1440,80 L1440,0 L0,0 Z"
+              fill="#fff"
+            />
+          </svg>
+        </div>
+
+        <h2 class="workflow__title" data-aos="fade-up">
+          — Порядок роботи зі мною
+        </h2>
+
+        <div class="workflow__svg-line">
+          <svg viewBox="0 0 1000 50" preserveAspectRatio="none">
+            <path
+              d="M0,25 Q250,0 500,25 T1000,25"
+              stroke="#f8f4f1"
+              stroke-width="3"
+              fill="none"
+              stroke-dasharray="10 5"
+            />
+          </svg>
+        </div>
+
+        <div class="workflow__line">
+          <div class="workflow__step top" data-aos="zoom-in" data-aos-delay="0">
+            <span class="with-icon"><span class="icon-emo-wink"></span></span>
+            <svg
+              class="arrow animate-arrow"
+              style="--delay: 0ms"
+              viewBox="0 0 50 10"
+            >
+              <path d="M0 5 H45 L40 2 M45 5 L40 8" />
+            </svg>
+            <p>Знайомимось</p>
+          </div>
+          <div
+            class="workflow__step bottom"
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            <span class="with-icon"
+              ><span class="icon-calendar-check-o"></span
+            ></span>
+            <svg
+              class="arrow animate-arrow"
+              style="--delay: 150ms"
+              viewBox="0 0 50 10"
+            >
+              <path d="M0 5 H45 L40 2 M45 5 L40 8" />
+            </svg>
+            <p>Погоджуємо дату і час</p>
+          </div>
+          <div
+            class="workflow__step top"
+            data-aos="zoom-in"
+            data-aos-delay="200"
+          >
+            <span class="with-icon"
+              ><span class="icon-location-1"> </span
+            ></span>
+            <svg
+              class="arrow animate-arrow"
+              style="--delay: 300ms"
+              viewBox="0 0 50 10"
+            >
+              <path d="M0 5 H45 L40 2 M45 5 L40 8" />
+            </svg>
+            <p>Бронюємо локацію</p>
+          </div>
+          <!-- <div
+            class="workflow__step bottom"
+            data-aos="zoom-in"
+            data-aos-delay="300"
+          >
+            <span class="with-icon">🤝</span>
+            <svg
+              class="arrow animate-arrow"
+              style="--delay: 450ms"
+              viewBox="0 0 50 10"
+            >
+              <path d="M0 5 H45 L40 2 M45 5 L40 8" />
+            </svg>
+            <p>Бронируем подрядчиков</p>
+          </div> -->
+          <div
+            class="workflow__step top"
+            data-aos="zoom-in"
+            data-aos-delay="400"
+          >
+            <span class="with-icon"><span class="icon-user"></span></span>
+            <svg
+              class="arrow animate-arrow"
+              style="--delay: 600ms"
+              viewBox="0 0 50 10"
+            >
+              <path d="M0 5 H45 L40 2 M45 5 L40 8" />
+            </svg>
+            <p>Підбираємо одяг та образи</p>
+          </div>
+          <div
+            class="workflow__step bottom"
+            data-aos="zoom-in"
+            data-aos-delay="500"
+          >
+            <span class="with-icon"> <span class="icon-camera"></span></span>
+            <svg
+              class="arrow animate-arrow"
+              style="--delay: 750ms"
+              viewBox="0 0 50 10"
+            >
+              <path d="M0 5 H45 L40 2 M45 5 L40 8" />
+            </svg>
+            <p>Проводимо зйомку</p>
+          </div>
+          <div
+            class="workflow__step top"
+            data-aos="zoom-in"
+            data-aos-delay="600"
+          >
+            <span class="with-icon"><span class="icon-edit"></span></span>
+            <svg
+              class="arrow animate-arrow"
+              style="--delay: 900ms"
+              viewBox="0 0 50 10"
+            >
+              <path d="M0 5 H45 L40 2 M45 5 L40 8" />
+            </svg>
+            <p>Оброблюємо фотографії</p>
+          </div>
+          <div
+            class="workflow__step bottom"
+            data-aos="zoom-in"
+            data-aos-delay="700"
+          >
+            <span class="with-icon last"><span class="icon-photo"></span></span>
+            <p>Передаємо фотографії</p>
+          </div>
+        </div>
+      </section>
+      <style>
+        .workflow {
+          padding: 0;
+          background: #fff;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .workflow__wave-top svg {
+          display: block;
+          width: 100%;
+          height: 80px;
+        }
+
+        .workflow__title {
+          font-size: 26px;
+          font-weight: 600;
+          margin-bottom: 40px;
+          padding-top: 40px;
+        }
+
+        .workflow__svg-line {
+          width: 100%;
+          height: 50px;
+          margin-bottom: 30px;
+        }
+
+        .workflow__svg-line svg {
+          width: 100%;
+          height: 100%;
+        }
+
+        .workflow__line {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          gap: 20px;
+          position: relative;
+          padding: 20px;
+        }
+
+        .workflow__step {
+          position: relative;
+          z-index: 2;
+          width: calc(12.5% - 10px);
+          min-width: 90px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          transition: transform 0.3s ease;
+        }
+
+        .workflow__step.top {
+          transform: translateY(-15px);
+        }
+        .workflow__step.bottom {
+          transform: translateY(15px);
+        }
+
+        .workflow__step span.with-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          font-size: 20px;
+          /* background: linear-gradient(135deg, #000, #f8f4f1); */
+          background: #f8f4f1;
+          color: var(--light-dark);
+          border-radius: 50%;
+          margin-bottom: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+          transition: transform 0.3s;
+        }
+
+        .workflow__step span.with-icon.last::after {
+          content: "✨";
+          position: absolute;
+          top: -10px;
+          right: -12px;
+          font-size: 18px;
+          animation: blink 1s infinite alternate;
+        }
+
+        @keyframes blink {
+          from {
+            opacity: 0.4;
+            transform: scale(1);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1.2);
+          }
+        }
+
+        .workflow__step .arrow {
+          width: 50px;
+          height: 10px;
+          margin-bottom: 10px;
+          stroke: var(--light-dark);
+          stroke-width: 2;
+          fill: none;
+          opacity: 0;
+          transform: translateX(-10px);
+          animation: arrowFadeIn 0.6s forwards;
+          animation-delay: var(--delay);
+          filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
+        }
+
+        @keyframes arrowFadeIn {
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+
+        .workflow__step p {
+          font-size: 14px;
+          color: #333;
+        }
+
+        @media (max-width: 992px) {
+          .workflow__line {
+            justify-content: center;
+          }
+          .workflow__step {
+            width: 45%;
+            transform: none !important;
+          }
+          .workflow__svg-line {
+            display: none;
+          }
+        }
+
+        /* @media (max-width: 576px) {
+          .workflow__step {
+            width: 100%;
+          }
+        } */
+      </style>
+
+      <!-- AOS -->
+      <link
+        href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+        rel="stylesheet"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+      <script>
+        AOS.init({ duration: 800, once: true });
+      </script>
     </main>
 
     <footer class="footer">
