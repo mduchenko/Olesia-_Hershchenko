@@ -110,38 +110,38 @@ if (window.innerWidth <= 768) {
   currentHeader = isHeaderScroll(headerBottom);
 }
 
-function isMobileScroll(header) {
-  let lastScrollTop = 0;
-  const delta = 100;
-  const fixAfter = 500; // Після скількох px фіксуємо хедер
+// function isMobileScroll(header) {
+//   let lastScrollTop = 0;
+//   const delta = 100;
+//   const fixAfter = 500; // Після скількох px фіксуємо хедер
 
-  window.addEventListener("scroll", () => {
-    const currentScroll =
-      window.pageYOffset || document.documentElement.scrollTop;
+//   window.addEventListener("scroll", () => {
+//     const currentScroll =
+//       window.pageYOffset || document.documentElement.scrollTop;
 
-    // Додаємо/знімаємо fixed
-    if (currentScroll > fixAfter) {
-      header.classList.add("fixed");
-    } else {
-      header.classList.remove("fixed");
-    }
+//     // Додаємо/знімаємо fixed
+//     if (currentScroll > fixAfter) {
+//       header.classList.add("fixed");
+//     } else {
+//       header.classList.remove("fixed");
+//     }
 
-    // 2. Ігноруємо дрібні рухи
-    if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
+//     // 2. Ігноруємо дрібні рухи
+//     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
 
-    if (currentScroll > lastScrollTop) {
-      // Скрол вниз — ховати
-      header.classList.remove("nav-down");
-      header.classList.add("nav-up");
-    } else {
-      // Скрол вгору — показати
-      header.classList.remove("nav-up");
-      header.classList.add("nav-down");
-    }
+//     if (currentScroll > lastScrollTop) {
+//       // Скрол вниз — ховати
+//       header.classList.remove("nav-down");
+//       header.classList.add("nav-up");
+//     } else {
+//       // Скрол вгору — показати
+//       header.classList.remove("nav-up");
+//       header.classList.add("nav-down");
+//     }
 
-    lastScrollTop = currentScroll;
-  });
-}
+//     lastScrollTop = currentScroll;
+//   });
+// }
 
 // const header = document.querySelector(".header");
 // let lastScrollTop = 0;
@@ -178,3 +178,48 @@ function isMobileScroll(header) {
 // // Ініціалізація
 // header.classList.add("nav-down"); // Початково видимий
 // window.addEventListener("scroll", onScroll);
+
+function isMobileScroll(header) {
+  let lastScrollTop = 0;
+  let ticking = false;
+  const delta = 5;
+  const fixAfter = 300;
+
+  function onScroll() {
+    const currentScroll =
+      window.pageYOffset || document.documentElement.scrollTop;
+
+    // 1. Фіксація хедера
+    if (currentScroll > fixAfter) {
+      header.classList.add("fixed");
+    } else {
+      header.classList.remove("fixed");
+    }
+
+    // 2. Ігнорувати дрібні рухи
+    if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
+
+    // 3. Логіка появи / зникнення
+    if (currentScroll > lastScrollTop) {
+      // Скрол вниз — ховати
+      header.classList.remove("nav-down");
+      header.classList.add("nav-up");
+    } else {
+      // Скрол вгору — показати
+      header.classList.remove("nav-up");
+      header.classList.add("nav-down");
+    }
+
+    lastScrollTop = currentScroll;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+}
