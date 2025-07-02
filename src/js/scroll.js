@@ -102,6 +102,7 @@ function isHeaderScroll(header) {
 //   });
 // }
 const currentHeader = "";
+
 if (window.innerWidth <= 768) {
   headerMain.classList.add("nav-down"); // Щоб одразу був видимим
   currentHeader = isMobileScroll(headerMain);
