@@ -113,7 +113,7 @@ if (window.innerWidth <= 768) {
 function isMobileScroll(header) {
   let lastScrollTop = 0;
   const delta = 100;
-  const fixAfter = 300; // Після скількох px фіксуємо хедер
+  const fixAfter = 500; // Після скількох px фіксуємо хедер
 
   window.addEventListener("scroll", () => {
     const currentScroll =
