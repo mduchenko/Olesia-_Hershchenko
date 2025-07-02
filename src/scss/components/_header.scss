@@ -8,6 +8,9 @@ body.menu-open {
   //   height: 100vh;
   // }
 }
+main {
+  padding-top: 10px; /* Запас щоб хедер не перекривав вміст */
+}
 
 .header {
   padding-top: 20px;

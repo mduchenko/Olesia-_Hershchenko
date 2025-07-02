@@ -101,15 +101,13 @@ function isHeaderScroll(header) {
 //     lastScrollTop = currentScroll;
 //   });
 // }
-
+const currentHeader = "";
 if (window.innerWidth <= 768) {
   headerMain.classList.add("nav-down"); // Щоб одразу був видимим
-  isMobileScroll(headerMain);
+  currentHeader = isMobileScroll(headerMain);
+} else {
+  currentHeader = isHeaderScroll(headerBottom);
 }
-const currentHeader =
-  window.innerWidth <= 768
-    ? isMobileScroll(headerMain)
-    : isHeaderScroll(headerBottom);
 
 function isMobileScroll(header) {
   let lastScrollTop = 0;
@@ -142,3 +140,39 @@ function isMobileScroll(header) {
     lastScrollTop = currentScroll;
   });
 }
+
+// const header = document.querySelector(".header");
+// let lastScrollTop = 0;
+// const delta = 5;
+// const fixAfter = 100;
+
+// function onScroll() {
+//   const currentScroll =
+//     window.pageYOffset || document.documentElement.scrollTop;
+
+//   // Додати або зняти клас fixed
+//   if (currentScroll > fixAfter) {
+//     header.classList.add("fixed");
+//   } else {
+//     header.classList.remove("fixed");
+//   }
+
+//   // Сховати/показати при прокрутці
+//   if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
+
+//   if (currentScroll > lastScrollTop) {
+//     // Скрол вниз
+//     header.classList.remove("nav-down");
+//     header.classList.add("nav-up");
+//   } else {
+//     // Скрол вгору
+//     header.classList.remove("nav-up");
+//     header.classList.add("nav-down");
+//   }
+
+//   lastScrollTop = currentScroll;
+// }
+
+// // Ініціалізація
+// header.classList.add("nav-down"); // Початково видимий
+// window.addEventListener("scroll", onScroll);
