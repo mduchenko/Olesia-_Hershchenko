@@ -182,7 +182,7 @@ if (window.innerWidth <= 768) {
 function isMobileScroll(header) {
   let lastScrollTop = 0;
   let ticking = false;
-  const delta = 5;
+  const delta = 1;
   const fixAfter = 300;
 
   function onScroll() {
