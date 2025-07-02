@@ -19,16 +19,19 @@ function hasScrolled() {
   const documentHeight = document.documentElement.scrollHeight;
 
   // Для десктопу (ширина > 991px)
-  if (windowWidth > 360) {
+  if (windowWidth > 360 && windowWidth <= 768) {
     // Якщо користувач прокручує вниз і перейшов за висоту шапки
     if (currentScrollTop > lastScrollTop && currentScrollTop > navbarHeight) {
       document.querySelector(".header").classList.remove("nav-down");
-      document.querySelector(".header").classList.add("nav-up"); // Ховаємо шапку
+      document.querySelector(".header").classList.add("nav-up");
+      document.querySelector(".header__bottom").classList.remove("nav-up1");
+      // Ховаємо шапку
     }
     // Якщо користувач прокручує вгору і не дійшов до кінця сторінки
     else if (currentScrollTop + windowHeight < documentHeight) {
       document.querySelector(".header").classList.remove("nav-up");
       document.querySelector(".header").classList.add("nav-down"); // Показуємо шапку
+      document.querySelector(".header__bottom").classList.remove("nav-up1");
     }
   }
   // Для мобільних пристроїв (ширина ≤ 991px)
