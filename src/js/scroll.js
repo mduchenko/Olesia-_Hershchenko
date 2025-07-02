@@ -45,14 +45,36 @@ function isHeaderScroll(header) {
     }
   });
 }
-const currentHeader =
-  window.innerWidth <= 768
-    ? isMobileScroll(headerMain)
-    : isHeaderScroll(headerBottom);
+
+// function isMobileScroll(header) {
+//   let lastScrollTop = 0;
+//   const delta = 5;
+//   window.addEventListener("scroll", () => {
+//     const currentScroll =
+//       window.pageYOffset || document.documentElement.scrollTop;
+
+//     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
+
+//     if (currentScroll > lastScrollTop) {
+//       // Скрол вниз — ховати
+//       header.classList.remove("nav-down");
+//       header.classList.remove("nav-up");
+//     } else {
+//       // Скрол вгору — показати
+//       header.classList.add("nav-up");
+//       header.classList.remove("nav-down");
+//     }
+
+//     lastScrollTop = currentScroll;
+//   });
+// }
+
+headerMain.classList.add("nav-down");
 
 function isMobileScroll(header) {
   let lastScrollTop = 0;
   const delta = 5;
+
   window.addEventListener("scroll", () => {
     const currentScroll =
       window.pageYOffset || document.documentElement.scrollTop;
@@ -60,15 +82,20 @@ function isMobileScroll(header) {
     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
 
     if (currentScroll > lastScrollTop) {
-      // Скрол вниз — ховати
+      // Скрол вниз — ховати хедер
       header.classList.remove("nav-down");
-      header.classList.remove("nav-up");
-    } else {
-      // Скрол вгору — показати
       header.classList.add("nav-up");
-      header.classList.remove("nav-down");
+    } else {
+      // Скрол вгору — показати хедер
+      header.classList.remove("nav-up");
+      header.classList.add("nav-down");
     }
 
     lastScrollTop = currentScroll;
   });
 }
+
+const currentHeader =
+  window.innerWidth <= 768
+    ? isMobileScroll(headerMain)
+    : isHeaderScroll(headerBottom);

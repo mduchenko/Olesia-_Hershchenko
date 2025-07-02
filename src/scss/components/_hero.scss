@@ -1,9 +1,9 @@
 .hero {
   padding: 0;
   height: calc(100vh - 132px);
-  @media screen and (max-width: 768px) {
-    padding-top: 75px;
-  }
+  // @media screen and (max-width: 768px) {
+  //   padding-top: 72px;
+  // }
 }
 .slider {
   position: relative;
@@ -129,9 +129,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .slider {
-    margin: 0 auto;
-  }
+  // .slider {
+  //   margin: 0 auto;
+  // }
   .slider-content h1 {
     font-size: 2rem;
   }
