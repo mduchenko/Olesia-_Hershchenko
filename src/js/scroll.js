@@ -24,8 +24,8 @@ function isHeaderScroll(header) {
 
     if (scrollingDown) {
       // Скрол вниз — ховати
-      header.classList.remove("nav-down");
-      header.classList.add("nav-up");
+      header.classList.remove("nav-down1");
+      header.classList.add("nav-up1");
       // header.classList.remove("nav-down");
       // header.classList.add("nav-up");
     } else if (notAtBottom) {
@@ -33,8 +33,8 @@ function isHeaderScroll(header) {
       // header.classList.add("nav-down");
 
       // Скрол вгору — показати
-      header.classList.remove("nav-up");
-      header.classList.add("nav-down");
+      header.classList.remove("nav-up1");
+      header.classList.add("nav-down1");
     }
 
     lastScrollTop = scrollTop;
@@ -101,14 +101,18 @@ function isHeaderScroll(header) {
 //     lastScrollTop = currentScroll;
 //   });
 // }
-let currentHeader = "";
+// let currentHeader = "";
 
-if (window.innerWidth <= 768) {
-  headerMain.classList.add("nav-down"); // Щоб одразу був видимим
-  currentHeader = isMobileScroll(headerMain);
-} else {
-  currentHeader = isHeaderScroll(headerBottom);
-}
+// if (window.innerWidth <= 768) {
+//   headerMain.classList.add("nav-down"); // Щоб одразу був видимим
+//   currentHeader = isMobileScroll(headerMain);
+// } else {
+//   currentHeader = isHeaderScroll(headerBottom);
+// }
+
+const isMobile = window.innerWidth <= 768;
+headerMain.classList.add("nav-down");
+isMobile ? isMobileScroll(headerMain) : isHeaderScroll(headerMain);
 
 // function isMobileScroll(header) {
 //   let lastScrollTop = 0;
