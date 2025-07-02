@@ -202,7 +202,8 @@ main {
     }
 
     &.nav-up {
-      transform: translateY(-100%);
+      transform: translateY(-72px);
+      // top: -56px;
     }
 
     &.nav-down {
