@@ -101,7 +101,7 @@ function isHeaderScroll(header) {
 //     lastScrollTop = currentScroll;
 //   });
 // }
-const currentHeader = "";
+let currentHeader = "";
 
 if (window.innerWidth <= 768) {
   headerMain.classList.add("nav-down"); // Щоб одразу був видимим
