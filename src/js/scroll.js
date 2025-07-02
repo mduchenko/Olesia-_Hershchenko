@@ -23,9 +23,16 @@ function isHeaderScroll(header) {
       scrollTop + window.innerHeight < document.documentElement.scrollHeight;
 
     if (scrollingDown) {
+      // Скрол вниз — ховати
       header.classList.remove("nav-down");
       header.classList.add("nav-up");
+      // header.classList.remove("nav-down");
+      // header.classList.add("nav-up");
     } else if (notAtBottom) {
+      // header.classList.remove("nav-up");
+      // header.classList.add("nav-down");
+
+      // Скрол вгору — показати
       header.classList.remove("nav-up");
       header.classList.add("nav-down");
     }
@@ -69,24 +76,65 @@ function isHeaderScroll(header) {
 //   });
 // }
 
-headerMain.classList.add("nav-down");
+// headerMain.classList.add("nav-down");
+
+// function isMobileScroll(header) {
+//   let lastScrollTop = 0;
+//   const delta = 5;
+
+//   window.addEventListener("scroll", () => {
+//     const currentScroll =
+//       window.pageYOffset || document.documentElement.scrollTop;
+
+//     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
+
+//     if (currentScroll > lastScrollTop) {
+//       // Скрол вниз — ховати хедер
+//       header.classList.remove("nav-down");
+//       header.classList.add("nav-up");
+//     } else {
+//       // Скрол вгору — показати хедер
+//       header.classList.remove("nav-up");
+//       header.classList.add("nav-down");
+//     }
+
+//     lastScrollTop = currentScroll;
+//   });
+// }
+
+if (window.innerWidth <= 768) {
+  headerMain.classList.add("nav-down"); // Щоб одразу був видимим
+  isMobileScroll(headerMain);
+}
+const currentHeader =
+  window.innerWidth <= 768
+    ? isMobileScroll(headerMain)
+    : isHeaderScroll(headerBottom);
 
 function isMobileScroll(header) {
   let lastScrollTop = 0;
   const delta = 5;
+  const fixAfter = 300; // Після скількох px фіксуємо хедер
 
   window.addEventListener("scroll", () => {
     const currentScroll =
       window.pageYOffset || document.documentElement.scrollTop;
 
+    // Додаємо/знімаємо fixed
+    if (currentScroll > fixAfter) {
+      header.classList.add("fixed");
+    } else {
+      header.classList.remove("fixed");
+    }
+
     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
 
     if (currentScroll > lastScrollTop) {
-      // Скрол вниз — ховати хедер
+      // Скрол вниз — ховати
       header.classList.remove("nav-down");
       header.classList.add("nav-up");
     } else {
-      // Скрол вгору — показати хедер
+      // Скрол вгору — показати
       header.classList.remove("nav-up");
       header.classList.add("nav-down");
     }
@@ -94,8 +142,3 @@ function isMobileScroll(header) {
     lastScrollTop = currentScroll;
   });
 }
-
-const currentHeader =
-  window.innerWidth <= 768
-    ? isMobileScroll(headerMain)
-    : isHeaderScroll(headerBottom);

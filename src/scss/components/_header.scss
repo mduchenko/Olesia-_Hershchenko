@@ -122,7 +122,8 @@ body.menu-open {
       transition: transform 0.3s ease-in-out;
       display: none;
       &.active {
-        margin: 20px 0;
+        padding-top: 20px;
+        // margin: 20px 0;
         // position: fixed; /* Фіксує меню */
         // top: 70px;
         // left: 0;
@@ -149,37 +150,60 @@ body.menu-open {
       width: 100%;
     }
   }
+
+  //   @media screen and (max-width: 768px) {
+  //     position: fixed; // Було static — тому «з’їжджало»
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     z-index: 1000;
+  //     background-color: var(--light-bg);
+  //     // position: static;
+  //     // // top: 0;
+  //     // width: 100%;
+  //     &.active {
+  //       width: 100%;
+  //       height: 100%;
+  //       overflow: scroll;
+  //       // position: fixed;
+  //       // top: 0;
+  //       // left: 0;
+  //       z-index: 1000;
+  //       background-color: var(--light-bg);
+  //     }
+  //     &.nav-down {
+  //       // display: none;
+  //       transform: translateY(0); // Показує хедер
+  //     }
+  //     &.nav-up {
+  //       // position: fixed;
+  //       // top: 0;
+  //       // background-color: var(--light-bg);
+  //       // width: 100%;
+  //       // z-index: 10000;
+  //       transform: translateY(-100%); // Ховає хедер вгору
+  //     }
+  //   }
+  // }
+
   @media screen and (max-width: 768px) {
-    position: fixed; // Було static — тому «з’їжджало»
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    z-index: 1000;
+    transition: transform 0.3s ease;
     background-color: var(--light-bg);
-    // position: static;
-    // // top: 0;
-    // width: 100%;
-    &.active {
-      width: 100%;
-      height: 100%;
-      overflow: scroll;
-      // position: fixed;
-      // top: 0;
-      // left: 0;
-      z-index: 1000;
-      background-color: var(--light-bg);
+    &.fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10000;
     }
-    &.nav-down {
-      // display: none;
-      transform: translateY(0); // Показує хедер
-    }
+
     &.nav-up {
-      // position: fixed;
-      // top: 0;
-      // background-color: var(--light-bg);
-      // width: 100%;
-      // z-index: 10000;
-      transform: translateY(-100%); // Ховає хедер вгору
+      transform: translateY(-100%);
+    }
+
+    &.nav-down {
+      transform: translateY(0);
     }
   }
 }
