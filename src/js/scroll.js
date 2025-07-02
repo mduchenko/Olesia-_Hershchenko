@@ -36,12 +36,7 @@ function isHeaderScroll(header) {
       // Скрол вниз — ховати
       header.classList.remove("nav-down");
       header.classList.add("nav-up");
-      // header.classList.remove("nav-down");
-      // header.classList.add("nav-up");
     } else if (notAtBottom) {
-      // header.classList.remove("nav-up");
-      // header.classList.add("nav-down");
-
       // Скрол вгору — показати
       header.classList.remove("nav-up");
       header.classList.add("nav-down");
@@ -62,128 +57,6 @@ function isHeaderScroll(header) {
     }
   });
 }
-
-// function isMobileScroll(header) {
-//   let lastScrollTop = 0;
-//   const delta = 5;
-//   window.addEventListener("scroll", () => {
-//     const currentScroll =
-//       window.pageYOffset || document.documentElement.scrollTop;
-
-//     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
-
-//     if (currentScroll > lastScrollTop) {
-//       // Скрол вниз — ховати
-//       header.classList.remove("nav-down");
-//       header.classList.remove("nav-up");
-//     } else {
-//       // Скрол вгору — показати
-//       header.classList.add("nav-up");
-//       header.classList.remove("nav-down");
-//     }
-
-//     lastScrollTop = currentScroll;
-//   });
-// }
-
-// headerMain.classList.add("nav-down");
-
-// function isMobileScroll(header) {
-//   let lastScrollTop = 0;
-//   const delta = 5;
-
-//   window.addEventListener("scroll", () => {
-//     const currentScroll =
-//       window.pageYOffset || document.documentElement.scrollTop;
-
-//     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
-
-//     if (currentScroll > lastScrollTop) {
-//       // Скрол вниз — ховати хедер
-//       header.classList.remove("nav-down");
-//       header.classList.add("nav-up");
-//     } else {
-//       // Скрол вгору — показати хедер
-//       header.classList.remove("nav-up");
-//       header.classList.add("nav-down");
-//     }
-
-//     lastScrollTop = currentScroll;
-//   });
-// }
-
-// const isMobile = window.innerWidth <= 768;
-// headerMain.classList.add("nav-down");
-// isMobile ? isMobileScroll(headerMain) : isHeaderScroll(headerMain);
-
-// function isMobileScroll(header) {
-//   let lastScrollTop = 0;
-//   const delta = 100;
-//   const fixAfter = 500; // Після скількох px фіксуємо хедер
-
-//   window.addEventListener("scroll", () => {
-//     const currentScroll =
-//       window.pageYOffset || document.documentElement.scrollTop;
-
-//     // Додаємо/знімаємо fixed
-//     if (currentScroll > fixAfter) {
-//       header.classList.add("fixed");
-//     } else {
-//       header.classList.remove("fixed");
-//     }
-
-//     // 2. Ігноруємо дрібні рухи
-//     if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
-
-//     if (currentScroll > lastScrollTop) {
-//       // Скрол вниз — ховати
-//       header.classList.remove("nav-down");
-//       header.classList.add("nav-up");
-//     } else {
-//       // Скрол вгору — показати
-//       header.classList.remove("nav-up");
-//       header.classList.add("nav-down");
-//     }
-
-//     lastScrollTop = currentScroll;
-//   });
-// }
-
-// const header = document.querySelector(".header");
-// let lastScrollTop = 0;
-// const delta = 5;
-// const fixAfter = 100;
-
-// function onScroll() {
-//   const currentScroll =
-//     window.pageYOffset || document.documentElement.scrollTop;
-
-//   // Додати або зняти клас fixed
-//   if (currentScroll > fixAfter) {
-//     header.classList.add("fixed");
-//   } else {
-//     header.classList.remove("fixed");
-//   }
-
-//   // Сховати/показати при прокрутці
-//   if (Math.abs(currentScroll - lastScrollTop) <= delta) return;
-
-//   if (currentScroll > lastScrollTop) {
-//     // Скрол вниз
-//     header.classList.remove("nav-down");
-//     header.classList.add("nav-up");
-//   } else {
-//     // Скрол вгору
-//     header.classList.remove("nav-up");
-//     header.classList.add("nav-down");
-//   }
-
-//   lastScrollTop = currentScroll;
-// }
-
-// // Ініціалізація
-// header.classList.add("nav-down"); // Початково видимий
-// window.addEventListener("scroll", onScroll);
 
 function isMobileScroll(header) {
   let lastScrollTop = 0;
