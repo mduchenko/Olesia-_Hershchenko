@@ -230,19 +230,19 @@
           <button class="button about__button">скажи привіт</button>
         </div>
       </section>
-      <section class="portfolio" id="portfolio">
-        <div class="container">
+      <!-- <section class="portfolio" id="portfolio">
+        <!-- <div class="container">
           <h2 class="portfolio__title">Моє портфоліо</h2>
           <div class="portfolio__gallery">
             <img src="./img/фото1.webp" alt="Фото 1" class="portfolio__img1" />
             <img src="./img/фото2.webp" alt="Фото 2" class="portfolio__img1" />
             <img src="./img/фото1.webp" alt="Фото 3" class="portfolio__img1" />
-            <img src="./img/фото2.webp" alt="Фото 4" class="portfolio__img1" />
-            <!-- Додай більше фото за потреби -->
-          </div>
+            <img src="./img/фото2.webp" alt="Фото 4" class="portfolio__img1" /> -->
+      <!-- Додай більше фото за потреби -->
+      <!-- </div> -->
 
-          <!-- Lightbox / Слайдер -->
-          <div class="lightbox hidden">
+      <!-- Lightbox / Слайдер -->
+      <!-- <div class="lightbox hidden">
             <span class="lightbox__close">&times;</span>
             <img class="lightbox__img" src="" alt="" />
             <div class="lightbox__controls">
@@ -250,8 +250,735 @@
               <span class="next1">&#10095;</span>
             </div>
           </div>
+        </div> -->
+      <!-- </section> -->
+
+      <section class="portfolio-section">
+        <h2 class="section-title">Портфоліо</h2>
+
+        <div class="portfolio-tabs">
+          <button class="tab-btn active" data-category="studio">
+            Студійна
+          </button>
+          <button class="tab-btn" data-category="street">Вулична</button>
+          <button class="tab-btn" data-category="family">Сімейна</button>
+          <button class="tab-btn" data-category="love">Love&Story</button>
+          <button class="tab-btn" data-category="event">Подієва</button>
+        </div>
+
+        <div class="portfolio-grid">
+          <!-- Студійні фото -->
+          <div
+            class="portfolio-card"
+            data-category="studio"
+            data-gallery="gallery1"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?portrait,studio"
+              alt="Студійна фотосесія"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Портретна зйомка</h3>
+              <p class="card-description">
+                Професійна студійна зйомка з правильним світлом
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-card"
+            data-category="studio"
+            data-gallery="gallery2"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?fashion,studio"
+              alt="Фешн зйомка"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Фешн зйомка</h3>
+              <p class="card-description">Каталог одягу для бренду</p>
+            </div>
+          </div>
+
+          <!-- Вуличні фото -->
+          <div
+            class="portfolio-card"
+            data-category="street"
+            data-gallery="gallery3"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?street,urban"
+              alt="Вулична фотографія"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Міські пейзажі</h3>
+              <p class="card-description">Архітектура та атмосфера міста</p>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-card"
+            data-category="street"
+            data-gallery="gallery4"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?street,portrait"
+              alt="Вуличний портрет"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Вуличні портрети</h3>
+              <p class="card-description">Живі емоції в міському середовищі</p>
+            </div>
+          </div>
+
+          <!-- Сімейні фото -->
+          <div
+            class="portfolio-card"
+            data-category="family"
+            data-gallery="gallery5"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?family,park"
+              alt="Сімейна фотосесія"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Сім'я в парку</h3>
+              <p class="card-description">Теплі сімейні моменти на природі</p>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-card"
+            data-category="family"
+            data-gallery="gallery6"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?family,home"
+              alt="Домашня фотосесія"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Домашня атмосфера</h3>
+              <p class="card-description">Щирі емоції в домашній обстановці</p>
+            </div>
+          </div>
+
+          <!-- Love&Story -->
+          <div
+            class="portfolio-card"
+            data-category="love"
+            data-gallery="gallery7"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?couple,beach"
+              alt="Love Story на пляжі"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Love Story на пляжі</h3>
+              <p class="card-description">Романтична прогулянка біля моря</p>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-card"
+            data-category="love"
+            data-gallery="gallery8"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?couple,forest"
+              alt="Love Story в лісі"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Love Story в лісі</h3>
+              <p class="card-description">Чарівні моменти серед природи</p>
+            </div>
+          </div>
+
+          <!-- Подієві фото -->
+          <div
+            class="portfolio-card"
+            data-category="event"
+            data-gallery="gallery9"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?wedding"
+              alt="Весільна церемонія"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Весільна церемонія</h3>
+              <p class="card-description">Найщасливіший день у житті</p>
+            </div>
+          </div>
+
+          <div
+            class="portfolio-card"
+            data-category="event"
+            data-gallery="gallery10"
+          >
+            <img
+              src="https://source.unsplash.com/random/600x400/?concert"
+              alt="Концерт"
+            />
+            <div class="card-overlay">
+              <h3 class="card-title">Музичний фестиваль</h3>
+              <p class="card-description">Енергія та емоції живого виступу</p>
+            </div>
+          </div>
         </div>
       </section>
+
+      <!-- Модальне вікно галереї -->
+      <div id="galleryModal" class="gallery-modal">
+        <span class="close-btn">&times;</span>
+        <div class="modal-content">
+          <div class="gallery-slider">
+            <div class="slide active">
+              <img src="" alt="" id="currentSlide" />
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next-portfolio">&#10095;</button>
+          </div>
+          <div class="gallery-thumbnails" id="thumbnailsContainer"></div>
+        </div>
+      </div>
+
+      <style>
+        /* Основні стилі
+      * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+          font-family: 'Arial', sans-serif;
+      }
+      
+      body {
+          background: #f9f9f9;
+          color: #333;
+          line-height: 1.6;
+      } */
+
+        .portfolio-section {
+          padding: 60px 20px;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+
+        .section-title {
+          text-align: center;
+          margin-bottom: 40px;
+          font-size: 2.5rem;
+          color: #222;
+        }
+
+        /* Стилі для табів */
+        .portfolio-tabs {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 30px;
+          flex-wrap: wrap;
+        }
+
+        .tab-btn {
+          padding: 12px 24px;
+          margin: 0 10px;
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 600;
+          color: #666;
+          transition: all 0.3s ease;
+          border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+          color: #000;
+          border-bottom: 2px solid #000;
+        }
+
+        .tab-btn:hover {
+          color: #000;
+        }
+
+        /* Стилі для карток */
+        .portfolio-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 20px;
+        }
+
+        .portfolio-card {
+          position: relative;
+          overflow: hidden;
+          border-radius: 8px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease;
+          height: 250px;
+          cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+          transform: translateY(-5px);
+        }
+
+        .portfolio-card img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover img {
+          transform: scale(1.05);
+        }
+
+        .card-overlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+          color: white;
+          padding: 20px;
+        }
+
+        .card-title {
+          font-size: 1.2rem;
+          margin-bottom: 5px;
+        }
+
+        .card-description {
+          font-size: 0.9rem;
+          opacity: 0.9;
+        }
+
+        /* Модальне вікно галереї */
+        .gallery-modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          z-index: 1000;
+          overflow: hidden;
+        }
+
+        .modal-content {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 20px;
+          right: 30px;
+          color: white;
+          font-size: 35px;
+          font-weight: bold;
+          cursor: pointer;
+          z-index: 1001;
+        }
+
+        .gallery-slider {
+          flex-grow: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+        }
+
+        .slide {
+          display: none;
+          text-align: center;
+          max-width: 90%;
+          max-height: 90vh;
+        }
+
+        .slide.active {
+          display: block;
+        }
+
+        .slide img {
+          max-width: 100%;
+          max-height: 80vh;
+          object-fit: contain;
+        }
+
+        .prev,
+        .next-portfolio {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          padding: 16px;
+          margin-top: -22px;
+          color: white;
+          font-weight: bold;
+          font-size: 20px;
+          transition: 0.3s;
+          user-select: none;
+          background: rgba(0, 0, 0, 0.5);
+          border: none;
+        }
+
+        .next-portfolio {
+          right: 0;
+          border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+          left: 0;
+          border-radius: 0 3px 3px 0;
+        }
+
+        .prev:hover,
+        .next-portfolio:hover {
+          background: rgba(0, 0, 0, 0.8);
+        }
+
+        .gallery-thumbnails {
+          display: flex;
+          padding: 10px;
+          overflow-x: auto;
+          background: #111;
+          justify-content: center;
+        }
+
+        .thumbnail {
+          width: 80px;
+          height: 60px;
+          margin-right: 10px;
+          cursor: pointer;
+          opacity: 0.6;
+          transition: opacity 0.3s;
+          flex-shrink: 0;
+        }
+
+        .thumbnail:hover,
+        .thumbnail.active {
+          opacity: 1;
+        }
+
+        .thumbnail img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 768px) {
+          .portfolio-grid {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          }
+
+          .tab-btn {
+            padding: 10px 15px;
+            margin: 0 5px;
+            font-size: 0.9rem;
+          }
+
+          .gallery-thumbnails {
+            padding: 5px;
+          }
+
+          .thumbnail {
+            width: 60px;
+            height: 45px;
+            margin-right: 5px;
+          }
+        }
+      </style>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          // Дані для галерей (можна замінити на реальні фото)
+          const galleries = {
+            gallery1: [
+              {
+                src: "./img/фото1.webp",
+                alt: "Студійний портрет 1",
+              },
+              {
+                src: "./img/фото2.webp",
+                alt: "Студійний портрет 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?portrait,studio,3",
+                alt: "Студійний портрет 3",
+              },
+            ],
+            gallery2: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?fashion,studio,1",
+                alt: "Фешн зйомка 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?fashion,studio,2",
+                alt: "Фешн зйомка 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?fashion,studio,3",
+                alt: "Фешн зйомка 3",
+              },
+            ],
+            gallery3: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?street,urban,1",
+                alt: "Міський пейзаж 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?street,urban,2",
+                alt: "Міський пейзаж 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?street,urban,3",
+                alt: "Міський пейзаж 3",
+              },
+            ],
+            gallery4: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?street,portrait,1",
+                alt: "Вуличний портрет 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?street,portrait,2",
+                alt: "Вуличний портрет 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?street,portrait,3",
+                alt: "Вуличний портрет 3",
+              },
+            ],
+            gallery5: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?family,park,1",
+                alt: "Сім'я в парку 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?family,park,2",
+                alt: "Сім'я в парку 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?family,park,3",
+                alt: "Сім'я в парку 3",
+              },
+            ],
+            gallery6: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?family,home,1",
+                alt: "Домашня фотосесія 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?family,home,2",
+                alt: "Домашня фотосесія 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?family,home,3",
+                alt: "Домашня фотосесія 3",
+              },
+            ],
+            gallery7: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?couple,beach,1",
+                alt: "Love Story на пляжі 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?couple,beach,2",
+                alt: "Love Story на пляжі 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?couple,beach,3",
+                alt: "Love Story на пляжі 3",
+              },
+            ],
+            gallery8: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?couple,forest,1",
+                alt: "Love Story в лісі 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?couple,forest,2",
+                alt: "Love Story в лісі 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?couple,forest,3",
+                alt: "Love Story в лісі 3",
+              },
+            ],
+            gallery9: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?wedding,1",
+                alt: "Весільна церемонія 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?wedding,2",
+                alt: "Весільна церемонія 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?wedding,3",
+                alt: "Весільна церемонія 3",
+              },
+            ],
+            gallery10: [
+              {
+                src: "https://source.unsplash.com/random/800x600/?concert,1",
+                alt: "Концерт 1",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?concert,2",
+                alt: "Концерт 2",
+              },
+              {
+                src: "https://source.unsplash.com/random/800x600/?concert,3",
+                alt: "Концерт 3",
+              },
+            ],
+          };
+
+          // Фільтрація по табам
+          const tabBtns = document.querySelectorAll(".tab-btn");
+          const portfolioCards = document.querySelectorAll(".portfolio-card");
+
+          tabBtns.forEach((btn) => {
+            btn.addEventListener("click", function () {
+              // Видаляємо активний клас з усіх кнопок
+              tabBtns.forEach((b) => b.classList.remove("active"));
+              // Додаємо активний клас до поточної кнопки
+              this.classList.add("active");
+
+              const category = this.getAttribute("data-category");
+
+              // Фільтруємо картки
+              portfolioCards.forEach((card) => {
+                if (
+                  category === "all" ||
+                  card.getAttribute("data-category") === category
+                ) {
+                  card.style.display = "block";
+                } else {
+                  card.style.display = "none";
+                }
+              });
+            });
+          });
+
+          // Відкриття галереї
+          const modal = document.getElementById("galleryModal");
+          const currentSlide = document.getElementById("currentSlide");
+          const thumbnailsContainer = document.getElementById(
+            "thumbnailsContainer"
+          );
+          let currentGallery = [];
+          let currentIndex = 0;
+
+          portfolioCards.forEach((card) => {
+            card.addEventListener("click", function () {
+              const galleryId = this.getAttribute("data-gallery");
+              currentGallery = galleries[galleryId];
+              currentIndex = 0;
+
+              // Очищаємо мініатюри
+              thumbnailsContainer.innerHTML = "";
+
+              // Відображаємо перше зображення
+              showSlide(currentIndex);
+
+              // Додаємо мініатюри
+              currentGallery.forEach((img, index) => {
+                const thumbnail = document.createElement("div");
+                thumbnail.className = "thumbnail";
+                if (index === 0) thumbnail.classList.add("active");
+
+                const thumbnailImg = document.createElement("img");
+                thumbnailImg.src = img.src;
+                thumbnailImg.alt = img.alt;
+
+                thumbnail.appendChild(thumbnailImg);
+                thumbnailsContainer.appendChild(thumbnail);
+
+                // Обробник кліку на мініатюру
+                thumbnail.addEventListener("click", () => {
+                  showSlide(index);
+                });
+              });
+
+              // Відкриваємо модальне вікно
+              modal.style.display = "block";
+              document.body.style.overflow = "hidden";
+            });
+          });
+
+          // Функція для відображення слайда
+          function showSlide(index) {
+            currentIndex = index;
+            const slide = currentGallery[index];
+
+            currentSlide.src = slide.src;
+            currentSlide.alt = slide.alt;
+
+            // Оновлюємо активну мініатюру
+            const thumbnails = document.querySelectorAll(".thumbnail");
+            thumbnails.forEach((thumb, i) => {
+              if (i === index) {
+                thumb.classList.add("active");
+              } else {
+                thumb.classList.remove("active");
+              }
+            });
+          }
+
+          // Кнопки навігації
+          document.querySelector(".prev").addEventListener("click", () => {
+            currentIndex =
+              (currentIndex - 1 + currentGallery.length) %
+              currentGallery.length;
+            showSlide(currentIndex);
+          });
+          console.log(document.querySelector(".next-portfolio"));
+          document
+            .querySelector(".next-portfolio")
+            .addEventListener("click", () => {
+              currentIndex = (currentIndex + 1) % currentGallery.length;
+              showSlide(currentIndex);
+            });
+
+          // Закриття модального вікна
+          document.querySelector(".close-btn").addEventListener("click", () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+          });
+
+          // Закриття при кліку поза зображенням
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+              modal.style.display = "none";
+              document.body.style.overflow = "auto";
+            }
+          });
+
+          // Навігація клавішами
+          document.addEventListener("keydown", (e) => {
+            if (modal.style.display === "block") {
+              if (e.key === "ArrowLeft") {
+                currentIndex =
+                  (currentIndex - 1 + currentGallery.length) %
+                  currentGallery.length;
+                showSlide(currentIndex);
+              } else if (e.key === "ArrowRight") {
+                currentIndex = (currentIndex + 1) % currentGallery.length;
+                showSlide(currentIndex);
+              } else if (e.key === "Escape") {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+              }
+            }
+          });
+        });
+      </script>
 
       <section class="price" id="pricing">
         <div class="container">
@@ -948,7 +1675,7 @@
     <script src="./js/scroll.js"></script>
     <script src="./js/modal.js"></script>
     <script src="./js/slider.js"></script>
-    <script src="./js/portfolio.js"></script>
+    <!-- <script src="./js/portfolio.js"></script> -->
     <script src="./js/scrollMobile.js"></script>
   </body>
 </html>
