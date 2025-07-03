@@ -28,6 +28,15 @@
       sizes="16x16"
       href="./favicon-16x16.png"
     />
+    <!-- LightGallery CSS  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css"
+    />
+
+    <!-- Tailwind (для стилізації галереї) -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
     <link rel="manifest" href="./site.webmanifest" />
     <link rel="stylesheet" href="css/style.min.css" />
   </head>
@@ -449,15 +458,39 @@
       <!-- Модальне вікно галереї -->
       <div id="galleryModal" class="gallery-modal">
         <span class="close-btn">&times;</span>
-        <div class="modal-content">
-          <div class="gallery-slider">
+        <div class="modal-content-portfolio">
+          <!-- <div class="gallery-slider">
             <div class="slide active">
               <img src="" alt="" id="currentSlide" />
             </div>
             <button class="prev">&#10094;</button>
             <button class="next-portfolio">&#10095;</button>
           </div>
-          <div class="gallery-thumbnails" id="thumbnailsContainer"></div>
+          <div class="gallery-thumbnails" id="thumbnailsContainer"></div> -->
+
+          <div
+            id="lightgallery"
+            class="gallery-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+          >
+            <a href="https://picsum.photos/id/1015/1200/800">
+              <img src="https://picsum.photos/id/1015/400/300" alt="Фото 1" />
+            </a>
+            <a href="https://picsum.photos/id/1016/1200/800">
+              <img src="https://picsum.photos/id/1016/400/300" alt="Фото 2" />
+            </a>
+            <a href="https://picsum.photos/id/1018/1200/800">
+              <img src="https://picsum.photos/id/1018/400/300" alt="Фото 3" />
+            </a>
+            <a href="https://picsum.photos/id/1019/1200/800">
+              <img src="https://picsum.photos/id/1019/400/300" alt="Фото 4" />
+            </a>
+            <a href="https://picsum.photos/id/1020/1200/800">
+              <img src="https://picsum.photos/id/1020/400/300" alt="Фото 5" />
+            </a>
+            <a href="https://picsum.photos/id/1021/1200/800">
+              <img src="https://picsum.photos/id/1021/400/300" alt="Фото 6" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -581,10 +614,10 @@
           height: 100%;
           background: rgba(0, 0, 0, 0.9);
           z-index: 1000;
-          overflow: hidden;
+          overflow: scroll;
         }
 
-        .modal-content {
+        .modal-content-portfolio {
           position: relative;
           width: 100%;
           height: 100%;
@@ -888,43 +921,43 @@
 
           // Відкриття галереї
           const modal = document.getElementById("galleryModal");
-          const currentSlide = document.getElementById("currentSlide");
-          const thumbnailsContainer = document.getElementById(
-            "thumbnailsContainer"
-          );
-          let currentGallery = [];
-          let currentIndex = 0;
+          // const currentSlide = document.getElementById("currentSlide");
+          // const thumbnailsContainer = document.getElementById(
+          //   "thumbnailsContainer"
+          // );
+          // let currentGallery = [];
+          // let currentIndex = 0;
 
           portfolioCards.forEach((card) => {
             card.addEventListener("click", function () {
-              const galleryId = this.getAttribute("data-gallery");
-              currentGallery = galleries[galleryId];
-              currentIndex = 0;
+              // const galleryId = this.getAttribute("data-gallery");
+              // currentGallery = galleries[galleryId];
+              // currentIndex = 0;
 
               // Очищаємо мініатюри
-              thumbnailsContainer.innerHTML = "";
+              // thumbnailsContainer.innerHTML = "";
 
               // Відображаємо перше зображення
-              showSlide(currentIndex);
+              // showSlide(currentIndex);
 
               // Додаємо мініатюри
-              currentGallery.forEach((img, index) => {
-                const thumbnail = document.createElement("div");
-                thumbnail.className = "thumbnail";
-                if (index === 0) thumbnail.classList.add("active");
+              // currentGallery.forEach((img, index) => {
+              //   const thumbnail = document.createElement("div");
+              //   thumbnail.className = "thumbnail";
+              //   if (index === 0) thumbnail.classList.add("active");
 
-                const thumbnailImg = document.createElement("img");
-                thumbnailImg.src = img.src;
-                thumbnailImg.alt = img.alt;
+              //   const thumbnailImg = document.createElement("img");
+              //   thumbnailImg.src = img.src;
+              //   thumbnailImg.alt = img.alt;
 
-                thumbnail.appendChild(thumbnailImg);
-                thumbnailsContainer.appendChild(thumbnail);
+              //   thumbnail.appendChild(thumbnailImg);
+              //   thumbnailsContainer.appendChild(thumbnail);
 
-                // Обробник кліку на мініатюру
-                thumbnail.addEventListener("click", () => {
-                  showSlide(index);
-                });
-              });
+              // Обробник кліку на мініатюру
+              //   thumbnail.addEventListener("click", () => {
+              //     showSlide(index);
+              //   });
+              // });
 
               // Відкриваємо модальне вікно
               modal.style.display = "block";
@@ -933,38 +966,38 @@
           });
 
           // Функція для відображення слайда
-          function showSlide(index) {
-            currentIndex = index;
-            const slide = currentGallery[index];
+          // function showSlide(index) {
+          //   currentIndex = index;
+          //   const slide = currentGallery[index];
 
-            currentSlide.src = slide.src;
-            currentSlide.alt = slide.alt;
+          //   currentSlide.src = slide.src;
+          //   currentSlide.alt = slide.alt;
 
-            // Оновлюємо активну мініатюру
-            const thumbnails = document.querySelectorAll(".thumbnail");
-            thumbnails.forEach((thumb, i) => {
-              if (i === index) {
-                thumb.classList.add("active");
-              } else {
-                thumb.classList.remove("active");
-              }
-            });
-          }
+          // Оновлюємо активну мініатюру
+          //   const thumbnails = document.querySelectorAll(".thumbnail");
+          //   thumbnails.forEach((thumb, i) => {
+          //     if (i === index) {
+          //       thumb.classList.add("active");
+          //     } else {
+          //       thumb.classList.remove("active");
+          //     }
+          //   });
+          // }
 
           // Кнопки навігації
-          document.querySelector(".prev").addEventListener("click", () => {
-            currentIndex =
-              (currentIndex - 1 + currentGallery.length) %
-              currentGallery.length;
-            showSlide(currentIndex);
-          });
-          console.log(document.querySelector(".next-portfolio"));
-          document
-            .querySelector(".next-portfolio")
-            .addEventListener("click", () => {
-              currentIndex = (currentIndex + 1) % currentGallery.length;
-              showSlide(currentIndex);
-            });
+          // document.querySelector(".prev").addEventListener("click", () => {
+          //   currentIndex =
+          //     (currentIndex - 1 + currentGallery.length) %
+          //     currentGallery.length;
+          //   showSlide(currentIndex);
+          // });
+          // console.log(document.querySelector(".next-portfolio"));
+          // document
+          //   .querySelector(".next-portfolio")
+          //   .addEventListener("click", () => {
+          //     currentIndex = (currentIndex + 1) % currentGallery.length;
+          //     showSlide(currentIndex);
+          //   });
 
           // Закриття модального вікна
           document.querySelector(".close-btn").addEventListener("click", () => {
@@ -1697,6 +1730,48 @@
       </div>
     </footer>
 
+    <div class="container mx-auto px-4">
+      <h1 class="text-4xl font-bold text-center mb-10">Моя Фотогалерея</h1>
+
+      <div
+        id="lightgallery"
+        class="gallery-container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+      >
+        <a href="https://picsum.photos/id/1015/1200/800">
+          <img src="https://picsum.photos/id/1015/400/300" alt="Фото 1" />
+        </a>
+        <a href="https://picsum.photos/id/1016/1200/800">
+          <img src="https://picsum.photos/id/1016/400/300" alt="Фото 2" />
+        </a>
+        <a href="https://picsum.photos/id/1018/1200/800">
+          <img src="https://picsum.photos/id/1018/400/300" alt="Фото 3" />
+        </a>
+        <a href="https://picsum.photos/id/1019/1200/800">
+          <img src="https://picsum.photos/id/1019/400/300" alt="Фото 4" />
+        </a>
+        <a href="https://picsum.photos/id/1020/1200/800">
+          <img src="https://picsum.photos/id/1020/400/300" alt="Фото 5" />
+        </a>
+        <a href="https://picsum.photos/id/1021/1200/800">
+          <img src="https://picsum.photos/id/1021/400/300" alt="Фото 6" />
+        </a>
+      </div>
+    </div>
+
+    <style>
+      .gallery-container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .gallery-container img {
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .gallery-container img:hover {
+        transform: scale(1.03);
+      }
+    </style>
     <script src="./js/preloder.js"></script>
     <script src="./js/gamburger.js"></script>
     <script src="./js/scroll.js"></script>
@@ -1704,5 +1779,27 @@
     <script src="./js/slider.js"></script>
     <!-- <script src="./js/portfolio.js"></script> -->
     <script src="./js/scrollMobile.js"></script>
+
+    <!-- LightGallery JS -->
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/fullscreen/lg-fullscreen.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/autoplay/lg-autoplay.min.js"></script>
+
+    <script>
+      lightGallery(document.getElementById("lightgallery"), {
+        plugins: [lgZoom, lgThumbnail, lgFullscreen, lgAutoplay],
+        speed: 500,
+        zoom: true,
+        thumbnail: true,
+        fullscreen: true,
+        autoplay: false,
+        download: false,
+        mode: "lg-fade",
+        controls: true,
+        selector: "a",
+      });
+    </script>
   </body>
 </html>
