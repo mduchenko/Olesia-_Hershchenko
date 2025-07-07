@@ -2343,6 +2343,11 @@
       .hidden {
         display: none;
       }
+      @media (max-width: 768px) {
+        #chat-widget {
+          transition: bottom 0.3s ease;
+        }
+      }
     </style>
     <!-- <script>
       let chatOpen = false;
@@ -2483,6 +2488,18 @@
             }
           }, 2000);
         }
+      });
+      const textarea = document.getElementById("telegram-message");
+      const chatWidget = document.getElementById("chat-widget");
+
+      textarea.addEventListener("focus", () => {
+        // При появі клавіатури — зміщуємо чат вище
+        chatWidget.style.bottom = "300px"; // можеш змінити на 50% чи інше значення
+      });
+
+      textarea.addEventListener("blur", () => {
+        // Коли клавіатура зникає — повертаємо назад
+        chatWidget.style.bottom = "20px";
       });
     </script>
 
