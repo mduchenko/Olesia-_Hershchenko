@@ -2344,8 +2344,81 @@
         display: none;
       }
     </style>
-
     <script>
+      let chatOpen = false;
+      let scrollTimeout;
+
+      function toggleChat() {
+        const chatBody = document.getElementById("chat-body");
+        const widget = document.getElementById("chat-widget");
+
+        chatBody.classList.toggle("hidden");
+        chatOpen = !chatBody.classList.contains("hidden");
+
+        if (chatOpen) {
+          widget.classList.remove("hidden-chat");
+        }
+      }
+
+      function sendTelegramMessage() {
+        const messageField = document.getElementById("telegram-message");
+        const message = messageField.value.trim();
+        if (!message) return;
+
+        const userBubble = document.createElement("div");
+        userBubble.className = "chat-bubble user";
+        userBubble.textContent = message;
+        document.getElementById("chat-messages").appendChild(userBubble);
+
+        messageField.value = "";
+
+        const token = "ВАШ_BOT_TOKEN";
+        const chatId = "ВАШ_CHAT_ID";
+
+        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chatId, text: message }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (!data.ok) {
+              alert("Помилка надсилання!");
+            } else {
+              chatOpen = false;
+            }
+          })
+          .catch(() => {
+            alert("Помилка з'єднання.");
+          });
+      }
+
+      window.addEventListener("scroll", () => {
+        const widget = document.getElementById("chat-widget");
+
+        if (!chatOpen) {
+          widget.classList.remove("hidden-chat");
+
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            if (!chatOpen) {
+              widget.classList.add("hidden-chat");
+            }
+          }, 2000);
+        }
+      });
+
+      // Scroll chat to bottom on focus (mobile fix)
+      const textarea = document.getElementById("telegram-message");
+      textarea.addEventListener("focus", () => {
+        setTimeout(() => {
+          const messages = document.getElementById("chat-messages");
+          messages.scrollTop = messages.scrollHeight;
+          window.scrollTo(0, 0); // Prevent scroll jumps
+        }, 300);
+      });
+    </script>
+    <!-- <script>
       let chatOpen = false;
       let scrollTimeout;
 
@@ -2411,7 +2484,7 @@
           }, 2000);
         }
       });
-    </script>
+    </script> -->
 
     <!-- <div class="container mx-auto px-4">
       <h1 class="text-4xl font-bold text-center mb-10">Моя Фотогалерея</h1>
