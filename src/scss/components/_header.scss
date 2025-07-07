@@ -177,6 +177,7 @@ main {
       justify-content: center;
       background-color: var(--light-bg);
       width: 100%;
+      z-index: 100001;
     }
     // &.fixed-top {
     //   position: absolute;
