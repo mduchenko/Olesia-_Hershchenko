@@ -2489,18 +2489,35 @@
           }, 2000);
         }
       });
-      const textarea = document.getElementById("telegram-message");
+      // const textarea = document.getElementById("telegram-message");
+      // const chatWidget = document.getElementById("chat-widget");
+
+      // textarea.addEventListener("focus", () => {
+      //   // При появі клавіатури — зміщуємо чат вище
+      //   chatWidget.style.bottom = "50%"; // можеш змінити на 50% чи інше значення
+      // });
+
+      // textarea.addEventListener("blur", () => {
+      //   // Коли клавіатура зникає — повертаємо назад
+      //   chatWidget.style.bottom = "20px";
+      // });
       const chatWidget = document.getElementById("chat-widget");
 
-      textarea.addEventListener("focus", () => {
-        // При появі клавіатури — зміщуємо чат вище
-        chatWidget.style.bottom = "50%"; // можеш змінити на 50% чи інше значення
-      });
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", () => {
+          const viewportHeight = window.visualViewport.height;
+          const windowHeight = window.innerHeight;
 
-      textarea.addEventListener("blur", () => {
-        // Коли клавіатура зникає — повертаємо назад
-        chatWidget.style.bottom = "20px";
-      });
+          // якщо клавіатура з’явилась (висота менша)
+          if (viewportHeight < windowHeight) {
+            const keyboardHeight = windowHeight - viewportHeight;
+            chatWidget.style.bottom = `${keyboardHeight + 20}px`;
+          } else {
+            // клавіатура зникла
+            chatWidget.style.bottom = "20px";
+          }
+        });
+      }
     </script>
 
     <!-- <div class="container mx-auto px-4">
