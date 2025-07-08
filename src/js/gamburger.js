@@ -58,6 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
     navMenu.classList.toggle("active");
     headerMenu.classList.toggle("active");
     socialMenu.classList.remove("active");
+
+    const navItemsList = navMenu.querySelector(".nav-items");
+
+    if (navMenu.classList.contains("active")) {
+      setTimeout(() => {
+        navItemsList.classList.add("animate");
+      }, 100); // невелика пауза, щоб .active застосувався
+    } else {
+      navItemsList.classList.remove("animate");
+    }
+
     updateBodyScrollState();
   });
 
@@ -95,6 +106,10 @@ document.addEventListener("DOMContentLoaded", () => {
         navMenu.classList.remove("active");
         headerMenu.classList.remove("active");
         headerMenu.classList.remove("nav-down", "nav-up");
+
+        const navItemsList = navMenu.querySelector(".nav-items");
+        navItemsList.classList.remove("animate");
+
         updateBodyScrollState();
       });
     });
