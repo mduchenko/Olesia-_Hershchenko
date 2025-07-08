@@ -2508,6 +2508,16 @@
     </div>
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+
       #chat-widget {
         position: fixed;
         bottom: 20px;
@@ -2517,7 +2527,6 @@
         z-index: 999;
         opacity: 1;
         transition: bottom 0.3s ease, opacity 1s ease-in-out;
-        box-sizing: border-box;
       }
 
       #chat-widget.keyboard-open {
