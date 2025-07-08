@@ -1206,6 +1206,176 @@
         </div>
       </section>
 
+      <section class="post">
+        <div class="container">
+          <div>
+            <h2 class="title">Історії зйомок</h2>
+            <nav class="post-nav">
+              <ul id="categories"></ul>
+            </nav>
+          </div>
+          <main id="posts"></main>
+        </div>
+
+        <script>
+          let posts = [];
+
+          fetch("./json/posts.json")
+            .then((res) => res.json())
+            .then((data) => {
+              posts = data;
+              renderPosts();
+            })
+            .catch((err) => {
+              console.error("Помилка завантаження постів:", err);
+            });
+
+          const postsContainer = document.getElementById("posts");
+          const categoriesContainer = document.getElementById("categories");
+
+          const manualCategories = [
+            "Студійна",
+            "Вулична",
+            "Сімейна",
+            "Love&Story",
+            "Подієва",
+          ];
+
+          manualCategories.forEach((cat) => {
+            const li = document.createElement("li");
+            li.textContent = cat;
+            li.onclick = () => renderPosts(cat);
+            categoriesContainer.appendChild(li);
+          });
+
+          function renderPosts(filterCat = null) {
+            postsContainer.innerHTML = "";
+            const filtered = filterCat
+              ? posts.filter((p) => p.category === filterCat)
+              : posts;
+            filtered.forEach((post, index) => {
+              const el = document.createElement("article");
+              el.style.animationDelay = `${index * 0.1}s`;
+              el.innerHTML = `
+                <h2>${post.title}</h2>
+                <small>${post.date}</small>
+                <p>${post.excerpt}</p>
+                <div class="gallery-post">
+                  ${post.images
+                    .map(
+                      (src) =>
+                        `<img src="${src}" loading="lazy" onclick="openLightbox('${src}')">`
+                    )
+                    .join("")}
+                </div>
+                <div>${post.content}</div>
+              `;
+              postsContainer.appendChild(el);
+            });
+          }
+
+          function openLightbox(src) {
+            const overlay = document.createElement("div");
+            overlay.className = "lightbox";
+            overlay.innerHTML = `<img src="${src}" /><span onclick="this.parentNode.remove()">✖</span>`;
+            document.body.appendChild(overlay);
+          }
+
+          renderPosts();
+        </script>
+        <style>
+          body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+          }
+          .post .title {
+            padding: 40px 0;
+            text-align: center;
+          }
+          .post-nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            flex-wrap: wrap;
+          }
+          .post-nav li {
+            cursor: pointer;
+            color: blue;
+            background: #eef;
+            padding: 6px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+          }
+          .post-nav li:hover {
+            background: #cce;
+            transform: scale(1.05);
+          }
+          article {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+          }
+          @keyframes fadeInUp {
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          .gallery-post {
+            display: flex;
+            flex-wrap: wrap;
+          }
+          .gallery-post img {
+            width: 30%;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+          }
+          .gallery-post img:hover {
+            transform: scale(1.01);
+          }
+          .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999999;
+          }
+          .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.3s ease;
+          }
+          @keyframes zoomIn {
+            from {
+              transform: scale(0.7);
+              opacity: 0;
+            }
+            to {
+              transform: scale(1);
+              opacity: 1;
+            }
+          }
+          .lightbox span {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+          }
+        </style>
+      </section>
+
       <script>
         const form = document.getElementById("services-form");
         const totalPriceEl = document.getElementById("total-price");
