@@ -2686,11 +2686,6 @@
           return;
         }
 
-        const userBubble = document.createElement("div");
-        userBubble.className = "chat-bubble user";
-        userBubble.textContent = `${name}: ${messageText}`;
-        document.getElementById("chat-messages").appendChild(userBubble);
-
         const message = `📸 Нове повідомлення з сайту фотографа:\n\n👤 Ім’я: ${name}\n📞 Телефон: ${phone}\n📧 Email: ${email}\n💬 Повідомлення:\n${messageText}`;
 
         const token = "ВАШ_BOT_TOKEN";
@@ -2710,7 +2705,7 @@
               document.getElementById("user-phone").value = "";
               document.getElementById("user-email").value = "";
               document.getElementById("telegram-message").value = "";
-              chatOpen = false;
+              alert("Ваш запит прийнято! Дякуємо.");
             }
           })
           .catch(() => {
@@ -2723,7 +2718,6 @@
 
         if (!chatOpen) {
           widget.classList.remove("hidden-chat");
-
           clearTimeout(scrollTimeout);
           scrollTimeout = setTimeout(() => {
             if (!chatOpen) {
