@@ -2476,8 +2476,8 @@
         </a>
       </div>
     </div> -->
-
     <!-- Telegram Chat Widget -->
+    <div id="chat-modal-overlay" class="hidden" onclick="toggleChat()"></div>
     <div id="chat-widget" class="hidden-chat">
       <div class="chat-header" onclick="toggleChat()">
         <span class="icon-paper-plane"></span>
@@ -2485,7 +2485,9 @@
           <div class="chat-name">Олеся Геращенко</div>
           <div class="chat-status">онлайн</div>
         </div>
-        <div class="chat-toggle"><span class="icon-mail"></span></div>
+        <div class="chat-toggle" onclick="toggleChat(event)">
+          <span class="icon-mail chat-icon"></span>
+        </div>
       </div>
 
       <div class="chat-body hidden" id="chat-body">
@@ -2525,12 +2527,15 @@
       #chat-widget {
         position: fixed;
         bottom: 20px;
-        right: 20px;
+        left: 20px;
         width: 100%;
         max-width: 320px;
-        z-index: 999;
+        z-index: 1001;
         opacity: 1;
-        transition: bottom 0.3s ease, opacity 1s ease-in-out;
+        transition: bottom 0.3s ease, opacity 1s ease-in-out,
+          transform 0.3s ease;
+        background: #fff;
+        border-radius: 16px;
       }
 
       #chat-widget.keyboard-open {
@@ -2538,8 +2543,7 @@
       }
 
       body.prevent-scroll {
-        overflow-x: hidden !important;
-        position: relative;
+        overflow: hidden !important;
       }
 
       #chat-widget.hidden-chat {
@@ -2570,14 +2574,13 @@
       .chat-header .chat-toggle {
         margin-left: auto;
         font-size: 20px;
+        cursor: pointer;
       }
 
       .chat-body {
         background: #fff;
-        border: 1px solid #ccc;
         border-top: none;
         border-radius: 0 0 16px 16px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         max-height: 500px;
         display: flex;
         flex-direction: column;
@@ -2658,11 +2661,37 @@
         display: none;
       }
 
+      #chat-modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1000;
+        display: none;
+      }
+
+      #chat-modal-overlay.active {
+        display: block;
+      }
+
       @media (max-width: 768px) {
         #chat-widget {
-          right: 10px;
-          left: 10px;
-          width: auto;
+          left: 20px;
+          right: auto;
+          overflow: hidden;
+        }
+
+        #chat-widget.chat-open {
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100vh;
+          border-radius: 0;
+        }
+
+        .chat-body {
+          max-height: calc(100vh - 60px);
         }
       }
     </style>
@@ -2671,93 +2700,49 @@
       let chatOpen = false;
       let scrollTimeout;
 
-      function toggleChat() {
+      function toggleChat(event) {
+        if (event) event.stopPropagation();
         const chatBody = document.getElementById("chat-body");
         const widget = document.getElementById("chat-widget");
+        const overlay = document.getElementById("chat-modal-overlay");
+        const icon = document.querySelector(".chat-icon");
+        console.log(icon);
 
         chatBody.classList.toggle("hidden");
         chatOpen = !chatBody.classList.contains("hidden");
 
         if (chatOpen) {
           widget.classList.remove("hidden-chat");
+          overlay.classList.add("active");
+          widget.classList.add("chat-open");
+          document.body.classList.add("prevent-scroll");
+          icon.classList.remove("icon-mail");
+          icon.classList.add("icon-cancel");
+        } else {
+          overlay.classList.remove("active");
+          widget.classList.remove("chat-open");
+          document.body.classList.remove("prevent-scroll");
+          icon.classList.remove("icon-cancel");
+          icon.classList.add("icon-mail");
         }
-      }
-
-      function sendTelegramMessage() {
-        const name = document.getElementById("user-name").value.trim();
-        const phone = document.getElementById("user-phone").value.trim();
-        const email = document.getElementById("user-email").value.trim();
-        const messageText = document
-          .getElementById("telegram-message")
-          .value.trim();
-
-        if (!name || !phone || !email || !messageText) {
-          alert("Будь ласка, заповніть всі поля.");
-          return;
-        }
-
-        const message = `📸 Нове повідомлення з сайту фотографа:\n\n👤 Ім’я: ${name}\n📞 Телефон: ${phone}\n📧 Email: ${email}\n💬 Повідомлення:\n${messageText}`;
-
-        const token = "ВАШ_BOT_TOKEN";
-        const chatId = "ВАШ_CHAT_ID";
-
-        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: chatId, text: message }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (!data.ok) {
-              alert("Помилка надсилання!");
-            } else {
-              document.getElementById("user-name").value = "";
-              document.getElementById("user-phone").value = "";
-              document.getElementById("user-email").value = "";
-              document.getElementById("telegram-message").value = "";
-              alert("Ваш запит прийнято! Дякуємо.");
-            }
-          })
-          .catch(() => {
-            alert("Помилка з'єднання.");
-          });
       }
 
       window.addEventListener("scroll", () => {
         const widget = document.getElementById("chat-widget");
+        const chatBody = document.getElementById("chat-body");
 
-        if (!chatOpen) {
+        if (!chatOpen && chatBody.classList.contains("hidden")) {
           widget.classList.remove("hidden-chat");
+
           clearTimeout(scrollTimeout);
           scrollTimeout = setTimeout(() => {
-            if (!chatOpen) {
+            if (!chatOpen && chatBody.classList.contains("hidden")) {
               widget.classList.add("hidden-chat");
             }
-          }, 2000);
+          }, 2500);
         }
       });
-
-      const chatWidget = document.getElementById("chat-widget");
-
-      if (window.visualViewport) {
-        let previousHeight = window.visualViewport.height;
-
-        window.visualViewport.addEventListener("resize", () => {
-          const currentHeight = window.visualViewport.height;
-
-          if (currentHeight < previousHeight - 100) {
-            chatWidget.classList.add("keyboard-open");
-            document.body.classList.add("prevent-scroll");
-          } else {
-            chatWidget.classList.remove("keyboard-open");
-            document.body.classList.remove("prevent-scroll");
-          }
-
-          previousHeight = currentHeight;
-        });
-      }
     </script>
-
     <style>
       .gallery-container {
         display: flex;
