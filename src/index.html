@@ -2502,19 +2502,22 @@
       const chatWidget = document.getElementById("chat-widget");
 
       if (window.visualViewport) {
-        const initialHeight = window.visualViewport.height;
+        let previousHeight = window.visualViewport.height;
 
         window.visualViewport.addEventListener("resize", () => {
           const currentHeight = window.visualViewport.height;
 
-          if (currentHeight < initialHeight - 100) {
-            // Приблизна перевірка, чи клавіатура активна
+          if (currentHeight < previousHeight - 100) {
+            // Клавіатура з’явилась
             chatWidget.classList.add("keyboard-open");
             document.body.classList.add("prevent-scroll");
           } else {
+            // Клавіатура сховалась
             chatWidget.classList.remove("keyboard-open");
             document.body.classList.remove("prevent-scroll");
           }
+
+          previousHeight = currentHeight; // оновлюємо на поточний
         });
       }
     </script>
