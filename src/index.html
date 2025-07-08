@@ -2512,10 +2512,12 @@
         position: fixed;
         bottom: 20px;
         right: 20px;
-        width: 280px;
+        width: 100%;
+        max-width: 320px;
         z-index: 999;
         opacity: 1;
         transition: bottom 0.3s ease, opacity 1s ease-in-out;
+        box-sizing: border-box;
       }
 
       #chat-widget.keyboard-open {
@@ -2523,7 +2525,7 @@
       }
 
       body.prevent-scroll {
-        overflow-x: hidden;
+        overflow-x: hidden !important;
         position: relative;
       }
 
@@ -2603,12 +2605,6 @@
         align-self: flex-start;
       }
 
-      .user {
-        background-color: #c1ffc8;
-        align-self: flex-end;
-        margin-left: auto;
-      }
-
       .chat-input {
         display: flex;
         flex-direction: column;
@@ -2652,7 +2648,9 @@
 
       @media (max-width: 768px) {
         #chat-widget {
-          transition: bottom 0.3s ease;
+          right: 10px;
+          left: 10px;
+          width: auto;
         }
       }
     </style>
