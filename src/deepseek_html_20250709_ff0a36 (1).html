@@ -1,1024 +1,1274 @@
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Фотостудія - Послуги та ціни</title>
-  <style>
-    :root {
-      --dark-btn: #333;
-      --light-dark: #666;
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #f9f9f9;
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* Стилі для секції цін */
-    .price {
-      padding: 3rem 0;
-      background-color: #f9f9f9;
-    }
-    
-    .price__wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-    
-    .price__services {
-      flex: 0 1 calc(66.666% - 2rem);
-    }
-    
-    @media (max-width: 1024px) {
-      .price__services {
-        flex: 0 1 100%;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Фотостудія - Послуги та ціни</title>
+    <style>
+      :root {
+        --dark-btn: #333;
+        --light-dark: #666;
       }
-    }
-    
-    .price__title {
-      margin-bottom: 2rem;
-      text-align: left;
-      font-size: 2rem;
-      color: #333;
-      position: relative;
-      padding-bottom: 0.5rem;
-    }
-    
-    .price__title::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
-    }
-    
-    @media (max-width: 1024px) {
-      .price__title {
-        text-align: center;
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
       }
-      
-      .price__title::after {
-        left: 50%;
-        transform: translateX(-50%);
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f9f9;
       }
-    }
-    
-    /* Форма послуг */
-    .services-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-    
-    @media (max-width: 768px) {
-      .services-grid {
-        grid-template-columns: 1fr;
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
       }
-    }
-    
-    /* Картки послуг */
-    .service-item {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .service-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, #ff6b6b, #ff8e8e);
-      transition: width 0.3s ease;
-    }
-    
-    .service-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-    
-    .service-item:hover::before {
-      width: 6px;
-    }
-    
-    .service-item.simple {
-      padding: 1rem 1.5rem;
-    }
-    
-    .service-info {
-      flex: 1;
-    }
-    
-    .service-label {
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #333;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-      cursor: pointer;
-    }
-    
-    .service-price {
-      font-weight: 700;
-      color: #ff6b6b;
-    }
-    
-    .service-desc {
-      font-size: 0.9rem;
-      color: #666;
-      line-height: 1.4;
-    }
-    
-    .service-controls {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    
-    /* Перемикачі */
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 50px;
-      height: 24px;
-    }
-    
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    
-    .toggle-switch input:checked + .slider {
-      background-color: #ff6b6b;
-    }
-    
-    .toggle-switch input:checked + .slider:before {
-      transform: translateX(26px);
-    }
-    
-    .toggle-switch .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: .4s;
-      border-radius: 24px;
-    }
-    
-    .toggle-switch .slider:before {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      transition: .4s;
-      border-radius: 50%;
-    }
-    
-    /* Поле для кількості годин */
-    .service-number-input {
-      width: 70px;
-      padding: 0.5rem;
-      text-align: center;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .service-number-input:focus {
-      border-color: #ff6b6b;
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
-    }
-    
-    .hours-selector {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .hours-label {
-      font-size: 0.9rem;
-      color: #666;
-    }
-    
-    .hidden {
-      display: none;
-    }
-    
-    /* Вибір дати */
-    .date-picker {
-      margin-top: 1rem;
-    }
-    
-    .date-picker .date-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: #333;
-    }
-    
-    .date-picker .date-input-wrapper {
-      position: relative;
-    }
-    
-    .date-picker .date-input-wrapper .icon-calendar {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #666;
-    }
-    
-    .date-picker .date-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .date-picker .date-input:focus {
-      border-color: #ff6b6b;
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
-    }
-    
-    .date-picker .error-message {
-      color: #ff6b6b;
-      font-size: 0.8rem;
-      margin-top: 0.5rem;
-      height: 1rem;
-    }
-    
-    .date-picker .error-message.hidden {
-      visibility: hidden;
-    }
-    
-    /* Блок загальної ціни */
-    .price-summary {
-      flex: 0 1 33.333%;
-      position: sticky;
-      top: 20px;
-      align-self: flex-start;
-    }
-    
-    @media (max-width: 1024px) {
-      .price-summary {
-        flex: 0 1 100%;
-        position: static;
-      }
-    }
-    
-    .summary-box {
-      background: linear-gradient(135deg, #fff, #f9f9f9);
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      text-align: center;
-    }
-    
-    .total-price-wrapper {
-      margin-bottom: 1.5rem;
-    }
-    
-    .total-price-label {
-      display: block;
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 0.5rem;
-    }
-    
-    .total-price {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #333;
-      margin: 0;
-      line-height: 1;
-    }
-    
-    .duration {
-      color: #666;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
-    
-    .duration span {
-      font-weight: 600;
-      color: #333;
-    }
-    
-    /* Кнопка замовлення */
-    .order-button {
-      width: 100%;
-      background: linear-gradient(to right, #ff6b6b, #ff8e8e);
-      color: white;
-      padding: 1rem;
-      font-weight: 600;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
-    }
-    
-    .order-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
-      background: linear-gradient(to right, #ff5e5e, #ff8282);
-    }
-    
-    .order-button:active {
-      transform: translateY(0);
-    }
-    
-    .summary-note {
-      font-size: 0.75rem;
-      color: #999;
-      margin-top: 1.5rem;
-      line-height: 1.4;
-    }
-    
-    /* Модальне вікно */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .modal {
-      background-color: white;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 500px;
-      padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      transform: translateY(20px);
-      transition: all 0.3s ease;
-    }
-    
-    .modal-overlay.active .modal {
-      transform: translateY(0);
-    }
-    
-    .modal-header {
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-    
-    .modal-title {
-      font-size: 1.5rem;
-      color: #333;
-      margin-bottom: 0.5rem;
-    }
-    
-    .modal-subtitle {
-      color: #666;
-      font-size: 0.9rem;
-    }
-    
-    .modal-content {
-      margin-bottom: 2rem;
-    }
-    
-    .order-summary {
-      background-color: #f9f9f9;
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-    
-    .summary-row:last-child {
-      margin-bottom: 0;
-    }
-    
-    .summary-label {
-      color: #666;
-    }
-    
-    .summary-value {
-      font-weight: 600;
-    }
-    
-    .summary-total {
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-      padding-top: 0.5rem;
-      border-top: 1px solid #eee;
-    }
-    
-    .form-group {
-      margin-bottom: 1rem;
-    }
-    
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: #333;
-    }
-    
-    .form-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-    }
-    
-    .form-input:focus {
-      border-color: #ff6b6b;
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
-    }
-    
-    .form-error {
-      color: #ff6b6b;
-      font-size: 0.8rem;
-      margin-top: 0.25rem;
-      height: 1rem;
-    }
-    
-    .modal-footer {
-      display: flex;
-      gap: 1rem;
-    }
-    
-    .modal-button {
-      flex: 1;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .modal-button-primary {
-      background: linear-gradient(to right, #ff6b6b, #ff8e8e);
-      color: white;
-      border: none;
-    }
-    
-    .modal-button-primary:hover {
-      background: linear-gradient(to right, #ff5e5e, #ff8282);
-    }
-    
-    .modal-button-secondary {
-      background: white;
-      color: #333;
-      border: 1px solid #ddd;
-    }
-    
-    .modal-button-secondary:hover {
-      border-color: #ccc;
-      background-color: #f9f9f9;
-    }
-    
-    /* Іконки (заглушки) */
-    [class^="icon-"], [class*=" icon-"] {
-      display: inline-block;
-      width: 1em;
-      height: 1em;
-      stroke-width: 0;
-      stroke: currentColor;
-      fill: currentColor;
-    }
-    
-    /* Адаптивність */
-    @media (max-width: 768px) {
+
+      /* Стилі для секції цін */
       .price {
-        padding: 2rem 0;
+        padding: 3rem 0;
+        background-color: #f9f9f9;
       }
-      
-      .service-item {
-        padding: 1rem;
+
+      .price__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
       }
-      
-      .summary-box {
-        padding: 1.5rem;
+
+      .price__services {
+        flex: 0 1 calc(66.666% - 2rem);
       }
-      
-      .total-price {
+
+      @media (max-width: 1024px) {
+        .price__services {
+          flex: 0 1 100%;
+        }
+      }
+
+      .price__title {
+        margin-bottom: 2rem;
+        text-align: left;
         font-size: 2rem;
+        color: #333;
+        position: relative;
+        padding-bottom: 0.5rem;
       }
-      
-      .modal {
-        margin: 0 1rem;
-        padding: 1.5rem;
+
+      .price__title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
       }
-      
-      .modal-footer {
+
+      @media (max-width: 1024px) {
+        .price__title {
+          text-align: center;
+        }
+
+        .price__title::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+
+      /* Форма послуг */
+      .services-form {
+        display: flex;
         flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Картки послуг */
+      .service-item {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, #ff6b6b, #ff8e8e);
+        transition: width 0.3s ease;
+      }
+
+      .service-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-item:hover::before {
+        width: 6px;
+      }
+
+      .service-item.simple {
+        padding: 1rem 1.5rem;
+      }
+
+      .service-info {
+        flex: 1;
+      }
+
+      .service-label {
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #333;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+      }
+
+      .service-price {
+        font-weight: 700;
+        color: #ff6b6b;
+      }
+
+      .service-desc {
+        font-size: 0.9rem;
+        color: #666;
+        line-height: 1.4;
+      }
+
+      .service-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      /* Перемикачі */
+      .toggle-switch-price {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+      }
+
+      .toggle-switch-price input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-switch-price input:checked + .slider {
+        background-color: #ff6b6b;
+      }
+
+      .toggle-switch-price input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      .toggle-switch-price .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 24px;
+      }
+
+      .toggle-switch-price .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      /* Поле для кількості годин */
+      .service-number-input {
+        width: 70px;
+        padding: 0.5rem;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .service-number-input:focus {
+        border-color: #ff6b6b;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+      }
+
+      .hours-selector {
+        display: flex;
+        align-items: center;
         gap: 0.5rem;
       }
-      
-      .modal-button {
-        width: 100%;
+
+      .hours-label {
+        font-size: 0.9rem;
+        color: #666;
       }
-    }
-  </style>
-</head>
-<body>
-  <section class="price" id="pricing">
-    <div class="container">
-      <div class="price__wrapper">
-        <!-- Блок вибору послуг -->
-        <div class="price__services">
-          <h2 class="title price__title">Послуги та ціни</h2>
-          <form id="services-form" class="services-form">
-            <div class="services-grid">
-              <!-- Послуга -->
-              <div class="service-item">
-                <div class="service-info">
-                  <label class="service-label">
-                    <span class="icon-camera"></span> Фотозйомка
-                    <span class="service-price">1500 грн/год</span>
-                  </label>
-                  <p class="service-desc">Професійна фотозйомка у студії або на виїзді</p>
-                  <div class="hours-selector" id="photoshoot-hours-selector">
-                    <span class="hours-label">Години:</span>
-                    <input type="number" min="1" value="1" name="photoshoot-hours" data-price="1500" class="service-number-input">
+
+      .hidden {
+        display: none;
+      }
+
+      /* Вибір дати */
+      .date-picker {
+        margin-top: 1rem;
+      }
+
+      .date-picker .date-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .date-picker .date-input-wrapper {
+        position: relative;
+      }
+
+      .date-picker .date-input-wrapper .icon-calendar {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+      }
+
+      .date-picker .date-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .date-picker .date-input:focus {
+        border-color: #ff6b6b;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+      }
+
+      .date-picker .error-message {
+        color: #ff6b6b;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
+        height: 1rem;
+      }
+
+      .date-picker .error-message.hidden {
+        visibility: hidden;
+      }
+
+      /* Блок загальної ціни */
+      .price-summary {
+        flex: 0 1 33.333%;
+        position: sticky;
+        top: 20px;
+        align-self: flex-start;
+      }
+
+      @media (max-width: 1024px) {
+        .price-summary {
+          flex: 0 1 100%;
+          position: static;
+        }
+      }
+
+      .summary-box {
+        background: linear-gradient(135deg, #fff, #f9f9f9);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        text-align: center;
+      }
+
+      .total-price-wrapper {
+        margin-bottom: 1.5rem;
+      }
+
+      .total-price-label {
+        display: block;
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+
+      .total-price {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin: 0;
+        line-height: 1;
+      }
+
+      .duration {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+      }
+
+      .duration span {
+        font-weight: 600;
+        color: #333;
+      }
+
+      /* Кнопка замовлення */
+      .order-button {
+        width: 100%;
+        background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+        color: white;
+        padding: 1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
+      }
+
+      .order-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+        background: linear-gradient(to right, #ff5e5e, #ff8282);
+      }
+
+      .order-button:active {
+        transform: translateY(0);
+      }
+
+      .summary-note {
+        font-size: 0.75rem;
+        color: #999;
+        margin-top: 1.5rem;
+        line-height: 1.4;
+      }
+
+      /* Модальне вікно */
+      .modalPrice-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modalPrice-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modalPrice {
+        background-color: white;
+        border-radius: 16px;
+        width: 100%;
+        max-width: 500px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .modalPrice-overlay.active .modalPrice {
+        transform: translateY(0);
+      }
+
+      .modalPrice-header {
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .modalPrice-title {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .modalPrice-subtitle {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .modalPrice-content {
+        margin-bottom: 2rem;
+      }
+
+      .order-summary {
+        background-color: #f9f9f9;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+
+      .summary-row:last-child {
+        margin-bottom: 0;
+      }
+
+      .summary-label {
+        color: #666;
+      }
+
+      .summary-value {
+        font-weight: 600;
+      }
+
+      .summary-total {
+        font-size: 1.2rem;
+        margin-top: 0.5rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid #eee;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-input:focus {
+        border-color: #ff6b6b;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+      }
+
+      .form-error {
+        color: #ff6b6b;
+        font-size: 0.8rem;
+        margin-top: 0.25rem;
+        height: 1rem;
+      }
+
+      .modalPrice-footer {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .modalPrice-button {
+        flex: 1;
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .modalPrice-button-primary {
+        background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+        color: white;
+        border: none;
+      }
+
+      .modalPrice-button-primary:hover {
+        background: linear-gradient(to right, #ff5e5e, #ff8282);
+      }
+
+      .modalPrice-button-secondary {
+        background: white;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+
+      .modalPrice-button-secondary:hover {
+        border-color: #ccc;
+        background-color: #f9f9f9;
+      }
+
+      /* Іконки (заглушки) */
+      [class^="icon-"],
+      [class*=" icon-"] {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+      }
+
+      /* Адаптивність */
+      @media (max-width: 768px) {
+        .price {
+          padding: 2rem 0;
+        }
+
+        .service-item {
+          padding: 1rem;
+        }
+
+        .summary-box {
+          padding: 1.5rem;
+        }
+
+        .total-price {
+          font-size: 2rem;
+        }
+
+        .modalPrice {
+          margin: 0 1rem;
+          padding: 1.5rem;
+        }
+
+        .modalPrice-footer {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .modalPrice-button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="price" id="pricing">
+      <div class="container">
+        <div class="price__wrapper">
+          <!-- Блок вибору послуг -->
+          <div class="price__services">
+            <h2 class="title price__title">Послуги та ціни</h2>
+            <form id="services-form" class="services-form">
+              <div class="services-grid">
+                <!-- Послуга -->
+                <div class="service-item">
+                  <div class="service-info">
+                    <label class="service-label">
+                      <span class="icon-camera"></span> Фотозйомка
+                      <span class="service-price">1500 грн/год</span>
+                    </label>
+                    <p class="service-desc">
+                      Професійна фотозйомка у студії або на виїзді
+                    </p>
+                    <div class="hours-selector" id="photoshoot-hours-selector">
+                      <span class="hours-label">Години:</span>
+                      <input
+                        type="number"
+                        min="1"
+                        value="1"
+                        name="photoshoot-hours"
+                        data-price="1500"
+                        class="service-number-input"
+                      />
+                    </div>
+                  </div>
+                  <div class="service-controls">
+                    <label class="toggle-switch-price">
+                      <input type="checkbox" name="photoshoot-toggle" checked />
+                      <span class="slider"></span>
+                    </label>
                   </div>
                 </div>
-                <div class="service-controls">
-                  <label class="toggle-switch">
-                    <input type="checkbox" name="photoshoot-toggle" checked>
+
+                <!-- Студія -->
+                <div class="service-item">
+                  <div class="service-info">
+                    <label class="service-label">
+                      <span class="icon-shop"></span> Оренда фотостудії
+                      <span class="service-price">1000 грн/год</span>
+                    </label>
+                    <p class="service-desc">
+                      Простір з професійним обладнанням
+                    </p>
+                    <div class="hours-selector" id="studio-hours-selector">
+                      <span class="hours-label">Години:</span>
+                      <input
+                        type="number"
+                        min="1"
+                        value="1"
+                        name="studio-hours"
+                        data-price="1000"
+                        class="service-number-input"
+                      />
+                    </div>
+                  </div>
+                  <div class="service-controls">
+                    <label class="toggle-switch-price">
+                      <input type="checkbox" name="studio-toggle" />
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Ретуш -->
+                <div class="service-item simple">
+                  <div class="service-info">
+                    <label class="service-label">
+                      <span class="icon-photo"></span> Додаткова ретуш
+                      <span class="service-price">150 грн</span>
+                    </label>
+                    <p class="service-desc">Обробка 1 фото</p>
+                  </div>
+                  <label class="toggle-switch-price">
+                    <input type="checkbox" name="retouch" data-price="150" />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <!-- Прискорена обробка -->
+                <div class="service-item simple">
+                  <div class="service-info">
+                    <label class="service-label">
+                      <span class="icon-flash"></span> Прискорена обробка
+                      <span class="service-price">200 грн</span>
+                    </label>
+                    <p class="service-desc">Готові фото протягом 24 годин</p>
+                  </div>
+                  <label class="toggle-switch-price">
+                    <input
+                      type="checkbox"
+                      name="fast-editing"
+                      data-price="200"
+                    />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <!-- Сертифікат -->
+                <div class="service-item simple">
+                  <div class="service-info">
+                    <label class="service-label">
+                      <span class="icon-gift"></span> Подарунковий сертифікат
+                      <span class="service-price">500 грн</span>
+                    </label>
+                    <p class="service-desc">
+                      Електронний або паперовий варіант
+                    </p>
+                  </div>
+                  <label class="toggle-switch-price">
+                    <input
+                      type="checkbox"
+                      name="certificate"
+                      data-price="500"
+                    />
                     <span class="slider"></span>
                   </label>
                 </div>
               </div>
 
-              <!-- Студія -->
-              <div class="service-item">
-                <div class="service-info">
-                  <label class="service-label">
-                    <span class="icon-shop"></span> Оренда фотостудії
-                    <span class="service-price">1000 грн/год</span>
-                  </label>
-                  <p class="service-desc">Простір з професійним обладнанням</p>
-                  <div class="hours-selector" id="studio-hours-selector">
-                    <span class="hours-label">Години:</span>
-                    <input type="number" min="1" value="1" name="studio-hours" data-price="1000" class="service-number-input">
-                  </div>
+              <!-- Вибір дати -->
+              <div class="date-picker">
+                <label for="date" class="date-label"
+                  >Оберіть дату зйомки:</label
+                >
+                <div class="date-input-wrapper">
+                  <input
+                    type="date"
+                    id="date"
+                    name="date"
+                    class="date-input"
+                    required
+                  />
+                  <span class="icon-calendar"></span>
                 </div>
-                <div class="service-controls">
-                  <label class="toggle-switch">
-                    <input type="checkbox" name="studio-toggle">
-                    <span class="slider"></span>
-                  </label>
-                </div>
+                <div class="error-message hidden" id="date-error"></div>
               </div>
+            </form>
+          </div>
 
-              <!-- Ретуш -->
-              <div class="service-item simple">
-                <div class="service-info">
-                  <label class="service-label">
-                    <span class="icon-photo"></span> Додаткова ретуш
-                    <span class="service-price">150 грн</span>
-                  </label>
-                  <p class="service-desc">Обробка 1 фото</p>
-                </div>
-                <label class="toggle-switch">
-                  <input type="checkbox" name="retouch" data-price="150">
-                  <span class="slider"></span>
-                </label>
+          <!-- Блок загальної ціни -->
+          <div class="price-summary">
+            <div class="summary-box">
+              <div class="total-price-wrapper">
+                <span class="total-price-label">До сплати:</span>
+                <p class="total-price" id="total-price">1500 ₴</p>
               </div>
-
-              <!-- Прискорена обробка -->
-              <div class="service-item simple">
-                <div class="service-info">
-                  <label class="service-label">
-                    <span class="icon-flash"></span> Прискорена обробка
-                    <span class="service-price">200 грн</span>
-                  </label>
-                  <p class="service-desc">Готові фото протягом 24 годин</p>
-                </div>
-                <label class="toggle-switch">
-                  <input type="checkbox" name="fast-editing" data-price="200">
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-              <!-- Сертифікат -->
-              <div class="service-item simple">
-                <div class="service-info">
-                  <label class="service-label">
-                    <span class="icon-gift"></span> Подарунковий сертифікат
-                    <span class="service-price">500 грн</span>
-                  </label>
-                  <p class="service-desc">Електронний або паперовий варіант</p>
-                </div>
-                <label class="toggle-switch">
-                  <input type="checkbox" name="certificate" data-price="500">
-                  <span class="slider"></span>
-                </label>
+              <p class="duration">
+                Тривалість: <span id="duration-hours">1</span> година
+              </p>
+              <button type="button" id="order-button" class="order-button">
+                <span class="icon-camera"></span>
+                Замовити фотосесію
+              </button>
+              <div class="summary-note">
+                * Ціна може змінитись залежно від деталей
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <!-- Вибір дати -->
-            <div class="date-picker">
-              <label for="date" class="date-label">Оберіть дату зйомки:</label>
-              <div class="date-input-wrapper">
-                <input type="date" id="date" name="date" class="date-input" required>
-                <span class="icon-calendar"></span>
-              </div>
-              <div class="error-message hidden" id="date-error"></div>
+    <!-- Модальне вікно підтвердження замовлення -->
+    <div class="modalPrice-overlay" id="order-modalPrice">
+      <div class="modalPrice">
+        <div class="modalPrice-header">
+          <h3 class="modalPrice-title">Підтвердження замовлення</h3>
+          <p class="modalPrice-subtitle">
+            Будь ласка, перевірте деталі та введіть ваші контактні дані
+          </p>
+        </div>
+        <div class="modalPrice-content">
+          <div class="order-summary">
+            <div class="summary-row">
+              <span class="summary-label">Дата зйомки:</span>
+              <span class="summary-value" id="modalPrice-date">-</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Тривалість:</span>
+              <span class="summary-value" id="modalPrice-duration">-</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Фотозйомка:</span>
+              <span class="summary-value" id="modalPrice-photoshoot">-</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Оренда студії:</span>
+              <span class="summary-value" id="modalPrice-studio">-</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Додаткові послуги:</span>
+              <span class="summary-value" id="modalPrice-extras">-</span>
+            </div>
+            <div class="summary-row summary-total">
+              <span class="summary-label">До сплати:</span>
+              <span class="summary-value" id="modalPrice-total-price">-</span>
+            </div>
+          </div>
+
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name" class="form-label">Ваше ім'я*</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                required
+              />
+              <div class="form-error" id="name-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="form-label">Номер телефону*</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="form-input"
+                required
+              />
+              <div class="form-error" id="phone-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Електронна пошта*</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                required
+              />
+              <div class="form-error" id="email-error"></div>
+            </div>
+            <div class="form-group">
+              <label for="notes" class="form-label">Додаткові побажання</label>
+              <textarea
+                id="notes"
+                name="notes"
+                class="form-input"
+                rows="3"
+              ></textarea>
             </div>
           </form>
         </div>
-
-        <!-- Блок загальної ціни -->
-        <div class="price-summary">
-          <div class="summary-box">
-            <div class="total-price-wrapper">
-              <span class="total-price-label">До сплати:</span>
-              <p class="total-price" id="total-price">1500 ₴</p>
-            </div>
-            <p class="duration">Тривалість: <span id="duration-hours">1</span> година</p>
-            <button type="button" id="order-button" class="order-button">
-              <span class="icon-camera"></span>
-              Замовити фотосесію
-            </button>
-            <div class="summary-note">* Ціна може змінитись залежно від деталей</div>
-          </div>
+        <div class="modalPrice-footer">
+          <button
+            type="button"
+            class="modalPrice-button modalPrice-button-secondary"
+            id="cancel-order"
+          >
+            Скасувати
+          </button>
+          <button
+            type="button"
+            class="modalPrice-button modalPrice-button-primary"
+            id="confirm-order"
+          >
+            Підтвердити замовлення
+          </button>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Модальне вікно підтвердження замовлення -->
-  <div class="modal-overlay" id="order-modal">
-    <div class="modal">
-      <div class="modal-header">
-        <h3 class="modal-title">Підтвердження замовлення</h3>
-        <p class="modal-subtitle">Будь ласка, перевірте деталі та введіть ваші контактні дані</p>
-      </div>
-      <div class="modal-content">
-        <div class="order-summary">
-          <div class="summary-row">
-            <span class="summary-label">Дата зйомки:</span>
-            <span class="summary-value" id="modal-date">-</span>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("services-form");
+        const contactForm = document.getElementById("contact-form");
+        const totalPriceEl = document.getElementById("total-price");
+        const durationHoursEl = document.getElementById("duration-hours");
+        const dateInput = document.getElementById("date");
+        const dateErrorEl = document.getElementById("date-error");
+        const orderButton = document.getElementById("order-button");
+        const ordermodalPrice = document.getElementById("order-modalPrice");
+        const cancelOrderBtn = document.getElementById("cancel-order");
+        const confirmOrderBtn = document.getElementById("confirm-order");
+
+        // Елементи модального вікна
+        const modalPriceDateEl = document.getElementById("modalPrice-date");
+        const modalPriceDurationEl = document.getElementById(
+          "modalPrice-duration"
+        );
+        const modalPricePhotoshootEl = document.getElementById(
+          "modalPrice-photoshoot"
+        );
+        const modalPriceStudioEl = document.getElementById("modalPrice-studio");
+        const modalPriceExtrasEl = document.getElementById("modalPrice-extras");
+        const modalPriceTotalPriceEl = document.getElementById(
+          "modalPrice-total-price"
+        );
+
+        // Помилки форми контактів
+        const nameErrorEl = document.getElementById("name-error");
+        const phoneErrorEl = document.getElementById("phone-error");
+        const emailErrorEl = document.getElementById("email-error");
+
+        // Установка минимальной даты (сегодня)
+        const today = new Date().toISOString().split("T")[0];
+        dateInput.setAttribute("min", today);
+
+        function calculateTotal() {
+          let total = 0;
+          let totalHours = 0;
+          let photoshootHours = 0;
+          let studioHours = 0;
+          const extras = [];
+
+          // Фотозйомка
+          const photoshootToggle = form.querySelector(
+            '[name="photoshoot-toggle"]'
+          );
+          const photoshootHoursInput = form.querySelector(
+            '[name="photoshoot-hours"]'
+          );
+
+          if (photoshootToggle.checked) {
+            photoshootHours = parseInt(photoshootHoursInput.value) || 1;
+            total += 1500 * photoshootHours;
+            totalHours = Math.max(totalHours, photoshootHours);
+          }
+
+          // Оренда студії
+          const studioToggle = form.querySelector('[name="studio-toggle"]');
+          const studioHoursInput = form.querySelector('[name="studio-hours"]');
+
+          if (studioToggle.checked) {
+            studioHours = parseInt(studioHoursInput.value) || 1;
+            total += 1000 * studioHours;
+            totalHours = Math.max(totalHours, studioHours);
+          }
+
+          // Додаткові послуги
+          if (form.querySelector('[name="retouch"]').checked) {
+            total += 150;
+            extras.push("Ретуш фото");
+          }
+          if (form.querySelector('[name="fast-editing"]').checked) {
+            total += 200;
+            extras.push("Прискорена обробка");
+          }
+          if (form.querySelector('[name="certificate"]').checked) {
+            total += 500;
+            extras.push("Сертифікат");
+          }
+
+          // Форматирование суммы с разделителями
+          totalPriceEl.textContent = total.toLocaleString("uk-UA") + " ₴";
+          durationHoursEl.textContent = totalHours || 1;
+
+          // Оновлення даних у модальному вікні
+          updatemodalPriceData(photoshootHours, studioHours, extras);
+        }
+
+        function updatemodalPriceData(photoshootHours, studioHours, extras) {
+          // Дата
+          modalPriceDateEl.textContent = dateInput.value
+            ? new Date(dateInput.value).toLocaleDateString("uk-UA")
+            : "-";
+
+          // Тривалість
+          const hours = parseInt(durationHoursEl.textContent);
+          modalPriceDurationEl.textContent =
+            hours + (hours > 1 ? " години" : " година");
+
+          // Фотозйомка
+          const photoshootToggle = form.querySelector(
+            '[name="photoshoot-toggle"]'
+          );
+          if (photoshootToggle.checked) {
+            modalPricePhotoshootEl.textContent =
+              photoshootHours +
+              " год × 1500 грн = " +
+              (photoshootHours * 1500).toLocaleString("uk-UA") +
+              " грн";
+          } else {
+            modalPricePhotoshootEl.textContent = "Не обрано";
+          }
+
+          // Студія
+          const studioToggle = form.querySelector('[name="studio-toggle"]');
+          if (studioToggle.checked) {
+            modalPriceStudioEl.textContent =
+              studioHours +
+              " год × 1000 грн = " +
+              (studioHours * 1000).toLocaleString("uk-UA") +
+              " грн";
+          } else {
+            modalPriceStudioEl.textContent = "Не обрано";
+          }
+
+          // Додаткові послуги
+          if (extras.length > 0) {
+            modalPriceExtrasEl.textContent = extras.join(", ");
+          } else {
+            modalPriceExtrasEl.textContent = "Немає";
+          }
+
+          // Загальна сума
+          modalPriceTotalPriceEl.textContent = totalPriceEl.textContent;
+        }
+
+        function validateDate() {
+          const selectedDate = new Date(dateInput.value);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          if (!dateInput.value) {
+            dateErrorEl.textContent = "Будь ласка, оберіть дату";
+            dateErrorEl.classList.remove("hidden");
+            return false;
+          } else if (selectedDate < today) {
+            dateErrorEl.textContent = "Дата не може бути в минулому";
+            dateErrorEl.classList.remove("hidden");
+            return false;
+          } else {
+            dateErrorEl.classList.add("hidden");
+            return true;
+          }
+        }
+
+        function validateContactForm() {
+          let isValid = true;
+
+          // Валідація імені
+          const name = contactForm.querySelector("#name").value.trim();
+          if (name.length < 2) {
+            nameErrorEl.textContent = "Будь ласка, введіть ваше ім'я";
+            isValid = false;
+          } else {
+            nameErrorEl.textContent = "";
+          }
+
+          // Валідація телефону
+          const phone = contactForm.querySelector("#phone").value.trim();
+          const phoneRegex =
+            /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
+          if (!phoneRegex.test(phone)) {
+            phoneErrorEl.textContent =
+              "Будь ласка, введіть коректний номер телефону";
+            isValid = false;
+          } else {
+            phoneErrorEl.textContent = "";
+          }
+
+          // Валідація email
+          const email = contactForm.querySelector("#email").value.trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            emailErrorEl.textContent =
+              "Будь ласка, введіть коректну email адресу";
+            isValid = false;
+          } else {
+            emailErrorEl.textContent = "";
+          }
+
+          return isValid;
+        }
+
+        // Обробники подій для годин
+        form.querySelectorAll('input[type="number"]').forEach((input) => {
+          input.addEventListener("input", () => {
+            if (parseInt(input.value) < 1 || isNaN(parseInt(input.value))) {
+              input.value = 1;
+            }
+            calculateTotal();
+          });
+        });
+
+        // Обробники подій для перемикачів
+        form
+          .querySelectorAll(".toggle-switch-price input")
+          .forEach((toggle) => {
+            toggle.addEventListener("change", calculateTotal);
+          });
+
+        // Валідація дати при зміні
+        dateInput.addEventListener("change", validateDate);
+
+        // Відкриття модального вікна при натисканні кнопки "Замовити"
+        orderButton.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          if (!validateDate()) {
+            return;
+          }
+
+          calculateTotal();
+          ordermodalPrice.classList.add("active");
+        });
+
+        // Закриття модального вікна
+        cancelOrderBtn.addEventListener("click", function () {
+          ordermodalPrice.classList.remove("active");
+        });
+
+        // Підтвердження замовлення
+        confirmOrderBtn.addEventListener("click", function () {
+          if (validateContactForm()) {
+            alert(
+              "Дякуємо за ваше замовлення! Ми зв'яжемося з вами для підтвердження."
+            );
+            ordermodalPrice.classList.remove("active");
+          }
+        });
+
+        // Ініціалізація при завантаженні
+        calculateTotal();
+
+        // Збереження стану форми при перезавантаженні
+        window.addEventListener("beforeunload", function () {
+          const formData = new FormData(form);
+          localStorage.setItem(
+            "photoshootFormData",
+            JSON.stringify(Object.fromEntries(formData))
+          );
+        });
+
+        // Відновлення стану форми
+        const savedFormData = localStorage.getItem("photoshootFormData");
+        if (savedFormData) {
+          const data = JSON.parse(savedFormData);
+          Object.keys(data).forEach((key) => {
+            const input = form.querySelector(`[name="${key}"]`);
+            if (input) {
+              if (input.type === "checkbox") {
+                input.checked = data[key] === "on";
+              } else {
+                input.value = data[key];
+              }
+            }
+          });
+          calculateTotal();
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<section class="price" id="pricing">
+  <div class="container">
+    <div class="price__wrapper">
+      <!-- Блок вибору послуг -->
+      <div class="price__services">
+        <h2 class="title price__title">Послуги та ціни</h2>
+        <form id="services-form" class="services-form">
+          <div class="services-grid">
+            <!-- Послуга -->
+            <div class="service-item">
+              <div class="service-info">
+                <label class="service-label"
+                  ><span class="icon-camera"></span> Фотозйомка</label
+                >
+                <p class="service-desc">1500 грн / година</p>
+              </div>
+              <div class="service-controls">
+                <input
+                  type="checkbox"
+                  name="photoshoot-toggle"
+                  data-input="photoshoot"
+                  class="toggle-switch"
+                  value="0"
+                />
+                <input
+                  type="number"
+                  min="0"
+                  value="0"
+                  name="photoshoot"
+                  data-price="1500"
+                  class="service-number-input hidden"
+                />
+              </div>
+            </div>
+
+            <!-- Студія -->
+            <div class="service-item">
+              <div class="service-info">
+                <label class="service-label"
+                  ><span class="icon-shop"></span> Оренда фотостудії</label
+                >
+                <p class="service-desc">1000 грн / година</p>
+              </div>
+              <div class="service-controls">
+                <input
+                  type="checkbox"
+                  name="studio-toggle"
+                  data-input="studio"
+                  class="toggle-switch"
+                />
+                <input
+                  type="number"
+                  min="0"
+                  value="0"
+                  name="studio"
+                  data-price="1000"
+                  class="service-number-input hidden"
+                />
+              </div>
+            </div>
+
+            <!-- Ретуш -->
+            <div class="service-item simple">
+              <div>
+                <label class="service-label"
+                  ><span class="icon-photo"></span> Додаткова ретуш</label
+                >
+                <p class="service-desc">150 грн</p>
+              </div>
+              <input
+                type="checkbox"
+                name="retouch"
+                data-price="150"
+                class="toggle-switch"
+              />
+            </div>
+
+            <!-- Прискорена обробка -->
+            <div class="service-item simple">
+              <div>
+                <label class="service-label"
+                  ><span class="icon-flash"></span> Прискорена обробка</label
+                >
+                <p class="service-desc">200 грн</p>
+              </div>
+              <input
+                type="checkbox"
+                name="fast-editing"
+                data-price="200"
+                class="toggle-switch"
+              />
+            </div>
+
+            <!-- Сертифікат -->
+            <div class="service-item simple">
+              <div>
+                <label class="service-label"
+                  ><span class="icon-gift"></span> Подарунковий
+                  сертифікат</label
+                >
+                <p class="service-desc">150 грн</p>
+              </div>
+              <input
+                type="checkbox"
+                name="certificate"
+                data-price="500"
+                class="toggle-switch"
+              />
+            </div>
           </div>
-          <div class="summary-row">
-            <span class="summary-label">Тривалість:</span>
-            <span class="summary-value" id="modal-duration">-</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">Фотозйомка:</span>
-            <span class="summary-value" id="modal-photoshoot">-</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">Оренда студії:</span>
-            <span class="summary-value" id="modal-studio">-</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">Додаткові послуги:</span>
-            <span class="summary-value" id="modal-extras">-</span>
-          </div>
-          <div class="summary-row summary-total">
-            <span class="summary-label">До сплати:</span>
-            <span class="summary-value" id="modal-total-price">-</span>
-          </div>
-        </div>
-        
-        <form id="contact-form">
-          <div class="form-group">
-            <label for="name" class="form-label">Ваше ім'я*</label>
-            <input type="text" id="name" name="name" class="form-input" required>
-            <div class="form-error" id="name-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="phone" class="form-label">Номер телефону*</label>
-            <input type="tel" id="phone" name="phone" class="form-input" required>
-            <div class="form-error" id="phone-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="email" class="form-label">Електронна пошта*</label>
-            <input type="email" id="email" name="email" class="form-input" required>
-            <div class="form-error" id="email-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="notes" class="form-label">Додаткові побажання</label>
-            <textarea id="notes" name="notes" class="form-input" rows="3"></textarea>
+
+          <!-- Вибір дати -->
+          <div class="date-picker">
+            <label for="date" class="date-label">Оберіть дату зйомки:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              class="date-input"
+              required
+            />
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="modal-button modal-button-secondary" id="cancel-order">Скасувати</button>
-        <button type="button" class="modal-button modal-button-primary" id="confirm-order">Підтвердити замовлення</button>
+
+      <!-- Блок загальної ціни -->
+      <div class="price-summary">
+        <div class="summary-box">
+          <p class="total-price" id="total-price">0 ₴</p>
+          <p class="duration">1 година</p>
+          <button type="submit" form="services-form" class="order-button">
+            Замовити фотосесію
+          </button>
+        </div>
       </div>
     </div>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById("services-form");
-      const contactForm = document.getElementById("contact-form");
-      const totalPriceEl = document.getElementById("total-price");
-      const durationHoursEl = document.getElementById("duration-hours");
-      const dateInput = document.getElementById("date");
-      const dateErrorEl = document.getElementById("date-error");
-      const orderButton = document.getElementById("order-button");
-      const orderModal = document.getElementById("order-modal");
-      const cancelOrderBtn = document.getElementById("cancel-order");
-      const confirmOrderBtn = document.getElementById("confirm-order");
-      
-      // Елементи модального вікна
-      const modalDateEl = document.getElementById("modal-date");
-      const modalDurationEl = document.getElementById("modal-duration");
-      const modalPhotoshootEl = document.getElementById("modal-photoshoot");
-      const modalStudioEl = document.getElementById("modal-studio");
-      const modalExtrasEl = document.getElementById("modal-extras");
-      const modalTotalPriceEl = document.getElementById("modal-total-price");
-      
-      // Помилки форми контактів
-      const nameErrorEl = document.getElementById("name-error");
-      const phoneErrorEl = document.getElementById("phone-error");
-      const emailErrorEl = document.getElementById("email-error");
-
-      // Установка минимальной даты (сегодня)
-      const today = new Date().toISOString().split('T')[0];
-      dateInput.setAttribute('min', today);
-
-      function calculateTotal() {
-        let total = 0;
-        let totalHours = 0;
-        let photoshootHours = 0;
-        let studioHours = 0;
-        const extras = [];
-        
-        // Фотозйомка
-        const photoshootToggle = form.querySelector('[name="photoshoot-toggle"]');
-        const photoshootHoursInput = form.querySelector('[name="photoshoot-hours"]');
-        
-        if (photoshootToggle.checked) {
-          photoshootHours = parseInt(photoshootHoursInput.value) || 1;
-          total += 1500 * photoshootHours;
-          totalHours = Math.max(totalHours, photoshootHours);
-        }
-        
-        // Оренда студії
-        const studioToggle = form.querySelector('[name="studio-toggle"]');
-        const studioHoursInput = form.querySelector('[name="studio-hours"]');
-        
-        if (studioToggle.checked) {
-          studioHours = parseInt(studioHoursInput.value) || 1;
-          total += 1000 * studioHours;
-          totalHours = Math.max(totalHours, studioHours);
-        }
-        
-        // Додаткові послуги
-        if (form.querySelector('[name="retouch"]').checked) {
-          total += 150;
-          extras.push("Ретуш фото");
-        }
-        if (form.querySelector('[name="fast-editing"]').checked) {
-          total += 200;
-          extras.push("Прискорена обробка");
-        }
-        if (form.querySelector('[name="certificate"]').checked) {
-          total += 500;
-          extras.push("Сертифікат");
-        }
-
-        // Форматирование суммы с разделителями
-        totalPriceEl.textContent = total.toLocaleString('uk-UA') + " ₴";
-        durationHoursEl.textContent = totalHours || 1;
-        
-        // Оновлення даних у модальному вікні
-        updateModalData(photoshootHours, studioHours, extras);
-      }
-
-      function updateModalData(photoshootHours, studioHours, extras) {
-        // Дата
-        modalDateEl.textContent = dateInput.value ? new Date(dateInput.value).toLocaleDateString('uk-UA') : "-";
-        
-        // Тривалість
-        const hours = parseInt(durationHoursEl.textContent);
-        modalDurationEl.textContent = hours + (hours > 1 ? " години" : " година");
-        
-        // Фотозйомка
-        const photoshootToggle = form.querySelector('[name="photoshoot-toggle"]');
-        if (photoshootToggle.checked) {
-          modalPhotoshootEl.textContent = photoshootHours + " год × 1500 грн = " + (photoshootHours * 1500).toLocaleString('uk-UA') + " грн";
-        } else {
-          modalPhotoshootEl.textContent = "Не обрано";
-        }
-        
-        // Студія
-        const studioToggle = form.querySelector('[name="studio-toggle"]');
-        if (studioToggle.checked) {
-          modalStudioEl.textContent = studioHours + " год × 1000 грн = " + (studioHours * 1000).toLocaleString('uk-UA') + " грн";
-        } else {
-          modalStudioEl.textContent = "Не обрано";
-        }
-        
-        // Додаткові послуги
-        if (extras.length > 0) {
-          modalExtrasEl.textContent = extras.join(", ");
-        } else {
-          modalExtrasEl.textContent = "Немає";
-        }
-        
-        // Загальна сума
-        modalTotalPriceEl.textContent = totalPriceEl.textContent;
-      }
-
-      function validateDate() {
-        const selectedDate = new Date(dateInput.value);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        
-        if (!dateInput.value) {
-          dateErrorEl.textContent = "Будь ласка, оберіть дату";
-          dateErrorEl.classList.remove("hidden");
-          return false;
-        } else if (selectedDate < today) {
-          dateErrorEl.textContent = "Дата не може бути в минулому";
-          dateErrorEl.classList.remove("hidden");
-          return false;
-        } else {
-          dateErrorEl.classList.add("hidden");
-          return true;
-        }
-      }
-      
-      function validateContactForm() {
-        let isValid = true;
-        
-        // Валідація імені
-        const name = contactForm.querySelector("#name").value.trim();
-        if (name.length < 2) {
-          nameErrorEl.textContent = "Будь ласка, введіть ваше ім'я";
-          isValid = false;
-        } else {
-          nameErrorEl.textContent = "";
-        }
-        
-        // Валідація телефону
-        const phone = contactForm.querySelector("#phone").value.trim();
-        const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-        if (!phoneRegex.test(phone)) {
-          phoneErrorEl.textContent = "Будь ласка, введіть коректний номер телефону";
-          isValid = false;
-        } else {
-          phoneErrorEl.textContent = "";
-        }
-        
-        // Валідація email
-        const email = contactForm.querySelector("#email").value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-          emailErrorEl.textContent = "Будь ласка, введіть коректну email адресу";
-          isValid = false;
-        } else {
-          emailErrorEl.textContent = "";
-        }
-        
-        return isValid;
-      }
-
-      // Обробники подій для годин
-      form.querySelectorAll('input[type="number"]').forEach((input) => {
-        input.addEventListener("input", () => {
-          if (parseInt(input.value) < 1 || isNaN(parseInt(input.value))) {
-            input.value = 1;
-          }
-          calculateTotal();
-        });
-      });
-
-      // Обробники подій для перемикачів
-      form.querySelectorAll('.toggle-switch input').forEach((toggle) => {
-        toggle.addEventListener('change', calculateTotal);
-      });
-
-      // Валідація дати при зміні
-      dateInput.addEventListener("change", validateDate);
-      
-      // Відкриття модального вікна при натисканні кнопки "Замовити"
-      orderButton.addEventListener("click", function(e) {
-        e.preventDefault();
-        
-        if (!validateDate()) {
-          return;
-        }
-        
-        calculateTotal();
-        orderModal.classList.add("active");
-      });
-      
-      // Закриття модального вікна
-      cancelOrderBtn.addEventListener("click", function() {
-        orderModal.classList.remove("active");
-      });
-      
-      // Підтвердження замовлення
-      confirmOrderBtn.addEventListener("click", function() {
-        if (validateContactForm()) {
-          alert("Дякуємо за ваше замовлення! Ми зв'яжемося з вами для підтвердження.");
-          orderModal.classList.remove("active");
-        }
-      });
-
-      // Ініціалізація при завантаженні
-      calculateTotal();
-      
-      // Збереження стану форми при перезавантаженні
-      window.addEventListener('beforeunload', function() {
-        const formData = new FormData(form);
-        localStorage.setItem('photoshootFormData', JSON.stringify(Object.fromEntries(formData)));
-      });
-      
-      // Відновлення стану форми
-      const savedFormData = localStorage.getItem('photoshootFormData');
-      if (savedFormData) {
-        const data = JSON.parse(savedFormData);
-        Object.keys(data).forEach(key => {
-          const input = form.querySelector(`[name="${key}"]`);
-          if (input) {
-            if (input.type === 'checkbox') {
-              input.checked = data[key] === 'on';
-            } else {
-              input.value = data[key];
-            }
-          }
-        });
-        calculateTotal();
-      }
-    });
-  </script>
-</body>
-</html>
+</section>
