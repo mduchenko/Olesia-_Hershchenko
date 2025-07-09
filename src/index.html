@@ -1183,7 +1183,7 @@
               <div class="summary-box">
                 <div class="total-price-wrapper">
                   <span class="total-price-label">До сплати:</span>
-                  <p class="total-price" id="total-price">1500 ₴</p>
+                  <p class="total-price" id="total-price">0 ₴</p>
                 </div>
                 <p class="duration">
                   Тривалість: <span id="duration-hours">1</span> година
@@ -1577,12 +1577,88 @@
             });
             calculateTotal();
           }
+
+          // Центрування модального вікна з урахуванням клавіатури (Chrome, Safari)
+          function centerModal() {
+            const modal = document.querySelector(".modalPrice");
+            const overlay = document.getElementById("order-modalPrice");
+
+            if (!modal || !overlay) return;
+
+            // Отримати розміри вікна
+            let viewportHeight = window.innerHeight;
+
+            if (window.visualViewport) {
+              viewportHeight = window.visualViewport.height;
+            }
+
+            // Відцентрувати модалку
+            modal.style.marginTop = `${Math.max(
+              (viewportHeight - modal.offsetHeight) / 2,
+              20
+            )}px`;
+          }
+
+          // Переобчислювати при ресайзі або фокусі
+          if (window.visualViewport) {
+            window.visualViewport.addEventListener("resize", centerModal);
+          }
+          window.addEventListener("resize", centerModal);
+          document.addEventListener("focusin", centerModal);
+
+          // Також викликати при відкритті
+          orderButton.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            if (!validateDate()) return;
+
+            calculateTotal();
+            ordermodalPrice.classList.add("active");
+            document.body.classList.add("modal-open"); // <-- додаємо клас
+            centerModal();
+          });
+
+          // При закритті прибираємо клас
+          cancelOrderBtn.addEventListener("click", function () {
+            ordermodalPrice.classList.remove("active");
+            document.body.classList.remove("modal-open");
+          });
+          // Закриття при кліку на фон
+          ordermodalPrice.addEventListener("click", function (e) {
+            if (e.target === ordermodalPrice) {
+              closeModal();
+            }
+          });
+
+          // Закриття по Escape
+          document.addEventListener("keydown", function (e) {
+            if (
+              e.key === "Escape" &&
+              ordermodalPrice.classList.contains("active")
+            ) {
+              closeModal();
+            }
+          });
+
+          // Загальна функція закриття модального
+          function closeModal() {
+            ordermodalPrice.classList.remove("active");
+            document.body.classList.remove("modal-open");
+          }
         });
       </script>
       <style>
-        :root {
-          --dark-btn: #333;
-          --light-dark: #666;
+        /* Блокуємо скрол при активному модальному вікні */
+        body.modal-open {
+          overflow: hidden;
+          height: 100vh;
+          touch-action: none;
+        }
+
+        /* Додаємо плавне центрування модального */
+        .modalPrice {
+          margin-top: 10vh;
+          transition: margin-top 0.3s ease;
         }
 
         * {
@@ -1595,7 +1671,6 @@
           font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
           line-height: 1.6;
           color: #333;
-          background-color: #f9f9f9;
         }
 
         .container {
@@ -1989,12 +2064,14 @@
         .modalPrice {
           background-color: white;
           border-radius: 16px;
-          width: 100%;
           max-width: 500px;
+          max-height: 90vh;
+          overflow-y: auto;
           padding: 2rem;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
           transform: translateY(20px);
           transition: all 0.3s ease;
+          position: relative;
         }
 
         .modalPrice-overlay.active .modalPrice {
@@ -2135,7 +2212,7 @@
         /* Адаптивність */
         @media (max-width: 768px) {
           .price {
-            padding: 2rem 0;
+            padding: 1rem 0;
           }
 
           .service-item {
@@ -2151,13 +2228,13 @@
           }
 
           .modalPrice {
-            margin: 0 1rem;
-            padding: 1.5rem;
+            margin: 0 0.5rem;
+            padding: 1rem;
           }
 
           .modalPrice-footer {
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 0.3rem;
           }
 
           .modalPrice-button {
@@ -2341,7 +2418,7 @@
         </style>
       </section>
 
-      <script>
+      <!-- <script>
         const form = document.getElementById("services-form");
         const totalPriceEl = document.getElementById("total-price");
 
@@ -2398,7 +2475,7 @@
           toggleInputVisibility();
           calculateTotal();
         });
-      </script>
+      </script> -->
       <section class="contact-section" id="contacs">
         <div class="container">
           <h2 class="title title__contact">Контакти</h2>

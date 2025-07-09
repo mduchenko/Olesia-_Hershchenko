@@ -113,7 +113,7 @@ function handleDesktopHeaderScroll(header) {
   if (!header) return; // Якщо шапка не знайдена - виходимо
 
   let lastScrollTop = 0;
-  const delta = 5; // Чутливість скролу для десктопу
+  const delta = 400; // Чутливість скролу для десктопу
   const navbarHeight = header.offsetHeight * 4; // Висота шапки
 
   function checkScroll() {
