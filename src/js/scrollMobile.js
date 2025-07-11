@@ -6,6 +6,7 @@ const navbarHeight = document.querySelector(".header").offsetHeight; // Висо
 
 // Функція, яка перевіряє, чи користувач прокрутив сторінку
 function hasScrolled() {
+  if (isMenuOpen() || anyModalOpen()) return; // ⛔ не ховати хедер
   // Поточна позиція прокрутки (для різних браузерів)
   const currentScrollTop =
     window.pageYOffset || document.documentElement.scrollTop;
@@ -64,6 +65,6 @@ setInterval(function () {
 }, 250);
 
 // При відкритому  меню щоб  не  випадало  меню при скроллі
-if (document.getElementById("menu-btn").classList.contains("active")) {
-  didScroll = false;
-}
+// if (document.getElementById("menu-btn").classList.contains("active")) {
+//   didScroll = false;
+// }
