@@ -62,3 +62,8 @@ setInterval(function () {
     didScroll = false; // Скидаємо прапорець
   }
 }, 250);
+
+// При відкритому  меню щоб  не  випадало  меню при скроллі
+if (document.getElementById("menu-btn").classList.contains("active")) {
+  didScroll = false;
+}
