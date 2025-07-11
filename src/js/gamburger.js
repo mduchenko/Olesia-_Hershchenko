@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("menu-open");
     document.body.style.position = "";
     document.body.style.top = "";
+    headerMenu.style.height = "";
 
     if (typeof scrollY !== "undefined" && scrollY !== null) {
       window.scrollTo(0, scrollY);
@@ -47,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const isSocialOpen = socialMenu.classList.contains("active");
 
     if (isMainMenuOpen || isSocialOpen) {
+      headerMenu.style.height = "100%";
       openMenu();
     } else if (document.body.classList.contains("menu-open")) {
       closeMenu();
