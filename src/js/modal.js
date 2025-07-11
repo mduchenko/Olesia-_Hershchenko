@@ -6,7 +6,7 @@ const modal = document.getElementById("bookingModal");
 const openBtnModal = document.querySelector(".button.header__button");
 const openBtnModalHero = document.querySelector(".button__hero");
 console.log(openBtnModal);
-const closeBtnModal = document.querySelector(".modal .close");
+const closeBtnModal = document.querySelector(".bookingModal .close");
 // const priceToggle = document.getElementById("priceToggle");
 const priceSection = document.getElementById("priceSection");
 const sessionSelect = document.querySelector("select[name='sessionType']");
