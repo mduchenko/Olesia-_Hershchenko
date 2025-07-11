@@ -28,7 +28,7 @@ openBtnModalHero.addEventListener("click", (e) => {
   e.stopPropagation();
   e.preventDefault();
   modal.style.display = "block";
-  document.body.classList.toggle("menu-open");
+  document.body.classList.add("menu-open");
 });
 
 closeBtnModal.onclick = () => {
