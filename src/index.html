@@ -4305,21 +4305,50 @@
         }
       }
 
+      // window.addEventListener("scroll", () => {
+      //   const widget = document.getElementById("chat-widget");
+      //   const chatBody = document.getElementById("chat-body");
+
+      //   if (!chatOpen && chatBody.classList.contains("hidden")) {
+      //     widget.classList.remove("hidden-chat");
+
+      //     clearTimeout(scrollTimeout);
+      //     scrollTimeout = setTimeout(() => {
+      //       if (!chatOpen && chatBody.classList.contains("hidden")) {
+      //         widget.classList.add("hidden-chat");
+      //       }
+      //     }, 2500);
+      //   }
+      // });
+
       window.addEventListener("scroll", () => {
         const widget = document.getElementById("chat-widget");
         const chatBody = document.getElementById("chat-body");
 
-        if (!chatOpen && chatBody.classList.contains("hidden")) {
+        // НЕ показувати віджет, якщо чат відкритий або інша модалка активна
+        if (
+          !chatOpen &&
+          chatBody.classList.contains("hidden") &&
+          !anyModalOpen()
+        ) {
           widget.classList.remove("hidden-chat");
 
           clearTimeout(scrollTimeout);
           scrollTimeout = setTimeout(() => {
-            if (!chatOpen && chatBody.classList.contains("hidden")) {
+            if (
+              !chatOpen &&
+              chatBody.classList.contains("hidden") &&
+              !anyModalOpen()
+            ) {
               widget.classList.add("hidden-chat");
             }
           }, 2500);
         }
       });
+
+      function anyModalOpen() {
+        return document.querySelector("body.menu-open") !== null;
+      }
     </script>
     <style>
       .gallery-container {
