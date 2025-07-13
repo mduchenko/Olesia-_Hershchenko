@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зв'язок з фотографом</title>
+    <style>
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+            transition: all 0.3s ease;
+            opacity: 1;
+        }
+        
+        .chat-widget.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .chat-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+        }
+        
+        .chat-button:hover {
+            background-color: #45a049;
+            animation: none;
+            transform: scale(1.1);
+        }
+        
+        .messengers-list {
+            display: none;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            flex-direction: column;
+            align-items: center;
+            animation: slideUp 0.3s ease;
+        }
+        
+        .messengers-list.show {
+            display: flex;
+        }
+        
+        .messenger-item {
+            margin: 8px 0;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .messenger-item:hover {
+            transform: scale(1.1);
+        }
+        
+        .messenger-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-widget" id="chatWidget">
+        <div class="messengers-list" id="messengersList">
+            <div class="messenger-item" onclick="openMessenger('viber')" title="Viber">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Viber_Logo_2023.svg" alt="Viber" class="messenger-icon">
+            </div>
+            <div class="messenger-item" onclick="openMessenger('telegram')" title="Telegram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="messenger-icon">
+            </div>
+            <div class="messenger-item" onclick="openMessenger('whatsapp')" title="WhatsApp">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" class="messenger-icon">
+            </div>
+            <div class="messenger-item" onclick="openMessenger('email')" title="Email">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg" alt="Email" class="messenger-icon">
+            </div>
+        </div>
+        <button class="chat-button" id="chatButton">💬</button>
+    </div>
+
+    <script>
+        const chatButton = document.getElementById('chatButton');
+        const messengersList = document.getElementById('messengersList');
+        const chatWidget = document.getElementById('chatWidget');
+        
+        let lastScrollPosition = 0;
+        let scrollTimeout;
+        let isScrolling = false;
+        
+        // Функція для показу/приховування віджета при скролі
+        function handleScroll() {
+            const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Приховуємо віджет при скролі вниз
+            if (currentScrollPosition > lastScrollPosition) {
+                chatWidget.classList.add('hidden');
+                isScrolling = true;
+            } 
+            // Показуємо віджет при скролі вгору
+            else if (currentScrollPosition < lastScrollPosition) {
+                chatWidget.classList.remove('hidden');
+                isScrolling = true;
+            }
+            
+            lastScrollPosition = currentScrollPosition;
+            
+            // Якщо скролінг припинився, показуємо віджет через 1 секунду
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (isScrolling) {
+                    chatWidget.classList.remove('hidden');
+                    isScrolling = false;
+                }
+            }, 1000);
+        }
+        
+        // Відслідковуємо події скролу
+        window.addEventListener('scroll', handleScroll);
+        
+        chatButton.addEventListener('click', function() {
+            messengersList.classList.toggle('show');
+        });
+        
+        function openMessenger(messenger) {
+            let url = '';
+            switch(messenger) {
+                case 'viber':
+                    url = 'viber://chat?number=+380XXXXXXXXX';
+                    break;
+                case 'telegram':
+                    url = 'https://t.me/your_telegram_username';
+                    break;
+                case 'whatsapp':
+                    url = 'https://wa.me/380XXXXXXXXX';
+                    break;
+                case 'email':
+                    url = 'mailto:your.email@example.com';
+                    break;
+            }
+            
+            window.open(url, '_blank');
+            messengersList.classList.remove('show');
+        }
+
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.chat-widget')) {
+                messengersList.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
