@@ -61,7 +61,9 @@ function handleScroll() {
 // Відслідковуємо події скролу
 window.addEventListener("scroll", handleScroll);
 
-chatButton.addEventListener("click", function () {
+chatButton.addEventListener("pointerdown", function (e) {
+  e.preventDefault();
+  e.stopPropagation();
   const isOpen = messengersList.classList.contains("show");
 
   chatButton.querySelector("span").classList.toggle("icon-gift", isOpen);
