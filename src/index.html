@@ -4398,7 +4398,9 @@
           />
         </div>
       </div>
-      <button class="chat-button" id="chatButton">💬</button>
+      <button class="chat-button" id="chatButton">
+        <span class="icon-gift"></span>
+      </button>
     </div>
     <style>
       .chat-widget {
@@ -4438,7 +4440,10 @@
         position: relative;
         animation: pulse 2s infinite;
       }
-
+      .chat-button span {
+        display: flex;
+        justify-content: center;
+      }
       @keyframes pulse {
         0% {
           transform: scale(1);
@@ -4554,6 +4559,12 @@
       window.addEventListener("scroll", handleScroll);
 
       chatButton.addEventListener("click", function () {
+        const isOpen = messengersList.classList.contains("show");
+
+        chatButton.querySelector("span").classList.toggle("icon-gift", isOpen);
+        chatButton
+          .querySelector("span")
+          .classList.toggle("icon-cancel", !isOpen);
         messengersList.classList.toggle("show");
       });
 
@@ -4576,12 +4587,16 @@
 
         window.open(url, "_blank");
         messengersList.classList.remove("show");
+
+        chatButton.querySelector("span").classList.remove("icon-cancel");
+        chatButton.querySelector("span").classList.add("icon-gift");
       }
 
       document.addEventListener("click", function (event) {
         if (!event.target.closest(".chat-widget")) {
-          console.log(messengersList);
           messengersList.classList.remove("show");
+          chatButton.querySelector("span").classList.remove("icon-cancel");
+          chatButton.querySelector("span").classList.add("icon-gift");
         }
       });
     </script>
