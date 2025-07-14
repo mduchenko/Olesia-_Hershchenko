@@ -188,7 +188,11 @@ main {
     //   background: var(--light-bg);
     // }
   }
-
+  // @media (orientation: landscape) {
+  //   .header {
+  //     overflow-y: scroll;
+  //   }
+  // }
   //   @media screen and (max-width: 768px) {
   //     position: fixed; // Було static — тому «з’їжджало»
   //     top: 0;

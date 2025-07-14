@@ -1,0 +1,139 @@
+.workflow {
+  padding: 0;
+  background: #fff;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.workflow__wave-top svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+}
+
+.workflow__title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  padding-top: 40px;
+}
+
+.workflow__svg-line {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 30px;
+}
+
+.workflow__svg-line svg {
+  width: 100%;
+  height: 100%;
+}
+
+.workflow__line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  padding: 20px;
+}
+
+.workflow__step {
+  position: relative;
+  z-index: 2;
+  width: calc(12.5% - 10px);
+  min-width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.workflow__step.top {
+  transform: translateY(-15px);
+}
+.workflow__step.bottom {
+  transform: translateY(15px);
+}
+
+.workflow__step span.with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  /* background: linear-gradient(135deg, #000, #f8f4f1); */
+  background: #f8f4f1;
+  color: var(--light-dark);
+  border-radius: 50%;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s;
+}
+
+.workflow__step span.with-icon.last::after {
+  content: "✨";
+  position: absolute;
+  top: -10px;
+  right: -12px;
+  font-size: 18px;
+  animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.workflow__step .arrow {
+  width: 50px;
+  height: 10px;
+  margin-bottom: 10px;
+  stroke: var(--light-dark);
+  stroke-width: 2;
+  fill: none;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: arrowFadeIn 0.6s forwards;
+  animation-delay: var(--delay);
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes arrowFadeIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.workflow__step p {
+  font-size: 14px;
+  color: #333;
+}
+
+@media (max-width: 992px) {
+  .workflow__line {
+    justify-content: center;
+  }
+  .workflow__step {
+    width: 45%;
+    transform: none !important;
+  }
+  .workflow__svg-line {
+    display: none;
+  }
+}
+
+/* @media (max-width: 576px) {
+          .workflow__step {
+            width: 100%;
+          }
+        } */

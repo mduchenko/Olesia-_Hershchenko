@@ -1,25 +1,84 @@
-/* Контейнер для центрування і максимальна ширина */
+/* Блокуємо скрол при активному модальному вікні */
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
+}
+
+/* Додаємо плавне центрування модального */
+.modalPrice {
+  margin-top: 10vh;
+  transition: margin-top 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Стилі для секції цін */
 .price {
-  &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+  padding: 3rem 0;
+  background-color: #f9f9f9;
+}
+
+.price__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.price__services {
+  flex: 0 1 calc(66.666% - 2rem);
+}
+
+@media (max-width: 1024px) {
+  .price__services {
+    flex: 0 1 100%;
   }
-  /* Ліва частина (послуги) */
-  &__services {
-    flex: 0 1 calc(66.666% - 2rem); /* 2/3 ширини */
-    display: flex;
-    flex-direction: column;
-    @media (max-width: 1024px) {
-      flex: 0 1 100%;
-    }
+}
+
+.price__title {
+  margin-bottom: 2rem;
+  text-align: left;
+  font-size: 2rem;
+  color: #333;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.price__title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+}
+
+@media (max-width: 1024px) {
+  .price__title {
+    text-align: center;
   }
-  &__title {
-    margin-bottom: 1.5rem;
-    text-align: left;
-    @media (max-width: 1024px) {
-      text-align: center;
-    }
+
+  .price__title::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
@@ -28,178 +87,507 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  @media screen and (max-width: 576px) {
-    gap: 0.5rem;
-  }
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+}
 
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
+  .services-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
   }
 }
 
-/* Кожен блок послуги */
+/* Картки послуг */
 .service-item {
-  background-color: transparent;
-  // border: 1px solid var(--dark-btn);
-  // filter: drop-shadow(3px 3px 17px #f9a8d4) invert(40%);
+  background: white;
   border-radius: 12px;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem;
   display: flex;
-  // flex-direction: column;
   justify-content: space-between;
-  gap: 0.5rem;
   align-items: center;
-  @media screen and (max-width: 576px) {
-    padding: 0.5rem 1rem;
-  }
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 
-// @media (min-width: 640px) {
-//   .service-item {
-//     flex-direction: row;
-//     align-items: center;
-//   }
-// }
+.service-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff6b6b, #ff8e8e);
+  transition: width 0.3s ease;
+}
+
+.service-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.service-item:hover::before {
+  width: 6px;
+}
+
+.service-item.simple {
+  padding: 1rem 1.5rem;
+}
 
 .service-info {
-  margin-bottom: 0.5rem;
-}
-
-@media (min-width: 640px) {
-  .service-info {
-    margin-bottom: 0;
-  }
+  flex: 1;
 }
 
 .service-label {
   font-weight: 600;
-  display: block;
+  font-size: 1.1rem;
+  color: #333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.service-price {
+  font-weight: 700;
+  color: #ff6b6b;
 }
 
 .service-desc {
-  font-size: 1rem;
-  color: var(--light-dark); /* сіро-блакитний */
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
 }
 
-/* Контрол елементів (чекбокс, input number) */
 .service-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Перемикачі */
+.toggle-switch-price {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch-price input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-switch-price input:checked + .sliderPrice {
+  background-color: #ff6b6b;
+}
+
+.toggle-switch-price input:checked + .sliderPrice:before {
+  transform: translateX(26px);
+}
+
+.toggle-switch-price .sliderPrice {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.toggle-switch-price .sliderPrice:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* Поле для кількості годин */
+.service-number-input {
+  width: 70px;
+  padding: 0.5rem;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.service-number-input:focus {
+  border-color: #ff6b6b;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+}
+
+.hours-selector {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.toggle-switch {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  border-radius: 50%;
-}
-
-.service-number-input {
-  width: 4rem;
-  padding: 0.25rem 0.5rem;
-  text-align: right;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+.hours-label {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .hidden {
   display: none;
 }
 
-/* Прості елементи без input number */
-.service-item.simple {
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /* Вибір дати */
 .date-picker {
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
+  margin-top: 1rem;
 }
 
-.date-label {
+.date-picker .date-label {
+  display: block;
+  margin-bottom: 0.5rem;
   font-weight: 500;
-  margin-bottom: 0.25rem;
+  color: #333;
 }
 
-.date-input {
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
+.date-picker .date-input-wrapper {
+  position: relative;
+}
+
+.date-picker .date-input-wrapper .icon-calendar {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.date-picker .date-input {
   width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   font-size: 1rem;
+  transition: all 0.3s ease;
 }
 
-/* Права частина (ціна) */
+.date-picker .date-input:focus {
+  border-color: #ff6b6b;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+}
+
+.date-picker .error-message {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  height: 1rem;
+}
+
+.date-picker .error-message.hidden {
+  visibility: hidden;
+}
+
+/* Блок загальної ціни */
 .price-summary {
-  flex: 0 1 33.333%; /* 1/3 ширини */
+  flex: 0 1 33.333%;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+}
+
+@media (max-width: 1024px) {
+  .price-summary {
+    flex: 0 1 100%;
+    position: static;
+  }
 }
 
 .summary-box {
-  background-color: #f8f4f1;
-  // border: 2px solid #f9a8d4; /* рожевий */
+  background: linear-gradient(135deg, #fff, #f9f9f9);
   padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   text-align: center;
-  border-radius: 24px;
-  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
-  @media screen and (max-width: 576px) {
-    padding: 1rem;
-  }
 }
 
-.total-price {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.duration {
-  color: #6b7280;
+.total-price-wrapper {
   margin-bottom: 1.5rem;
 }
 
+.total-price-label {
+  display: block;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.total-price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  line-height: 1;
+}
+
+.duration {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.duration span {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Кнопка замовлення */
 .order-button {
   width: 100%;
-  background-color: #000;
-  color: #fff;
-  padding: 0.75rem 0;
+  background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+  color: white;
+  padding: 1rem;
   font-weight: 600;
-  border-radius: 16px;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
 }
 
 .order-button:hover {
-  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+  background: linear-gradient(to right, #ff5e5e, #ff8282);
+}
+
+.order-button:active {
+  transform: translateY(0);
+}
+
+.summary-note {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 1.5rem;
+  line-height: 1.4;
+}
+
+/* Модальне вікно */
+.modalPrice-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modalPrice-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modalPrice {
+  background-color: white;
+  border-radius: 16px;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.modalPrice-overlay.active .modalPrice {
+  transform: translateY(0);
+}
+
+.modalPrice-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.modalPrice-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.modalPrice-subtitle {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.modalPrice-content {
+  margin-bottom: 2rem;
+}
+
+.order-summary {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.summary-label {
+  color: #666;
+}
+
+.summary-value {
+  font-weight: 600;
+}
+
+.summary-total {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #ff6b6b;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+}
+
+.form-error {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  height: 1rem;
+}
+
+.modalPrice-footer {
+  display: flex;
+  gap: 1rem;
+}
+
+.modalPrice-button {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modalPrice-button-primary {
+  background: linear-gradient(to right, #ff6b6b, #ff8e8e);
+  color: white;
+  border: none;
+}
+
+.modalPrice-button-primary:hover {
+  background: linear-gradient(to right, #ff5e5e, #ff8282);
+}
+
+.modalPrice-button-secondary {
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.modalPrice-button-secondary:hover {
+  border-color: #ccc;
+  background-color: #f9f9f9;
+}
+
+/* Іконки (заглушки) */
+[class^="icon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
 }
 
 /* Адаптивність */
-@media (max-width: 1023px) {
-  .container {
+@media (max-width: 768px) {
+  .price {
+    padding: 1rem 0;
+  }
+
+  .service-item {
+    padding: 1rem;
+  }
+
+  .summary-box {
+    padding: 1.5rem;
+  }
+
+  .total-price {
+    font-size: 2rem;
+  }
+
+  .modalPrice {
+    margin: 0 0.5rem;
+    padding: 1rem;
+  }
+
+  .modalPrice-footer {
     flex-direction: column;
+    gap: 0.3rem;
   }
 
-  .services-block,
-  .price-summary {
-    flex: 1 1 100%;
+  .modalPrice-button {
+    width: 100%;
   }
-}
-
-/* Приховуємо стандартні стрілки */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
 }

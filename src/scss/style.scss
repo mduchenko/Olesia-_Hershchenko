@@ -12,15 +12,19 @@
 @import "./utils/title";
 @import "./utils/button";
 @import "./components/header";
-// @import "./components//bookingModal";
+@import "./components//bookingModal";
 @import "./utils/gamburger";
 @import "./components/hero";
 @import "./components/about";
-// @import "./components/portfolio";
-// @import "./components/price";
+@import "./components/portfolio";
+@import "./components/price";
 @import "./components/contact";
 @import "./components/footer";
-// @import "./utils/lightgallery-bundle.scss";
+@import "./components/sertificates";
+@import "./components/faq";
+@import "./components/advantages";
+@import "./components/workflow";
+@import "./components/chatWidget";
 body,
 html {
   overflow-x: hidden;

@@ -1,78 +1,246 @@
-.portfolio {
-  padding: 30px 20px;
-  background-color: var(--light-bg);
-  text-align: center;
-
-  &__title {
-    font-size: 32px;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    color: var(--light-dark);
-  }
-
-  &__gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-  }
-
-  &__img {
-    width: 100%;
-    cursor: pointer;
-    object-fit: cover;
-    border-radius: 12px;
-    transition: transform 0.3s;
-    &:hover {
-      transform: scale(1.03);
-    }
-  }
+.portfolio-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.lightbox {
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  color: #222;
+}
+
+/* Стилі для табів */
+.portfolio-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 24px;
+  margin: 0 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+  color: #000;
+  border-bottom: 2px solid #000;
+}
+
+.tab-btn:hover {
+  color: #000;
+}
+
+/* Стилі для карток */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.portfolio-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  height: 250px;
+  cursor: pointer;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+}
+
+.portfolio-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover img {
+  transform: scale(1.05);
+}
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, #f8f4f1, transparent);
+  color: white;
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--light-dark);
+  text-align: center;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  color: var(--light-dark);
+  text-align: center;
+}
+
+/* Модальне вікно галереї */
+.gallery-modal {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  overflow: scroll;
+  padding: 0 40px;
+}
+
+.modal-content-portfolio {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  line-height: 0.8;
+}
+
+.gallery-slider {
+  flex-grow: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  position: relative;
+}
+.gallery-container {
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 10px;
+}
 
-  &.hidden {
-    display: none;
+.slide {
+  display: none;
+  text-align: center;
+  max-width: 90%;
+  max-height: 90vh;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.prev,
+.next-portfolio {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: 0.3s;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+}
+
+.next-portfolio {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+  left: 0;
+  border-radius: 0 3px 3px 0;
+}
+
+.prev:hover,
+.next-portfolio:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.gallery-thumbnails {
+  display: flex;
+  padding: 10px;
+  overflow-x: auto;
+  background: #111;
+  justify-content: center;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 60px;
+  margin-right: 10px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  flex-shrink: 0;
+}
+
+.thumbnail:hover,
+.thumbnail.active {
+  opacity: 1;
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 
-  &__img {
-    max-width: 90%;
-    max-height: 80vh;
-    border-radius: 10px;
+  .tab-btn {
+    padding: 10px 15px;
+    margin: 0 5px;
+    font-size: 0.9rem;
   }
 
-  &__close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 40px;
-    color: white;
-    cursor: pointer;
+  .gallery-thumbnails {
+    padding: 5px;
   }
 
-  &__controls {
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 30px;
-
-    span {
-      color: white;
-      font-size: 40px;
-      cursor: pointer;
-      user-select: none;
-    }
+  .thumbnail {
+    width: 60px;
+    height: 45px;
+    margin-right: 5px;
   }
 }
