@@ -10,14 +10,14 @@
   background-color: rgba(0, 0, 0, 0.7);
   animation: fadeIn 0.3s;
   overflow-y: scroll;
-  height: auto;
-  max-height: 100vh;
+  // height: auto;
+  // max-height: 100vh;
 }
-@media screen and (max-width: 768px) {
-  .modalBooking {
-    position: absolute;
-  }
-}
+// @media screen and (max-width: 768px) {
+//   .modalBooking {
+//     position: absolute;
+//   }
+// }
 
 @keyframes fadeIn {
   from {
@@ -31,14 +31,14 @@
 .modalBooking-content {
   position: relative;
   background-color: #f8f4f1;
-  margin: 5% auto;
-  padding: 30px;
+  margin: 0 auto;
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
   max-width: 600px;
   animation: slideDown 0.3s;
 
-  max-height: 95vh;
+  // max-height: 95vh;
   overflow-y: auto;
   @media screen and (max-width: 768px) {
     padding: 10px;
@@ -58,9 +58,9 @@
   }
 }
 
-.booking-modalBooking {
-  max-width: 700px;
-}
+// .booking-modalBooking {
+//   max-width: 700px;
+// }
 
 .calculator-modalBooking {
   max-width: 800px;
@@ -146,7 +146,7 @@ h2 {
 }
 
 textarea {
-  min-height: 100px;
+  min-height: 60px;
   resize: vertical;
   @media screen and (max-width: 768px) {
     min-height: 50px;
@@ -155,7 +155,7 @@ textarea {
 
 /* Стилі секції ціни */
 .price-section {
-  margin-top: 25px;
+  margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid #eee;
   @media screen and (max-width: 768px) {

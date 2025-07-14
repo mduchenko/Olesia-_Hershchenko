@@ -10,24 +10,35 @@ document.addEventListener("DOMContentLoaded", function () {
     "modalBookingTotalPrice"
   );
 
-  function lockBodyScroll(lock) {
-    document.body.style.overflow = lock ? "hidden" : "";
-  }
-
+  console.log(calculateBtn);
   // Відкриття калькулятора
   calculateBtn.addEventListener("click", function () {
     calculatorModal.style.display = "block";
-    lockBodyScroll(true);
   });
 
   // Застосування вартості
+  // applyPriceBtn.addEventListener("click", function () {
+  //   const total = calculateTotalPrice();
+  //   priceResult.textContent = total;
+  //   priceResultContainer.classList.remove("hidden");
+  //   // document.body.classList.add("menu-open");
+  //   // Прокручування до результату
+  //   priceResultContainer.scrollIntoView({ behavior: "smooth" });
+  // });
   applyPriceBtn.addEventListener("click", function () {
     const total = calculateTotalPrice();
     priceResult.textContent = total;
     priceResultContainer.classList.remove("hidden");
+
     calculatorModal.style.display = "none";
-    document.body.classList.add("menu-open");
-    // Прокручування до результату
+
+    // ✨ Виправлення:
+    bookingModal.style.display = "block";
+    // lockBodyScroll(true);
+
+    // lockBodyScroll(true); // ✅
+    // document.body.classList.add("menu-open");
+    // Прокрутка до результату
     priceResultContainer.scrollIntoView({ behavior: "smooth" });
   });
 
@@ -36,7 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function () {
       bookingModal.style.display = "none";
       calculatorModal.style.display = "none";
-      lockBodyScroll(false);
+      // lockBodyScroll(false); // <-- ОБОВ’ЯЗКОВО
+      // document.body.classList.remove("menu-open");
     });
   });
 
@@ -85,8 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
       // Очищення форми
       this.reset();
       priceResultContainer.classList.add("hidden");
-
-      lockBodyScroll(lock);
     });
 
   // Ініціалізація калькулятора
@@ -96,5 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("click", function (e) {
     if (e.target === bookingModal) bookingModal.style.display = "none";
     if (e.target === calculatorModal) calculatorModal.style.display = "none";
+    // document.body.classList.remove("menu-open");
   });
 });
