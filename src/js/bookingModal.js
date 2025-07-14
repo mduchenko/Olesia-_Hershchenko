@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     priceResult.textContent = total;
     priceResultContainer.classList.remove("hidden");
     calculatorModal.style.display = "none";
-
+    document.body.classList.add("menu-open");
     // Прокручування до результату
     priceResultContainer.scrollIntoView({ behavior: "smooth" });
   });
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function () {
       bookingModal.style.display = "none";
       calculatorModal.style.display = "none";
-      lockBodyScroll(true);
+      lockBodyScroll(false);
     });
   });
 
@@ -85,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // Очищення форми
       this.reset();
       priceResultContainer.classList.add("hidden");
+
+      lockBodyScroll(lock);
     });
 
   // Ініціалізація калькулятора
