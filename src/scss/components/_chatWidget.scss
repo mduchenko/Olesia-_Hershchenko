@@ -1,119 +1,155 @@
+// .chat-widget {
+//   position: fixed;
+//   bottom: 30px;
+//   right: 20px;
+//   z-index: 1000;
+//   transition: all 0.3s ease;
+//   opacity: 1;
+
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .chat-widget.hidden {
+//   opacity: 0;
+//   transform: translateY(20px);
+// }
+
+// .chat-button {
+//   background-color: #4caf50;
+//   color: white;
+//   border: none;
+//   border-radius: 50%;
+//   width: 60px;
+//   height: 60px;
+//   font-size: 24px;
+//   cursor: pointer;
+//   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   position: relative;
+//   animation: pulse 2s infinite;
+// }
+// .chat-button span {
+//   display: flex;
+//   justify-content: center;
+// }
+// @keyframes pulse {
+//   0% {
+//     transform: scale(1);
+//     box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+//   }
+//   70% {
+//     transform: scale(1.05);
+//     box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+//   }
+//   100% {
+//     transform: scale(1);
+//     box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+//   }
+// }
+
+// .chat-button:hover {
+//   background-color: #45a049;
+//   animation: none;
+//   transform: scale(1.1);
+// }
+
+// .messengers-list {
+//   display: none;
+//   position: absolute;
+//   bottom: 70px;
+//   right: 0;
+//   left: auto;
+
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   animation: slideUp 0.3s ease;
+// }
+
+// .messengers-list.show {
+//   display: flex;
+// }
+
+// .messenger-item {
+//   margin: 8px 0;
+//   cursor: pointer;
+//   transition: transform 0.2s;
+//   width: 80px;
+//   height: 80px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .messenger-item:hover {
+//   transform: scale(1.1);
+// }
+
+// .messenger-icon {
+//   width: 50px;
+//   height: 50px;
+//   /* border-radius: 50%; */
+//   object-fit: contain;
+// }
+
+// @keyframes slideUp {
+//   from {
+//     opacity: 0;
+//     transform: translateY(10px);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }
+// .chat-widget,
+// .chat-button,
+// .messengers-list {
+//   pointer-events: auto;
+//   touch-action: manipulation; /* Для кращої мобільної взаємодії */
+// }
 .chat-widget {
-  /* overflow: hidden; */
   position: fixed;
-  bottom: 30px;
+  bottom: 20px;
   right: 20px;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  opacity: 1;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* width: 80px;
-        height: 80px; */
+  z-index: 9999;
+  transition: opacity 0.3s, transform 0.3s;
+  will-change: opacity, transform;
 }
-
 .chat-widget.hidden {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(100px);
+  pointer-events: none;
 }
-
-.chat-button {
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  animation: pulse 2s infinite;
-}
-.chat-button span {
-  display: flex;
-  justify-content: center;
-}
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
-  }
-  70% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
-  }
-}
-
-.chat-button:hover {
-  background-color: #45a049;
-  animation: none;
-  transform: scale(1.1);
-}
-
 .messengers-list {
   display: none;
-  position: absolute;
-  bottom: 70px;
-  right: 0;
-  left: auto;
-  /* max-width: 100vw; */
-  /* transform: translateX(-20%); */
-  /* right: 7px; */
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: slideUp 0.3s ease;
+  margin-bottom: 10px;
 }
-
 .messengers-list.show {
   display: flex;
 }
-
-.messenger-item {
-  margin: 8px 0;
+.chat-button {
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
   cursor: pointer;
-  transition: transform 0.2s;
-  width: 80px;
-  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.messenger-item:hover {
-  transform: scale(1.1);
-}
-
-.messenger-icon {
-  width: 50px;
-  height: 50px;
-  /* border-radius: 50%; */
-  object-fit: contain;
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-.chat-widget,
-.chat-button,
-.messengers-list {
   pointer-events: auto;
-  touch-action: manipulation; /* Для кращої мобільної взаємодії */
+  touch-action: manipulation;
+}
+.messenger-item img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
