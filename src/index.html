@@ -2917,6 +2917,297 @@
           }
         }
       </style>
+      <section class="gift-certificates">
+        <h2 class="section-title">Подарункові сертифікати</h2>
+
+        <p class="section-description">
+          Зробіть своїм близьким незабутній подарунок - сертифікат на наші
+          послуги. Вони зможуть самі обрати зручний час та послугу, яка їм
+          найбільше до вподоби.
+        </p>
+
+        <div class="certificate-slider-container">
+          <div class="certificate-slider">
+            <!-- Перший сертифікат -->
+            <div class="certificate-slide">
+              <div class="certificate-image">
+                <img
+                  src="https://via.placeholder.com/400x250/ff7e5f/ffffff?text=Стандартний+сертифікат"
+                  alt="Стандартний сертифікат"
+                />
+              </div>
+              <h3 class="certificate-title">Стандартний сертифікат</h3>
+              <p class="certificate-description">
+                Ідеальний вибір для тих, хто хоче спробувати наші послуги
+                вперше. Дає можливість обрати будь-яку послугу зі стандартного
+                переліку.
+              </p>
+            </div>
+
+            <!-- Другий сертифікат -->
+            <div class="certificate-slide">
+              <div class="certificate-image">
+                <img
+                  src="https://via.placeholder.com/400x250/feb47b/ffffff?text=Преміум+сертифікат"
+                  alt="Преміум сертифікат"
+                />
+              </div>
+              <h3 class="certificate-title">Преміум сертифікат</h3>
+              <p class="certificate-description">
+                Для тих, хто цінує ексклюзивність. Включає всі наші послуги,
+                включаючи VIP-варіанти та додаткові бонуси.
+              </p>
+            </div>
+          </div>
+
+          <div class="slider-controls">
+            <div class="slider-dot active"></div>
+            <div class="slider-dot"></div>
+          </div>
+        </div>
+      </section>
+      <style>
+        .gift-certificates {
+          font-family: "Arial", sans-serif;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 40px 20px;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .section-title {
+          text-align: center;
+          font-size: 2.5rem;
+          margin-bottom: 30px;
+          color: #333;
+          position: relative;
+          display: inline-block;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .section-title::after {
+          content: "";
+          position: absolute;
+          width: 70%;
+          height: 3px;
+          background: linear-gradient(90deg, #ff7e5f, #feb47b);
+          bottom: -10px;
+          left: 15%;
+          border-radius: 3px;
+        }
+
+        .certificate-slider {
+          display: flex;
+          transition: transform 0.5s ease-in-out;
+          margin-bottom: 30px;
+        }
+
+        .certificate-slide {
+          min-width: 100%;
+          padding: 20px;
+          box-sizing: border-box;
+          text-align: center;
+        }
+
+        .certificate-image {
+          width: 100%;
+          max-width: 500px;
+          height: 300px;
+          margin: 0 auto 20px;
+          border-radius: 10px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+          position: relative;
+          background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .certificate-image img {
+          max-width: 90%;
+          max-height: 90%;
+          object-fit: contain;
+          transition: transform 0.3s ease;
+        }
+
+        .certificate-image:hover img {
+          transform: scale(1.05);
+        }
+
+        .certificate-title {
+          font-size: 1.8rem;
+          margin-bottom: 15px;
+          color: #2c3e50;
+        }
+
+        .certificate-description {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          color: #555;
+          max-width: 600px;
+          margin: 0 auto 20px;
+        }
+
+        .slider-controls {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+        }
+
+        .slider-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #ddd;
+          margin: 0 8px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .slider-dot.active {
+          background-color: #ff7e5f;
+        }
+
+        .section-description {
+          text-align: center;
+          font-size: 1.2rem;
+          line-height: 1.7;
+          color: #555;
+          max-width: 800px;
+          margin: 0 auto 40px;
+          padding: 0 20px;
+        }
+
+        /* Анімація для заголовка */
+        @keyframes fadeInDown {
+          from {
+            opacity: 0;
+            transform: translateY(-20px) translateX(-50%);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) translateX(-50%);
+          }
+        }
+
+        /* Анімація для слайдів */
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .section-title {
+          animation: fadeInDown 0.8s ease-out forwards;
+        }
+
+        .certificate-slide {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        /* Анімація хвилі для кнопки */
+        @keyframes wave {
+          0% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.05);
+            opacity: 0.7;
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+
+        .buy-btn {
+          animation: wave 2s infinite;
+        }
+
+        /* Адаптація для планшетів */
+        @media (max-width: 768px) {
+          .section-title {
+            font-size: 2rem;
+          }
+
+          .certificate-title {
+            font-size: 1.5rem;
+          }
+
+          .certificate-description {
+            font-size: 1rem;
+          }
+
+          .certificate-price {
+            font-size: 1.3rem;
+          }
+
+          .section-description {
+            font-size: 1.1rem;
+          }
+        }
+
+        /* Адаптація для мобільних */
+        @media (max-width: 480px) {
+          .section-title {
+            font-size: 1.8rem;
+          }
+
+          .certificate-description {
+            font-size: 0.95rem;
+          }
+
+          .buy-btn {
+            padding: 10px 25px;
+            font-size: 1rem;
+          }
+
+          .section-description {
+            font-size: 1rem;
+          }
+        }
+      </style>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const slider = document.querySelector(".certificate-slider");
+          const slides = document.querySelectorAll(".certificate-slide");
+          const dots = document.querySelectorAll(".slider-dot");
+          let currentSlide = 0;
+
+          // Ініціалізація слайдера
+          function showSlide(index) {
+            slider.style.transform = `translateX(-${index * 100}%)`;
+
+            // Оновлення активних точок
+            dots.forEach((dot, i) => {
+              dot.classList.toggle("active", i === index);
+            });
+
+            currentSlide = index;
+          }
+
+          // Обробники кліків для точок
+          dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+              showSlide(index);
+            });
+          });
+
+          // Автоматичне перемикання слайдів
+          setInterval(() => {
+            const nextSlide = (currentSlide + 1) % slides.length;
+            showSlide(nextSlide);
+          }, 5000);
+        });
+      </script>
+
       <section class="post">
         <div class="container">
           <div>
