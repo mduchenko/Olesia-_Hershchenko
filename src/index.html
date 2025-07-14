@@ -4402,12 +4402,19 @@
     </div>
     <style>
       .chat-widget {
+        overflow: hidden;
         position: fixed;
         bottom: 30px;
         right: 20px;
         z-index: 1000;
         transition: all 0.3s ease;
         opacity: 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 80px;
       }
 
       .chat-widget.hidden {
