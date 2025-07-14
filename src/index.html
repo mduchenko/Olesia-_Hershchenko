@@ -4075,7 +4075,7 @@
     </footer>
 
     <!-- Telegram Chat Widget -->
-    <div id="chat-modal-overlay" class="hidden" onclick="toggleChat()"></div>
+    <!-- <div id="chat-modal-overlay" class="hidden" onclick="toggleChat()"></div>
     <div id="chat-widget" class="hidden-chat">
       <div class="chat-header" onclick="toggleChat()">
         <span class="icon-paper-plane"></span>
@@ -4104,8 +4104,8 @@
           <button onclick="sendTelegramMessage()">➔</button>
         </div>
       </div>
-    </div>
-
+    </div> -->
+    <!-- 
     <style>
       #chat-widget {
         position: fixed;
@@ -4272,38 +4272,38 @@
           max-height: calc(100vh - 60px);
         }
       }
-    </style>
+    </style> -->
 
     <script>
-      let chatOpen = false;
-      let scrollTimeout;
+      // let chatOpen = false;
+      // let scrollTimeout;
 
-      function toggleChat(event) {
-        if (event) event.stopPropagation();
-        const chatBody = document.getElementById("chat-body");
-        const widget = document.getElementById("chat-widget");
-        const overlay = document.getElementById("chat-modal-overlay");
-        const icon = document.querySelector(".chat-icon");
-        console.log(icon);
+      // function toggleChat(event) {
+      //   if (event) event.stopPropagation();
+      //   const chatBody = document.getElementById("chat-body");
+      //   const widget = document.getElementById("chat-widget");
+      //   const overlay = document.getElementById("chat-modal-overlay");
+      //   const icon = document.querySelector(".chat-icon");
+      //   console.log(icon);
 
-        chatBody.classList.toggle("hidden");
-        chatOpen = !chatBody.classList.contains("hidden");
+      //   chatBody.classList.toggle("hidden");
+      //   chatOpen = !chatBody.classList.contains("hidden");
 
-        if (chatOpen) {
-          widget.classList.remove("hidden-chat");
-          overlay.classList.add("active");
-          widget.classList.add("chat-open");
-          document.body.classList.add("prevent-scroll");
-          icon.classList.remove("icon-mail");
-          icon.classList.add("icon-cancel");
-        } else {
-          overlay.classList.remove("active");
-          widget.classList.remove("chat-open");
-          document.body.classList.remove("prevent-scroll");
-          icon.classList.remove("icon-cancel");
-          icon.classList.add("icon-mail");
-        }
-      }
+      //   if (chatOpen) {
+      //     widget.classList.remove("hidden-chat");
+      //     overlay.classList.add("active");
+      //     widget.classList.add("chat-open");
+      //     document.body.classList.add("prevent-scroll");
+      //     icon.classList.remove("icon-mail");
+      //     icon.classList.add("icon-cancel");
+      //   } else {
+      //     overlay.classList.remove("active");
+      //     widget.classList.remove("chat-open");
+      //     document.body.classList.remove("prevent-scroll");
+      //     icon.classList.remove("icon-cancel");
+      //     icon.classList.add("icon-mail");
+      //   }
+      // }
 
       // window.addEventListener("scroll", () => {
       //   const widget = document.getElementById("chat-widget");
@@ -4319,37 +4319,264 @@
       //       }
       //     }, 2500);
       //   }
+      // // });
+
+      // window.addEventListener("scroll", () => {
+      //   const widget = document.getElementById("chat-widget");
+      //   const chatBody = document.getElementById("chat-body");
+
+      //   // НЕ показувати віджет, якщо чат відкритий або інша модалка активна
+      //   if (
+      //     !chatOpen &&
+      //     chatBody.classList.contains("hidden") &&
+      //     !anyModalOpen()
+      //   ) {
+      //     widget.classList.remove("hidden-chat");
+
+      //     clearTimeout(scrollTimeout);
+      //     scrollTimeout = setTimeout(() => {
+      //       if (
+      //         !chatOpen &&
+      //         chatBody.classList.contains("hidden") &&
+      //         !anyModalOpen()
+      //       ) {
+      //         widget.classList.add("hidden-chat");
+      //       }
+      //     }, 2500);
+      //   }
       // });
 
-      window.addEventListener("scroll", () => {
-        const widget = document.getElementById("chat-widget");
-        const chatBody = document.getElementById("chat-body");
+      // function anyModalOpen() {
+      //   return document.querySelector("body.menu-open") !== null;
+      // }
+    </script>
+    <!-- New chat-widget -->
+    <div class="chat-widget" id="chatWidget">
+      <div class="messengers-list" id="messengersList">
+        <div
+          class="messenger-item"
+          onclick="openMessenger('viber')"
+          title="Viber"
+        >
+          <img
+            src="./logo/viber_logo_color.svg.png"
+            alt="Viber"
+            class="messenger-icon"
+          />
+        </div>
+        <div
+          class="messenger-item"
+          onclick="openMessenger('telegram')"
+          title="Telegram"
+        >
+          <img
+            src="./logo/telegram_logo_color.svg"
+            alt="Telegram"
+            class="messenger-icon"
+          />
+        </div>
+        <div
+          class="messenger-item"
+          onclick="openMessenger('whatsapp')"
+          title="WhatsApp"
+        >
+          <img
+            src="./logo/whatsApp_logo_color.svg"
+            alt="WhatsApp"
+            class="messenger-icon"
+          />
+        </div>
+        <div
+          class="messenger-item"
+          onclick="openMessenger('email')"
+          title="Email"
+        >
+          <img
+            src="./logo/email-color.svg"
+            alt="Email"
+            class="messenger-icon"
+          />
+        </div>
+      </div>
+      <button class="chat-button" id="chatButton">💬</button>
+    </div>
+    <style>
+      .chat-widget {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        font-family: Arial, sans-serif;
+        transition: all 0.3s ease;
+        opacity: 1;
+      }
 
-        // НЕ показувати віджет, якщо чат відкритий або інша модалка активна
-        if (
-          !chatOpen &&
-          chatBody.classList.contains("hidden") &&
-          !anyModalOpen()
-        ) {
-          widget.classList.remove("hidden-chat");
+      .chat-widget.hidden {
+        opacity: 0;
+        transform: translateY(20px);
+      }
 
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            if (
-              !chatOpen &&
-              chatBody.classList.contains("hidden") &&
-              !anyModalOpen()
-            ) {
-              widget.classList.add("hidden-chat");
-            }
-          }, 2500);
+      .chat-button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
         }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+        }
+      }
+
+      .chat-button:hover {
+        background-color: #45a049;
+        animation: none;
+        transform: scale(1.1);
+      }
+
+      .messengers-list {
+        display: none;
+        position: absolute;
+        bottom: 70px;
+        right: 0;
+        /* transform: translateX(-20%); */
+        /* right: 7px; */
+        flex-direction: column;
+        align-items: center;
+        /* justify-content: center; */
+        animation: slideUp 0.3s ease;
+      }
+
+      .messengers-list.show {
+        display: flex;
+      }
+
+      .messenger-item {
+        margin: 8px 0;
+        cursor: pointer;
+        transition: transform 0.2s;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .messenger-item:hover {
+        transform: scale(1.1);
+      }
+
+      .messenger-icon {
+        width: 50px;
+        height: 50px;
+        /* border-radius: 50%; */
+        object-fit: contain;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+
+    <script>
+      const chatButton = document.getElementById("chatButton");
+      const messengersList = document.getElementById("messengersList");
+      const chatWidget = document.getElementById("chatWidget");
+
+      let lastScrollPosition = 0;
+      let scrollTimeout;
+      let isScrolling = false;
+
+      // Функція для показу/приховування віджета при скролі
+      function handleScroll() {
+        const currentScrollPosition =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        // Приховуємо віджет при скролі вниз
+        if (currentScrollPosition > lastScrollPosition) {
+          chatWidget.classList.add("hidden");
+          isScrolling = true;
+        }
+        // Показуємо віджет при скролі вгору
+        else if (currentScrollPosition < lastScrollPosition) {
+          chatWidget.classList.remove("hidden");
+          isScrolling = true;
+        }
+
+        lastScrollPosition = currentScrollPosition;
+
+        // Якщо скролінг припинився, показуємо віджет через 1 секунду
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          if (isScrolling) {
+            chatWidget.classList.remove("hidden");
+            isScrolling = false;
+          }
+        }, 1000);
+      }
+
+      // Відслідковуємо події скролу
+      window.addEventListener("scroll", handleScroll);
+
+      chatButton.addEventListener("click", function () {
+        messengersList.classList.toggle("show");
       });
 
-      function anyModalOpen() {
-        return document.querySelector("body.menu-open") !== null;
+      function openMessenger(messenger) {
+        let url = "";
+        switch (messenger) {
+          case "viber":
+            url = "viber://chat?number=+380XXXXXXXXX";
+            break;
+          case "telegram":
+            url = "https://t.me/your_telegram_username";
+            break;
+          case "whatsapp":
+            url = "https://wa.me/380XXXXXXXXX";
+            break;
+          case "email":
+            url = "mailto:your.email@example.com";
+            break;
+        }
+
+        window.open(url, "_blank");
+        messengersList.classList.remove("show");
       }
+
+      document.addEventListener("click", function (event) {
+        if (!event.target.closest(".chat-widget")) {
+          messengersList.classList.remove("show");
+        }
+      });
     </script>
+
     <style>
       .gallery-container {
         display: flex;
