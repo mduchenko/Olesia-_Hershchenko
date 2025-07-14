@@ -111,3 +111,9 @@
     transform: translateY(0);
   }
 }
+.chat-widget,
+.chat-button,
+.messengers-list {
+  pointer-events: auto;
+  touch-action: manipulation; /* Для кращої мобільної взаємодії */
+}

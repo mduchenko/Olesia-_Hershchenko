@@ -7,33 +7,57 @@ let scrollTimeout;
 let isScrolling = false;
 
 // Функція для показу/приховування віджета при скролі
+// function handleScroll() {
+//   const currentScrollPosition =
+//     window.pageYOffset || document.documentElement.scrollTop;
+
+//   // Приховуємо віджет при скролі вниз
+//   if (currentScrollPosition > lastScrollPosition) {
+//     chatWidget.classList.add("hidden");
+//     isScrolling = true;
+//   }
+//   // Показуємо віджет при скролі вгору
+//   else if (currentScrollPosition < lastScrollPosition) {
+//     chatWidget.classList.remove("hidden");
+//     isScrolling = true;
+//   }
+
+//   lastScrollPosition = currentScrollPosition;
+
+//   // Якщо скролінг припинився, показуємо віджет через 1 секунду
+//   clearTimeout(scrollTimeout);
+//   scrollTimeout = setTimeout(() => {
+//     if (isScrolling) {
+//       chatWidget.classList.remove("hidden");
+//       isScrolling = false;
+//     }
+//   }, 1000);
+// }
 function handleScroll() {
   const currentScrollPosition =
     window.pageYOffset || document.documentElement.scrollTop;
 
-  // Приховуємо віджет при скролі вниз
+  // Вийти, якщо віджет відкритий (не ховати/показувати)
+  if (messengersList.classList.contains("show")) return;
+
   if (currentScrollPosition > lastScrollPosition) {
     chatWidget.classList.add("hidden");
     isScrolling = true;
-  }
-  // Показуємо віджет при скролі вгору
-  else if (currentScrollPosition < lastScrollPosition) {
+  } else if (currentScrollPosition < lastScrollPosition) {
     chatWidget.classList.remove("hidden");
     isScrolling = true;
   }
 
   lastScrollPosition = currentScrollPosition;
 
-  // Якщо скролінг припинився, показуємо віджет через 1 секунду
   clearTimeout(scrollTimeout);
   scrollTimeout = setTimeout(() => {
-    if (isScrolling) {
+    if (isScrolling && !messengersList.classList.contains("show")) {
       chatWidget.classList.remove("hidden");
       isScrolling = false;
     }
   }, 1000);
 }
-
 // Відслідковуємо події скролу
 window.addEventListener("scroll", handleScroll);
 
