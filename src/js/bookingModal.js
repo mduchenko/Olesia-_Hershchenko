@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // lockBodyScroll(true);
 
     // lockBodyScroll(true); // ✅
-    // document.body.classList.add("menu-open");
+    document.body.classList.add("menu-open-one");
     // Прокрутка до результату
     priceResultContainer.scrollIntoView({ behavior: "smooth" });
   });
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bookingModal.style.display = "none";
       calculatorModal.style.display = "none";
       // lockBodyScroll(false); // <-- ОБОВ’ЯЗКОВО
-      // document.body.classList.remove("menu-open");
+      document.body.classList.remove("menu-open-one");
     });
   });
 
@@ -106,6 +106,6 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("click", function (e) {
     if (e.target === bookingModal) bookingModal.style.display = "none";
     if (e.target === calculatorModal) calculatorModal.style.display = "none";
-    // document.body.classList.remove("menu-open");
+    document.body.classList.remove("menu-open-one");
   });
 });
