@@ -18,12 +18,9 @@ modal.addEventListener("click", (e) => {
 openBtnModal.addEventListener("click", (e) => {
   e.stopPropagation();
   modal.style.display = "block";
-  document.body.classList.toggle("menu-open");
+  document.body.classList.add("menu-open");
 });
-// orderBtn.addEventListener("click", (e) => {
-//   modal.style.display = "block";
-//   document.body.classList.toggle("menu-open");
-// });
+
 openBtnModalHero.addEventListener("click", (e) => {
   e.stopPropagation();
   e.preventDefault();
@@ -38,36 +35,3 @@ closeBtnModal.onclick = () => {
 window.onclick = (e) => {
   if (e.target === modal) modal.style.display = "none";
 };
-
-// priceToggle.addEventListener("change", () => {
-//   priceSection.style.display = priceToggle.checked ? "block" : "none";
-//   if (priceToggle.checked) calculatePrice();
-// });
-
-// sessionSelect.addEventListener("change", () => {
-//   if (priceToggle.checked) calculatePrice();
-// });
-
-// function calculatePrice() {
-//   const type = sessionSelect.value;
-//   let price = 0;
-
-//   switch (type) {
-//     case "studio":
-//       price = 2500;
-//       break;
-//     case "outdoor":
-//       price = 1500;
-//       break;
-//     case "event":
-//       price = 1500;
-//       break;
-//     case "family":
-//       price = 1500;
-//       break;
-//     default:
-//       price = 0;
-//   }
-
-//   priceResult.textContent = price;
-// }
