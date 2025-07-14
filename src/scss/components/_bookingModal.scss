@@ -11,6 +11,11 @@
   animation: fadeIn 0.3s;
   overflow-y: scroll;
 }
+@media screen and (max-width: 768px) {
+  .modalBooking {
+    position: absolute;
+  }
+}
 
 @keyframes fadeIn {
   from {
