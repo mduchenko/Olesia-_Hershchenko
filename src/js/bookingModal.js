@@ -10,9 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
     "modalBookingTotalPrice"
   );
 
+  function lockBodyScroll(lock) {
+    document.body.style.overflow = lock ? "hidden" : "";
+  }
+
   // Відкриття калькулятора
   calculateBtn.addEventListener("click", function () {
     calculatorModal.style.display = "block";
+    lockBodyScroll(true);
   });
 
   // Застосування вартості
@@ -31,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function () {
       bookingModal.style.display = "none";
       calculatorModal.style.display = "none";
+      lockBodyScroll(true);
     });
   });
 
