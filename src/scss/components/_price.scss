@@ -1,26 +1,14 @@
-/* Блокуємо скрол при активному модальному вікні */
-body.modal-open {
-  overflow: hidden;
-  height: 100vh;
-  touch-action: none;
-}
+// /* Блокуємо скрол при активному модальному вікні */
+// body.modal-open {
+//   overflow: hidden;
+//   height: 100vh;
+//   touch-action: none;
+// }
 
 /* Додаємо плавне центрування модального */
 .modalPrice {
   margin-top: 10vh;
   transition: margin-top 0.3s ease;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
 }
 
 .container {
