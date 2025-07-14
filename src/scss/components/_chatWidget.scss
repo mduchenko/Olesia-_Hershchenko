@@ -115,44 +115,8 @@
   pointer-events: auto;
   touch-action: manipulation; /* Для кращої мобільної взаємодії */
 }
-// .chat-widget {
-//   position: fixed;
-//   bottom: 50px;
-//   right: 20px;
-//   z-index: 9999;
-//   transition: opacity 0.3s, transform 0.3s;
-//   will-change: opacity, transform;
-// }
-// .chat-widget.hidden {
-//   opacity: 0;
-//   transform: translateY(100px);
-//   pointer-events: none;
-// }
-// .messengers-list {
-//   display: none;
-//   flex-direction: column;
-//   margin-bottom: 10px;
-// }
-// .messengers-list.show {
-//   display: flex;
-// }
-// .chat-button {
-//   background: #333;
-//   color: white;
-//   border: none;
-//   border-radius: 50%;
-//   width: 50px;
-//   height: 50px;
-//   font-size: 20px;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   pointer-events: auto;
-//   touch-action: manipulation;
-// }
-// .messenger-item img {
-//   width: 40px;
-//   height: 40px;
-//   cursor: pointer;
-// }
+@media screen and (max-width: 768px) {
+  .messenger-item {
+    margin: 0;
+  }
+}
