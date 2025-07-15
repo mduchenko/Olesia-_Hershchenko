@@ -118,13 +118,13 @@
   z-index: 9999;
   width: 100px;
   height: auto;
-  animation: pulse 1.5s infinite ease-in-out;
+  animation: pulseDesktop 1.5s infinite ease-in-out;
   @media screen and (max-width: 768px) {
     animation: pulseMobile 1.5s infinite ease-in-out;
   }
 }
 
-@keyframes pulse {
+@keyframes pulseDesktop {
   0%,
   100% {
     transform: scale(2);
