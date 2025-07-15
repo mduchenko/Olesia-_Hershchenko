@@ -28,7 +28,7 @@ function handleScroll() {
       chatWidget.offsetHeight;
       isScrolling = false;
     }
-  }, 1000);
+  }, 650);
 }
 
 window.addEventListener("scroll", handleScroll);
