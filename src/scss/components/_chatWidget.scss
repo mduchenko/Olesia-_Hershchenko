@@ -50,7 +50,7 @@
   }
   70% {
     transform: scale(1.2);
-    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+    box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
   }
   100% {
     transform: scale(1);
@@ -116,7 +116,7 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(35px);
   }
   to {
     opacity: 1;
