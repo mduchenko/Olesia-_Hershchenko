@@ -17,14 +17,14 @@ modal.addEventListener("click", (e) => {
 });
 openBtnModal.addEventListener("click", (e) => {
   e.stopPropagation();
-  modal.style.display = "block";
+  modal.style.display = "flex";
   document.body.classList.add("menu-open");
 });
 
 openBtnModalHero.addEventListener("click", (e) => {
   e.stopPropagation();
   e.preventDefault();
-  modal.style.display = "block";
+  modal.style.display = "flex";
   document.body.classList.add("menu-open");
 });
 

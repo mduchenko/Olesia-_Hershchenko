@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log(calculateBtn);
   // Відкриття калькулятора
   calculateBtn.addEventListener("click", function () {
-    calculatorModal.style.display = "block";
+    calculatorModal.style.display = "flex";
   });
 
   // Застосування вартості
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     calculatorModal.style.display = "none";
 
     // ✨ Виправлення:
-    bookingModal.style.display = "block";
+    bookingModal.style.display = "flex";
     // lockBodyScroll(true);
 
     // lockBodyScroll(true); // ✅
