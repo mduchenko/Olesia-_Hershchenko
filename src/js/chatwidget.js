@@ -39,7 +39,16 @@ chatButton.addEventListener("pointerdown", function (e) {
 
   chatButton.querySelector("span").classList.toggle("icon-gift", isOpen);
   chatButton.querySelector("span").classList.toggle("icon-cancel", !isOpen);
+
   messengersList.classList.toggle("show");
+
+  if (!isOpen) {
+    chatButton.style.animation = "none";
+    chatButton.offsetHeight; // примусове перерахування стилів
+  } else {
+    chatButton.style.animation = "pulse 2s infinite";
+    chatButton.offsetHeight; // примусове перерахування стилів
+  }
 });
 
 function openMessenger(messenger) {
