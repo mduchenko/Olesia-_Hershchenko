@@ -1,7 +1,7 @@
 /* Базові стилі модальних вікон */
 .modalBooking {
-  // display: none;
-  position: fixed;
+  display: none;
+  position: absolute;
   z-index: 1000;
   left: 0;
   top: 0;
@@ -10,7 +10,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   animation: fadeIn 0.3s;
   overflow-y: scroll;
-  display: flex;
+  // display: flex;
   justify-content: center;
   align-items: center;
   // height: auto;
@@ -27,7 +27,8 @@
 }
 
 .modalBooking-content {
-  position: relative;
+  position: absolute;
+  top: 0;
   background-color: #f8f4f1;
   // margin: 0 auto;
   padding: 20px;
@@ -35,7 +36,6 @@
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
   width: 50%;
   animation: slideDown 0.3s;
-
   // max-height: 95vh;
   overflow-y: auto;
   @media screen and (max-width: 1200px) {

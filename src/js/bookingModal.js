@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Відкриття калькулятора
   calculateBtn.addEventListener("click", function () {
     calculatorModal.style.display = "flex";
+    bookingModal.style.display = "flex";
   });
 
   // Застосування вартості
