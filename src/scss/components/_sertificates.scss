@@ -35,9 +35,17 @@
   margin-bottom: 30px;
 }
 
+.certificate-slider-container {
+  width: 50%;
+  overflow-x: hidden;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
 .certificate-slide {
   min-width: 100%;
-  padding: 20px;
+  // padding: 20px;
   box-sizing: border-box;
   text-align: center;
 }
@@ -203,4 +211,99 @@
   .section-description {
     font-size: 1rem;
   }
+}
+
+// certificate-container
+
+.certificat-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    row-gap: 20px;
+  }
+}
+.certificate-container {
+  width: 50%;
+  // margin: 40px auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+// .feature-block {
+//   margin-bottom: 15px;
+// }
+
+.feature-title {
+  font-size: 20px;
+  color: #8c6e5d;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.feature-text {
+  font-size: 16px;
+  color: #5a4a42;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #d4b8a7, transparent);
+  margin: 30px 0;
+  border: none;
+}
+
+.cta-block {
+  background-color: #f8f1ed;
+  padding: 25px;
+  border-radius: 8px;
+  margin: 10px auto;
+}
+
+.cta-title {
+  font-size: 20px;
+  color: #3a2c2a;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.cta-text {
+  font-size: 16px;
+  color: #5a4a42;
+  margin-bottom: 10px;
+}
+
+.highlight {
+  color: #8c6e5d;
+  font-weight: 600;
+}
+
+.order-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 30px auto 0;
+  padding: 15px;
+  background-color: #8c6e5d;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none;
+}
+
+.order-btn:hover {
+  background-color: #6d5649;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(140, 110, 93, 0.3);
 }

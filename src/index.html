@@ -636,10 +636,280 @@
 
       <section class="price" id="pricing">
         <div class="container">
+          <h2 class="title price__title">Послуги та ціни</h2>
+          <div class="services-container">
+            <div class="services-section">
+              <div class="services-grid">
+                <!-- Картка 1 -->
+                <div class="service-card" onclick="showServiceDetail('studio')">
+                  <img
+                    src="https://images.unsplash.com/photo-1513151233558-d860c5398176"
+                    alt="Студійна зйомка"
+                  />
+                  <div class="service-content">
+                    <h3>Студійна</h3>
+                    <p>
+                      Професійна зйомка в обладнаній студії зі стилізацією та
+                      реквізитом.
+                    </p>
+                    <div class="btn">Детальніше</div>
+                  </div>
+                </div>
+
+                <!-- Картка 2 -->
+                <div
+                  class="service-card"
+                  onclick="showServiceDetail('outdoor')"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
+                    alt="Вулична зйомка"
+                  />
+                  <div class="service-content">
+                    <h3>Вулична</h3>
+                    <p>
+                      Натуральні кадри в міському середовищі або природних
+                      локаціях.
+                    </p>
+                    <div class="btn">Детальніше</div>
+                  </div>
+                </div>
+
+                <!-- Картка 3 -->
+                <div class="service-card" onclick="showServiceDetail('family')">
+                  <img
+                    src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70"
+                    alt="Сімейна зйомка"
+                  />
+                  <div class="service-content">
+                    <h3>Сімейна</h3>
+                    <p>Теплі моменти вашої родини, запечатані у фотографіях.</p>
+                    <div class="btn">Детальніше</div>
+                  </div>
+                </div>
+
+                <!-- Картка 4 -->
+                <div
+                  class="service-card"
+                  onclick="showServiceDetail('love-story')"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1518199266791-5375a83190b7"
+                    alt="Love Story"
+                  />
+                  <div class="service-content">
+                    <h3>Love Story</h3>
+                    <p>Романтичні кадри для закоханих пар.</p>
+                    <div class="btn">Детальніше</div>
+                  </div>
+                </div>
+
+                <!-- Картка 5 -->
+                <div
+                  class="service-card"
+                  onclick="showServiceDetail('pregnancy')"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb"
+                    alt="Фотосесія вагітності"
+                  />
+                  <div class="service-content">
+                    <h3>Вагітність</h3>
+                    <p>
+                      Ніжні фотографії, що зберігають унікальний період
+                      очікування.
+                    </p>
+                    <div class="btn">Детальніше</div>
+                  </div>
+                </div>
+
+                <!-- Картка 6 -->
+                <div class="service-card" onclick="showServiceDetail('event')">
+                  <img
+                    src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce"
+                    alt="Подієва зйомка"
+                  />
+                  <div class="service-content">
+                    <h3>Подієва</h3>
+                    <p>Професійна зйомка ваших важливих подій та свят.</p>
+                    <div class="btn">Детальніше</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Детальна сторінка Студійна зйомка -->
+            <div id="studio" class="service-detail">
+              <a href="#" class="back-btn" onclick="hideServiceDetails()"
+                >← Назад до послуг</a
+              >
+
+              <img
+                src="https://images.unsplash.com/photo-1513151233558-d860c5398176"
+                alt="Студійна фотосесія"
+                class="hero-image"
+              />
+
+              <h2>Студійна фотосесія</h2>
+              <p>
+                Портретна фотосесія — це можливість зберегти ваш настрій,
+                характер і внутрішнє світло в одному кадрі. Такі фотосесії
+                можуть проходити в студії з професійним обладнанням, що дозволяє
+                досягти ідеального світла та фону.
+              </p>
+
+              <p>
+                Ми підбираємо світло, стиль і позиції, щоб у результаті вийшла
+                жива та виразна фотографія, яка передає вашу особистість.
+                Студійна зйомка підійде як для оновлення профайлу, так і просто
+                як подарунок собі.
+              </p>
+
+              <h3>Галерея робіт</h3>
+              <div class="gallery" id="studio-gallery">
+                <a
+                  href="https://images.unsplash.com/photo-1513151233558-d860c5398176"
+                  class="gallery-item"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1513151233558-d860c5398176"
+                    alt="Студійна зйомка 1"
+                  />
+                </a>
+                <a
+                  href="https://images.unsplash.com/photo-1524504388940-b1c1722653e1"
+                  class="gallery-item"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1"
+                    alt="Студійна зйомка 2"
+                  />
+                </a>
+                <a
+                  href="https://images.unsplash.com/photo-1517841905240-472988babdf9"
+                  class="gallery-item"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1517841905240-472988babdf9"
+                    alt="Студійна зйомка 3"
+                  />
+                </a>
+              </div>
+
+              <div class="price-section">
+                <button class="btn" onclick="calculatePrice('studio')">
+                  Згенерувати вартість
+                </button>
+              </div>
+
+              <div class="addons-section">
+                <h3>Додатково замовляють:</h3>
+                <div class="addons-grid">
+                  <div class="addon-card">
+                    <h4>Подарунковий сертифікат</h4>
+                    <p>
+                      Ідеальний подарунок для близьких - сертифікат на
+                      фотосесію.
+                    </p>
+                  </div>
+                  <div class="addon-card">
+                    <h4>Додаткова ретуш</h4>
+                    <p>
+                      Професійна обробка фотографій для досконалого результату.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Детальна сторінка Вулична зйомка -->
+            <div id="outdoor" class="service-detail">
+              <a href="#" class="back-btn" onclick="hideServiceDetails()"
+                >← Назад до послуг</a
+              >
+
+              <img
+                src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
+                alt="Вулична фотосесія"
+                class="hero-image"
+              />
+
+              <h2>Вулична фотосесія</h2>
+              <p>
+                Вулична фотосесія — це можливість знятися в природному
+                середовищі, використовуючи архітектуру, парки та міський простір
+                як фон. Такі фото виходять більш живими та емоційними.
+              </p>
+
+              <p>
+                Ми пропонуємо різні варіанти вуличної зйомки: від класичних
+                портретів у парку до креативних концепцій в урбаністичному
+                середовищі.
+              </p>
+
+              <h3>Галерея робіт</h3>
+              <div class="gallery" id="outdoor-gallery">
+                <a
+                  href="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
+                  class="gallery-item"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0"
+                    alt="Вулична зйомка 1"
+                  />
+                </a>
+                <a
+                  href="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                  class="gallery-item"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                    alt="Вулична зйомка 2"
+                  />
+                </a>
+                <a
+                  href="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+                  class="gallery-item"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e"
+                    alt="Вулична зйомка 3"
+                  />
+                </a>
+              </div>
+
+              <div class="price-section">
+                <button class="btn" onclick="calculatePrice('outdoor')">
+                  Згенерувати вартість
+                </button>
+              </div>
+
+              <div class="addons-section">
+                <h3>Додатково замовляють:</h3>
+                <div class="addons-grid">
+                  <div class="addon-card">
+                    <h4>Подарунковий сертифікат</h4>
+                    <p>
+                      Ідеальний подарунок для близьких - сертифікат на
+                      фотосесію.
+                    </p>
+                  </div>
+                  <div class="addon-card">
+                    <h4>Додаткова ретуш</h4>
+                    <p>
+                      Професійна обробка фотографій для досконалого результату.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Інші детальні сторінки можна додати за аналогією -->
+          </div>
           <div class="price__wrapper">
             <!-- Блок вибору послуг -->
             <div class="price__services">
-              <h2 class="title price__title">Послуги та ціни</h2>
+              <h3 class="title">- Калькулятор вартості</h3>
               <form id="services-form" class="services-form">
                 <div class="services-grid">
                   <!-- Послуга -->
@@ -919,45 +1189,94 @@
           послуги. Вони зможуть самі обрати зручний час та послугу, яка їм
           найбільше до вподоби.
         </p>
-
-        <div class="certificate-slider-container">
-          <div class="certificate-slider">
-            <!-- Перший сертифікат -->
-            <div class="certificate-slide">
-              <div class="certificate-image">
-                <img
-                  src="https://via.placeholder.com/400x250/ff7e5f/ffffff?text=Стандартний+сертифікат"
-                  alt="Стандартний сертифікат"
-                />
-              </div>
-              <h3 class="certificate-title">Стандартний сертифікат</h3>
-              <p class="certificate-description">
-                Ідеальний вибір для тих, хто хоче спробувати наші послуги
-                вперше. Дає можливість обрати будь-яку послугу зі стандартного
-                переліку.
+        <div class="certificat-wrapper">
+          <div class="certificate-container">
+            <div class="feature-block">
+              <h3 class="feature-title">Найкращий подарунок</h3>
+              <p class="feature-text">
+                На день народження, весілля,<br />8 березня, Новий рік тощо.
               </p>
             </div>
 
-            <!-- Другий сертифікат -->
-            <div class="certificate-slide">
-              <div class="certificate-image">
-                <img
-                  src="https://via.placeholder.com/400x250/feb47b/ffffff?text=Преміум+сертифікат"
-                  alt="Преміум сертифікат"
-                />
-              </div>
-              <h3 class="certificate-title">Преміум сертифікат</h3>
-              <p class="certificate-description">
-                Для тих, хто цінує ексклюзивність. Включає всі наші послуги,
-                включаючи VIP-варіанти та додаткові бонуси.
+            <hr class="divider" />
+
+            <div class="feature-block">
+              <h3 class="feature-title">Ціна сертифіката – ціні фотосесії</h3>
+              <p class="feature-text">
+                Залежить від виду фотосесії та обраного пакета.
               </p>
             </div>
+
+            <hr class="divider" />
+
+            <div class="feature-block">
+              <h3 class="feature-title">Тривалий термін дії</h3>
+              <p class="feature-text">
+                Термін дії сертифікатів<br />6 місяців (з дня покупки).
+              </p>
+            </div>
+
+            <hr class="divider" />
           </div>
 
-          <div class="slider-controls">
-            <div class="slider-dot active"></div>
-            <div class="slider-dot"></div>
+          <div class="certificate-slider-container">
+            <div class="certificate-slider">
+              <!-- Перший сертифікат -->
+              <div class="certificate-slide">
+                <div class="certificate-image">
+                  <img
+                    src="https://via.placeholder.com/400x250/ff7e5f/ffffff?text=Стандартний+сертифікат"
+                    alt="Стандартний сертифікат"
+                  />
+                </div>
+                <h3 class="certificate-title">Стандартний сертифікат</h3>
+                <p class="certificate-description">
+                  Ідеальний вибір для тих, хто хоче спробувати наші послуги
+                  вперше. Дає можливість обрати будь-яку послугу зі стандартного
+                  переліку.
+                </p>
+              </div>
+
+              <!-- Другий сертифікат -->
+              <div class="certificate-slide">
+                <div class="certificate-image">
+                  <img
+                    src="https://via.placeholder.com/400x250/feb47b/ffffff?text=Преміум+сертифікат"
+                    alt="Преміум сертифікат"
+                  />
+                </div>
+                <h3 class="certificate-title">Преміум сертифікат</h3>
+                <p class="certificate-description">
+                  Для тих, хто цінує ексклюзивність. Включає всі наші послуги,
+                  включаючи VIP-варіанти та додаткові бонуси.
+                </p>
+              </div>
+            </div>
+
+            <div class="slider-controls">
+              <div class="slider-dot active"></div>
+              <div class="slider-dot"></div>
+            </div>
           </div>
+        </div>
+        <div class="cta-block">
+          <h3 class="cta-title">
+            Все ще думаєте, що подарувати дорогій людині на майбутнє свято?
+          </h3>
+          <p class="cta-text">
+            <span class="highlight"
+              >Подарунковий сертифікат на фотосесію (Київ)</span
+            >
+            – це чудове рішення подарунка на будь-яке свято! Сертифікат також
+            може виступати у ролі додаткового унікального подарунка на весілля
+            молодягам!
+          </p>
+          <p class="cta-text">
+            <span class="highlight">Чим це зручно?</span> Ви купуєте красиво
+            оформлений сертифікат на фотосесію у студії або фотопрогулянку,
+            сімейну фотосесію, Love story або фотосесію вагітності. Підносите
+            дорогій людині.
+          </p>
         </div>
       </section>
 
@@ -1644,9 +1963,10 @@
     <script src="./js/scrollMobile.js"></script>
 
     <script src="./js/price.js"></script>
+    <script src="./js/service.js"></script>
     <script src="./js/sertificates.js"></script>
     <script src="./js/faq.js"></script>
-    <script src="./js//chatwidget.js"></script>
+    <script src="./js/chatwidget.js"></script>
 
     <!-- LightGallery JS -->
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
