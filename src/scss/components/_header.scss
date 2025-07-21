@@ -351,6 +351,7 @@ main {
   gap: 10px;
   @media screen and (max-width: 768px) {
     width: 100%;
+    left: 0;
   }
   .social__char {
     width: 50px;
