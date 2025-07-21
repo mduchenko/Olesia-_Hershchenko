@@ -328,13 +328,6 @@ main {
     }
   }
 }
-@media screen and (max-width: 768px) {
-  .social.social-mobile {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-  }
-}
 
 .social__menu {
   display: none;
@@ -356,11 +349,7 @@ main {
   align-items: center;
   gap: 10px;
   @media screen and (max-width: 768px) {
-    &.social__menu-mobile {
-      display: flex;
-      flex-direction: column;
-      justify-content: left;
-    }
+    width: 100%;
   }
   .social__char {
     width: 50px;
