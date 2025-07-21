@@ -377,7 +377,7 @@ main {
   &.active {
     // left: calc(50% + 2px);
     // transform: translate(-50%, -50%);
-    transform: translateX(50%) translateY(-50%);
+    transform: translateY(-50%);
     display: flex;
     border: 1px solid #ccc;
     // @media screen and (max-width: 768px) {

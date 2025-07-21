@@ -43,17 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function updateBodyScrollState() {
-    const isMainMenuOpen = navMenu.classList.contains("active");
-    const isSocialOpen = socialMenu.classList.contains("active");
+  // function updateBodyScrollState() {
+  //   const isMainMenuOpen = navMenu.classList.contains("active");
+  //   const isSocialOpen = socialMenu.classList.contains("active");
 
-    if (isMainMenuOpen || isSocialOpen) {
-      headerMenu.style.height = "100%";
-      openMenu();
-    } else if (document.body.classList.contains("menu-open")) {
-      closeMenu();
-    }
-  }
+  //   if (isMainMenuOpen || isSocialOpen) {
+  //     headerMenu.style.height = "100%";
+  //     openMenu();
+  //   } else if (document.body.classList.contains("menu-open")) {
+  //     closeMenu();
+  //   }
+  // }
 
   menuBtn.addEventListener("click", () => {
     menuBtn.classList.toggle("active");
@@ -71,16 +71,17 @@ document.addEventListener("DOMContentLoaded", () => {
       navItemsList.classList.remove("animate");
     }
 
-    updateBodyScrollState();
+    // updateBodyScrollState();
   });
 
   function openSocial(el) {
     console.log(el);
     el.forEach((i) => {
       i.addEventListener("click", (e) => {
+        e.preventDefault();
         e.stopPropagation();
         socialMenu.classList.toggle("active");
-        updateBodyScrollState();
+        // updateBodyScrollState();
       });
     });
   }
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeSocial(el) {
     el.addEventListener("click", () => {
       socialMenu.classList.remove("active");
-      updateBodyScrollState();
+      // updateBodyScrollState();
     });
   }
   closeSocial(socialClose);
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     if (!socialMenu.contains(e.target) && !e.target.closest(".social__rest")) {
       socialMenu.classList.remove("active");
-      updateBodyScrollState();
+      // updateBodyScrollState();
     }
   });
 
@@ -112,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const navItemsList = navMenu.querySelector(".nav-items");
         navItemsList.classList.remove("animate");
 
-        updateBodyScrollState();
+        // updateBodyScrollState();
       });
     });
   }
