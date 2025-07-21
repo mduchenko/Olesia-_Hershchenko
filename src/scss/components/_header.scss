@@ -56,6 +56,11 @@ main {
         justify-content: center;
       }
     }
+    @media screen and (max-width: 768px) {
+      nav {
+        width: 100%;
+      }
+    }
     ul {
       display: flex;
       justify-content: center;
@@ -63,11 +68,14 @@ main {
       gap: 25px;
       @media screen and (max-width: 768px) {
         flex-direction: column;
+        width: 100%;
       }
+
       li {
         position: relative;
         @media screen and (max-width: 768px) {
           font-size: 27px;
+          width: 100%;
         }
       }
       a {
@@ -88,8 +96,12 @@ main {
           background-color: var(--light-btn);
         }
         @media screen and (max-width: 768px) {
+          display: block;
+
+          // width: 100%;
           &::after {
-            display: none;
+            transform: scaleX(1);
+            background-color: #f8f4f1;
           }
         }
 
