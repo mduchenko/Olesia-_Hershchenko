@@ -243,6 +243,7 @@ main {
 
   @media screen and (max-width: 768px) {
     .header__bottom {
+      overflow: scroll;
       ul.nav-items {
         flex-direction: column;
 
