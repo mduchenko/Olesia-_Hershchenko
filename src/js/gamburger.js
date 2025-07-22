@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         e.stopPropagation();
         socialMenu.classList.toggle("active");
-        document.querySelector(".social__overlay").classList.add("active");
+        document.querySelector(".social__overlay").classList.toggle("active");
         // updateBodyScrollState();
       });
     });
@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     if (!socialMenu.contains(e.target) && !e.target.closest(".social__rest")) {
       socialMenu.classList.remove("active");
+      document.querySelector(".social__overlay").classList.remove("active");
       // updateBodyScrollState();
     }
   });
