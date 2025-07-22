@@ -81,3 +81,15 @@ document.addEventListener("click", function (event) {
     chatButton.querySelector("span").classList.add("icon-gift");
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const widget = document.getElementById("chatWidget");
+
+  // Додаємо початковий клас по центру
+  widget.classList.add("center-start");
+
+  // Через мить прибираємо його — активується transition
+  setTimeout(() => {
+    widget.classList.remove("center-start");
+  }, 8000); // затримка, щоб браузер застосував клас
+});
