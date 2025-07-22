@@ -45,6 +45,7 @@
     box-shadow: none;
     animation: none !important; /* Вимикає анімацію, яка може впливати на масштабування */
     transform: none !important; /* Додатково прибирає вплив анімації на Safari */
+    overflow-x: hidden;
   }
 }
 
@@ -58,10 +59,6 @@
     opacity: 1;
   }
 }
-
-// .booking-modalBooking {
-//   max-width: 700px;
-// }
 
 .calculator-modalBooking {
   max-width: 800px;
@@ -87,7 +84,6 @@ h2 {
   margin-bottom: 25px;
   font-size: 28px;
   @media screen and (max-width: 768px) {
-    // margin: 0;
     font-size: 24px;
   }
 }

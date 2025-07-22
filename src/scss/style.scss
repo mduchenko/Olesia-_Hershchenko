@@ -1,11 +1,6 @@
 * {
   font-family: "Cormorant", sans-serif;
 }
-body,
-html {
-  overflow-x: hidden;
-  position: relative;
-}
 
 @import "./data/modern-normolize";
 @import "./data/reset";
@@ -32,8 +27,8 @@ html {
 @import "./components/chatWidget";
 @import "./components//services";
 
-// @media screen and (max-width: 768px) {
-//   body {
-//     padding-top: 120px; // Висота хедера + запас
-//   }
-// }
+body,
+html {
+  overflow-x: hidden;
+  position: relative;
+}
