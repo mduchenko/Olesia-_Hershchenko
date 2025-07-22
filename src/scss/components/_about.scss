@@ -1,6 +1,9 @@
 .about {
   background-color: var(--light-bg);
   padding: 80px 20px;
+  @media screen and (max-width: 768px) {
+    padding: 30px 10px;
+  }
 }
 
 .about__container {
@@ -37,9 +40,10 @@
 
 .about__description {
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.5;
   font-weight: 300;
   margin-bottom: 20px;
+  text-align: justify;
 }
 
 .about__button {
@@ -77,4 +81,37 @@
   height: auto;
   display: block;
   border-radius: 12px;
+}
+
+// Gallerry
+.gallery-strip {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  scroll-snap-type: x mandatory;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+
+.gallery-strip a {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gallery-strip img {
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.3s ease;
+}
+
+.gallery-strip img:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }

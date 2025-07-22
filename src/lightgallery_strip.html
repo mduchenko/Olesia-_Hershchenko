@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LightGallery Horizontal Strip</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/css/lightgallery-bundle.min.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .gallery-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px;
+      white-space: nowrap;
+      scrollbar-width: thin;
+      scroll-snap-type: x mandatory;
+      background-color: #f8f8f8;
+      border-radius: 10px;
+    }
+
+    .gallery-strip a {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      display: inline-block;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .gallery-strip img {
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-strip img:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Галерея LightGallery (горизонтальна смуга)</h2>
+  <div id="lightgallery" class="gallery-strip">
+    <a href="https://picsum.photos/id/1015/800/600">
+      <img src="https://picsum.photos/id/1015/160/100" alt="Фото 1" />
+    </a>
+    <a href="https://picsum.photos/id/1016/800/600">
+      <img src="https://picsum.photos/id/1016/160/100" alt="Фото 2" />
+    </a>
+    <a href="https://picsum.photos/id/1018/800/600">
+      <img src="https://picsum.photos/id/1018/160/100" alt="Фото 3" />
+    </a>
+    <a href="https://picsum.photos/id/1019/800/600">
+      <img src="https://picsum.photos/id/1019/160/100" alt="Фото 4" />
+    </a>
+    <a href="https://picsum.photos/id/1020/800/600">
+      <img src="https://picsum.photos/id/1020/160/100" alt="Фото 5" />
+    </a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/lightgallery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      lightGallery(document.getElementById("lightgallery"), {
+        selector: 'a',
+        thumbnail: true,
+        zoom: true,
+        animateThumb: true,
+        showThumbByDefault: false,
+      });
+    });
+  </script>
+
+</body>
+</html>

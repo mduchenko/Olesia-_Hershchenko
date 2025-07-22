@@ -393,36 +393,77 @@
         <div class="container">
           <div class="about__container">
             <div class="about__text">
-              <h4 class="about__subtitle">Трішки про мене1</h4>
+              <h4 class="about__subtitle">Трішки про мене</h4>
               <h2 class="about__title">
                 Фотограф у Києві<br /><span>Олеся Геращенко</span>
               </h2>
               <p class="about__description">
-                Привіт! Мене звати Олеся, я — фотограф з пристрастю до
-                миттєвостей, які говорять більше за тисячу слів. Моя мета — не
-                просто створювати зображення, а розповідати історії через
-                світло, тіні та емоції. Працюю у різних жанрах. Кожна зйомка —
-                це унікальний досвід, який я намагаюся зробити особливим для
-                кожного із Вас. Вірю, що найкращі кадри народжуються у щирості.
-                Тому створюю атмосферу, де ви можете бути собою — без напруги та
-                постановочності. Якщо ви шукаєте фотографа, який допоможе вам
-                зберегти емоції на все життя — запрошую переглянути мої роботи
-                та зв’язатися для бронювання.
+                Привіт! <br />
+                Мене звати Олеся, я — фотограф з пристрастю до миттєвостей, які
+                говорять більше за тисячу слів. Моя мета — не просто створювати
+                зображення, а розповідати історії через світло, тіні та емоції.
+                Працюю у різних жанрах. <br />
+                Кожна зйомка — це унікальний досвід, який я намагаюся зробити
+                особливим для кожного із Вас. <br />
+                Вірю, що найкращі кадри народжуються у щирості. Тому створюю
+                атмосферу, де ви можете бути собою — без напруги та
+                постановочності. <br />
+                Якщо ви шукаєте фотографа, який допоможе вам зберегти емоції на
+                все життя — запрошую переглянути мої роботи та зв’язатися для
+                бронювання.
               </p>
               <button class="about__button">Скажи привіт</button>
             </div>
             <div class="about__image-wrapper">
               <div class="about__image-card">
-                <img
-                  src="./img/about_me/about_me1.png"
-                  alt="Олеся"
-                  class="about__image"
-                />
+                <div id="lightgallery-about" class="gallery-strip">
+                  <a href="https://picsum.photos/id/1015/800/600">
+                    <img
+                      src="https://picsum.photos/id/1015/160/100"
+                      alt="Фото 1"
+                    />
+                  </a>
+                  <a href="https://picsum.photos/id/1016/800/600">
+                    <img
+                      src="https://picsum.photos/id/1016/160/100"
+                      alt="Фото 2"
+                    />
+                  </a>
+                  <a href="https://picsum.photos/id/1018/800/600">
+                    <img
+                      src="https://picsum.photos/id/1018/160/100"
+                      alt="Фото 3"
+                    />
+                  </a>
+                  <a href="https://picsum.photos/id/1019/800/600">
+                    <img
+                      src="https://picsum.photos/id/1019/160/100"
+                      alt="Фото 4"
+                    />
+                  </a>
+                  <a href="https://picsum.photos/id/1020/800/600">
+                    <img
+                      src="https://picsum.photos/id/1020/160/100"
+                      alt="Фото 5"
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          lightGallery(document.getElementById("lightgallery-about"), {
+            selector: "a",
+            thumbnail: true,
+            zoom: true,
+            animateThumb: true,
+            showThumbByDefault: false,
+          });
+        });
+      </script>
       <section class="portfolio-section">
         <h2 class="section-title">Портфоліо</h2>
 
