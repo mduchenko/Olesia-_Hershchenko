@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✨ Виправлення:
     bookingModal.style.display = "flex";
 
-    document.body.classList.add("menu-open-one");
+    document.body.classList.add("menu-open");
     // Прокрутка до результату
     priceResultContainer.scrollIntoView({ behavior: "smooth" });
   });
