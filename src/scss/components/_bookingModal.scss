@@ -115,6 +115,14 @@ h2 {
     margin: 0;
   }
 }
+.form-group.form-group-date {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  input {
+    width: 70%;
+  }
+}
 
 .form-group label {
   display: block;
