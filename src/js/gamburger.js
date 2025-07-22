@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         e.stopPropagation();
         socialMenu.classList.toggle("active");
+        document.querySelector(".social__overlay").classList.add("active");
         // updateBodyScrollState();
       });
     });
@@ -90,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function closeSocial(el) {
     el.addEventListener("click", () => {
       socialMenu.classList.remove("active");
+      document.querySelector(".social__overlay").classList.remove("active");
       // updateBodyScrollState();
     });
   }
