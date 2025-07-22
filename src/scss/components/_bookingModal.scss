@@ -37,19 +37,21 @@
     width: 70%;
   }
   @media screen and (max-width: 768px) {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    border-radius: 0;
-    animation: none;
-    box-shadow: none;
-    // width: 100vw;
-    // height: 100vh;
-    // overflow-y: auto;
-    padding: 16px;
-    // margin: 0 !important;
-    // border-radius: 0 !important;
-    // box-sizing: border-box;
+    // width: 100%;
+    // height: 100%;
+    // margin: 0;
+    // border-radius: 0;
+    // animation: none;
+    // box-shadow: none;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    box-sizing: border-box;
+    padding: 20px;
+    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 0 !important;
   }
 }
 
@@ -57,6 +59,28 @@
   .modalBooking-content {
     animation: none !important; /* Вимикає анімацію, яка може впливати на масштабування */
     transform: none !important; /* Додатково прибирає вплив анімації на Safari */
+  }
+  .modalBooking-content *,
+  .modalBooking-content *::before,
+  .modalBooking-content *::after {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+  /* Форматування форми */
+  .form-columns,
+  .form-column,
+  .form-group,
+  .calculator-grid,
+  .service-category,
+  .service-item,
+  .calculator-summary {
+    width: 100% !important;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100% !important;
   }
 }
 
