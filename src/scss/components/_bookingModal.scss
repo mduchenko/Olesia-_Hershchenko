@@ -19,8 +19,9 @@
 @media (max-width: 768px) {
   .modalBooking {
     position: absolute; /* Важливо! */
-    height: auto;
-    min-height: 100vh;
+    // height: auto;
+    height: 100%;
+    // min-height: 100vh;
     align-items: flex-start;
     overflow-y: scroll;
   }
@@ -58,11 +59,11 @@
     // transform: none !important; /* Додатково прибирає вплив анімації на Safari */
     // overflow-x: hidden;
 
-    max-height: none;
-    height: auto;
+    // max-height: none;
+    height: 100%;
     border-radius: 0;
     width: 100%;
-    max-width: 100%;
+    // max-width: 100%;
   }
 }
 
