@@ -92,9 +92,24 @@ document.addEventListener("DOMContentLoaded", function () {
   calculateTotalPrice();
 
   // Закриття при кліку на фон
-  window.addEventListener("click", function (e) {
-    if (e.target === bookingModal) bookingModal.style.display = "none";
-    if (e.target === calculatorModal) calculatorModal.style.display = "none";
-    document.body.classList.remove("menu-open-one");
+  // window.addEventListener("click", function (e) {
+  //   if (e.target === bookingModal) bookingModal.style.display = "none";
+  //   if (e.target === calculatorModal) calculatorModal.style.display = "none";
+  //   document.body.classList.remove("menu-open-one");
+  // });
+
+  // Закриття при кліку на фон
+  bookingModal.addEventListener("click", function (e) {
+    if (e.target === bookingModal) {
+      bookingModal.style.display = "none";
+      document.body.classList.remove("menu-open");
+    }
+  });
+
+  calculatorModal.addEventListener("click", function (e) {
+    if (e.target === calculatorModal) {
+      calculatorModal.style.display = "none";
+      document.body.classList.remove("menu-open");
+    }
   });
 });
