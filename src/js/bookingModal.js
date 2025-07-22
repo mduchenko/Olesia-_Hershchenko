@@ -17,15 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     bookingModal.style.display = "flex";
   });
 
-  // Застосування вартості
-  // applyPriceBtn.addEventListener("click", function () {
-  //   const total = calculateTotalPrice();
-  //   priceResult.textContent = total;
-  //   priceResultContainer.classList.remove("hidden");
-  //   // document.body.classList.add("menu-open");
-  //   // Прокручування до результату
-  //   priceResultContainer.scrollIntoView({ behavior: "smooth" });
-  // });
   applyPriceBtn.addEventListener("click", function () {
     const total = calculateTotalPrice();
     priceResult.textContent = total;
@@ -35,9 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✨ Виправлення:
     bookingModal.style.display = "flex";
-    // lockBodyScroll(true);
 
-    // lockBodyScroll(true); // ✅
     document.body.classList.add("menu-open-one");
     // Прокрутка до результату
     priceResultContainer.scrollIntoView({ behavior: "smooth" });
@@ -48,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function () {
       bookingModal.style.display = "none";
       calculatorModal.style.display = "none";
-      // lockBodyScroll(false); // <-- ОБОВ’ЯЗКОВО
       document.body.classList.remove("menu-open-one");
     });
   });

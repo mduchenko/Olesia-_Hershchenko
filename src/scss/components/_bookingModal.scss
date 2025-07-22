@@ -43,7 +43,6 @@
     border-radius: 0;
     animation: none;
     box-shadow: none;
-    overflow-y: auto;
     animation: none !important; /* Вимикає анімацію, яка може впливати на масштабування */
     transform: none !important; /* Додатково прибирає вплив анімації на Safari */
   }
