@@ -149,9 +149,8 @@ h2 {
   font-size: 14px;
   transition: border-color 0.3s;
   @media screen and (max-width: 768px) {
+    width: 90%;
     padding: 8px 12px;
-    box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s; /* Уникаємо зміни розмірів */
   }
 }
 
