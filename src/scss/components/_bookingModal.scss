@@ -44,7 +44,8 @@
 }
 
 @media screen and (max-width: 768px) {
-  .modalBooking-content {
+  .modalBooking-content,
+  .modalBooking {
     animation: none !important; /* Вимикає анімацію, яка може впливати на масштабування */
     transform: none !important; /* Додатково прибирає вплив анімації на Safari */
   }
