@@ -110,3 +110,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.classList.remove("menu-open-one");
   });
 });
+
+document.querySelectorAll("input, textarea").forEach((el) => {
+  el.addEventListener("focus", () => {
+    setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
+  });
+});
