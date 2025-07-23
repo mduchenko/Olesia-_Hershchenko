@@ -286,6 +286,9 @@ main {
         li:nth-child(7) {
           transition-delay: 0.7s;
         }
+        li:nth-child(8) {
+          transition-delay: 0.8s;
+        }
       }
     }
   }
@@ -470,4 +473,26 @@ main {
 
 .social__overlay.active {
   display: flex;
+}
+
+.contact-details.contact-details-mobile {
+  display: none;
+  justify-content: flex-start;
+  a {
+    text-transform: capitalize;
+  }
+
+  @media screen and (max-width: 768px) {
+    padding-top: 30px;
+    display: flex;
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__bottom .contact-details a::after {
+    transform: none;
+    animation: none;
+    width: 0;
+  }
 }
