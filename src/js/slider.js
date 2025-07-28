@@ -1,7 +1,7 @@
 const images = [
-  "https://picsum.photos/id/1018/900/500",
-  "https://picsum.photos/id/1015/900/500",
-  "https://picsum.photos/id/1019/900/500",
+  "./img/hero/picnic_scene_optimized.webP",
+  "./img/hero/picnic_scene_2_optimized.webP",
+  "./img/hero/picnic_scene_2_optimized.webP",
 ];
 
 let current = 0;
