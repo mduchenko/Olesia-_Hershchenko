@@ -1,7 +1,7 @@
 const images = [
-  "img/hero/picnic_scene_optimized.webP",
-  "img/hero/picnic_scene_2_optimized.webP",
-  "img/hero/picnic_scene_2_optimized.webP",
+  "./img/hero/picnic_scene_optimized.webp",
+  "./img/hero/picnic_scene_2_optimized.webp",
+  "./img/hero/picnic_scene_2_optimized.webp",
 ];
 
 let current = 0;
