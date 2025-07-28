@@ -479,7 +479,7 @@ main {
   display: none;
   justify-content: flex-start;
   a {
-    text-transform: capitalize;
+    text-transform: none;
   }
 
   @media screen and (max-width: 768px) {

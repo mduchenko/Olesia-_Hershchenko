@@ -3,15 +3,19 @@ document.addEventListener("DOMContentLoaded", function () {
   const galleries = {
     gallery1: [
       {
-        src: "./img/фото1.webp",
+        src: "./img/anna/anna(1).webp",
         alt: "Студійний портрет 1",
       },
       {
-        src: "./img/фото2.webp",
+        src: "./img/anna/anna(2).webp",
         alt: "Студійний портрет 2",
       },
       {
-        src: "https://source.unsplash.com/random/800x600/?portrait,studio,3",
+        src: "./img/anna/anna(3).webp",
+        alt: "Студійний портрет 3",
+      },
+      {
+        src: "./img/anna/anna(4).webp",
         alt: "Студійний портрет 3",
       },
     ],
@@ -172,49 +176,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Відкриття галереї
   const modal = document.getElementById("galleryModal");
-  // const currentSlide = document.getElementById("currentSlide");
-  // const thumbnailsContainer = document.getElementById(
-  //   "thumbnailsContainer"
-  // );
-  // let currentGallery = [];
-  // let currentIndex = 0;
+  const currentSlide = document.getElementById("currentSlide");
+  const thumbnailsContainer = document.getElementById("lightgallery");
+  let currentGallery = [];
+  let currentIndex = 0;
 
-  portfolioCards.forEach((card) => {
-    card.addEventListener("click", function () {
-      // const galleryId = this.getAttribute("data-gallery");
-      // currentGallery = galleries[galleryId];
-      // currentIndex = 0;
+  // portfolioCards.forEach((card) => {
 
-      // Очищаємо мініатюри
-      // thumbnailsContainer.innerHTML = "";
+  //   // card.addEventListener("click", function () {
+  //   //   // const galleryId = this.getAttribute("data-gallery");
+  //   //   // currentGallery = galleries[galleryId];
+  //   //   // currentIndex = 0;
 
-      // Відображаємо перше зображення
-      // showSlide(currentIndex);
+  //   //   // Очищаємо мініатюри
+  //   //   // thumbnailsContainer.innerHTML = "";
 
-      // Додаємо мініатюри
-      // currentGallery.forEach((img, index) => {
-      //   const thumbnail = document.createElement("div");
-      //   thumbnail.className = "thumbnail";
-      //   if (index === 0) thumbnail.classList.add("active");
+  //   //   // Відображаємо перше зображення
+  //   //   // showSlide(currentIndex);
 
-      //   const thumbnailImg = document.createElement("img");
-      //   thumbnailImg.src = img.src;
-      //   thumbnailImg.alt = img.alt;
+  //   //   // Додаємо мініатюри
+  //   //   // currentGallery.forEach((img, index) => {
+  //   //   //   const thumbnail = document.createElement("div");
+  //   //   //   thumbnail.className = "thumbnail";
+  //   //   //   if (index === 0) thumbnail.classList.add("active");
 
-      //   thumbnail.appendChild(thumbnailImg);
-      //   thumbnailsContainer.appendChild(thumbnail);
+  //   //   //   const thumbnailImg = document.createElement("img");
+  //   //   //   thumbnailImg.src = img.src;
+  //   //   //   thumbnailImg.alt = img.alt;
 
-      // Обробник кліку на мініатюру
-      //   thumbnail.addEventListener("click", () => {
-      //     showSlide(index);
-      //   });
-      // });
+  //   //   //   thumbnail.appendChild(thumbnailImg);
+  //   //   //   thumbnailsContainer.appendChild(thumbnail);
 
-      // Відкриваємо модальне вікно
-      modal.style.display = "block";
-      document.body.style.overflow = "hidden";
-    });
-  });
+  //   //   // Обробник кліку на мініатюру
+  //   //   //   thumbnail.addEventListener("click", () => {
+  //   //   //     showSlide(index);
+  //   //   //   });
+  //   //   // });
+
+  //   //   // Відкриваємо модальне вікно
+  //   //   modal.style.display = "block";
+  //   //   document.body.style.overflow = "hidden";
+  //   // });
+  // });
 
   // Функція для відображення слайда
   // function showSlide(index) {
@@ -279,5 +282,51 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.style.overflow = "auto";
       }
     }
+  });
+
+  portfolioCards.forEach((card) => {
+    card.addEventListener("click", function () {
+      const galleryId = this.getAttribute("data-gallery");
+      const currentGallery = galleries[galleryId];
+
+      if (!currentGallery) return;
+
+      thumbnailsContainer.innerHTML = "";
+
+      currentGallery.forEach((img) => {
+        const link = document.createElement("a");
+        link.href = img.src;
+        link.setAttribute("data-sub-html", `<h4>${img.alt}</h4>`);
+
+        const image = document.createElement("img");
+        image.src = img.src;
+        image.alt = img.alt;
+
+        link.appendChild(image);
+        thumbnailsContainer.appendChild(link);
+      });
+
+      // Destroy previous instance
+      if (thumbnailsContainer.lg) {
+        thumbnailsContainer.lg.destroy();
+      }
+
+      // Init lightGallery
+      lightGallery(thumbnailsContainer, {
+        plugins: [lgZoom, lgThumbnail, lgFullscreen, lgAutoplay],
+        speed: 500,
+        zoom: true,
+        thumbnail: true,
+        fullscreen: true,
+        autoplay: false,
+        download: false,
+        mode: "lg-fade",
+        controls: true,
+        selector: "a",
+      });
+
+      modal.style.display = "block";
+      document.body.style.overflow = "hidden";
+    });
   });
 });
