@@ -241,6 +241,12 @@ textarea {
   color: white;
   width: 100%;
   margin-top: 15px;
+  @media screen and (max-width: 768px) {
+    // margin-top: 5px;
+    // font-size: 14px;
+    min-width: 50%;
+    margin: 5px auto;
+  }
 }
 
 .submit-btn:hover {
@@ -489,7 +495,6 @@ input:checked + .sliderBooking:before {
   margin-bottom: 10px;
   font-weight: bold;
   @media screen and (max-width: 768px) {
-    font-size: 10px;
     margin-bottom: 5px;
   }
 }
@@ -508,7 +513,7 @@ input:checked + .sliderBooking:before {
   @media screen and (max-width: 768px) {
     padding: 10px;
     font-size: 14px;
-    width: 50%;
+    min-width: 50%;
     margin: 10px auto;
   }
 }
