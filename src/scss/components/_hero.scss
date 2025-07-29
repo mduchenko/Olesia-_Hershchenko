@@ -55,6 +55,9 @@
   // padding: 20px;
   pointer-events: none;
   user-select: none;
+  @media screen and (max-width: 768px) {
+    top: 80%;
+  }
 }
 
 .slider-content h1 {
