@@ -116,6 +116,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const navItemsList = navMenu.querySelector(".nav-items");
         navItemsList.classList.remove("animate");
 
+        // Знімаємо "nav-active" з усіх елементів
+        el.forEach((l) => l.classList.remove("nav-active"));
+        // Додаємо "nav-active" лише до натиснутого елемента
+        i.classList.add("nav-active");
         // updateBodyScrollState();
       });
     });

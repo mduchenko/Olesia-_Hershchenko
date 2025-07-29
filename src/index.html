@@ -32,6 +32,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <!-- Style -->
     <link rel="stylesheet" href="css/style.min.css" />
   </head>
@@ -65,7 +70,7 @@
                 <label>Прізвище*</label>
                 <input type="text" name="lastName" required />
               </div> -->
-                <div class="form-group">
+                <div class="form-group form-group-type">
                   <label>Тип зйомки*</label>
                   <select name="sessionType" required>
                     <option value="">Оберіть тип</option>
@@ -123,7 +128,7 @@
           <div class="service-category">
             <h3>Основні послуги</h3>
 
-            <div class="service-item">
+            <div class="service-item service-item-booking">
               <div class="service-header">
                 <label class="service-toggle">
                   <input type="checkbox" id="photoshoot-toggle" checked />
@@ -146,7 +151,7 @@
               </div>
             </div>
 
-            <div class="service-item">
+            <div class="service-item service-item-booking">
               <div class="service-header">
                 <label class="service-toggle">
                   <input type="checkbox" id="studio-toggle" />
@@ -174,7 +179,7 @@
           <div class="service-category">
             <h3>Додаткові послуги</h3>
 
-            <div class="service-item simple">
+            <div class="service-item service-item-booking simple">
               <label class="service-checkbox">
                 <input type="checkbox" id="retouch" data-price="150" />
                 <span class="checkmark"></span>
@@ -183,7 +188,7 @@
               </label>
             </div>
 
-            <div class="service-item simple">
+            <div class="service-item service-item-booking simple">
               <label class="service-checkbox">
                 <input type="checkbox" id="fast-editing" data-price="200" />
                 <span class="checkmark"></span>
@@ -192,7 +197,7 @@
               </label>
             </div>
 
-            <div class="service-item simple">
+            <div class="service-item service-item-booking simple">
               <label class="service-checkbox">
                 <input type="checkbox" id="certificate" data-price="500" />
                 <span class="checkmark"></span>
@@ -204,7 +209,7 @@
         </div>
 
         <div class="calculator-summary">
-          <div class="total-price">
+          <div class="total-price total-price-booking">
             <span>Загальна вартість:</span>
             <strong id="modalBookingTotalPrice">0</strong> грн
           </div>
