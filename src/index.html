@@ -7,6 +7,10 @@
     <meta name="author" content="Awesome student" />
     <title>Фотограф — Олеся Геращенко</title>
 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
     <!-- Favicon -->
     <link
       rel="apple-touch-icon"
@@ -422,24 +426,163 @@
               </h2>
               <p class="about__description">
                 Привіт! <br />
-                Мене звати Олеся, я — фотограф з пристрастю до миттєвостей, які
+                Мене звати Олеся, я — фотограф, закохана в миттєвості, що
                 говорять більше за тисячу слів. Моя мета — не просто створювати
-                зображення, а розповідати історії через світло, тіні та емоції.
-                Працюю у різних жанрах. <br />
-                Кожна зйомка — це унікальний досвід, який я намагаюся зробити
-                особливим для кожного із Вас. <br />
-                Вірю, що найкращі кадри народжуються у щирості. Тому створюю
-                атмосферу, де ви можете бути собою — без напруги та
-                постановочності. <br />
-                Якщо ви шукаєте фотографа, який допоможе вам зберегти емоції на
-                все життя — запрошую переглянути мої роботи та зв’язатися для
-                бронювання.
+                зображення, а розповідати історії через світло, тіні й емоції.
+                <br />Працюю в різних жанрах — від портретної до репортажної
+                зйомки. Кожна зйомка для мене — це унікальний досвід, який я
+                прагну зробити особливим і справді неповторним для кожного з
+                Вас. Я вірю, що найкращі кадри народжуються в щирості — коли ви
+                залишаєтесь собою. Саме тому я створюю довірливу й комфортну
+                атмосферу, без напруги та постановочності. <br />Якщо ви шукаєте
+                фотографа, який допоможе зберегти ваші емоції на все життя —
+                запрошую переглянути мої роботи та зв’язатися для бронювання.
               </p>
               <button class="about__button">Скажи привіт</button>
             </div>
             <div class="about__image-wrapper">
               <div class="about__image-card">
-                <div id="lightgallery-about" class="gallery-strip">
+                <!-- Простий слайдер -->
+                <div class="simple-slider">
+                  <div class="slider-track">
+                    <div class="slide-about">
+                      <img src="img/anna/anna(1).webp" alt="Портретна робота" />
+                    </div>
+                    <div class="slide-about">
+                      <img
+                        src="img/anna/anna(2).webp"
+                        alt="Весільна фотографія"
+                      />
+                    </div>
+                    <div class="slide-about">
+                      <img
+                        src="img/anna/anna(3).webp"
+                        alt="Сімейна фотосесія"
+                      />
+                    </div>
+                  </div>
+                  <!-- Навігація -->
+                  <!-- <div class="slider-nav">
+                    <button class="prev">&lt;</button>
+                    <div class="dots">
+                      <span class="dot active"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                      <span class="dot"></span>
+                    </div>
+                    <button class="next">&gt;</button>
+                  </div> -->
+                </div>
+
+                <!-- Стилі для слайдера -->
+
+                <style>
+                  .simple-slider {
+                    position: relative;
+                    width: 100%;
+                    overflow: hidden;
+                    border-radius: 8px;
+                  }
+
+                  .slider-track {
+                    display: flex;
+                    transition: transform 0.5s ease;
+                  }
+
+                  .slide-about {
+                    min-width: 100%;
+                    height: 400px;
+                  }
+
+                  .slide-about img {
+                    width: 100%;
+                    height: auto;
+                    display: block;
+                    border-radius: 8px;
+                  }
+
+                  /* .slider-nav {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 15px;
+                    margin-top: 15px;
+                  }
+
+                  .slider-nav button {
+                    background: none;
+                    border: none;
+                    font-size: 20px;
+                    cursor: pointer;
+                    color: #333;
+                  }
+
+                  .dots {
+                    display: flex;
+                    gap: 8px;
+                  }
+
+                  .dot {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: #ccc;
+                    cursor: pointer;
+                  }
+
+                  .dot.active {
+                    background: #333;
+                  } */
+                </style>
+                <!-- Скрипт для слайдера -->
+                <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    const track = document.querySelector(".slider-track");
+                    const slides = document.querySelectorAll(".slide-about");
+                    // const dots = document.querySelectorAll(".dot");
+                    // const prevBtn = document.querySelector(".prev");
+                    // const nextBtn = document.querySelector(".next");
+                    let currentIndex = 0;
+                    const slideCount = slides.length;
+
+                    function updateSlider() {
+                      track.style.transform = `translateX(-${
+                        currentIndex * 100
+                      }%)`;
+
+                      // dots.forEach((dot, index) => {
+                      //   dot.classList.toggle("active", index === currentIndex);
+                      // });
+                    }
+
+                    function nextSlide() {
+                      currentIndex = (currentIndex + 1) % slideCount;
+                      updateSlider();
+                    }
+
+                    // function prevSlide() {
+                    //   currentIndex =
+                    //     (currentIndex - 1 + slideCount) % slideCount;
+                    //   updateSlider();
+                    // }
+
+                    // // Кнопки навігації
+                    // nextBtn.addEventListener("click", nextSlide);
+                    // prevBtn.addEventListener("click", prevSlide);
+
+                    // // Навігація точками
+                    // dots.forEach((dot, index) => {
+                    //   dot.addEventListener("click", () => {
+                    //     currentIndex = index;
+                    //     updateSlider();
+                    //   });
+                    // });
+
+                    // Автоматичне гортання (опціонально)
+                    setInterval(nextSlide, 5000);
+                  });
+                </script>
+                <!-- <div id="lightgallery-about" class="gallery-strip">
                   <a href="https://picsum.photos/id/1015/800/600">
                     <img
                       src="https://picsum.photos/id/1015/160/100"
@@ -470,13 +613,13 @@
                       alt="Фото 5"
                     />
                   </a>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
         </div>
       </section>
-      <script>
+      <!-- <script>
         document.addEventListener("DOMContentLoaded", function () {
           lightGallery(document.getElementById("lightgallery-about"), {
             selector: "a",
@@ -486,7 +629,7 @@
             showThumbByDefault: false,
           });
         });
-      </script>
+      </script> -->
       <section class="portfolio-section">
         <h2 class="section-title">Портфоліо</h2>
 
