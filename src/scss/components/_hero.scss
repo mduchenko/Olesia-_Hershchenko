@@ -5,6 +5,14 @@
   //   padding-top: 72px;
   // }
 }
+.hero {
+  .container {
+    @media screen and (max-width: 768px) {
+      padding: 0;
+    }
+  }
+}
+
 .slider {
   position: relative;
   width: 100%;
@@ -44,7 +52,7 @@
   z-index: 2;
   color: var(--light-bg);
   text-align: center;
-  padding: 20px;
+  // padding: 20px;
   pointer-events: none;
   user-select: none;
 }

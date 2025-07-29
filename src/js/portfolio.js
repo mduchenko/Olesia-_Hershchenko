@@ -323,6 +323,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mode: "lg-fade",
         controls: true,
         selector: "a",
+        c,
       });
 
       modal.style.display = "block";

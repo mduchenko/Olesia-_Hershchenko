@@ -502,7 +502,11 @@
             data-category="studio"
             data-gallery="gallery1"
           >
-            <img src="./img/anna/anna(1).webp" alt="Студійна фотосесія" />
+            <img
+              src="./img/anna/anna(1).webp"
+              alt="Студійна фотосесія"
+              loading="lazy"
+            />
             <div class="card-overlay">
               <h3 class="card-title">Портретна зйомка</h3>
               <p class="card-description">
@@ -666,7 +670,7 @@
         <div class="modal-content-portfolio">
           <div id="lightgallery" class="gallery-container">
             <a href="">
-              <img src="" alt="" id="currentSlide" />
+              <img src="" alt="" id="currentSlide" loading="lazy" />
             </a>
           </div>
         </div>
@@ -1980,20 +1984,7 @@
         <span class="icon-gift"></span>
       </button>
     </div>
-    <style>
-      .gallery-container {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .gallery-container img {
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-      }
-      .gallery-container img:hover {
-        transform: scale(1.03);
-      }
-    </style>
+
     <script src="./js/bookingModal.js"></script>
     <script src="./js/preloder.js"></script>
     <script src="./js/gamburger.js"></script>
