@@ -1,23 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+  const MAX_INITIAL_CARDS = 8;
+
   // Дані для галерей (можна замінити на реальні фото)
   const galleries = {
     gallery1: [
-      {
-        src: "./img/anna/anna(1).webp",
-        alt: "Студійний портрет 1",
-      },
-      {
-        src: "./img/anna/anna(2).webp",
-        alt: "Студійний портрет 2",
-      },
-      {
-        src: "./img/anna/anna(3).webp",
-        alt: "Студійний портрет 3",
-      },
-      {
-        src: "./img/anna/anna(4).webp",
-        alt: "Студійний портрет 3",
-      },
+      { src: "./img/anna/anna(1).webp", alt: "Студійний портрет 1" },
+      { src: "./img/anna/anna(2).webp", alt: "Студійний портрет 2" },
+      { src: "./img/anna/anna(3).webp", alt: "Студійний портрет 3" },
+      { src: "./img/anna/anna(4).webp", alt: "Студійний портрет 4" },
     ],
     gallery2: [
       {
@@ -35,16 +25,44 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     gallery3: [
       {
-        src: "https://source.unsplash.com/random/800x600/?street,urban,1",
+        src: "./img/street/streat_park_natalka(1).webp",
         alt: "Міський пейзаж 1",
       },
       {
-        src: "https://source.unsplash.com/random/800x600/?street,urban,2",
-        alt: "Міський пейзаж 2",
+        src: "./img/street/streat_park_natalka(2).webp",
+        alt: "Міський пейзаж 1",
       },
       {
-        src: "https://source.unsplash.com/random/800x600/?street,urban,3",
-        alt: "Міський пейзаж 3",
+        src: "./img/street/streat_park_natalka(3).webp",
+        alt: "Міський пейзаж 1",
+      },
+      {
+        src: "./img/street/streat_park_natalka(4).webp",
+        alt: "Міський пейзаж 1",
+      },
+      {
+        src: "./img/street/streat_park_natalka(5).webp",
+        alt: "Міський пейзаж 1",
+      },
+      {
+        src: "./img/street/streat_park_natalka(6).webp",
+        alt: "Міський пейзаж 1",
+      },
+      {
+        src: "./img/street/streat_park_natalka(7).webp",
+        alt: "Міський пейзаж 1",
+      },
+      {
+        src: "./img/street/streat_park_natalka(8).webp",
+        alt: "Міський пейзаж 1",
+      },
+      {
+        src: "./img/street/streat_park_natalka(9).webp",
+        alt: "Міський пейзаж 1",
+      },
+      {
+        src: "./img/street/streat_park_natalka(10).webp",
+        alt: "Міський пейзаж 1",
       },
     ],
     gallery4: [
@@ -150,6 +168,42 @@ document.addEventListener("DOMContentLoaded", function () {
   // Фільтрація по табам
   const tabBtns = document.querySelectorAll(".tab-btn");
   const portfolioCards = document.querySelectorAll(".portfolio-card");
+  const loadMoreBtn = document.querySelector(".load-more-btn");
+
+  // Приховати зайві картки при завантаженні
+  hideExtraCards();
+
+  function hideExtraCards() {
+    let visibleCount = 0;
+    portfolioCards.forEach((card, index) => {
+      if (
+        card.style.display !== "none" &&
+        !card.classList.contains("hidden-card")
+      ) {
+        visibleCount++;
+        if (visibleCount > MAX_INITIAL_CARDS) {
+          card.classList.add("hidden-card");
+        }
+      }
+    });
+
+    // Показати/приховати кнопку "Більше робіт"
+    updateLoadMoreButton();
+  }
+
+  function showAllCards() {
+    document.querySelectorAll(".portfolio-card.hidden-card").forEach((card) => {
+      card.classList.remove("hidden-card");
+    });
+    loadMoreBtn.style.display = "none";
+  }
+
+  function updateLoadMoreButton() {
+    const hiddenCards = document.querySelectorAll(
+      ".portfolio-card.hidden-card"
+    ).length;
+    loadMoreBtn.style.display = hiddenCards > 0 ? "inline-block" : "none";
+  }
 
   tabBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -171,116 +225,28 @@ document.addEventListener("DOMContentLoaded", function () {
           card.style.display = "none";
         }
       });
+
+      // Приховати зайві картки після фільтрації
+      hideExtraCards();
     });
   });
 
+  // Обробник кнопки "Більше робіт"
+  loadMoreBtn.addEventListener("click", showAllCards);
+
   // Відкриття галереї
   const modal = document.getElementById("galleryModal");
-  const currentSlide = document.getElementById("currentSlide");
   const thumbnailsContainer = document.getElementById("lightgallery");
-  let currentGallery = [];
-  let currentIndex = 0;
 
-  // portfolioCards.forEach((card) => {
-
-  //   // card.addEventListener("click", function () {
-  //   //   // const galleryId = this.getAttribute("data-gallery");
-  //   //   // currentGallery = galleries[galleryId];
-  //   //   // currentIndex = 0;
-
-  //   //   // Очищаємо мініатюри
-  //   //   // thumbnailsContainer.innerHTML = "";
-
-  //   //   // Відображаємо перше зображення
-  //   //   // showSlide(currentIndex);
-
-  //   //   // Додаємо мініатюри
-  //   //   // currentGallery.forEach((img, index) => {
-  //   //   //   const thumbnail = document.createElement("div");
-  //   //   //   thumbnail.className = "thumbnail";
-  //   //   //   if (index === 0) thumbnail.classList.add("active");
-
-  //   //   //   const thumbnailImg = document.createElement("img");
-  //   //   //   thumbnailImg.src = img.src;
-  //   //   //   thumbnailImg.alt = img.alt;
-
-  //   //   //   thumbnail.appendChild(thumbnailImg);
-  //   //   //   thumbnailsContainer.appendChild(thumbnail);
-
-  //   //   // Обробник кліку на мініатюру
-  //   //   //   thumbnail.addEventListener("click", () => {
-  //   //   //     showSlide(index);
-  //   //   //   });
-  //   //   // });
-
-  //   //   // Відкриваємо модальне вікно
-  //   //   modal.style.display = "block";
-  //   //   document.body.style.overflow = "hidden";
-  //   // });
-  // });
-
-  // Функція для відображення слайда
-  // function showSlide(index) {
-  //   currentIndex = index;
-  //   const slide = currentGallery[index];
-
-  //   currentSlide.src = slide.src;
-  //   currentSlide.alt = slide.alt;
-
-  // Оновлюємо активну мініатюру
-  //   const thumbnails = document.querySelectorAll(".thumbnail");
-  //   thumbnails.forEach((thumb, i) => {
-  //     if (i === index) {
-  //       thumb.classList.add("active");
-  //     } else {
-  //       thumb.classList.remove("active");
-  //     }
-  //   });
-  // }
-
-  // Кнопки навігації
-  // document.querySelector(".prev").addEventListener("click", () => {
-  //   currentIndex =
-  //     (currentIndex - 1 + currentGallery.length) %
-  //     currentGallery.length;
-  //   showSlide(currentIndex);
-  // });
-  // console.log(document.querySelector(".next-portfolio"));
-  // document
-  //   .querySelector(".next-portfolio")
-  //   .addEventListener("click", () => {
-  //     currentIndex = (currentIndex + 1) % currentGallery.length;
-  //     showSlide(currentIndex);
-  //   });
-
-  // Закриття модального вікна
   document.querySelector(".close-btn").addEventListener("click", () => {
     modal.style.display = "none";
     document.body.style.overflow = "auto";
   });
 
-  // Закриття при кліку поза зображенням
   modal.addEventListener("click", (e) => {
     if (e.target === modal) {
       modal.style.display = "none";
       document.body.style.overflow = "auto";
-    }
-  });
-
-  // Навігація клавішами
-  document.addEventListener("keydown", (e) => {
-    if (modal.style.display === "block") {
-      if (e.key === "ArrowLeft") {
-        currentIndex =
-          (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-        showSlide(currentIndex);
-      } else if (e.key === "ArrowRight") {
-        currentIndex = (currentIndex + 1) % currentGallery.length;
-        showSlide(currentIndex);
-      } else if (e.key === "Escape") {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-      }
     }
   });
 
