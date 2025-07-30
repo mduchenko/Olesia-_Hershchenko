@@ -1,13 +1,8 @@
-// const orderBtn = document.querySelector(".order-button");
-// console.log(orderBtn);
-// const totalPrice1 = querySelector(".total-price");
-// console.log(totalPrice1);
 const modal = document.getElementById("bookingModal");
 const openBtnModal = document.querySelector(".button.header__button");
 const openBtnModalHero = document.querySelector(".button__hero");
 console.log(openBtnModal);
 const closeBtnModal = document.querySelector(".modalBooking-content .close");
-// const priceToggle = document.getElementById("priceToggle");
 const priceSection = document.getElementById("priceSection");
 const sessionSelect = document.querySelector("select[name='sessionType']");
 const priceResult = document.getElementById("priceResult");
