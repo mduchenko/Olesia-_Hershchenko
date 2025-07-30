@@ -1716,6 +1716,317 @@
         </div>
       </section>
 
+      <section class="reviews-section">
+        <h2 class="section-title">Відгуки клієнтів</h2>
+
+        <div class="reviews-list">
+          <div class="review-item">
+            <h4 class="review-author">Анна Коваленко</h4>
+            <p class="review-social">
+              Instagram: <a href="#">@anna_kovalenko</a>
+            </p>
+            <p class="review-text">
+              Дуже задоволена роботою! Фотограф вміє знайти підхід до дитини,
+              зйомка пройшла в дружній атмосфері. Фото вийшли яскраві та живі.
+              Рекомендую!
+            </p>
+            <div class="review-photos">
+              <img src="https://via.placeholder.com/100" alt="Фото 1" />
+              <img src="https://via.placeholder.com/100" alt="Фото 2" />
+            </div>
+            <span class="review-category">СІМЕЙНА ФОТОСЕСІЯ</span>
+          </div>
+
+          <div class="review-item">
+            <h4 class="review-author">Олексій Петренко</h4>
+            <p class="review-text">
+              Професійний підхід та якісний результат. Фото ідеально передають
+              атмосферу нашого весілля. Дякую за чудові спогади!
+            </p>
+            <div class="review-photos">
+              <img src="https://via.placeholder.com/100" alt="Фото 1" />
+            </div>
+            <span class="review-category">ВЕСІЛЬНА ФОТОЗЙОМКА</span>
+          </div>
+
+          <div class="review-item">
+            <h4 class="review-author">Марія</h4>
+            <p class="review-text">
+              Зйомка пройшла дуже легко, хоча я звикла почуватися незручно перед
+              камерою. Фотограф знайшла правильні ракурси, і фото вийшли просто
+              чарівними!
+            </p>
+            <span class="review-category">ІНДИВІДУАЛЬНА ФОТОСЕСІЯ</span>
+          </div>
+        </div>
+
+        <div class="leave-review-wrapper">
+          <button class="open-review-btn" id="openReviewBtn">
+            <i class="fas fa-pen"></i> Залишити відгук
+          </button>
+        </div>
+
+        <p class="moderation-notice">
+          Відгуки публікуються після модерації. Дякуємо за ваш відгук!
+        </p>
+      </section>
+
+      <div class="modal" id="reviewModal">
+        <div class="modal-content">
+          <button class="close-modal" id="closeModal">&times;</button>
+          <h3
+            style="
+              text-align: center;
+              color: var(--primary-color);
+              margin-bottom: 20px;
+            "
+          >
+            Залишити відгук
+          </h3>
+          <form id="reviewForm">
+            <div class="form-group">
+              <label for="name">Ваше ім'я</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="social">Посилання на соцмережу</label>
+              <input type="url" id="social" name="social" />
+            </div>
+            <div class="form-group">
+              <label for="contact">Email або телефон</label>
+              <input type="text" id="contact" name="contact" required />
+            </div>
+            <div class="form-group">
+              <label for="review">Ваш відгук</label>
+              <textarea id="review" name="review" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="photos">Додати фото (до 3 штук)</label>
+              <input
+                type="file"
+                id="photos"
+                name="photos"
+                multiple
+                accept="image/*"
+              />
+              <div class="photo-preview" id="photoPreview"></div>
+            </div>
+            <button type="submit" class="submit-btn">Надіслати</button>
+          </form>
+        </div>
+      </div>
+      <style>
+        :root {
+          --primary-color: #6096ba;
+          --secondary-color: #ffb385;
+          --text-color: #2c3e50;
+          --light-gray: #f9f9f9;
+          --white: #ffffff;
+          --border-radius: 10px;
+          --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .reviews-section {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 40px 20px;
+        }
+
+        .section-title {
+          text-align: center;
+          font-size: 2.5rem;
+          color: var(--primary-color);
+          margin-bottom: 40px;
+        }
+
+        .reviews-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          gap: 30px;
+        }
+
+        .review-item {
+          background: var(--white);
+          padding: 20px;
+          border-radius: var(--border-radius);
+          box-shadow: var(--box-shadow);
+        }
+
+        .review-author {
+          font-weight: bold;
+          font-size: 1.2rem;
+          margin-bottom: 8px;
+          color: var(--primary-color);
+        }
+
+        .review-social a {
+          color: var(--primary-color);
+          text-decoration: none;
+        }
+
+        .review-text {
+          margin-top: 10px;
+          line-height: 1.6;
+        }
+
+        .review-photos {
+          display: flex;
+          gap: 10px;
+          margin-top: 15px;
+        }
+
+        .review-photos img {
+          max-width: 80px;
+          border-radius: 6px;
+        }
+
+        .review-category {
+          display: inline-block;
+          margin-top: 10px;
+          background: var(--primary-color);
+          color: var(--white);
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 0.85rem;
+        }
+
+        .leave-review-wrapper {
+          text-align: center;
+          margin-top: 40px;
+        }
+
+        .open-review-btn {
+          background: var(--secondary-color);
+          color: var(--white);
+          border: none;
+          padding: 12px 25px;
+          font-size: 1rem;
+          border-radius: 50px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .open-review-btn:hover {
+          background-color: #ffa76b;
+        }
+
+        .moderation-notice {
+          text-align: center;
+          font-style: italic;
+          margin-top: 20px;
+          color: #888;
+          font-size: 0.9rem;
+        }
+
+        .modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;
+          z-index: 999;
+        }
+
+        .modal-content {
+          background: var(--white);
+          padding: 30px;
+          border-radius: var(--border-radius);
+          width: 90%;
+          max-width: 500px;
+          box-shadow: var(--box-shadow);
+          position: relative;
+        }
+
+        .close-modal {
+          position: absolute;
+          top: 15px;
+          right: 20px;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          color: var(--text-color);
+          cursor: pointer;
+        }
+
+        .form-group {
+          margin-bottom: 15px;
+        }
+
+        .form-group label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: var(--border-radius);
+        }
+
+        .photo-preview img {
+          max-width: 80px;
+          margin-right: 10px;
+          margin-top: 10px;
+          border-radius: 6px;
+        }
+
+        .submit-btn {
+          background: var(--secondary-color);
+          color: var(--white);
+          border: none;
+          padding: 10px 20px;
+          border-radius: var(--border-radius);
+          cursor: pointer;
+          font-weight: bold;
+        }
+
+        .submit-btn:hover {
+          background-color: #ffa76b;
+        }
+      </style>
+      <script>
+        const modal = document.getElementById("reviewModal");
+        const openBtn = document.getElementById("openReviewBtn");
+        const closeBtn = document.getElementById("closeModal");
+        const photoInput = document.getElementById("photos");
+        const photoPreview = document.getElementById("photoPreview");
+
+        openBtn.addEventListener("click", () => {
+          modal.style.display = "flex";
+        });
+
+        closeBtn.addEventListener("click", () => {
+          modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.style.display = "none";
+          }
+        });
+
+        photoInput.addEventListener("change", () => {
+          photoPreview.innerHTML = "";
+          const files = Array.from(photoInput.files).slice(0, 3);
+          files.forEach((file) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              photoPreview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          });
+        });
+      </script>
+
       <section class="faq-section">
         <div class="container">
           <h2 class="section-title">Часті питання</h2>
