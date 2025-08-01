@@ -35,7 +35,7 @@ main {
     align-items: center;
 
     font-family: "Dancing Script", cursive;
-    // font-optical-sizing: auto;
+
     font-weight: 500;
     font-style: normal;
   }
@@ -104,7 +104,6 @@ main {
         @media screen and (max-width: 768px) {
           display: block;
 
-          // width: 100%;
           &::after {
             transform: scaleX(1);
             background-color: #f8f4f1;
@@ -136,7 +135,6 @@ main {
     }
 
     @media screen and (max-width: 768px) {
-      // transition: transform 0.3s ease-in-out;
       padding-top: 20px;
       display: none;
       width: 100%;
@@ -148,45 +146,15 @@ main {
       overflow: hidden;
       &.active {
         display: flex;
-        // margin: 20px 0;
-        // position: fixed; /* Фіксує меню */
-        // top: 70px;
-        // left: 0;
-        // transform: translateY(0);
+        ul {
+          li {
+            color: #f8f4f1;
+            a {
+              color: #f8f4f1;
+            }
+          }
+        }
       }
-      // nav ul {
-      //   display: flex;
-      //   flex-direction: column;
-      //   gap: 25px;
-      // }
-      // nav ul li {
-      //   opacity: 0;
-      //   transform: translateX(-100%);
-      //   transition: transform 0.4s ease, opacity 0.4s ease;
-      // }
-
-      // /* Активне меню — елементи виїжджають */
-      // &.active nav ul li {
-      //   opacity: 1;
-      //   transform: translateX(0);
-      // }
-
-      // /* Затримка по черзі */
-      // &.active nav ul li:nth-child(1) {
-      //   transition-delay: 0.1s;
-      // }
-      // &.active nav ul li:nth-child(2) {
-      //   transition-delay: 0.2s;
-      // }
-      // &.active nav ul li:nth-child(3) {
-      //   transition-delay: 0.3s;
-      // }
-      // &.active nav ul li:nth-child(4) {
-      //   transition-delay: 0.4s;
-      // }
-      // &.active nav ul li:nth-child(5) {
-      //   transition-delay: 0.5s;
-      // }
     }
 
     &.nav-down1 {
@@ -203,59 +171,9 @@ main {
       width: 100%;
       z-index: 1000;
     }
-    // &.fixed-top {
-    //   position: absolute;
-    //   top: 70px;
-    //   right: 0;
-    //   left: 0;
-    //   z-index: 1030;
-    //   background: var(--light-bg);
-    // }
   }
-  // @media (orientation: landscape) {
-  //   .header {
-  //     overflow-y: scroll;
-  //   }
-  // }
-  //   @media screen and (max-width: 768px) {
-  //     position: fixed; // Було static — тому «з’їжджало»
-  //     top: 0;
-  //     left: 0;
-  //     width: 100%;
-  //     z-index: 1000;
-  //     background-color: var(--light-bg);
-  //     // position: static;
-  //     // // top: 0;
-  //     // width: 100%;
-  //     &.active {
-  //       width: 100%;
-  //       height: 100%;
-  //       overflow: scroll;
-  //       // position: fixed;
-  //       // top: 0;
-  //       // left: 0;
-  //       z-index: 1000;
-  //       background-color: var(--light-bg);
-  //     }
-  //     &.nav-down {
-  //       // display: none;
-  //       transform: translateY(0); // Показує хедер
-  //     }
-  //     &.nav-up {
-  //       // position: fixed;
-  //       // top: 0;
-  //       // background-color: var(--light-bg);
-  //       // width: 100%;
-  //       // z-index: 10000;
-  //       transform: translateY(-100%); // Ховає хедер вгору
-  //     }
-  //   }
-  // }
 
   @media screen and (max-width: 768px) {
-    // background: url("../img/anna/anna\(1\).webp") center center / cover
-    //   no-repeat;
-    // color: white;
     .header__bottom {
       background: transparent;
       overflow: scroll;
@@ -324,16 +242,12 @@ main {
       transform: translateY(0);
     }
   }
-}
-// .header__bottom.nav-up {
-//   transform: translateY(100%);
-//   transition: transform 0.3s ease;
-// }
 
-// .header__bottom.nav-down {
-//   transform: translateY(0);
-//   transition: transform 0.3s ease;
-// }
+  &.active {
+    background: url("../img/hero/picnic_scene_2_optimized.webp") center center /
+      cover no-repeat;
+  }
+}
 
 .social {
   display: flex;
@@ -362,10 +276,10 @@ main {
   margin: 0;
   transition: transform 1s ease;
   background-color: #f8f4f1;
-  // box-shadow: 1px 0 2px var(--light-bg);
+
   z-index: 100000;
   border-radius: 20px;
-  // display: flex;
+
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -397,17 +311,9 @@ main {
     cursor: pointer;
   }
   &.active {
-    // left: calc(50% + 2px);
-    // transform: translate(-50%, -50%);
     transform: translateY(-50%);
     display: flex;
     border: 1px solid #ccc;
-    // @media screen and (max-width: 768px) {
-    // &.social__menu-mobile {
-    //   display: flex;
-    //   flex-direction: column;
-    //   justify-content: left;
-    // }
   }
 }
 .header__bottom .social__wrap {
