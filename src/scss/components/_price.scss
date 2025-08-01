@@ -4,7 +4,9 @@
 //   height: 100vh;
 //   touch-action: none;
 // }
-
+.title.tile_price {
+  text-transform: lowercase;
+}
 /* Додаємо плавне центрування модального */
 .modalPrice {
   margin-top: 10vh;
@@ -14,7 +16,6 @@
 /* Стилі для секції цін */
 .price {
   padding: 3rem 0;
-  background-color: #f9f9f9;
 }
 
 .price__wrapper {
@@ -84,7 +85,7 @@
 
 /* Картки послуг */
 .service-item {
-  background: white;
+  background: linear-gradient(to top, #f8f4f1, transparent);
   border-radius: 12px;
   padding: 1.5rem;
   display: flex;

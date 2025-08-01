@@ -72,6 +72,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s;
 }
+.workflow__step span.with-icon span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .workflow__step span.with-icon.last::after {
   content: "✨";

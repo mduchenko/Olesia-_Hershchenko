@@ -253,7 +253,11 @@ main {
   // }
 
   @media screen and (max-width: 768px) {
+    // background: url("../img/anna/anna\(1\).webp") center center / cover
+    //   no-repeat;
+    // color: white;
     .header__bottom {
+      background: transparent;
       overflow: scroll;
       ul.nav-items {
         flex-direction: column;
@@ -451,6 +455,9 @@ main {
   justify-content: space-between;
   width: 100%;
 }
+// .header__bottom .social__char-mobile a.social__link-mobile {
+//   font-family: "Dancing Script", cursive;
+// }
 
 .social__overlay {
   display: none;
