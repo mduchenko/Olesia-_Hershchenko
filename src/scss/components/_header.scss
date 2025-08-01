@@ -146,14 +146,14 @@ main {
       overflow: hidden;
       &.active {
         display: flex;
-        ul {
-          li {
-            color: #f8f4f1;
-            a {
-              color: #f8f4f1;
-            }
-          }
-        }
+        // ul {
+        //   li {
+        //     color: #f8f4f1;
+        //     a {
+        //       color: #f8f4f1;
+        //     }
+        //   }
+        // }
       }
     }
 
@@ -243,10 +243,10 @@ main {
     }
   }
 
-  &.active {
-    background: url("../img/hero/picnic_scene_2_optimized.webp") center center /
-      cover no-repeat;
-  }
+  // &.active {
+  //   background: url("../img/hero/picnic_scene_2_optimized.webp") center center /
+  //     cover no-repeat;
+  // }
 }
 
 .social {
