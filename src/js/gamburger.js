@@ -128,10 +128,10 @@ document.addEventListener("DOMContentLoaded", () => {
   clickNavLink(navLink);
 });
 
-// Заборона копіювання з повідомленням
-document.addEventListener("copy", function (e) {
-  e.preventDefault();
-  alert(
-    "Копіювання заборонено без дозволу автора. Зв'яжіться будь-ласка з власником. "
-  );
-});
+// // Заборона копіювання з повідомленням
+// document.addEventListener("copy", function (e) {
+//   e.preventDefault();
+//   alert(
+//     "Копіювання заборонено без дозволу автора. Зв'яжіться будь-ласка з власником. "
+//   );
+// });
