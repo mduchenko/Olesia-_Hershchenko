@@ -2446,6 +2446,47 @@
         <span class="icon-gift"></span>
       </button>
     </div>
+    <!-- Page-up Button  -->
+    <button id="pageUpBtn">↑</button>
+    <style>
+      #pageUpBtn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        display: none;
+        padding: 10px 15px;
+        font-size: 20px;
+        background-color: #33333378;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        z-index: 1000;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+    <script>
+      let prevScrollPos = window.pageYOffset;
+      const btn = document.getElementById("pageUpBtn");
+
+      window.addEventListener("scroll", function () {
+        let currentScrollPos = window.pageYOffset;
+
+        if (currentScrollPos < prevScrollPos && currentScrollPos > 100) {
+          // Скролимо вгору
+          btn.style.display = "block";
+        } else {
+          // Скролимо вниз або на самому верху
+          btn.style.display = "none";
+        }
+
+        prevScrollPos = currentScrollPos;
+      });
+
+      btn.addEventListener("click", function () {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    </script>
 
     <script src="./js/bookingModal.js"></script>
     <script src="./js/preloder.js"></script>

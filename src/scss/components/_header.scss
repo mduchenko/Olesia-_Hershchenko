@@ -256,6 +256,7 @@ main {
   &__item {
     width: 16px;
     height: 16px;
+
     span {
       font-size: 20px;
       color: var(--light-dark);
@@ -299,6 +300,12 @@ main {
     font-size: 24px;
     a {
       color: var(--light-dark);
+      text-decoration: none;
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 
