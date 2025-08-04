@@ -627,7 +627,7 @@
           <div
             class="portfolio-tabs"
             data-aos="fade-right"
-            data-aos-delay="500"
+            data-aos-delay="800"
           >
             <button class="tab-btn active" data-category="all">Усі</button>
             <button class="tab-btn" data-category="studio">Студійна</button>
@@ -637,11 +637,7 @@
             <button class="tab-btn" data-category="event">Подієва</button>
           </div>
 
-          <div
-            class="portfolio-grid"
-            data-aos="fade-up"
-            data-aos-duration="3000"
-          >
+          <div class="portfolio-grid">
             <!-- Студійні фото -->
             <div
               class="portfolio-card"
@@ -665,6 +661,8 @@
               class="portfolio-card"
               data-category="studio"
               data-gallery="gallery2"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?fashion,studio"
@@ -681,6 +679,8 @@
               class="portfolio-card"
               data-category="street"
               data-gallery="gallery3"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="./img/street/streat_park_natalka(8).webp"
@@ -696,6 +696,8 @@
               class="portfolio-card"
               data-category="street"
               data-gallery="gallery4"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?street,portrait"
@@ -714,6 +716,8 @@
               class="portfolio-card"
               data-category="family"
               data-gallery="gallery5"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?family,park"
@@ -729,6 +733,8 @@
               class="portfolio-card"
               data-category="family"
               data-gallery="gallery6"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?family,home"
@@ -747,6 +753,8 @@
               class="portfolio-card"
               data-category="love"
               data-gallery="gallery7"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?couple,beach"
@@ -762,6 +770,8 @@
               class="portfolio-card"
               data-category="love"
               data-gallery="gallery8"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?couple,forest"
@@ -778,6 +788,8 @@
               class="portfolio-card hidden-card"
               data-category="event"
               data-gallery="gallery9"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?wedding"
@@ -793,6 +805,8 @@
               class="portfolio-card hidden-card"
               data-category="event"
               data-gallery="gallery10"
+              data-aos="fade-up"
+              data-aos-duration="3000"
             >
               <img
                 src="https://source.unsplash.com/random/600x400/?concert"
@@ -830,7 +844,11 @@
             <div class="services-section services-section-price">
               <div class="services-grid">
                 <!-- Картка 1 -->
-                <div class="service-card" onclick="showServiceDetail('studio')">
+                <div
+                  class="service-card"
+                  data-aos="flip-left"
+                  onclick="showServiceDetail('studio')"
+                >
                   <img
                     src="https://images.unsplash.com/photo-1513151233558-d860c5398176"
                     alt="Студійна зйомка"
@@ -848,6 +866,7 @@
                 <!-- Картка 2 -->
                 <div
                   class="service-card"
+                  data-aos="flip-left"
                   onclick="showServiceDetail('outdoor')"
                 >
                   <img
@@ -865,7 +884,11 @@
                 </div>
 
                 <!-- Картка 3 -->
-                <div class="service-card" onclick="showServiceDetail('family')">
+                <div
+                  class="service-card"
+                  onclick="showServiceDetail('family')"
+                  data-aos="flip-left"
+                >
                   <img
                     src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70"
                     alt="Сімейна зйомка"
@@ -881,6 +904,7 @@
                 <div
                   class="service-card"
                   onclick="showServiceDetail('love-story')"
+                  data-aos="flip-left"
                 >
                   <img
                     src="https://images.unsplash.com/photo-1518199266791-5375a83190b7"
@@ -897,6 +921,7 @@
                 <div
                   class="service-card"
                   onclick="showServiceDetail('pregnancy')"
+                  data-aos="flip-left"
                 >
                   <img
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb"
@@ -913,7 +938,11 @@
                 </div>
 
                 <!-- Картка 6 -->
-                <div class="service-card" onclick="showServiceDetail('event')">
+                <div
+                  class="service-card"
+                  onclick="showServiceDetail('event')"
+                  data-aos="flip-left"
+                >
                   <img
                     src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce"
                     alt="Подієва зйомка"
@@ -2197,6 +2226,15 @@
       </section>
 
       <section class="workflow">
+        <div class="workflow__wave-top">
+          <svg viewBox="0 0 1440 150" preserveAspectRatio="none">
+            <path
+              d="M0,80 C360,0 1080,150 1440,80 L1440,0 L0,0 Z"
+              fill="#fff"
+            />
+          </svg>
+        </div>
+
         <h2 class="workflow__title" data-aos="fade-up">
           — Порядок роботи зі мною
         </h2>
@@ -2337,7 +2375,7 @@
       />
       <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
       <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 1000, once: true });
       </script>
     </main>
 
