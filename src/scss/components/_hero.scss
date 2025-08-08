@@ -153,3 +153,9 @@
     display: none;
   }
 }
+.hero__descr {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  min-height: 50px;
+}

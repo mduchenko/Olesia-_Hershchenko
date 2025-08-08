@@ -36,7 +36,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css"
     />
-
+    <!-- typed.js Друк -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
@@ -404,7 +405,7 @@
 
             <div class="slider-content">
               <h1 class="tittle hero__title">Моменти для спогадів</h1>
-              <p class="hero__descr">Створимо Вашу історію кохання</p>
+              <p class="hero__descr" id="typewriter"></p>
               <a href="#contact" class="button__hero"
                 ><span>Замовити фотосесію</span></a
               >
@@ -414,6 +415,20 @@
             <button class="nav__hero right" id="next">&#10095;</button>
           </div>
         </div>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            // Typed.js без видалення тексту
+            new Typed("#typewriter", {
+              strings: ["Створимо Вашу історію кохання"],
+              typeSpeed: 80,
+              backSpeed: 0, // 0 = без стирання
+              backDelay: 10, // Дуже велика затримка, щоб не стирався текст
+              loop: true, // повторювати
+              showCursor: false,
+              // cursorChar: "|",
+            });
+          });
+        </script>
       </section>
 
       <section class="about" id="about">
