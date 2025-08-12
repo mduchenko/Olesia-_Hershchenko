@@ -2518,6 +2518,486 @@
       });
     </script>
 
+    <!-- PHOTO GADGET: вставити в <body> -->
+    <style>
+      /* --- gadget styles --- */
+      #photo-gadget {
+        position: fixed;
+        right: 20px; /* відступ від правого краю */
+        top: 20%; /* можна змінити на top/center */
+        z-index: 9999;
+        pointer-events: auto;
+        transform: translateX(120%); /* прихований праворуч */
+        opacity: 0;
+        transition: transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1),
+          opacity 300ms ease;
+        will-change: transform, opacity;
+      }
+
+      #photo-gadget.visible {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .photo-gadget-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 62px;
+        height: 62px;
+        border-radius: 18px;
+        box-shadow: 0 14px 36px rgba(16, 20, 30, 0.22);
+        background: transparent;
+        border: 1px solid rgba(10, 10, 20, 0.06);
+        cursor: pointer;
+        padding: 10px;
+        transition: transform 160ms ease;
+      }
+
+      .photo-gadget-btn:active {
+        transform: scale(0.98);
+      }
+      .photo-gadget-btn:focus {
+        outline: 3px solid rgba(100, 150, 255, 0.18);
+        outline-offset: 4px;
+      }
+
+      .photo-gadget-label {
+        margin-top: 8px;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        font-size: 12px;
+        color: #222;
+        text-align: center;
+        letter-spacing: 0.2px;
+      }
+
+      .photographer-svg {
+        width: 64px;
+        height: 64px;
+        display: block;
+      }
+
+      /* brighter flash overlay */
+      .flash-overlay {
+        position: absolute;
+        pointer-events: none;
+        inset: 0;
+        border-radius: 18px;
+        mix-blend-mode: screen;
+        opacity: 0;
+        transition: opacity 120ms ease;
+        backdrop-filter: none;
+      }
+      .flash-on .flash-overlay {
+        opacity: 1;
+      }
+
+      @keyframes liftArm {
+        0% {
+          transform: translateY(6px) rotate(0deg);
+        }
+        30% {
+          transform: translateY(-2px) rotate(-6deg);
+        }
+        60% {
+          transform: translateY(-4px) rotate(4deg);
+        }
+        100% {
+          transform: translateY(6px) rotate(0deg);
+        }
+      }
+
+      @keyframes tiltHead {
+        0% {
+          transform: rotate(0deg) translateY(0px);
+        }
+        40% {
+          transform: rotate(-6deg) translateY(-1px);
+        }
+        100% {
+          transform: rotate(0deg) translateY(0px);
+        }
+      }
+
+      .lift-anim {
+        animation: liftArm 720ms cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+      .head-tilt {
+        animation: tiltHead 720ms cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+
+      /* subtle drop shadow for svg */
+      .svg-shadow {
+        filter: drop-shadow(0 6px 12px rgba(10, 10, 30, 0.25));
+      }
+
+      /* small glow for lens when flash fires */
+      .lens-glow {
+        filter: blur(6px) drop-shadow(0 0 8px rgba(255, 240, 200, 0.85));
+        opacity: 0;
+        transition: opacity 110ms ease, transform 200ms ease;
+      }
+      .lens-glow.on {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+
+      @media (max-width: 420px) {
+        #photo-gadget {
+          display: none;
+        }
+      }
+    </style>
+
+    <div id="photo-gadget" aria-hidden="true">
+      <button
+        class="photo-gadget-btn"
+        id="photo-gadget-btn"
+        aria-label="Contact photographer"
+        title="Contact photographer"
+      >
+        <!-- Artistic SVG: more realistic photographer with hands and camera -->
+        <svg
+          class="photographer-svg svg-shadow"
+          viewBox="0 0 120 120"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="skinGrad" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#f5d6b8" />
+              <stop offset="100%" stop-color="#e5b288" />
+            </linearGradient>
+            <linearGradient id="hairGrad" x1="0" x2="1">
+              <stop offset="0%" stop-color="#2b2b2f" />
+              <stop offset="100%" stop-color="#111217" />
+            </linearGradient>
+            <linearGradient id="camBody" x1="0" x2="1">
+              <stop offset="0%" stop-color="#0b1220" />
+              <stop offset="100%" stop-color="#202730" />
+            </linearGradient>
+            <radialGradient id="lens" cx="50%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="#cbd6e6" stop-opacity="0.95" />
+              <stop offset="50%" stop-color="#6b7785" stop-opacity="0.98" />
+              <stop offset="100%" stop-color="#071018" stop-opacity="1" />
+            </radialGradient>
+          </defs>
+
+          <!-- body silhouette -->
+          <g transform="translate(6,8)">
+            <!-- torso -->
+            <path
+              d="M18 70 C18 58, 42 56, 60 58 C78 60, 96 64, 96 78 L96 86 L18 86 Z"
+              fill="#1f2937"
+              opacity="0.95"
+            />
+
+            <!-- left shoulder and arm back (shadow) -->
+            <path
+              d="M20 64 C12 70, 10 78, 14 84"
+              stroke="#111827"
+              stroke-width="6"
+              stroke-linecap="round"
+              fill="none"
+              opacity="0.25"
+            />
+
+            <!-- head -->
+            <g id="head" transform="translate(34,6)">
+              <ellipse cx="16" cy="18" rx="16" ry="18" fill="url(#skinGrad)" />
+              <!-- hair -->
+              <path
+                d="M0 16 C2 -2, 30 -4, 32 14 C34 34, 14 36, 4 32 C-2 28,-2 20,0 16 Z"
+                fill="url(#hairGrad)"
+              />
+              <!-- eye & camera-eye peek -->
+              <circle cx="12" cy="18" r="1.8" fill="#111" opacity="0.85" />
+              <circle cx="20" cy="18" r="1.6" fill="#111" opacity="0.85" />
+            </g>
+
+            <!-- camera held by hands -->
+            <g id="cameraGroup" transform="translate(18,34)">
+              <!-- left hand -->
+              <path
+                id="leftHand"
+                d="M6 32 C0 28, 0 20, 6 18 C12 16, 18 18, 22 22 C26 26, 24 34, 18 36 C14 38, 10 36, 6 32 Z"
+                fill="url(#skinGrad)"
+              />
+
+              <!-- camera body -->
+              <g id="camera" transform="translate(28,6)">
+                <rect
+                  x="0"
+                  y="0"
+                  rx="6"
+                  ry="6"
+                  width="56"
+                  height="34"
+                  fill="url(#camBody)"
+                />
+                <rect
+                  x="6"
+                  y="6"
+                  rx="3"
+                  ry="3"
+                  width="18"
+                  height="22"
+                  fill="#e6e9ef"
+                  opacity="0.9"
+                />
+                <circle cx="38" cy="17" r="12" fill="url(#lens)" />
+                <circle cx="38" cy="17" r="5.2" fill="#071018" opacity="0.95" />
+                <!-- lens glow (separate element for bright flash) -->
+                <circle
+                  id="lensGlow"
+                  class="lens-glow"
+                  cx="38"
+                  cy="17"
+                  r="18"
+                  fill="rgba(255,245,200,0.95)"
+                />
+                <!-- small details -->
+                <rect
+                  x="46"
+                  y="4"
+                  width="6"
+                  height="6"
+                  rx="1"
+                  fill="#9aa6b8"
+                  opacity="0.6"
+                />
+                <rect
+                  x="2"
+                  y="2"
+                  width="8"
+                  height="4"
+                  rx="1"
+                  fill="#0f1724"
+                  opacity="0.45"
+                />
+              </g>
+
+              <!-- right hand around camera -->
+              <path
+                id="rightHand"
+                d="M88 40 C92 36, 96 30, 92 26 C88 22, 78 22, 74 26 C72 28, 74 36, 78 38 C82 40, 86 42, 88 40 Z"
+                fill="url(#skinGrad)"
+              />
+
+              <!-- strap -->
+              <path
+                d="M12 40 C22 48, 46 54, 62 52"
+                stroke="#2b2f36"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                opacity="0.7"
+              />
+            </g>
+
+            <!-- shadow under gadget -->
+            <ellipse
+              cx="60"
+              cy="96"
+              rx="36"
+              ry="8"
+              fill="#000"
+              opacity="0.12"
+            />
+          </g>
+
+          <!-- flash circle (animated) -->
+          <g id="flashGroup" transform="translate(18,8)">
+            <circle
+              id="flashCore"
+              cx="86"
+              cy="42"
+              r="6"
+              fill="#fff"
+              opacity="0"
+              filter="url(#gBlur)"
+            />
+          </g>
+
+          <filter id="gBlur">
+            <feGaussianBlur stdDeviation="3" />
+            <feMerge>
+              <feMergeNode />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </svg>
+
+        <div class="flash-overlay" aria-hidden="true"></div>
+      </button>
+      <div
+        class="photo-gadget-label"
+        id="photo-gadget-label"
+        aria-hidden="true"
+      >
+        фотосесія
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        // CONFIG
+        const cfg = {
+          intervalMs: 9000, // час між появами (ms)
+          visibleMs: 2600, // як довго залишається видимим (ms)
+          initialDelay: 900, // початкова затримка першої появи (ms)
+          pauseOnHover: true, // пауза показів при ховері
+          clickUrl: "mailto:olesya_30@ukr.net", // можна змінити на modal
+          showLabel: true,
+          position: { right: "22px", bottom: "18vh" },
+          flashStrength: 2.4, // множник сили спалаху (збільшуй для яскравішого ефекту)
+          flashDuration: 320, // ms
+        };
+
+        const gadget = document.getElementById("photo-gadget");
+        const btn = document.getElementById("photo-gadget-btn");
+        const label = document.getElementById("photo-gadget-label");
+        const svg = gadget.querySelector(".photographer-svg");
+        const camera = svg.querySelector("#camera");
+        const leftHand = svg.querySelector("#leftHand");
+        const rightHand = svg.querySelector("#rightHand");
+        const head = svg.querySelector("#head");
+        const flashCore = svg.querySelector("#flashCore");
+        const lensGlow = svg.querySelector("#lensGlow");
+        const overlay = gadget.querySelector(".flash-overlay");
+
+        gadget.style.right = cfg.position.right;
+        gadget.style.bottom = cfg.position.bottom;
+        label.style.display = cfg.showLabel ? "block" : "none";
+
+        let paused = false;
+        let timer = null;
+        let flashTimer = null;
+
+        function animateFlash() {
+          const strength = Math.max(1, cfg.flashStrength);
+          const dur = cfg.flashDuration;
+
+          // flash core pulse — bigger and brighter
+          flashCore.animate(
+            [
+              { transform: "scale(0.2)", opacity: 0 },
+              { transform: `scale(${1.8 * strength})`, opacity: 1 },
+              { transform: `scale(${3.2 * strength})`, opacity: 0 },
+            ],
+            { duration: dur, easing: "cubic-bezier(.2,.9,.2,1)" }
+          );
+
+          // lens glow quick bright
+          lensGlow.classList.add("on");
+          lensGlow.style.transition = `opacity ${Math.round(
+            dur * 0.25
+          )}ms ease, transform ${Math.round(
+            dur * 0.6
+          )}ms cubic-bezier(.2,.9,.2,1)`;
+          setTimeout(
+            () => lensGlow.classList.remove("on"),
+            Math.round(dur * 0.6)
+          );
+
+          // overlay quick white flash with radial gradient
+          overlay.style.background = `radial-gradient(circle at 60% 40%, rgba(255,255,240,${
+            0.95 * strength
+          }), rgba(255,255,255,${
+            0.7 * strength
+          }) 24%, rgba(255,255,255,0) 45%)`;
+          gadget.classList.add("flash-on");
+
+          clearTimeout(flashTimer);
+          flashTimer = setTimeout(() => {
+            gadget.classList.remove("flash-on");
+          }, Math.round(dur * 0.9));
+        }
+
+        function showOnce() {
+          if (paused) return;
+          gadget.classList.add("visible");
+          gadget.setAttribute("aria-hidden", "false");
+
+          // add animations to parts
+          camera.classList.add("lift-anim");
+          head.classList.add("head-tilt");
+
+          // small delay then flash
+          setTimeout(() => {
+            animateFlash();
+          }, 420);
+
+          setTimeout(() => {
+            camera.classList.remove("lift-anim");
+            head.classList.remove("head-tilt");
+          }, 900);
+
+          setTimeout(() => {
+            gadget.classList.remove("visible");
+            gadget.setAttribute("aria-hidden", "true");
+          }, cfg.visibleMs);
+        }
+
+        function startCycle() {
+          setTimeout(() => {
+            showOnce();
+            timer = setInterval(() => {
+              if (!paused) showOnce();
+            }, cfg.intervalMs);
+          }, cfg.initialDelay);
+        }
+
+        if (cfg.pauseOnHover) {
+          gadget.addEventListener("mouseenter", () => {
+            paused = true;
+          });
+          gadget.addEventListener("mouseleave", () => {
+            paused = false;
+          });
+          btn.addEventListener("focus", () => {
+            paused = true;
+          });
+          btn.addEventListener("blur", () => {
+            paused = false;
+          });
+        }
+
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          // manual click triggers a brighter flash for feedback
+          animateFlash();
+          window.location.href = cfg.clickUrl;
+        });
+
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+
+        startCycle();
+
+        window.__photoGadget = {
+          showOnce,
+          pause() {
+            paused = true;
+          },
+          resume() {
+            paused = false;
+          },
+          destroy() {
+            clearInterval(timer);
+            clearTimeout(flashTimer);
+            gadget.remove();
+          },
+        };
+      })();
+    </script>
+
     <script src="./js/bookingModal.js"></script>
     <script src="./js/preloder.js"></script>
     <script src="./js/gamburger.js"></script>
