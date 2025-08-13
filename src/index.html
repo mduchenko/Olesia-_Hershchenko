@@ -2821,7 +2821,6 @@
       })();
     </script> -->
     <script>
-      const currentY = window.pageYOffset || document.documentElement.scrollTop;
       (function () {
         // Конфіг
         const cfg = {
@@ -2841,6 +2840,21 @@
         let hideTimer = null;
         let lastScrollY = window.scrollY;
         let scrollDelayTimer = null;
+
+        const currentY =
+          window.pageYOffset || document.documentElement.scrollTop;
+        let touchStartY = 0;
+        window.addEventListener("touchstart", (e) => {
+          touchStartY = e.touches[0].clientY;
+        });
+        window.addEventListener("touchmove", (e) => {
+          const deltaY = e.touches[0].clientY - touchStartY;
+          if (deltaY < 0) {
+            showGadget(); // вниз
+          } else {
+            hideGadget(); // вгору
+          }
+        });
 
         // Flash
         function animateFlash() {
