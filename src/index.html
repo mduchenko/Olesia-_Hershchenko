@@ -2978,5 +2978,167 @@
         selector: "a",
       });
     </script>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- MarkerCluster CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
+    />
+    <!-- LightGallery CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css"
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #map {
+        height: 80vh;
+        margin-bottom: 10px;
+      }
+      .filter-btns {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .filter-btns button {
+        margin: 0 5px;
+        padding: 6px 12px;
+        cursor: pointer;
+        border: none;
+        background: #eee;
+        border-radius: 5px;
+      }
+      .filter-btns button.active {
+        background: #007bff;
+        color: #fff;
+      }
+      .lg-gallery img {
+        width: 100px;
+        margin: 3px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+    <h2 style="text-align: center">Карта фотолокацій</h2>
+    <div class="filter-btns">
+      <button class="active" data-category="all">Усі</button>
+      <button data-category="Love Story">Love Story</button>
+      <button data-category="Сімейна">Сімейна</button>
+      <button data-category="Fashion">Fashion</button>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- MarkerCluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+    <!-- LightGallery JS -->
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+    <script>
+      // Дані локацій
+      const locations = [
+        {
+          name: "Маріїнський парк",
+          coords: [50.4452, 30.5362],
+          category: "Love Story",
+          photos: [
+            "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mariinsky_Park_Kyiv.jpg",
+            "https://picsum.photos/id/1018/600/400",
+            "https://picsum.photos/id/1015/600/400",
+          ],
+        },
+        {
+          name: "Поділ",
+          coords: [50.4676, 30.514],
+          category: "Сімейна",
+          photos: [
+            "https://upload.wikimedia.org/wikipedia/commons/2/23/Podil_Kyiv.jpg",
+            "https://picsum.photos/id/1025/600/400",
+            "https://picsum.photos/id/1035/600/400",
+          ],
+        },
+        {
+          name: "Андріївський узвіз",
+          coords: [50.4593, 30.5166],
+          category: "Fashion",
+          photos: [
+            "https://upload.wikimedia.org/wikipedia/commons/7/7b/Andriyivskyy_Descent_Kiev.jpg",
+            "https://picsum.photos/id/1041/600/400",
+            "https://picsum.photos/id/1043/600/400",
+          ],
+        },
+      ];
+
+      const map = L.map("map").setView([50.4501, 30.5234], 12);
+
+      // Підключення шарів карти
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      // Кастомна іконка
+      const cameraIcon = L.icon({
+        iconUrl: "https://cdn-icons-png.flaticon.com/512/685/685655.png",
+        iconSize: [32, 32],
+      });
+
+      // Кластерна група
+      let markers = L.markerClusterGroup();
+      map.addLayer(markers);
+
+      // Функція додавання маркерів
+      function loadMarkers(category) {
+        markers.clearLayers();
+        locations.forEach((loc) => {
+          if (category === "all" || loc.category === category) {
+            const marker = L.marker(loc.coords, { icon: cameraIcon });
+            const galleryId = `gallery-${loc.name.replace(/\s/g, "-")}`;
+
+            let popupContent = `<h3>${loc.name}</h3><p>Категорія: ${loc.category}</p>
+        <div id="${galleryId}" class="lg-gallery">`;
+            loc.photos.forEach((photo) => {
+              popupContent += `<a href="${photo}"><img src="${photo}" /></a>`;
+            });
+            popupContent += `</div>`;
+
+            marker.bindPopup(popupContent);
+            markers.addLayer(marker);
+
+            marker.on("popupopen", () => {
+              lightGallery(document.getElementById(galleryId), {
+                plugins: [lgZoom, lgThumbnail],
+                speed: 400,
+              });
+            });
+          }
+        });
+      }
+
+      // Завантаження всіх маркерів
+      loadMarkers("all");
+
+      // Фільтри
+      document.querySelectorAll(".filter-btns button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btns button")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          loadMarkers(btn.dataset.category);
+        });
+      });
+    </script>
   </body>
 </html>
