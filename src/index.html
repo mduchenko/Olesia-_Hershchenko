@@ -2550,7 +2550,7 @@
         align-items: center;
         justify-content: center;
         width: 100px;
-        height: 50px;
+        height: 100px;
         border-radius: 0 20px 20px 0;
         /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
         background: rgba(250, 250, 250, 0.5);
@@ -2613,6 +2613,27 @@
         }
       }
 
+      @keyframes gadgetBounceIn {
+        0% {
+          transform: translateX(-120%);
+          opacity: 0;
+        }
+        60% {
+          transform: translateX(10%);
+          opacity: 1;
+        }
+        80% {
+          transform: translateX(-5%);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      #photo-gadget.bounce-in {
+        animation: gadgetBounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
       .gadget-bounce {
         animation: subtleBounce 4s ease-in-out infinite;
       }
@@ -2652,7 +2673,7 @@
       </button>
     </div>
 
-    <script>
+    <!-- <script>
       (function () {
         // Enhanced configuration
         const cfg = {
@@ -2798,7 +2819,114 @@
           },
         };
       })();
+    </script> -->
+    <script>
+      (function () {
+        // Конфіг
+        const cfg = {
+          clickUrl: "tel:380981067972",
+          flashStrength: 2.8,
+          flashDuration: 400,
+          enableRipple: true,
+          scrollShowDelay: 150, // затримка перед показом після початку скролу вниз
+          hideAfterStop: 500, // час після зупинки або скролу вгору, коли зникає
+        };
+
+        const gadget = document.getElementById("photo-gadget");
+        const btn = document.getElementById("photo-gadget-btn");
+        const overlay = gadget.querySelector(".flash-overlay");
+
+        let flashTimer = null;
+        let hideTimer = null;
+        let lastScrollY = window.scrollY;
+        let scrollDelayTimer = null;
+
+        // Flash
+        function animateFlash() {
+          const strength = Math.max(1, cfg.flashStrength);
+          overlay.style.background = `radial-gradient(circle at center, 
+      rgba(255, 255, 240, ${0.95 * strength}), 
+      rgba(255, 255, 255, ${0.7 * strength}) 30%, 
+      transparent 70%)`;
+          gadget.classList.add("flash-on");
+
+          clearTimeout(flashTimer);
+          flashTimer = setTimeout(() => {
+            gadget.classList.remove("flash-on");
+          }, cfg.flashDuration * 0.9);
+        }
+
+        // Ripple
+        function createRipple(e) {
+          if (!cfg.enableRipple) return;
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        }
+
+        function showGadget() {
+          if (!gadget.classList.contains("visible")) {
+            gadget.classList.add("visible", "bounce-in");
+            gadget.setAttribute("aria-hidden", "false");
+            animateFlash();
+
+            // знімаємо bounce-клас після анімації
+            setTimeout(() => {
+              gadget.classList.remove("bounce-in");
+            }, 600);
+          }
+        }
+
+        function hideGadget() {
+          gadget.classList.remove("visible");
+          gadget.setAttribute("aria-hidden", "true");
+        }
+
+        // Відстеження скролу
+        window.addEventListener("scroll", () => {
+          const currentY = window.scrollY;
+          const isScrollingDown = currentY > lastScrollY;
+
+          clearTimeout(scrollDelayTimer);
+          clearTimeout(hideTimer);
+
+          if (isScrollingDown) {
+            scrollDelayTimer = setTimeout(showGadget, cfg.scrollShowDelay);
+          } else {
+            hideGadget();
+          }
+
+          // Ховаємо після зупинки
+          hideTimer = setTimeout(hideGadget, cfg.hideAfterStop);
+
+          lastScrollY = currentY <= 0 ? 0 : currentY;
+        });
+
+        // Клік
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          createRipple(e);
+          animateFlash();
+          setTimeout(() => {
+            window.location.href = cfg.clickUrl;
+          }, 300);
+        });
+
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      })();
     </script>
+
     <script src="./js/bookingModal.js"></script>
     <script src="./js/preloder.js"></script>
     <script src="./js/gamburger.js"></script>
