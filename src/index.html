@@ -42,8 +42,30 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
     />
+
     <!-- Style -->
     <link rel="stylesheet" href="css/style.min.css" />
+    <!-- <style>
+      .line {
+        overflow: hidden;
+      }
+
+      .word {
+        border: 1.5px dashed var(--color-surface-white);
+        background-image: var(--color-text-gradient);
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+        background-clip: text;
+        /* text-fill-color: transparent; */
+        height: 50px;
+        padding: 1rem;
+        margin: 0.25rem;
+        border-radius: 10px;
+      }
+    </style> -->
   </head>
 
   <body>
@@ -405,7 +427,10 @@
 
             <div class="slider-content">
               <h1 class="tittle hero__title">Моменти для спогадів</h1>
-              <p class="hero__descr" id="typewriter"></p>
+              <p class="hero__descr" id="typewriter" class="split"></p>
+              <!-- <p class="split">
+                #Створимо&#8205;Вашу&#8205;історію&#8205;кохання&#8205;GSAP
+              </p> -->
               <a href="#contact" class="button__hero"
                 ><span>Замовити фотосесію</span></a
               >
@@ -2673,153 +2698,7 @@
       </button>
     </div>
 
-    <!-- <script>
-      (function () {
-        // Enhanced configuration
-        const cfg = {
-          intervalMs: 10000, // Longer interval between appearances
-          visibleMs: 3000, // Longer visible duration
-          initialDelay: 1500, // Longer initial delay
-          pauseOnHover: true,
-          clickUrl: "tel:380981067972",
-          flashStrength: 2.8, // Stronger flash
-          flashDuration: 400, // Longer flash duration
-          enableRipple: true, // New ripple effect on click
-        };
-
-        const gadget = document.getElementById("photo-gadget");
-        const btn = document.getElementById("photo-gadget-btn");
-        const overlay = gadget.querySelector(".flash-overlay");
-
-        let paused = false;
-        let timer = null;
-        let flashTimer = null;
-
-        // Flash animation
-        function animateFlash() {
-          const strength = Math.max(1, cfg.flashStrength);
-          const dur = cfg.flashDuration;
-
-          // Overlay flash with better blending
-          overlay.style.background = `radial-gradient(circle at center, 
-        rgba(255, 255, 240, ${0.95 * strength}), 
-        rgba(255, 255, 255, ${0.7 * strength}) 30%, 
-        transparent 70%)`;
-          gadget.classList.add("flash-on");
-
-          clearTimeout(flashTimer);
-          flashTimer = setTimeout(() => {
-            gadget.classList.remove("flash-on");
-          }, dur * 0.9);
-        }
-
-        // Ripple effect for button click
-        function createRipple(e) {
-          if (!cfg.enableRipple) return;
-
-          const rect = btn.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-
-          const ripple = document.createElement("span");
-          ripple.classList.add("ripple");
-          ripple.style.left = `${x}px`;
-          ripple.style.top = `${y}px`;
-
-          btn.appendChild(ripple);
-
-          setTimeout(() => {
-            ripple.remove();
-          }, 600);
-        }
-
-        function showOnce() {
-          if (paused) return;
-
-          gadget.classList.add("visible");
-          gadget.setAttribute("aria-hidden", "false");
-
-          // Flash with better timing
-          setTimeout(() => {
-            animateFlash();
-          }, 500);
-
-          // Hide after duration
-          setTimeout(() => {
-            gadget.classList.remove("visible");
-            gadget.setAttribute("aria-hidden", "true");
-          }, cfg.visibleMs);
-        }
-
-        function startCycle() {
-          setTimeout(() => {
-            showOnce();
-            timer = setInterval(() => {
-              if (!paused) showOnce();
-            }, cfg.intervalMs);
-          }, cfg.initialDelay);
-        }
-
-        // Event listeners with better UX
-        if (cfg.pauseOnHover) {
-          gadget.addEventListener("mouseenter", () => {
-            paused = true;
-          });
-
-          gadget.addEventListener("mouseleave", () => {
-            paused = false;
-          });
-
-          btn.addEventListener("focus", () => {
-            paused = true;
-          });
-
-          btn.addEventListener("blur", () => {
-            paused = false;
-          });
-        }
-
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-          createRipple(e);
-
-          // More dramatic feedback on click
-          animateFlash();
-          setTimeout(() => {
-            window.location.href = cfg.clickUrl;
-          }, 300);
-        });
-
-        btn.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            btn.click();
-          }
-        });
-
-        // Start the animation cycle
-        startCycle();
-
-        // Public API
-        window.__photoGadget = {
-          showOnce,
-          pause() {
-            paused = true;
-          },
-          resume() {
-            paused = false;
-          },
-          destroy() {
-            clearInterval(timer);
-            clearTimeout(flashTimer);
-            gadget.remove();
-          },
-          updateConfig(newCfg) {
-            Object.assign(cfg, newCfg);
-          },
-        };
-      })();
-    </script> -->
+    <!-- 
     <script>
       (function () {
         // Конфіг
@@ -2940,8 +2819,114 @@
           }
         });
       })();
-    </script>
+    </script> -->
+    <script>
+      (function () {
+        const cfg = {
+          clickUrl: "tel:380981067972",
+          flashStrength: 2.8,
+          flashDuration: 400,
+          enableRipple: true,
+          stopScrollDelay: 300, // час без скролу перед показом гаджета
+          hideAfter: 2000, // час після показу гаджета, коли він ховається
+        };
 
+        const gadget = document.getElementById("photo-gadget");
+        const btn = document.getElementById("photo-gadget-btn");
+        const overlay = gadget.querySelector(".flash-overlay");
+
+        let flashTimer = null;
+        let scrollStopTimer = null;
+        let hideTimer = null;
+
+        // Flash
+        function animateFlash() {
+          const strength = Math.max(1, cfg.flashStrength);
+          overlay.style.background = `radial-gradient(circle at center, 
+      rgba(255, 255, 240, ${0.95 * strength}), 
+      rgba(255, 255, 255, ${0.7 * strength}) 30%, 
+      transparent 70%)`;
+          gadget.classList.add("flash-on");
+
+          clearTimeout(flashTimer);
+          flashTimer = setTimeout(() => {
+            gadget.classList.remove("flash-on");
+          }, cfg.flashDuration * 0.9);
+        }
+
+        // Ripple
+        function createRipple(e) {
+          if (!cfg.enableRipple) return;
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const ripple = document.createElement("span");
+          ripple.classList.add("ripple");
+          ripple.style.left = `${x}px`;
+          ripple.style.top = `${y}px`;
+          btn.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 600);
+        }
+
+        function showGadget() {
+          if (!gadget.classList.contains("visible")) {
+            gadget.classList.add("visible", "bounce-in");
+            gadget.setAttribute("aria-hidden", "false");
+            animateFlash();
+
+            setTimeout(() => {
+              gadget.classList.remove("bounce-in");
+            }, 600);
+
+            // ховаємо після певного часу
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hideGadget, cfg.hideAfter);
+          }
+        }
+
+        function hideGadget() {
+          gadget.classList.remove("visible");
+          gadget.setAttribute("aria-hidden", "true");
+        }
+
+        // Відстеження скролу
+        window.addEventListener("scroll", () => {
+          clearTimeout(scrollStopTimer);
+          hideGadget(); // ховаємо під час скролу
+
+          // показ після зупинки
+          scrollStopTimer = setTimeout(() => {
+            showGadget();
+          }, cfg.stopScrollDelay);
+        });
+
+        // Touch support
+        let touchStartY = 0;
+        window.addEventListener("touchstart", (e) => {
+          touchStartY = e.touches[0].clientY;
+        });
+        window.addEventListener("touchmove", () => {
+          hideGadget(); // ховаємо під час торкання
+        });
+
+        // Клік
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          createRipple(e);
+          animateFlash();
+          setTimeout(() => {
+            window.location.href = cfg.clickUrl;
+          }, 300);
+        });
+
+        btn.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            btn.click();
+          }
+        });
+      })();
+    </script>
     <script src="./js/bookingModal.js"></script>
     <script src="./js/preloder.js"></script>
     <script src="./js/gamburger.js"></script>
@@ -3045,6 +3030,34 @@
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+    <script>
+      gsap.registerPlugin(SplitText);
+
+      console.clear();
+
+      document.fonts.ready.then(() => {
+        gsap.set(".split", { opacity: 1 });
+
+        const split = SplitText.create(".split", {
+          type: "words",
+          wordsClass: "word++",
+          wordDelimiter: String.fromCharCode(8205),
+        });
+
+        gsap.from(split.words, {
+          y: -100,
+          opacity: 0,
+          rotation: "random(-80, 80)",
+          stagger: 0.1,
+          duration: 1,
+          ease: "back",
+        });
+      });
+    </script> -->
 
     <script>
       // Дані локацій
