@@ -3142,7 +3142,6 @@
     </script> -->
 
     <script>
-      // Дані локацій
       const locations = [
         {
           name: "Маріїнський парк",
@@ -3172,37 +3171,36 @@
             "https://upload.wikimedia.org/wikipedia/commons/7/7b/Andriyivskyy_Descent_Kiev.jpg",
             "https://picsum.photos/id/1041/600/400",
             "https://picsum.photos/id/1043/600/400",
-            "./img/video/f11.mp4",
+            "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
           ],
         },
         {
           name: "Play Studio",
           coords: [50.432820686434766, 30.394545008597547],
           category: "Studio",
-          photos: ["./img/video/f11.mp4"],
+          photos: [
+            "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
+          ],
         },
       ];
 
       const map = L.map("map").setView([50.4501, 30.5234], 12);
 
-      // Підключення шарів карти
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap",
       }).addTo(map);
 
-      // Кастомна іконка
       const cameraIcon = L.icon({
         iconUrl: "https://cdn-icons-png.flaticon.com/512/685/685655.png",
         iconSize: [32, 32],
       });
 
-      // Кластерна група
       let markers = L.markerClusterGroup();
       map.addLayer(markers);
 
-      // Функція додавання маркерів
       function loadMarkers(category) {
         markers.clearLayers();
+
         locations.forEach((loc) => {
           if (category === "all" || loc.category === category) {
             const marker = L.marker(loc.coords, { icon: cameraIcon });
@@ -3212,9 +3210,9 @@
             let popupContent = `<h3>${loc.name}</h3><p>Категорія: ${loc.category}</p>
         <div id="${galleryId}" class="lg-gallery">`;
 
-            // фото
+            // Фото тільки
             loc.photos.forEach((media) => {
-              const isVideo = /\.(mp4|webm|ogg)$/i.test(media);
+              const isVideo = /\/file\/.*\/preview/i.test(media); // Google Drive video check
               if (!isVideo) {
                 popupContent += `
             <a href="${media}" data-lg-size="600-400">
@@ -3222,17 +3220,16 @@
             </a>`;
               }
             });
-
             popupContent += `</div>`;
 
-            // відео окремо
+            // Відео тільки
             popupContent += `<div id="${videoId}" class="video-container">`;
             loc.photos.forEach((media) => {
-              const isVideo = /\.(mp4|webm|ogg)$/i.test(media);
+              const isVideo = /\/file\/.*\/preview/i.test(media);
               if (isVideo) {
                 popupContent += `
             <div class="video-thumb" data-video="${media}">
-              <video src="${media}" muted playsinline></video>
+              <div style="width:100%;height:100%;background:#000;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;">▶</div>
             </div>`;
               }
             });
@@ -3242,28 +3239,37 @@
             markers.addLayer(marker);
 
             marker.on("popupopen", () => {
-              // ініціалізація lightGallery тільки для фото (тільки <a>)
+              // LightGallery для фото
               lightGallery(document.getElementById(galleryId), {
-                selector: "a[href]", // ⚡ тільки посилання з фото
+                selector: "a[href]",
                 plugins: [lgZoom, lgThumbnail],
                 speed: 400,
               });
 
-              // обробка відео окремо
-              // обробка відео окремо
+              // Відео через iframe
               document
                 .querySelectorAll(`#${videoId} .video-thumb`)
                 .forEach((el) => {
                   el.addEventListener("click", (e) => {
-                    e.preventDefault(); // 🚫 забороняємо відкривати як лінк
-                    e.stopPropagation(); // 🚫 блокуємо клік для LightGallery
+                    e.preventDefault();
+                    e.stopPropagation();
 
                     const videoSrc = el.dataset.video;
                     const overlay = document.getElementById("video-overlay");
-                    const player = document.getElementById("video-player");
-                    player.src = videoSrc;
+                    overlay.innerHTML = `
+              <div class="phone-frame">
+                <div class="close-btn">&times;</div>
+                <iframe src="${videoSrc}" width="320" height="570" allow="autoplay; fullscreen" frameborder="0" allowfullscreen></iframe>
+              </div>
+            `;
                     overlay.classList.add("active");
-                    player.play();
+
+                    // Закриття
+                    const closeBtn = overlay.querySelector(".close-btn");
+                    closeBtn.addEventListener("click", closeVideo);
+                    overlay.addEventListener("click", (ev) => {
+                      if (ev.target === overlay) closeVideo();
+                    });
                   });
                 });
             });
@@ -3271,28 +3277,14 @@
         });
       }
 
-      // закриття відео
-      const overlay = document.getElementById("video-overlay");
-      const closeBtn = overlay.querySelector(".close-btn");
-      const player = document.getElementById("video-player");
-
-      closeBtn.addEventListener("click", closeVideo);
-      overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) {
-          closeVideo();
-        }
-      });
-
       function closeVideo() {
+        const overlay = document.getElementById("video-overlay");
         overlay.classList.remove("active");
-        player.pause();
-        player.src = "";
+        overlay.innerHTML = ""; // очищає iframe
       }
 
-      // Завантаження всіх маркерів
       loadMarkers("all");
 
-      // Фільтри
       document.querySelectorAll(".filter-btns button").forEach((btn) => {
         btn.addEventListener("click", () => {
           document
