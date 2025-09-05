@@ -3011,7 +3011,81 @@
         border-radius: 5px;
         cursor: pointer;
       }
+
+      /* overlay для відео */
+      #video-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px); /* 🌫 Розмиття */
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      #video-overlay.active {
+        display: flex;
+      }
+      #video-overlay .phone-frame {
+        width: 320px;
+        height: 570px;
+        border: 12px solid black;
+        border-radius: 25px;
+        background: #0000000e;
+        position: relative;
+        overflow: hidden;
+      }
+      #video-overlay video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #video-overlay .close-btn {
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        background: #fff;
+        color: #000;
+        font-size: 24px;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      /* стилі для іконки Play поверх превʼю */
+      .video-thumb {
+        position: relative;
+        width: 100px;
+        height: 177px;
+        border: 10px solid black;
+        border-radius: 20px;
+        background: #000;
+        cursor: pointer;
+        overflow: hidden;
+        display: inline-block;
+      }
+      .video-thumb video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .video-thumb::after {
+        content: "▶";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 32px;
+        color: white;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+        pointer-events: none;
+      }
     </style>
+
     <h2 style="text-align: center">Карта фотолокацій</h2>
     <div class="filter-btns">
       <button class="active" data-category="all">Усі</button>
@@ -3021,6 +3095,14 @@
     </div>
 
     <div id="map"></div>
+
+    <!-- overlay для відео -->
+    <div id="video-overlay">
+      <div class="phone-frame">
+        <div class="close-btn">&times;</div>
+        <video id="video-player" controls></video>
+      </div>
+    </div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -3090,7 +3172,14 @@
             "https://upload.wikimedia.org/wikipedia/commons/7/7b/Andriyivskyy_Descent_Kiev.jpg",
             "https://picsum.photos/id/1041/600/400",
             "https://picsum.photos/id/1043/600/400",
+            "./img/video/play.mp4",
           ],
+        },
+        {
+          name: "Play Studio",
+          coords: [50.432820686434766, 30.394545008597547],
+          category: "Studio",
+          photos: ["./img/video/play.mp4"],
         },
       ];
 
@@ -3118,11 +3207,34 @@
           if (category === "all" || loc.category === category) {
             const marker = L.marker(loc.coords, { icon: cameraIcon });
             const galleryId = `gallery-${loc.name.replace(/\s/g, "-")}`;
+            const videoId = `video-${loc.name.replace(/\s/g, "-")}`;
 
             let popupContent = `<h3>${loc.name}</h3><p>Категорія: ${loc.category}</p>
         <div id="${galleryId}" class="lg-gallery">`;
-            loc.photos.forEach((photo) => {
-              popupContent += `<a href="${photo}"><img src="${photo}" /></a>`;
+
+            // фото
+            loc.photos.forEach((media) => {
+              const isVideo = /\.(mp4|webm|ogg)$/i.test(media);
+              if (!isVideo) {
+                popupContent += `
+            <a href="${media}" data-lg-size="600-400">
+              <img src="${media}" alt="photo" />
+            </a>`;
+              }
+            });
+
+            popupContent += `</div>`;
+
+            // відео окремо
+            popupContent += `<div id="${videoId}" class="video-container">`;
+            loc.photos.forEach((media) => {
+              const isVideo = /\.(mp4|webm|ogg)$/i.test(media);
+              if (isVideo) {
+                popupContent += `
+            <div class="video-thumb" data-video="${media}">
+              <video src="${media}" muted playsinline></video>
+            </div>`;
+              }
             });
             popupContent += `</div>`;
 
@@ -3130,13 +3242,51 @@
             markers.addLayer(marker);
 
             marker.on("popupopen", () => {
+              // ініціалізація lightGallery тільки для фото (тільки <a>)
               lightGallery(document.getElementById(galleryId), {
+                selector: "a[href]", // ⚡ тільки посилання з фото
                 plugins: [lgZoom, lgThumbnail],
                 speed: 400,
               });
+
+              // обробка відео окремо
+              // обробка відео окремо
+              document
+                .querySelectorAll(`#${videoId} .video-thumb`)
+                .forEach((el) => {
+                  el.addEventListener("click", (e) => {
+                    e.preventDefault(); // 🚫 забороняємо відкривати як лінк
+                    e.stopPropagation(); // 🚫 блокуємо клік для LightGallery
+
+                    const videoSrc = el.dataset.video;
+                    const overlay = document.getElementById("video-overlay");
+                    const player = document.getElementById("video-player");
+                    player.src = videoSrc;
+                    overlay.classList.add("active");
+                    player.play();
+                  });
+                });
             });
           }
         });
+      }
+
+      // закриття відео
+      const overlay = document.getElementById("video-overlay");
+      const closeBtn = overlay.querySelector(".close-btn");
+      const player = document.getElementById("video-player");
+
+      closeBtn.addEventListener("click", closeVideo);
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) {
+          closeVideo();
+        }
+      });
+
+      function closeVideo() {
+        overlay.classList.remove("active");
+        player.pause();
+        player.src = "";
       }
 
       // Завантаження всіх маркерів
