@@ -93,3 +93,13 @@ document.addEventListener("DOMContentLoaded", () => {
     widget.classList.remove("center-start");
   }, 8000); // затримка, щоб браузер застосував клас
 });
+
+// Фолбек (коли Viber не встановлений)
+
+document.getElementById("viber-link").addEventListener("click", function (e) {
+  // коли користувач на ПК/браузері без Viber — можна перенаправити на сторінку профілю/інструкцію
+  // тут простий варіант: відкривати сторінку chats.viber.com як фолбек
+  setTimeout(function () {
+    window.location = "https://chats.viber.com/"; // фолбек
+  }, 500);
+});
