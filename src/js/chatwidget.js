@@ -55,16 +55,16 @@ function openMessenger(messenger) {
   let url = "";
   switch (messenger) {
     case "viber":
-      url = "viber://chat?number=+380XXXXXXXXX";
+      url = "viber://chat?number=+380981067972";
       break;
     case "telegram":
-      url = "https://t.me/your_telegram_username";
+      url = "https://t.me/olesichka_he_nko";
       break;
     case "whatsapp":
-      url = "https://wa.me/380XXXXXXXXX";
+      url = "https://wa.me/380981067972";
       break;
     case "email":
-      url = "mailto:your.email@example.com";
+      url = "mailto:mikeduchenko@gmail.com";
       break;
   }
 
