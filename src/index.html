@@ -427,7 +427,9 @@
 
             <div class="slider-content">
               <h1 class="tittle hero__title">Моменти для спогадів</h1>
-              <p class="hero__descr" id="typewriter" class="split"></p>
+              <p class="hero__descr" id="typewriter" class="split">
+                Створимо Вашу історію кохання
+              </p>
               <!-- <p class="split">
                 #Створимо&#8205;Вашу&#8205;історію&#8205;кохання&#8205;GSAP
               </p> -->
@@ -443,7 +445,7 @@
             <button class="nav__hero right" id="next">&#10095;</button>
           </div>
         </div>
-        <script>
+        <!-- <script>
           document.addEventListener("DOMContentLoaded", function () {
             // Typed.js без видалення тексту
             new Typed("#typewriter", {
@@ -456,7 +458,7 @@
               // cursorChar: "|",
             });
           });
-        </script>
+        </script> -->
       </section>
 
       <section class="about" id="about">
@@ -2502,6 +2504,10 @@
       </div>
       <button class="chat-button" id="chatButton">
         <span class="icon-gift"></span>
+        <!--  <img
+          src="./logo/contact_1.png"
+          alt="foto_viget"
+        /> -->
       </button>
     </div>
     <!-- Page-up Button  -->
@@ -2547,7 +2553,7 @@
     </script>
 
     <style>
-      /* --- gadget styles --- */
+      /* --- gadget styles ---
       #photo-gadget {
         position: fixed;
         left: 0;
@@ -2558,6 +2564,31 @@
         pointer-events: auto;
         transition: transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1.2),
           opacity 300ms ease;
+        will-change: transform, opacity;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        border: none;
+      }
+
+      #photo-gadget.visible {
+        transform: translateY(-50%) translateX(0);
+        opacity: 1;
+      } */
+      /* --- плавна поява --- */
+      #photo-gadget {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%) translateX(-120%);
+        opacity: 0;
+        z-index: 9000;
+        pointer-events: auto;
+        transition: transform 600ms cubic-bezier(0.2, 0.9, 0.2, 1.2),
+          opacity 600ms ease; /* довший час для плавності */
         will-change: transform, opacity;
         display: flex;
         flex-direction: column;
@@ -2700,18 +2731,31 @@
         <div class="flash-overlay" aria-hidden="true"></div>
       </button>
     </div>
-
-    <!-- 
     <script>
+      // Відстеження скролу (тільки після другого разу)
+      let scrollCount = 0;
+
+      window.addEventListener("scroll", () => {
+        scrollCount++;
+
+        clearTimeout(scrollStopTimer);
+        hideGadget();
+
+        scrollStopTimer = setTimeout(() => {
+          if (scrollCount >= 2) {
+            // показ тільки після другого скролу
+            showGadget();
+          }
+        }, cfg.stopScrollDelay);
+      });
       (function () {
-        // Конфіг
         const cfg = {
           clickUrl: "tel:380981067972",
           flashStrength: 2.8,
           flashDuration: 400,
           enableRipple: true,
-          scrollShowDelay: 150, // затримка перед показом після початку скролу вниз
-          hideAfterStop: 500, // час після зупинки або скролу вгору, коли зникає
+          stopScrollDelay: 300, // час без скролу перед показом гаджета
+          hideAfter: 2500, // трохи довше
         };
 
         const gadget = document.getElementById("photo-gadget");
@@ -2719,32 +2763,16 @@
         const overlay = gadget.querySelector(".flash-overlay");
 
         let flashTimer = null;
+        let scrollStopTimer = null;
         let hideTimer = null;
-        let lastScrollY = window.scrollY;
-        let scrollDelayTimer = null;
-
-        const currentY =
-          window.pageYOffset || document.documentElement.scrollTop;
-        let touchStartY = 0;
-        window.addEventListener("touchstart", (e) => {
-          touchStartY = e.touches[0].clientY;
-        });
-        window.addEventListener("touchmove", (e) => {
-          const deltaY = e.touches[0].clientY - touchStartY;
-          if (deltaY < 0) {
-            showGadget(); // вниз
-          } else {
-            hideGadget(); // вгору
-          }
-        });
 
         // Flash
         function animateFlash() {
           const strength = Math.max(1, cfg.flashStrength);
           overlay.style.background = `radial-gradient(circle at center, 
-      rgba(255, 255, 240, ${0.95 * strength}), 
-      rgba(255, 255, 255, ${0.7 * strength}) 30%, 
-      transparent 70%)`;
+    rgba(255, 255, 240, ${0.95 * strength}), 
+    rgba(255, 255, 255, ${0.7 * strength}) 30%, 
+    transparent 70%)`;
           gadget.classList.add("flash-on");
 
           clearTimeout(flashTimer);
@@ -2768,15 +2796,19 @@
         }
 
         function showGadget() {
+          // якщо відкрите якесь модальне вікно — не показуємо
+          if (
+            document.querySelector(".modal.open, .popup.open, .lightbox.open")
+          )
+            return;
+
           if (!gadget.classList.contains("visible")) {
-            gadget.classList.add("visible", "bounce-in");
+            gadget.classList.add("visible");
             gadget.setAttribute("aria-hidden", "false");
             animateFlash();
 
-            // знімаємо bounce-клас після анімації
-            setTimeout(() => {
-              gadget.classList.remove("bounce-in");
-            }, 600);
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(hideGadget, cfg.hideAfter);
           }
         }
 
@@ -2785,24 +2817,27 @@
           gadget.setAttribute("aria-hidden", "true");
         }
 
-        // Відстеження скролу
+        // Відстеження скролу (НЕ показуємо одразу при завантаженні)
+        let firstScroll = false;
         window.addEventListener("scroll", () => {
-          const currentY = window.scrollY;
-          const isScrollingDown = currentY > lastScrollY;
-
-          clearTimeout(scrollDelayTimer);
-          clearTimeout(hideTimer);
-
-          if (isScrollingDown) {
-            scrollDelayTimer = setTimeout(showGadget, cfg.scrollShowDelay);
-          } else {
-            hideGadget();
+          if (!firstScroll) {
+            firstScroll = true; // тільки після першого скролу дозволяємо показ
           }
+          clearTimeout(scrollStopTimer);
+          hideGadget();
 
-          // Ховаємо після зупинки
-          hideTimer = setTimeout(hideGadget, cfg.hideAfterStop);
+          scrollStopTimer = setTimeout(() => {
+            if (firstScroll) showGadget();
+          }, cfg.stopScrollDelay);
+        });
 
-          lastScrollY = currentY <= 0 ? 0 : currentY;
+        // Touch support
+        let touchStartY = 0;
+        window.addEventListener("touchstart", (e) => {
+          touchStartY = e.touches[0].clientY;
+        });
+        window.addEventListener("touchmove", () => {
+          hideGadget();
         });
 
         // Клік
@@ -2822,8 +2857,8 @@
           }
         });
       })();
-    </script> -->
-    <script>
+    </script>
+    <!-- <script>
       (function () {
         const cfg = {
           clickUrl: "tel:380981067972",
@@ -2929,7 +2964,7 @@
           }
         });
       })();
-    </script>
+    </script> -->
     <script src="./js/bookingModal.js"></script>
     <script src="./js/preloder.js"></script>
     <script src="./js/gamburger.js"></script>
