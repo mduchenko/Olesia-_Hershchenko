@@ -80,7 +80,7 @@
   font-weight: bold;
   font-size: 1.2em;
   transition: background 0.3s;
-  display: inline-block;
+  // display: inline-block;
   pointer-events: auto;
   user-select: auto;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
@@ -158,4 +158,12 @@
   white-space: nowrap;
   overflow: hidden;
   min-height: 50px;
+}
+.button__hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 45px;
+  }
 }
