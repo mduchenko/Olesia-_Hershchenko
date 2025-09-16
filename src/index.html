@@ -3005,10 +3005,7 @@
       href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css"
     />
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
+    <!-- <style>
       #map {
         height: 80vh;
         margin-bottom: 10px;
@@ -3108,9 +3105,134 @@
         text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
         pointer-events: none;
       }
+    </style> -->
+    <style>
+      #map {
+        height: 100vh;
+      }
+
+      /* #map {
+        height: 80vh;
+        margin-bottom: 10px;
+      } */
+      .filter-btns {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .filter-btns button {
+        margin: 0 5px;
+        padding: 6px 12px;
+        cursor: pointer;
+        border: none;
+        background: #eee;
+        border-radius: 5px;
+      }
+      .filter-btns button.active {
+        background: #007bff;
+        color: #fff;
+      }
+
+      /* .filter-btns {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        display: flex;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 6px 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      } */
+      /* .filter-btns button {
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        background: #eee;
+      }
+      .filter-btns button.active {
+        background: #007bff;
+        color: white;
+      } */
+
+      .lg-gallery img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin: 3px;
+      }
+
+      /* Overlay для відео */
+      #video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+      }
+      #video-overlay.active {
+        display: flex;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 32px;
+        color: white;
+        cursor: pointer;
+        z-index: 2100;
+      }
+
+      /* 📱 Мобільний режим (fullscreen) */
+      .phone-frame-mobile {
+        width: 100%;
+        max-width: 480px;
+        height: 80vh;
+        background: black;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      /* 💻 Десктоп: показуємо у фреймі телефону (9:16) */
+      .phone-frame-desktop {
+        position: relative;
+        width: 360px;
+        height: 640px; /* 9:16 */
+        border: 12px solid #333;
+        border-radius: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        background: black;
+        overflow: hidden;
+      }
+      .phone-frame-desktop::before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 8px;
+        background: #555;
+        border-radius: 4px;
+      }
+      .phone-frame-desktop iframe,
+      .phone-frame-mobile iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
     </style>
 
-    <h2 style="text-align: center">Карта фотолокацій</h2>
+    <!-- <h2 style="text-align: center">Карта фотолокацій</h2>
     <div class="filter-btns">
       <button class="active" data-category="all">Усі</button>
       <button data-category="Love Story">Love Story</button>
@@ -3118,15 +3240,25 @@
       <button data-category="Fashion">Fashion</button>
     </div>
 
-    <div id="map"></div>
+    <div id="map"></div> -->
 
     <!-- overlay для відео -->
-    <div id="video-overlay">
+    <!-- <div id="video-overlay">
       <div class="phone-frame">
         <div class="close-btn">&times;</div>
         <video id="video-player" controls></video>
       </div>
+    </div> -->
+    <h2 style="text-align: center">Карта фотолокацій</h2>
+    <div class="filter-btns">
+      <button class="active" data-category="all">Усі</button>
+      <button data-category="Studio">Студії</button>
+      <button data-category="Park">Парки</button>
+      <button data-category="Street">Street Style</button>
     </div>
+
+    <div id="map"></div>
+    <div id="video-overlay"><div class="close-btn">&times;</div></div>
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -3137,35 +3269,501 @@
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
     <script>
-      gsap.registerPlugin(SplitText);
+      // Карта
+      const map = L.map("map").setView([50.45, 30.52], 12);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
 
-      console.clear();
+      const markers = L.layerGroup().addTo(map);
 
-      document.fonts.ready.then(() => {
-        gsap.set(".split", { opacity: 1 });
+      // Іконки для різних категорій
+      const icons = {
+        Studio: L.icon({
+          iconUrl: "https://cdn-icons-png.flaticon.com/512/2920/2920237.png", // камера
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -30],
+        }),
+        Park: L.icon({
+          iconUrl: "https://cdn-icons-png.flaticon.com/512/427/427735.png", // дерево
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -30],
+        }),
+        Street: L.icon({
+          iconUrl: "https://cdn-icons-png.flaticon.com/512/1077/1077114.png", // людина
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -30],
+        }),
+      };
 
-        const split = SplitText.create(".split", {
-          type: "words",
-          wordsClass: "word++",
-          wordDelimiter: String.fromCharCode(8205),
+      // База локацій (тепер фото і відео можна змішувати)
+      const locations = [
+        {
+          name: "Play Studio",
+          coords: [50.4328, 30.3945],
+          category: "Studio",
+          url: "https://playstudio.com.ua",
+          media: [
+            { type: "photo", src: "https://picsum.photos/id/1033/600/400" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1MrtY7jUu9mWVpWcF3bZ9dGehPVd8vHJc/preview",
+            },
+          ],
+        },
+        // {
+        //   name: "Маріїнський парк",
+        //   coords: [50.4452, 30.5362],
+        //   category: "Love Story",
+        //   photos: [
+        //     "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mariinsky_Park_Kyiv.jpg",
+        //     "https://picsum.photos/id/1018/600/400",
+        //     "https://picsum.photos/id/1015/600/400",
+        //   ],
+        // },
+        // {
+        //   name: "Поділ",
+        //   coords: [50.4676, 30.514],
+        //   category: "Сімейна",
+        //   photos: [
+        //     "https://upload.wikimedia.org/wikipedia/commons/2/23/Podil_Kyiv.jpg",
+        //     "https://picsum.photos/id/1025/600/400",
+        //     "https://picsum.photos/id/1035/600/400",
+        //   ],
+        // },
+        // {
+        //   name: "Андріївський узвіз",
+        //   coords: [50.4593, 30.5166],
+        //   category: "Fashion",
+        //   photos: [
+        //     "https://upload.wikimedia.org/wikipedia/commons/7/7b/Andriyivskyy_Descent_Kiev.jpg",
+        //     "https://picsum.photos/id/1041/600/400",
+        //     "https://picsum.photos/id/1043/600/400",
+        //     "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
+        //   ],
+        // },
+        {
+          name: "Play Studio",
+          coords: [50.432820686434766, 30.394545008597547],
+          category: "Studio",
+          url: "https://playstudio.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
+            },
+          ],
+        },
+        {
+          name: "Inlight Studio",
+          coords: [50.39738467724631, 30.490896613096837],
+          category: "Studio",
+          url: "https://inlight.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1GPd-tEeWF9fbU61sY9BGRHhu-G1Jj9nu/preview",
+            },
+          ],
+        },
+        {
+          name: "Lagom Studio",
+          coords: [50.48692926672514, 30.490476184654824],
+          category: "Studio",
+          url: "https://lagomphotostudio.com",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1WZVOAPNtHBUDhSWjhiPFbDoUEz9BFj7R/preview",
+            },
+          ],
+        },
+        {
+          name: "Gradient Studio",
+          coords: [50.49606608665804, 30.519869271163707],
+          category: "Studio",
+          url: "https://www.instagram.com/gradient_photostudio.kyiv",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1gZMy0NIojJjsr42Lepr4wib6p4CvBr4u/preview",
+            },
+          ],
+        },
+        {
+          name: "Vision Studio",
+          coords: [50.41943149253267, 30.401739122089797],
+          category: "Studio",
+          url: "https://visionstudio.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1pZUked_GiatZuCpPcNKOJxmTTvDVXvcx/preview",
+            },
+          ],
+        },
+        {
+          name: "Universal Studio",
+          coords: [50.488831117540315, 30.49154562649851],
+          category: "Studio",
+          url: "https://www.unvrsl.studio",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1JGQOcPxt6YAApD58UIBrG9kJ8qoRL9TY/preview",
+            },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1XxG36Hr81pPCIumJyEQQfZkclhlkl_kd/preview",
+            },
+          ],
+        },
+        {
+          name: "Space11 Studio",
+          coords: [50.4025170176954, 30.510193755330206],
+          category: "Studio",
+          url: "https://space11.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1lARwR9tus-WKv4aeiHCVigED5aD2uA7k/preview",
+            },
+          ],
+        },
+        {
+          name: "Red Cucumber Studio",
+          coords: [50.47397967811787, 30.4974169706774],
+          category: "Studio",
+          url: "https://redcucumber.kiev.ua/en",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1RyX3nyLfwEih4e2DNpHWmKYHBQJgEAnZ/preview",
+            },
+          ],
+        },
+        {
+          name: "R18 Studio",
+          coords: [50.38965161819639, 30.497468982313976],
+          category: "Studio",
+          url: "https://r18studio.com/",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1nMq3ikacEx3fisvqXoHJvLuKoqkFHWMb/preview",
+            },
+          ],
+        },
+        {
+          name: "Pandora Studio",
+          coords: [50.37774060748647, 30.48573541329078],
+          category: "Studio",
+          url: "https://pandora.pictures",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1z0lRUR-2SO5wH8RHU6sZ6rgpaGuEdq2H/preview",
+            },
+          ],
+        },
+        {
+          name: "P.Five Studio",
+          coords: [50.44145446121316, 30.631673126496153],
+          category: "Studio",
+          url: "https://pfive.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1qtuiC4K2yHdT1L7dIs5CCV6iVA3ZmndK/preview",
+            },
+          ],
+        },
+        {
+          name: "Opera7 Studio",
+          coords: [50.44679724501563, 30.51056272464499],
+          category: "Studio",
+          url: "https://opera7.studio",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1qR4twVFDBrlbZuzp8VuFlLf85JrpEwCt/preview",
+            },
+          ],
+        },
+        {
+          name: "Mnemonica Studio",
+          coords: [50.40448788782479, 30.55006032649438],
+          category: "Studio",
+          url: "https://www.mnemonica.kyiv.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1rljD6FJEBVqikN6yEXXmSbA4ENz-LVj5/preview",
+            },
+          ],
+        },
+        {
+          name: "LYM Studio",
+          coords: [50.451599930454485, 30.614430484168526],
+          category: "Studio",
+          url: "https://lymphotostudio.com",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1basRCNd9loyvO9lO-nw-leh0uv3gGElv/preview",
+            },
+          ],
+        },
+        {
+          name: "LOFT31 Studio",
+          coords: [50.46658786038079, 30.500124293958667],
+          category: "Studio",
+          url: "https://loftphotostudio.com",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1xVlcc94ZK9lw8RU1TmS3hi0f9sCTHfbE/preview",
+            },
+          ],
+        },
+        {
+          name: "KULT Studio",
+          coords: [50.486694201737436, 30.491729888109003],
+          category: "Studio",
+          url: "https://kultstudio.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1joqkWI0mMmMzVcHBihruGGqE5QyecNuY/preview",
+            },
+          ],
+        },
+        {
+          name: "Icon Studio",
+          coords: [50.45969608725153, 30.446767141840613],
+          category: "Studio",
+          url: "http://icon-kiev.com",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1yfGWfYr_deleojaemvAynfNpckj57Fw2/preview",
+            },
+          ],
+        },
+        {
+          name: "F11 Studio",
+          coords: [50.44952222691406, 30.507927699512],
+          category: "Studio",
+          url: "https://f11-studio.com",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/18Oe0cKY1AStEvW4Cc27BhNtd6gwp4KxA/preview",
+            },
+          ],
+        },
+        {
+          name: "ADERStudio",
+          coords: [50.417366734223144, 30.52475246882317],
+          category: "Studio",
+          url: "https://aderstudio.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1LecH1IrXJTJcOoCchKqErhGhh3r6Oi1F/preview",
+            },
+          ],
+        },
+        {
+          name: "193 Studio",
+          coords: [50.39192671130444, 30.608348026493765],
+          category: "Studio",
+          url: "https://193photostudio.com.ua",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1E1m6-3d-uJfqFkEZmp-u7pbA6jV8PhGe/preview",
+            },
+          ],
+        },
+        {
+          name: "7sky Studio",
+          coords: [50.44417274776662, 30.603719911152623],
+          category: "Studio",
+          url: "https://7sky.space",
+          media: [
+            { type: "photo", src: "" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1KU6m3z8oB59v1R2SgN562c_83m3K8N-f/preview",
+            },
+          ],
+        },
+      ];
+      // const locations = [
+      //   {
+      //     name: "Маріїнський парк",
+      //     coords: [50.4452, 30.5362],
+      //     category: "Park",
+      //     url: "https://kyivcity.gov.ua",
+      //     media: [
+      //       {
+      //         type: "photo",
+      //         src: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mariinsky_Park_Kyiv.jpg",
+      //       },
+      //       { type: "photo", src: "https://picsum.photos/id/1018/600/400" },
+      //       {
+      //         type: "video",
+      //         src: "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     name: "Поділ",
+      //     coords: [50.4676, 30.514],
+      //     category: "Street",
+      //     url: "https://visitkyiv.city",
+      //     media: [
+      //       {
+      //         type: "photo",
+      //         src: "https://upload.wikimedia.org/wikipedia/commons/2/23/Podil_Kyiv.jpg",
+      //       },
+      //       {
+      //         type: "video",
+      //         src: "https://drive.google.com/file/d/1dO6mV2Y8v0O3hHxzSD6qC5PV7jsXcYXJ/preview",
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     name: "Play Studio",
+      //     coords: [50.4328, 30.3945],
+      //     category: "Studio",
+      //     url: "https://playstudio.com.ua",
+      //     media: [
+      //       { type: "photo", src: "https://picsum.photos/id/1033/600/400" },
+      //       {
+      //         type: "video",
+      //         src: "https://drive.google.com/file/d/1MrtY7jUu9mWVpWcF3bZ9dGehPVd8vHJc/preview",
+      //       },
+      //     ],
+      //   },
+      // ];
+
+      function loadMarkers(category) {
+        markers.clearLayers();
+        locations.forEach((loc) => {
+          if (category === "all" || loc.category === category) {
+            const marker = L.marker(loc.coords, { icon: icons[loc.category] });
+            const galleryId = `gallery-${loc.name.replace(/\s/g, "-")}`;
+            const videoId = `video-${loc.name.replace(/\s/g, "-")}`;
+
+            let popupContent = `
+            <h3>${loc.name}</h3>
+            <p>Категорія: ${loc.category}</p>
+            <a href="${loc.url}" target="_blank" style="display:inline-block;margin-bottom:6px;padding:6px 12px;background:#007bff;color:#fff;border-radius:6px;text-decoration:none;">🌐 Перейти на сайт</a>
+            <div id="${galleryId}" class="lg-gallery">`;
+
+            // Фото
+            loc.media.forEach((m) => {
+              if (m.type === "photo") {
+                popupContent += `<a href="${m.src}" data-lg-size="600-400"><img src="${m.src}" alt="photo"/></a>`;
+              }
+            });
+            popupContent += `</div><div id="${videoId}" class="video-container">`;
+
+            // Відео
+            loc.media.forEach((m) => {
+              if (m.type === "video") {
+                popupContent += `<button class="video-thumb" data-video="${m.src}" style="padding:6px 12px;background:#28a745;color:#fff;border:none;border-radius:6px;cursor:pointer;">🎬 Переглянути відео</button>`;
+              }
+            });
+
+            popupContent += `</div>`;
+            marker.bindPopup(popupContent);
+            markers.addLayer(marker);
+
+            marker.on("popupopen", () => {
+              lightGallery(document.getElementById(galleryId), {
+                selector: "a[href]",
+                plugins: [lgZoom, lgThumbnail],
+                speed: 400,
+              });
+
+              document
+                .querySelectorAll(`#${videoId} .video-thumb`)
+                .forEach((el) => {
+                  el.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    openVideo(el.dataset.video);
+                  });
+                });
+            });
+          }
         });
+      }
 
-        gsap.from(split.words, {
-          y: -100,
-          opacity: 0,
-          rotation: "random(-80, 80)",
-          stagger: 0.1,
-          duration: 1,
-          ease: "back",
+      function openVideo(src) {
+        const overlay = document.getElementById("video-overlay");
+        overlay.innerHTML = `<div class="close-btn">&times;</div>`;
+        if (window.innerWidth < 768) {
+          overlay.innerHTML += `<div class="phone-frame-mobile"><iframe src="${src}" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
+        } else {
+          overlay.innerHTML += `<div class="phone-frame-desktop"><iframe src="${src}" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`;
+        }
+        overlay.classList.add("active");
+        overlay
+          .querySelector(".close-btn")
+          .addEventListener("click", closeVideo);
+        overlay.addEventListener("click", (ev) => {
+          if (ev.target === overlay) closeVideo();
+        });
+      }
+
+      function closeVideo() {
+        const overlay = document.getElementById("video-overlay");
+        overlay.classList.remove("active");
+        overlay.innerHTML = `<div class="close-btn">&times;</div>`;
+      }
+
+      // Фільтри
+      document.querySelectorAll(".filter-btns button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btns button")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          loadMarkers(btn.dataset.category);
         });
       });
-    </script> -->
 
-    <script>
+      loadMarkers("all");
+    </script>
+    <!-- <script>
       const locations = [
         {
           name: "Маріїнський парк",
@@ -3479,6 +4077,6 @@
           loadMarkers(btn.dataset.category);
         });
       });
-    </script>
+    </script> -->
   </body>
 </html>
