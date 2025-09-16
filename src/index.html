@@ -3106,15 +3106,12 @@
         pointer-events: none;
       }
     </style> -->
-    <style>
+    <!-- <style>
       #map {
         height: 100vh;
       }
 
-      /* #map {
-        height: 80vh;
-        margin-bottom: 10px;
-      } */
+      
       .filter-btns {
         text-align: center;
         margin-bottom: 10px;
@@ -3132,30 +3129,7 @@
         color: #fff;
       }
 
-      /* .filter-btns {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-        display: flex;
-        gap: 8px;
-        background: rgba(255, 255, 255, 0.9);
-        padding: 6px 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      } */
-      /* .filter-btns button {
-        border: none;
-        padding: 6px 12px;
-        border-radius: 6px;
-        cursor: pointer;
-        background: #eee;
-      }
-      .filter-btns button.active {
-        background: #007bff;
-        color: white;
-      } */
+      
 
       .lg-gallery img {
         width: 60px;
@@ -3230,25 +3204,114 @@
         height: 100%;
         border: none;
       }
+    </style> -->
+    <style>
+      #map {
+        height: 80vh;
+      }
+
+      .filter-btns {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .filter-btns button {
+        margin: 0 5px;
+        padding: 6px 12px;
+        cursor: pointer;
+        border: none;
+        background: #eee;
+        border-radius: 5px;
+      }
+      .filter-btns button.active {
+        background: #007bff;
+        color: #fff;
+      }
+
+      /* Галерея всередині картки */
+      .lg-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 140px; /* обмежує висоту картки */
+        overflow: hidden;
+        margin-top: 6px;
+      }
+      .lg-gallery img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin: 3px;
+      }
+
+      /* Overlay для відео */
+      #video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        overflow-y: auto; /* додаємо скрол при потребі */
+        padding: 20px;
+      }
+      #video-overlay.active {
+        display: flex;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 32px;
+        color: white;
+        cursor: pointer;
+        z-index: 2100;
+      }
+
+      /* Мобільний фрейм */
+      .phone-frame-mobile {
+        width: 100%;
+        max-width: 480px;
+        height: 80vh;
+        background: black;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      /* Десктоп фрейм */
+      .phone-frame-desktop {
+        position: relative;
+        width: 360px;
+        height: 640px;
+        border: 12px solid #333;
+        border-radius: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        background: black;
+        overflow: hidden;
+      }
+      .phone-frame-desktop::before {
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 8px;
+        background: #555;
+        border-radius: 4px;
+      }
+      .phone-frame-desktop iframe,
+      .phone-frame-mobile iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
     </style>
 
-    <!-- <h2 style="text-align: center">Карта фотолокацій</h2>
-    <div class="filter-btns">
-      <button class="active" data-category="all">Усі</button>
-      <button data-category="Love Story">Love Story</button>
-      <button data-category="Сімейна">Сімейна</button>
-      <button data-category="Fashion">Fashion</button>
-    </div>
-
-    <div id="map"></div> -->
-
-    <!-- overlay для відео -->
-    <!-- <div id="video-overlay">
-      <div class="phone-frame">
-        <div class="close-btn">&times;</div>
-        <video id="video-player" controls></video>
-      </div>
-    </div> -->
     <h2 style="text-align: center">Карта фотолокацій</h2>
     <div class="filter-btns">
       <button class="active" data-category="all">Усі</button>
@@ -3417,7 +3480,12 @@
           category: "Studio",
           url: "https://www.unvrsl.studio",
           media: [
-            { type: "photo", src: "" },
+            { type: "photo", src: "https://picsum.photos/id/1015/600/400" },
+            { type: "photo", src: "https://picsum.photos/id/1015/600/400" },
+            { type: "photo", src: "https://picsum.photos/id/1015/600/400" },
+            { type: "photo", src: "https://picsum.photos/id/1015/600/400" },
+            { type: "photo", src: "https://picsum.photos/id/1015/600/400" },
+            { type: "photo", src: "https://picsum.photos/id/1015/600/400" },
             {
               type: "video",
               src: "https://drive.google.com/file/d/1JGQOcPxt6YAApD58UIBrG9kJ8qoRL9TY/preview",
