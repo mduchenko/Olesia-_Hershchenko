@@ -11,15 +11,51 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
     gallery2: [
       {
-        src: "https://source.unsplash.com/random/800x600/?fashion,studio,1",
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__1_ets1j5.webp",
         alt: "Фешн зйомка 1",
       },
       {
-        src: "https://source.unsplash.com/random/800x600/?fashion,studio,2",
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__3_xqmrl6.webp",
         alt: "Фешн зйомка 2",
       },
       {
-        src: "https://source.unsplash.com/random/800x600/?fashion,studio,3",
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__4_nuaan3.webp",
+        alt: "Фешн зйомка 3",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__2_r1muin.webp",
+        alt: "Фешн зйомка 3",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__1_ets1j5.webp",
+        alt: "Фешн зйомка 1",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__3_xqmrl6.webp",
+        alt: "Фешн зйомка 2",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__4_nuaan3.webp",
+        alt: "Фешн зйомка 3",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__2_r1muin.webp",
+        alt: "Фешн зйомка 3",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__1_ets1j5.webp",
+        alt: "Фешн зйомка 1",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__3_xqmrl6.webp",
+        alt: "Фешн зйомка 2",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__4_nuaan3.webp",
+        alt: "Фешн зйомка 3",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__2_r1muin.webp",
         alt: "Фешн зйомка 3",
       },
     ],
