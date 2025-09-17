@@ -3339,7 +3339,10 @@
         attribution: "© OpenStreetMap",
       }).addTo(map);
 
-      const markers = L.layerGroup().addTo(map);
+      // const markers = L.layerGroup().addTo(map);
+
+      // Заміна: markers = L.layerGroup().addTo(map);
+      const markers = L.markerClusterGroup().addTo(map);
 
       // Іконки для різних категорій
       const icons = {
@@ -3741,6 +3744,61 @@
       //   },
       // ];
 
+      // function loadMarkers(category) {
+      //   markers.clearLayers();
+      //   locations.forEach((loc) => {
+      //     if (category === "all" || loc.category === category) {
+      //       const marker = L.marker(loc.coords, { icon: icons[loc.category] });
+      //       const galleryId = `gallery-${loc.name.replace(/\s/g, "-")}`;
+      //       const videoId = `video-${loc.name.replace(/\s/g, "-")}`;
+
+      //       let popupContent = `
+      //       <h3>${loc.name}</h3>
+      //       <p>Категорія: ${loc.category}</p>
+      //       <a href="${loc.url}" target="_blank" style="display:inline-block;margin-bottom:6px;padding:6px 12px;background:#007bff;color:#fff;border-radius:6px;text-decoration:none;">🌐 Перейти на сайт</a>
+      //       <div id="${galleryId}" class="lg-gallery">`;
+
+      //       // Фото
+      //       loc.media.forEach((m) => {
+      //         if (m.type === "photo") {
+      //           popupContent += `<a href="${m.src}" data-lg-size="600-400"><img src="${m.src}" alt="photo"/></a>`;
+      //         }
+      //       });
+      //       popupContent += `</div><div id="${videoId}" class="video-container">`;
+
+      //       // Відео
+      //       loc.media.forEach((m) => {
+      //         if (m.type === "video") {
+      //           popupContent += `<button class="video-thumb" data-video="${m.src}" style="padding:6px 12px;background:#28a745;color:#fff;border:none;border-radius:6px;cursor:pointer;">🎬 Переглянути відео</button>`;
+      //         }
+      //       });
+
+      //       popupContent += `</div>`;
+      //       marker.bindPopup(popupContent);
+      //       markers.addLayer(marker);
+
+      //       marker.on("popupopen", () => {
+      //         lightGallery(document.getElementById(galleryId), {
+      //           selector: "a[href]",
+      //           plugins: [lgZoom, lgThumbnail],
+      //           speed: 400,
+      //         });
+
+      //         document
+      //           .querySelectorAll(`#${videoId} .video-thumb`)
+      //           .forEach((el) => {
+      //             el.addEventListener("click", (e) => {
+      //               e.preventDefault();
+      //               e.stopPropagation();
+      //               openVideo(el.dataset.video);
+      //             });
+      //           });
+      //       });
+      //     }
+      //   });
+      // }
+
+      // Функція для завантаження маркерів
       function loadMarkers(category) {
         markers.clearLayers();
         locations.forEach((loc) => {
@@ -3750,23 +3808,35 @@
             const videoId = `video-${loc.name.replace(/\s/g, "-")}`;
 
             let popupContent = `
-            <h3>${loc.name}</h3>
-            <p>Категорія: ${loc.category}</p>
-            <a href="${loc.url}" target="_blank" style="display:inline-block;margin-bottom:6px;padding:6px 12px;background:#007bff;color:#fff;border-radius:6px;text-decoration:none;">🌐 Перейти на сайт</a>
-            <div id="${galleryId}" class="lg-gallery">`;
+        <h3>${loc.name}</h3>
+        <p>Категорія: ${loc.category}</p>
+        <a href="${loc.url}" target="_blank"
+           style="display:inline-block;margin-bottom:6px;padding:6px 12px;
+           background:#007bff;color:#fff;border-radius:6px;text-decoration:none;">
+           🌐 Перейти на сайт</a>
+        <div id="${galleryId}" class="lg-gallery">`;
 
-            // Фото
-            loc.media.forEach((m) => {
+            // Обмежуємо кількість фото (наприклад, максимум 5 видимих)
+            loc.media.forEach((m, i) => {
               if (m.type === "photo") {
-                popupContent += `<a href="${m.src}" data-lg-size="600-400"><img src="${m.src}" alt="photo"/></a>`;
+                if (i < 5) {
+                  popupContent += `<a href="${m.src}" data-lg-size="600-400">
+                               <img src="${m.src}" alt="photo"/></a>`;
+                } else {
+                  // приховані фото (видимі лише у lightGallery)
+                  popupContent += `<a href="${m.src}" data-lg-size="600-400" style="display:none;"></a>`;
+                }
               }
             });
+
             popupContent += `</div><div id="${videoId}" class="video-container">`;
 
             // Відео
             loc.media.forEach((m) => {
               if (m.type === "video") {
-                popupContent += `<button class="video-thumb" data-video="${m.src}" style="padding:6px 12px;background:#28a745;color:#fff;border:none;border-radius:6px;cursor:pointer;">🎬 Переглянути відео</button>`;
+                popupContent += `<button class="video-thumb" data-video="${m.src}"
+            style="padding:6px 12px;background:#28a745;color:#fff;border:none;
+            border-radius:6px;cursor:pointer;">🎬 Переглянути відео</button>`;
               }
             });
 
