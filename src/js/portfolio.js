@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alt: "Фешн зйомка 3",
       },
       {
-        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758103225/love_story__2_r1muin.webp",
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758110353/love_story__5_rfhaqz.webp",
         alt: "Фешн зйомка 3",
       },
     ],
