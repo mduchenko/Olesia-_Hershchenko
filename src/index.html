@@ -2539,31 +2539,6 @@
     </script>
 
     <style>
-      /* --- gadget styles ---
-      #photo-gadget {
-        position: fixed;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%) translateX(-120%);
-        opacity: 0;
-        z-index: 9999;
-        pointer-events: auto;
-        transition: transform 420ms cubic-bezier(0.2, 0.9, 0.2, 1.2),
-          opacity 300ms ease;
-        will-change: transform, opacity;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        background: transparent;
-        padding: 0;
-        margin: 0;
-        border: none;
-      }
-
-      #photo-gadget.visible {
-        transform: translateY(-50%) translateX(0);
-        opacity: 1;
-      } */
       /* --- плавна поява --- */
       #photo-gadget {
         position: fixed;
@@ -2572,7 +2547,7 @@
         transform: translateY(-50%) translateX(-120%);
         opacity: 0;
         z-index: 9000;
-        pointer-events: auto;
+        pointer-events: none; /* ❌ вимикаємо кліки у прихованому стані */
         transition: transform 600ms cubic-bezier(0.2, 0.9, 0.2, 1.2),
           opacity 600ms ease; /* довший час для плавності */
         will-change: transform, opacity;
@@ -2588,6 +2563,7 @@
       #photo-gadget.visible {
         transform: translateY(-50%) translateX(0);
         opacity: 1;
+        pointer-events: auto; /* ✅ вмикаємо кліки тільки при появі */
       }
 
       .photo-gadget-btn {
@@ -3381,37 +3357,7 @@
             },
           ],
         },
-        // {
-        //   name: "Маріїнський парк",
-        //   coords: [50.4452, 30.5362],
-        //   category: "Love Story",
-        //   photos: [
-        //     "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mariinsky_Park_Kyiv.jpg",
-        //     "https://picsum.photos/id/1018/600/400",
-        //     "https://picsum.photos/id/1015/600/400",
-        //   ],
-        // },
-        // {
-        //   name: "Поділ",
-        //   coords: [50.4676, 30.514],
-        //   category: "Сімейна",
-        //   photos: [
-        //     "https://upload.wikimedia.org/wikipedia/commons/2/23/Podil_Kyiv.jpg",
-        //     "https://picsum.photos/id/1025/600/400",
-        //     "https://picsum.photos/id/1035/600/400",
-        //   ],
-        // },
-        // {
-        //   name: "Андріївський узвіз",
-        //   coords: [50.4593, 30.5166],
-        //   category: "Fashion",
-        //   photos: [
-        //     "https://upload.wikimedia.org/wikipedia/commons/7/7b/Andriyivskyy_Descent_Kiev.jpg",
-        //     "https://picsum.photos/id/1041/600/400",
-        //     "https://picsum.photos/id/1043/600/400",
-        //     "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
-        //   ],
-        // },
+
         {
           name: "Play Studio",
           coords: [50.432820686434766, 30.394545008597547],
@@ -3694,55 +3640,42 @@
             },
           ],
         },
+        // Park
+        {
+          name: "Маріїнський парк",
+          coords: [50.4452, 30.5362],
+          category: "Park",
+          url: "https://kyivcity.gov.ua",
+          media: [
+            {
+              type: "photo",
+              src: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mariinsky_Park_Kyiv.jpg",
+            },
+            { type: "photo", src: "https://picsum.photos/id/1018/600/400" },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
+            },
+          ],
+        },
+        // Street
+        {
+          name: "Поділ",
+          coords: [50.4676, 30.514],
+          category: "Street",
+          url: "https://visitkyiv.city",
+          media: [
+            {
+              type: "photo",
+              src: "https://upload.wikimedia.org/wikipedia/commons/2/23/Podil_Kyiv.jpg",
+            },
+            {
+              type: "video",
+              src: "https://drive.google.com/file/d/1dO6mV2Y8v0O3hHxzSD6qC5PV7jsXcYXJ/preview",
+            },
+          ],
+        },
       ];
-      // const locations = [
-      //   {
-      //     name: "Маріїнський парк",
-      //     coords: [50.4452, 30.5362],
-      //     category: "Park",
-      //     url: "https://kyivcity.gov.ua",
-      //     media: [
-      //       {
-      //         type: "photo",
-      //         src: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mariinsky_Park_Kyiv.jpg",
-      //       },
-      //       { type: "photo", src: "https://picsum.photos/id/1018/600/400" },
-      //       {
-      //         type: "video",
-      //         src: "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     name: "Поділ",
-      //     coords: [50.4676, 30.514],
-      //     category: "Street",
-      //     url: "https://visitkyiv.city",
-      //     media: [
-      //       {
-      //         type: "photo",
-      //         src: "https://upload.wikimedia.org/wikipedia/commons/2/23/Podil_Kyiv.jpg",
-      //       },
-      //       {
-      //         type: "video",
-      //         src: "https://drive.google.com/file/d/1dO6mV2Y8v0O3hHxzSD6qC5PV7jsXcYXJ/preview",
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     name: "Play Studio",
-      //     coords: [50.4328, 30.3945],
-      //     category: "Studio",
-      //     url: "https://playstudio.com.ua",
-      //     media: [
-      //       { type: "photo", src: "https://picsum.photos/id/1033/600/400" },
-      //       {
-      //         type: "video",
-      //         src: "https://drive.google.com/file/d/1MrtY7jUu9mWVpWcF3bZ9dGehPVd8vHJc/preview",
-      //       },
-      //     ],
-      //   },
-      // ];
 
       // function loadMarkers(category) {
       //   markers.clearLayers();
@@ -3901,320 +3834,5 @@
 
       loadMarkers("all");
     </script>
-    <!-- <script>
-      const locations = [
-        {
-          name: "Маріїнський парк",
-          coords: [50.4452, 30.5362],
-          category: "Love Story",
-          photos: [
-            "https://upload.wikimedia.org/wikipedia/commons/4/4f/Mariinsky_Park_Kyiv.jpg",
-            "https://picsum.photos/id/1018/600/400",
-            "https://picsum.photos/id/1015/600/400",
-          ],
-        },
-        {
-          name: "Поділ",
-          coords: [50.4676, 30.514],
-          category: "Сімейна",
-          photos: [
-            "https://upload.wikimedia.org/wikipedia/commons/2/23/Podil_Kyiv.jpg",
-            "https://picsum.photos/id/1025/600/400",
-            "https://picsum.photos/id/1035/600/400",
-          ],
-        },
-        {
-          name: "Андріївський узвіз",
-          coords: [50.4593, 30.5166],
-          category: "Fashion",
-          photos: [
-            "https://upload.wikimedia.org/wikipedia/commons/7/7b/Andriyivskyy_Descent_Kiev.jpg",
-            "https://picsum.photos/id/1041/600/400",
-            "https://picsum.photos/id/1043/600/400",
-            "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
-          ],
-        },
-        {
-          name: "Play Studio",
-          coords: [50.432820686434766, 30.394545008597547],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1r9TKIczQfwiP061ntHv2Yun5ZaighgH0/preview",
-          ],
-        },
-        {
-          name: "Inlight Studio",
-          coords: [50.39738467724631, 30.490896613096837],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1GPd-tEeWF9fbU61sY9BGRHhu-G1Jj9nu/preview",
-          ],
-        },
-        {
-          name: "Lagom Studio",
-          coords: [50.488932142840945, 30.49031523225126],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1WZVOAPNtHBUDhSWjhiPFbDoUEz9BFj7R/preview",
-          ],
-        },
-        {
-          name: "Gradient Studio",
-          coords: [50.49606608665804, 30.519869271163707],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1gZMy0NIojJjsr42Lepr4wib6p4CvBr4u/preview",
-          ],
-        },
-        {
-          name: "Vision Studio",
-          coords: [50.41943149253267, 30.401739122089797],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1pZUked_GiatZuCpPcNKOJxmTTvDVXvcx/preview",
-          ],
-        },
-        {
-          name: "Universal Studio",
-          coords: [50.488831117540315, 30.49154562649851],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1JGQOcPxt6YAApD58UIBrG9kJ8qoRL9TY/preview",
-            "https://drive.google.com/file/d/1XxG36Hr81pPCIumJyEQQfZkclhlkl_kd/preview",
-          ],
-        },
-        {
-          name: "Space11 Studio",
-          coords: [50.4025170176954, 30.510193755330206],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1lARwR9tus-WKv4aeiHCVigED5aD2uA7k/preview",
-          ],
-        },
-        {
-          name: "Red Cucumber Studio",
-          coords: [50.47397967811787, 30.4974169706774],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1RyX3nyLfwEih4e2DNpHWmKYHBQJgEAnZ/preview",
-          ],
-        },
-        {
-          name: "R18 Studio",
-          coords: [50.38965161819639, 30.497468982313976],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1nMq3ikacEx3fisvqXoHJvLuKoqkFHWMb/preview",
-          ],
-        },
-        {
-          name: "Pandora Studio",
-          coords: [50.37774060748647, 30.48573541329078],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1z0lRUR-2SO5wH8RHU6sZ6rgpaGuEdq2H/preview",
-          ],
-        },
-        {
-          name: "P.Five Studio",
-          coords: [50.44145446121316, 30.631673126496153],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1qtuiC4K2yHdT1L7dIs5CCV6iVA3ZmndK/preview",
-          ],
-        },
-        {
-          name: "Opera7 Studio",
-          coords: [50.44679724501563, 30.51056272464499],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1qR4twVFDBrlbZuzp8VuFlLf85JrpEwCt/preview",
-          ],
-        },
-        {
-          name: "Mnemonica Studio",
-          coords: [50.40448788782479, 30.55006032649438],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1rljD6FJEBVqikN6yEXXmSbA4ENz-LVj5/preview",
-          ],
-        },
-        {
-          name: "LYM Studio",
-          coords: [50.451599930454485, 30.614430484168526],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1basRCNd9loyvO9lO-nw-leh0uv3gGElv/preview",
-          ],
-        },
-        {
-          name: "LOFT31 Studio",
-          coords: [50.46658786038079, 30.500124293958667],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1xVlcc94ZK9lw8RU1TmS3hi0f9sCTHfbE/preview",
-          ],
-        },
-        {
-          name: "KULT Studio",
-          coords: [50.486694201737436, 30.491729888109003],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1joqkWI0mMmMzVcHBihruGGqE5QyecNuY/preview",
-          ],
-        },
-        {
-          name: "Icon Studio",
-          coords: [50.45969608725153, 30.446767141840613],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1yfGWfYr_deleojaemvAynfNpckj57Fw2/preview",
-          ],
-        },
-        {
-          name: "F11 Studio",
-          coords: [50.44952222691406, 30.507927699512],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/18Oe0cKY1AStEvW4Cc27BhNtd6gwp4KxA/preview",
-          ],
-        },
-        {
-          name: "ADERStudio",
-          coords: [50.417366734223144, 30.52475246882317],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1LecH1IrXJTJcOoCchKqErhGhh3r6Oi1F/preview",
-          ],
-        },
-        {
-          name: "193 Studio",
-          coords: [50.39192671130444, 30.608348026493765],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1E1m6-3d-uJfqFkEZmp-u7pbA6jV8PhGe/preview",
-          ],
-        },
-        {
-          name: "7sky Studio",
-          coords: [50.44417274776662, 30.603719911152623],
-          category: "Studio",
-          photos: [
-            "https://drive.google.com/file/d/1KU6m3z8oB59v1R2SgN562c_83m3K8N-f/preview",
-          ],
-        },
-      ];
-
-      const map = L.map("map").setView([50.4501, 30.5234], 12);
-
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "© OpenStreetMap",
-      }).addTo(map);
-
-      const cameraIcon = L.icon({
-        iconUrl: "https://cdn-icons-png.flaticon.com/512/685/685655.png",
-        iconSize: [32, 32],
-      });
-
-      let markers = L.markerClusterGroup();
-      map.addLayer(markers);
-
-      function loadMarkers(category) {
-        markers.clearLayers();
-
-        locations.forEach((loc) => {
-          if (category === "all" || loc.category === category) {
-            const marker = L.marker(loc.coords, { icon: cameraIcon });
-            const galleryId = `gallery-${loc.name.replace(/\s/g, "-")}`;
-            const videoId = `video-${loc.name.replace(/\s/g, "-")}`;
-
-            let popupContent = `<h3>${loc.name}</h3><p>Категорія: ${loc.category}</p>
-        <div id="${galleryId}" class="lg-gallery">`;
-
-            // Фото тільки
-            loc.photos.forEach((media) => {
-              const isVideo = /\/file\/.*\/preview/i.test(media); // Google Drive video check
-              if (!isVideo) {
-                popupContent += `
-            <a href="${media}" data-lg-size="600-400">
-              <img src="${media}" alt="photo" />
-            </a>`;
-              }
-            });
-            popupContent += `</div>`;
-
-            // Відео тільки
-            popupContent += `<div id="${videoId}" class="video-container">`;
-            loc.photos.forEach((media) => {
-              const isVideo = /\/file\/.*\/preview/i.test(media);
-              if (isVideo) {
-                popupContent += `
-            <div class="video-thumb" data-video="${media}">
-              <div style="width:100%;height:100%;background:#000;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;">▶</div>
-            </div>`;
-              }
-            });
-            popupContent += `</div>`;
-
-            marker.bindPopup(popupContent);
-            markers.addLayer(marker);
-
-            marker.on("popupopen", () => {
-              // LightGallery для фото
-              lightGallery(document.getElementById(galleryId), {
-                selector: "a[href]",
-                plugins: [lgZoom, lgThumbnail],
-                speed: 400,
-              });
-
-              // Відео через iframe
-              document
-                .querySelectorAll(`#${videoId} .video-thumb`)
-                .forEach((el) => {
-                  el.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    const videoSrc = el.dataset.video;
-                    const overlay = document.getElementById("video-overlay");
-                    overlay.innerHTML = `
-              <div class="phone-frame">
-                <div class="close-btn">&times;</div>
-                <iframe src="${videoSrc}" width="320" height="570" allow="autoplay; fullscreen" frameborder="0" allowfullscreen></iframe>
-              </div>
-            `;
-                    overlay.classList.add("active");
-
-                    // Закриття
-                    const closeBtn = overlay.querySelector(".close-btn");
-                    closeBtn.addEventListener("click", closeVideo);
-                    overlay.addEventListener("click", (ev) => {
-                      if (ev.target === overlay) closeVideo();
-                    });
-                  });
-                });
-            });
-          }
-        });
-      }
-
-      function closeVideo() {
-        const overlay = document.getElementById("video-overlay");
-        overlay.classList.remove("active");
-        overlay.innerHTML = ""; // очищає iframe
-      }
-
-      loadMarkers("all");
-
-      document.querySelectorAll(".filter-btns button").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          document
-            .querySelectorAll(".filter-btns button")
-            .forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-          loadMarkers(btn.dataset.category);
-        });
-      });
-    </script> -->
   </body>
 </html>
