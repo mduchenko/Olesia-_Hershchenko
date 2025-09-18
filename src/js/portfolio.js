@@ -4,10 +4,82 @@ document.addEventListener("DOMContentLoaded", function () {
   // Дані для галерей (можна замінити на реальні фото)
   const galleries = {
     gallery1: [
-      { src: "./img/anna/anna(1).webp", alt: "Студійний портрет 1" },
-      { src: "./img/anna/anna(2).webp", alt: "Студійний портрет 2" },
-      { src: "./img/anna/anna(3).webp", alt: "Студійний портрет 3" },
-      { src: "./img/anna/anna(4).webp", alt: "Студійний портрет 4" },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189974/studio_yllia__18_q0xevw.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189973/studio_yllia__16_qgpo9j.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189970/studio_yllia__15_tboz60.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189969/studio_yllia__17_xe1foj.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189966/studio_yllia__12_sam3b4.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189966/studio_yllia__12_sam3b4.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189967/studio_yllia__14_qjhlwb.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189967/studio_yllia__13_hp4odt.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189965/studio_yllia__11_hz8zf9.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189964/studio_yllia__6_dpq9hx.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189964/studio_yllia__9_xdkqao.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189964/studio_yllia__10_wrizsg.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189963/studio_yllia__8_yw3sau.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189962/studio_yllia__7_x6myzz.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189962/studio_yllia__1_ikg7ut.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189962/studio_yllia__5_zo4z8c.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189961/studio_yllia__4_mb3buh.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189960/studio_yllia__3_g07rmg.webp",
+        alt: "julia_couple",
+      },
+      {
+        src: "https://res.cloudinary.com/dsvnlnaq9/image/upload/v1758189960/studio_yllia__2_sj0bjm.webp",
+        alt: "julia_couple",
+      },
     ],
     gallery2: [
       {
@@ -102,18 +174,10 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     ],
     gallery4: [
-      {
-        src: "https://source.unsplash.com/random/800x600/?street,portrait,1",
-        alt: "Вуличний портрет 1",
-      },
-      {
-        src: "https://source.unsplash.com/random/800x600/?street,portrait,2",
-        alt: "Вуличний портрет 2",
-      },
-      {
-        src: "https://source.unsplash.com/random/800x600/?street,portrait,3",
-        alt: "Вуличний портрет 3",
-      },
+      { src: "./img/anna/anna(1).webp", alt: "Студійний портрет 1" },
+      { src: "./img/anna/anna(2).webp", alt: "Студійний портрет 2" },
+      { src: "./img/anna/anna(3).webp", alt: "Студійний портрет 3" },
+      { src: "./img/anna/anna(4).webp", alt: "Студійний портрет 4" },
     ],
     gallery5: [
       {
