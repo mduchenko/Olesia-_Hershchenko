@@ -84,6 +84,7 @@
   pointer-events: auto;
   user-select: auto;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
 }
 
 // .slider-content a.button__hero span::after {
@@ -100,9 +101,19 @@
 //   transition: all 0.5s ease-in-out;
 // }
 .slider-content a.button__hero:hover {
-  color: var(--light-btn);
-  filter: drop-shadow(8px 8px 10px #f6fff0);
+  color: black;
+  box-shadow: 0 0 15px #f0feff, 0 0 30px #f8f0ff;
+  // filter: drop-shadow(8px 8px 10px #f6fff0);
+  // animation: pulseOne 0.6s infinite alternate;
 }
+// @keyframes pulseOne {
+//   from {
+//     transform: scale(1);
+//   }
+//   to {
+//     transform: scale(1.08);
+//   }
+// }
 // .slider-content a.button__hero:hover span::after {
 //   box-shadow: 0px 1px 1px var(--light-bg);
 //   height: 2px;
