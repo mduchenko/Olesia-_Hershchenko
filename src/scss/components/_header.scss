@@ -41,15 +41,17 @@ main {
   }
 
   &__button {
+    position: relative;
     @media screen and (max-width: 768px) {
       display: none;
     }
   }
-  &__button:hover {
-    color: black;
-    filter: drop-shadow(8px 8px 10px #ede2f5);
-    background-color: #fff1f0bc;
-  }
+
+  // &__button:hover {
+  //   color: black;
+  //   filter: drop-shadow(8px 8px 10px #ede2f5);
+  //   background-color: #fff1f0bc;
+  // }
   &__bottom {
     padding: 20px 0;
 
