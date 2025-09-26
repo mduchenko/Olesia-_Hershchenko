@@ -4032,292 +4032,8 @@
       });
 
       loadMarkers("all");
-    </script>
 
-    <style>
-      :root {
-        --primary-color: #fff1f0;
-        --secondary-color: #ffd8d5;
-        --accent-color: #ff6b6b;
-        --text-color: #333;
-        --light-text: #666;
-        --border-radius: 12px;
-        --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      .filters {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.5rem;
-        margin: 2rem 0;
-        padding: 0 1rem;
-      }
-
-      .filter-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      label {
-        font-weight: 600;
-        color: var(--accent-color);
-        font-size: 1.1rem;
-      }
-
-      select {
-        padding: 0.7rem 1rem;
-        border: 2px solid var(--secondary-color);
-        border-radius: var(--border-radius);
-        background-color: white;
-        color: var(--text-color);
-        cursor: pointer;
-        transition: all 0.3s;
-        font-size: 1rem;
-      }
-
-      select:focus {
-        outline: none;
-        border-color: var(--accent-color);
-        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
-      }
-
-      .cards-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 2rem;
-        padding: 1rem;
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-
-      .card {
-        background-color: white;
-        border-radius: var(--border-radius);
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        transition: transform 0.3s, box-shadow 0.3s;
-        position: relative;
-        aspect-ratio: 9/16;
-        min-height: 500px;
-      }
-
-      .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      }
-
-      .card-media {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      .card-media img,
-      .card-media iframe {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .media-placeholder {
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          135deg,
-          var(--secondary-color),
-          var(--primary-color)
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--accent-color);
-        font-weight: 600;
-        font-size: 1.2rem;
-      }
-
-      .card-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: linear-gradient(
-          transparent,
-          rgba(255, 241, 240, 0.95) 30%,
-          rgba(255, 241, 240, 0.98)
-        );
-        padding: 2rem 1.5rem 1.5rem;
-        backdrop-filter: blur(5px);
-        border-radius: 0 0 var(--border-radius) var(--border-radius);
-        transition: all 0.3s ease;
-        z-index: 10;
-      }
-
-      .card-content.hidden {
-        opacity: 0;
-        transform: translateY(100%);
-        pointer-events: none;
-      }
-
-      .video-controls {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        z-index: 20;
-        display: flex;
-        gap: 0.5rem;
-      }
-
-      .control-btn {
-        background: rgba(255, 255, 255, 0.9);
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s;
-        backdrop-filter: blur(10px);
-        font-size: 1.2rem;
-      }
-
-      .control-btn:hover {
-        background: rgba(255, 255, 255, 1);
-        transform: scale(1.1);
-      }
-
-      .card-title {
-        font-size: 1.4rem;
-        margin-bottom: 0.8rem;
-        color: var(--accent-color);
-        font-weight: 700;
-      }
-
-      .card-category {
-        display: inline-block;
-        background-color: var(--accent-color);
-        color: white;
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-      }
-
-      .card-info {
-        margin-bottom: 1.2rem;
-        font-size: 1rem;
-        color: var(--text-color);
-      }
-
-      .card-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--accent-color);
-        color: white;
-        text-decoration: none;
-        padding: 0.8rem 1.5rem;
-        border-radius: 25px;
-        font-weight: 600;
-        transition: all 0.3s;
-        width: 100%;
-        text-align: center;
-      }
-
-      .card-link:hover {
-        background-color: #ff5252;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-      }
-
-      .no-results {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 3rem;
-        color: var(--light-text);
-        font-size: 1.2rem;
-      }
-
-      @media (max-width: 768px) {
-        .filters {
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .filter-group {
-          width: 100%;
-          max-width: 300px;
-        }
-
-        .cards-container {
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .card {
-          min-height: 450px;
-        }
-
-        .control-btn {
-          width: 35px;
-          height: 35px;
-          font-size: 1rem;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .cards-container {
-          grid-template-columns: 1fr;
-        }
-
-        .card {
-          min-height: 400px;
-        }
-
-        .card-content {
-          padding: 1.5rem 1rem 1rem;
-        }
-
-        .card-title {
-          font-size: 1.2rem;
-        }
-      }
-    </style>
-
-    <div class="filters">
-      <div class="filter-group">
-        <label for="district-filter">Район міста</label>
-        <select id="district-filter">
-          <option value="all">Всі райони</option>
-        </select>
-      </div>
-
-      <div class="filter-group">
-        <label for="category-filter">Категорія</label>
-        <select id="category-filter">
-          <option value="all">Всі категорії</option>
-          <option value="Studio">Студії</option>
-          <option value="Park">Парки</option>
-          <option value="Street">Street Style</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="cards-container" id="cards-container">
-      <!-- Карточки будуть додані через JavaScript -->
-    </div>
-    <script>
       // Дані локацій
-
       // Визначення районів за координатами
       const districts = [
         {
@@ -4564,7 +4280,8 @@
         if (locationsToShow.length === 0) {
           const noResults = document.createElement("div");
           noResults.className = "no-results";
-          noResults.textContent = "За вашим запитом нічого не знайдено";
+          noResults.textContent =
+            "За вашим запитом нічого не знайдено. Спробуйте змінити фільтри.";
           container.appendChild(noResults);
           return;
         }
@@ -4594,12 +4311,28 @@
         displayLocations(filteredLocations);
       }
 
+      // Функція для відображення віталього повідомлення
+      function showWelcomeMessage() {
+        const container = document.getElementById("cards-container");
+        container.innerHTML = `
+                <div class="welcome-message">
+                    <h2>👋 Ласкаво просимо!</h2>
+                    <p>Оберіть район та категорію локацій у фільтрах вище, щоб побачити доступні варіанти для вашої фотосесії.</p>
+                </div>
+            `;
+      }
+
       // Ініціалізація
       document.addEventListener("DOMContentLoaded", () => {
         populateDistrictFilter();
-        displayLocations(locations);
+        showWelcomeMessage(); // Показуємо вітальне повідомлення замість карток
 
         // Додаємо обробники подій для фільтрів
+        document
+          .getElementById("apply-filters")
+          .addEventListener("click", filterLocations);
+
+        // Додаємо також обробники зміни фільтрів для автоматичного застосування
         document
           .getElementById("district-filter")
           .addEventListener("change", filterLocations);
@@ -4608,5 +4341,351 @@
           .addEventListener("change", filterLocations);
       });
     </script>
+
+    <style>
+      :root {
+        --primary-color: #fff1f0;
+        --secondary-color: #ffd8d5;
+        --accent-color: #ff6b6b;
+        --text-color: #333;
+        --light-text: #666;
+        --border-radius: 12px;
+        --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 2rem 0;
+        padding: 0 1rem;
+      }
+
+      .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      label {
+        font-weight: 600;
+        color: var(--accent-color);
+        font-size: 1.1rem;
+      }
+
+      select {
+        padding: 0.7rem 1rem;
+        border: 2px solid var(--secondary-color);
+        border-radius: var(--border-radius);
+        background-color: white;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 1rem;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+      }
+
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        aspect-ratio: 9/16;
+        min-height: 500px;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-media {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .card-media img,
+      .card-media iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .media-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--secondary-color),
+          var(--primary-color)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          transparent,
+          rgba(255, 241, 240, 0.95) 30%,
+          rgba(255, 241, 240, 0.98)
+        );
+        padding: 2rem 1.5rem 1.5rem;
+        backdrop-filter: blur(5px);
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+
+      .card-content.hidden {
+        opacity: 0;
+        transform: translateY(100%);
+        pointer-events: none;
+      }
+
+      .video-controls {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 20;
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .control-btn {
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        backdrop-filter: blur(10px);
+        font-size: 1.2rem;
+      }
+
+      .control-btn:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: scale(1.1);
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: var(--accent-color);
+        font-weight: 700;
+      }
+
+      .card-category {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .card-info {
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+        color: var(--text-color);
+      }
+
+      .card-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--accent-color);
+        color: white;
+        text-decoration: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s;
+        width: 100%;
+        text-align: center;
+      }
+
+      .card-link:hover {
+        background-color: #ff5252;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+      }
+
+      .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        color: var(--light-text);
+        font-size: 1.2rem;
+      }
+
+      .welcome-message {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 4rem 2rem;
+        color: var(--light-text);
+      }
+
+      .welcome-message h2 {
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+        font-size: 2rem;
+      }
+
+      .welcome-message p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.8;
+      }
+      .apply-btn {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 0.7rem 2rem;
+        border-radius: var(--border-radius);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        align-self: flex-end;
+        margin-top: 1.8rem;
+      }
+      .apply-btn {
+        align-self: center;
+        margin-top: 1rem;
+        width: 100%;
+        max-width: 300px;
+      }
+      .apply-btn:hover {
+        background-color: #ff5252;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .filters {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .filter-group {
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .cards-container {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .card {
+          min-height: 450px;
+        }
+
+        .control-btn {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+
+        .welcome-message {
+          padding: 2rem 1rem;
+        }
+
+        .welcome-message h2 {
+          font-size: 1.5rem;
+        }
+
+        .welcome-message p {
+          font-size: 1.1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cards-container {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          min-height: 400px;
+        }
+
+        .card-content {
+          padding: 1.5rem 1rem 1rem;
+        }
+
+        .card-title {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+    <div class="filters">
+      <div class="filter-group">
+        <label for="district-filter">Район міста</label>
+        <select id="district-filter">
+          <option value="all">Всі райони</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="category-filter">Категорія</label>
+        <select id="category-filter">
+          <option value="all">Всі категорії</option>
+          <option value="Studio">Студії</option>
+          <option value="Park">Парки</option>
+          <option value="Street">Street Style</option>
+        </select>
+      </div>
+      <button class="apply-btn" id="apply-filters">Застосувати фільтри</button>
+    </div>
+
+    <div class="cards-container" id="cards-container">
+      <div class="welcome-message">
+        <h2>👋 Ласкаво просимо!</h2>
+        <p>
+          Оберіть район та категорію локацій у фільтрах вище, щоб побачити
+          доступні варіанти для вашої фотосесії.
+        </p>
+      </div>
+    </div>
+
+    <script></script>
   </body>
 </html>
