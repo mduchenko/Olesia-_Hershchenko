@@ -4032,5 +4032,610 @@
 
       loadMarkers("all");
     </script>
+
+    <style>
+      :root {
+        --primary-color: #fff1f0;
+        --secondary-color: #ffd8d5;
+        --accent-color: #ff6b6b;
+        --text-color: #333;
+        --light-text: #666;
+        --border-radius: 12px;
+        --shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        border-radius: var(--border-radius);
+        margin-bottom: 2rem;
+      }
+
+      h1 {
+        color: var(--accent-color);
+        margin-bottom: 0.5rem;
+        font-size: 2rem;
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 2rem 0;
+        padding: 0 1rem;
+      }
+
+      .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      label {
+        font-weight: 600;
+        color: var(--accent-color);
+        font-size: 1.1rem;
+      }
+
+      select {
+        padding: 0.7rem 1rem;
+        border: 2px solid var(--secondary-color);
+        border-radius: var(--border-radius);
+        background-color: white;
+        color: var(--text-color);
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 1rem;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+      }
+
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        padding: 1rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        aspect-ratio: 9/16;
+        min-height: 500px;
+      }
+
+      .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-media {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .card-media img,
+      .card-media iframe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .media-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          var(--secondary-color),
+          var(--primary-color)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-color);
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          transparent,
+          rgba(255, 241, 240, 0.95) 30%,
+          rgba(255, 241, 240, 0.98)
+        );
+        padding: 2rem 1.5rem 1.5rem;
+        backdrop-filter: blur(5px);
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+
+      .card-content.hidden {
+        opacity: 0;
+        transform: translateY(100%);
+        pointer-events: none;
+      }
+
+      .video-controls {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 20;
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .control-btn {
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        backdrop-filter: blur(10px);
+        font-size: 1.2rem;
+      }
+
+      .control-btn:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: scale(1.1);
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+        color: var(--accent-color);
+        font-weight: 700;
+      }
+
+      .card-category {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+
+      .card-info {
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+        color: var(--text-color);
+      }
+
+      .card-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--accent-color);
+        color: white;
+        text-decoration: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s;
+        width: 100%;
+        text-align: center;
+      }
+
+      .card-link:hover {
+        background-color: #ff5252;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+      }
+
+      .no-results {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        color: var(--light-text);
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 768px) {
+        .filters {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .filter-group {
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .cards-container {
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 1.5rem;
+        }
+
+        .card {
+          min-height: 450px;
+        }
+
+        h1 {
+          font-size: 1.6rem;
+        }
+
+        .control-btn {
+          width: 35px;
+          height: 35px;
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .cards-container {
+          grid-template-columns: 1fr;
+        }
+
+        .card {
+          min-height: 400px;
+        }
+
+        .card-content {
+          padding: 1.5rem 1rem 1rem;
+        }
+
+        .card-title {
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+    <header>
+      <h1>Студії та локації для фотосесій у Києві</h1>
+      <p>Знайдіть ідеальне місце для вашої фотосесії</p>
+    </header>
+
+    <div class="filters">
+      <div class="filter-group">
+        <label for="district-filter">Район міста</label>
+        <select id="district-filter">
+          <option value="all">Всі райони</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="category-filter">Категорія</label>
+        <select id="category-filter">
+          <option value="all">Всі категорії</option>
+          <option value="Studio">Студії</option>
+          <option value="Park">Парки</option>
+          <option value="Street">Street Style</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="cards-container" id="cards-container">
+      <!-- Карточки будуть додані через JavaScript -->
+    </div>
+    <script>
+      // Дані локацій
+
+      // Визначення районів за координатами
+      const districts = [
+        {
+          name: "Печерський",
+          bounds: [
+            [50.42, 30.52],
+            [50.45, 30.57],
+          ],
+        },
+        {
+          name: "Шевченківський",
+          bounds: [
+            [50.44, 30.48],
+            [50.47, 30.53],
+          ],
+        },
+        {
+          name: "Подільський",
+          bounds: [
+            [50.46, 30.48],
+            [50.5, 30.53],
+          ],
+        },
+        {
+          name: "Оболонський",
+          bounds: [
+            [50.48, 30.48],
+            [50.52, 30.55],
+          ],
+        },
+        {
+          name: "Дарницький",
+          bounds: [
+            [50.4, 30.6],
+            [50.46, 30.7],
+          ],
+        },
+        {
+          name: "Дніпровський",
+          bounds: [
+            [50.44, 30.58],
+            [50.5, 30.7],
+          ],
+        },
+        {
+          name: "Солом'янський",
+          bounds: [
+            [50.42, 30.45],
+            [50.46, 30.5],
+          ],
+        },
+        {
+          name: "Голосіївський",
+          bounds: [
+            [50.38, 30.48],
+            [50.42, 30.55],
+          ],
+        },
+        {
+          name: "Деснянський",
+          bounds: [
+            [50.48, 30.6],
+            [50.52, 30.7],
+          ],
+        },
+        {
+          name: "Святошинський",
+          bounds: [
+            [50.45, 30.35],
+            [50.5, 30.4],
+          ],
+        },
+      ];
+
+      // Функція для визначення району за координатами
+      function getDistrictByCoords(coords) {
+        for (const district of districts) {
+          const [lat, lng] = coords;
+          const [[south, west], [north, east]] = district.bounds;
+
+          if (lat >= south && lat <= north && lng >= west && lng <= east) {
+            return district.name;
+          }
+        }
+        return "Невідомий район";
+      }
+
+      // Додавання районів до фільтра
+      function populateDistrictFilter() {
+        const districtFilter = document.getElementById("district-filter");
+
+        // Додаємо всі райони до фільтра
+        districts.forEach((district) => {
+          const option = document.createElement("option");
+          option.value = district.name;
+          option.textContent = district.name;
+          districtFilter.appendChild(option);
+        });
+      }
+
+      // Функція для створення карточки
+      function createLocationCard(location) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.dataset.district = getDistrictByCoords(location.coords);
+        card.dataset.category = location.category;
+
+        // Медіа-контент
+        const mediaContainer = document.createElement("div");
+        mediaContainer.className = "card-media";
+
+        // Знаходимо перше доступне фото або відео
+        const firstMedia =
+          location.media.find((m) => m.src) || location.media[0];
+        let videoIframe = null;
+
+        if (firstMedia && firstMedia.src) {
+          if (firstMedia.type === "photo") {
+            const img = document.createElement("img");
+            img.src = firstMedia.src;
+            img.alt = location.name;
+            img.onerror = function () {
+              this.style.display = "none";
+              const placeholder = document.createElement("div");
+              placeholder.className = "media-placeholder";
+              placeholder.textContent = location.name;
+              mediaContainer.appendChild(placeholder);
+            };
+            mediaContainer.appendChild(img);
+          } else if (firstMedia.type === "video") {
+            videoIframe = document.createElement("iframe");
+            videoIframe.src = firstMedia.src;
+            videoIframe.frameBorder = "0";
+            videoIframe.allowFullscreen = true;
+            videoIframe.allow = "autoplay; encrypted-media";
+            mediaContainer.appendChild(videoIframe);
+          } else {
+            const placeholder = document.createElement("div");
+            placeholder.className = "media-placeholder";
+            placeholder.textContent = location.name;
+            mediaContainer.appendChild(placeholder);
+          }
+        } else {
+          const placeholder = document.createElement("div");
+          placeholder.className = "media-placeholder";
+          placeholder.textContent = location.name;
+          mediaContainer.appendChild(placeholder);
+        }
+
+        // Контент карточки
+        const contentContainer = document.createElement("div");
+        contentContainer.className = "card-content";
+
+        const title = document.createElement("h3");
+        title.className = "card-title";
+        title.textContent = location.name;
+
+        const category = document.createElement("span");
+        category.className = "card-category";
+        category.textContent =
+          location.category === "Studio"
+            ? "Студія"
+            : location.category === "Park"
+            ? "Парк"
+            : "Street Style";
+
+        const district = document.createElement("div");
+        district.className = "card-info";
+        district.textContent = `📍 ${getDistrictByCoords(location.coords)}`;
+
+        const link = document.createElement("a");
+        link.className = "card-link";
+        link.href = location.url || "#";
+        link.target = "_blank";
+        link.textContent = location.url ? "Детальніше" : "Інформація відсутня";
+
+        if (!location.url) {
+          link.style.backgroundColor = "#ccc";
+          link.style.cursor = "not-allowed";
+          link.onclick = (e) => e.preventDefault();
+        }
+
+        contentContainer.appendChild(title);
+        contentContainer.appendChild(category);
+        contentContainer.appendChild(district);
+        contentContainer.appendChild(link);
+
+        // Додаємо кнопки управління для відео
+        if (firstMedia && firstMedia.type === "video" && firstMedia.src) {
+          const videoControls = document.createElement("div");
+          videoControls.className = "video-controls";
+
+          const toggleBtn = document.createElement("button");
+          toggleBtn.className = "control-btn";
+          toggleBtn.innerHTML = "🎬";
+          toggleBtn.title = "Показати/приховати інформацію";
+
+          toggleBtn.addEventListener("click", () => {
+            contentContainer.classList.toggle("hidden");
+          });
+
+          videoControls.appendChild(toggleBtn);
+          card.appendChild(videoControls);
+
+          // Автоматично приховуємо інформацію при відтворенні відео
+          if (videoIframe) {
+            // Для Google Drive відео використовуємо MutationObserver
+            const observer = new MutationObserver((mutations) => {
+              mutations.forEach((mutation) => {
+                if (
+                  mutation.type === "attributes" &&
+                  mutation.attributeName === "src"
+                ) {
+                  // Відео почало завантажуватись - приховуємо інформацію
+                  setTimeout(() => {
+                    contentContainer.classList.add("hidden");
+                  }, 500);
+                }
+              });
+            });
+
+            observer.observe(videoIframe, { attributes: true });
+
+            // Також додаємо обробник подій для iframe
+            videoIframe.addEventListener("load", () => {
+              setTimeout(() => {
+                contentContainer.classList.add("hidden");
+              }, 1000);
+            });
+          }
+        }
+
+        card.appendChild(mediaContainer);
+        card.appendChild(contentContainer);
+
+        return card;
+      }
+
+      // Функція для відображення карточок
+      function displayLocations(locationsToShow) {
+        const container = document.getElementById("cards-container");
+        container.innerHTML = "";
+
+        if (locationsToShow.length === 0) {
+          const noResults = document.createElement("div");
+          noResults.className = "no-results";
+          noResults.textContent = "За вашим запитом нічого не знайдено";
+          container.appendChild(noResults);
+          return;
+        }
+
+        locationsToShow.forEach((location) => {
+          const card = createLocationCard(location);
+          container.appendChild(card);
+        });
+      }
+
+      // Функція фільтрації
+      function filterLocations() {
+        const districtFilter = document.getElementById("district-filter").value;
+        const categoryFilter = document.getElementById("category-filter").value;
+
+        const filteredLocations = locations.filter((location) => {
+          const locationDistrict = getDistrictByCoords(location.coords);
+
+          const districtMatch =
+            districtFilter === "all" || locationDistrict === districtFilter;
+          const categoryMatch =
+            categoryFilter === "all" || location.category === categoryFilter;
+
+          return districtMatch && categoryMatch;
+        });
+
+        displayLocations(filteredLocations);
+      }
+
+      // Ініціалізація
+      document.addEventListener("DOMContentLoaded", () => {
+        populateDistrictFilter();
+        displayLocations(locations);
+
+        // Додаємо обробники подій для фільтрів
+        document
+          .getElementById("district-filter")
+          .addEventListener("change", filterLocations);
+        document
+          .getElementById("category-filter")
+          .addEventListener("change", filterLocations);
+      });
+    </script>
   </body>
 </html>
