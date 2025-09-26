@@ -1,3 +1,106 @@
+// .contact-section {
+//   background: #fff;
+//   padding: 50px 20px;
+// }
+
+// .contact-wrapper {
+//   display: flex;
+//   flex-wrap: wrap;
+//   gap: 40px;
+//   justify-content: space-between;
+// }
+
+// .contact-info,
+// .contact-form {
+//   flex: 1 1 45%;
+// }
+// .contact-form {
+//   background-color: #f8f4f1;
+//   padding: 10px;
+//   border-radius: 10px;
+// }
+
+// .contact-info h3,
+// .contact-form h2 {
+//   text-align: center;
+//   margin-bottom: 20px;
+//   font-size: 32px;
+// }
+
+// .contact-info p {
+//   margin-bottom: 20px;
+//   color: #444;
+//   line-height: 1.6;
+// }
+
+// .contact-details {
+//   list-style: none;
+//   padding: 0;
+//   margin: 0 0 20px;
+// }
+
+// .contact-details li {
+//   margin-bottom: 10px;
+//   font-size: 20px;
+//   display: flex;
+//   gap: 20px;
+// }
+// .contact-details span {
+//   align-self: flex-end;
+//   transition: transform 0.2s ease;
+// }
+
+// .contact-details a {
+//   color: inherit;
+//   text-decoration: none;
+// }
+
+// .contact-details li:hover span {
+//   transform: scale(1.1);
+// }
+
+// .social-icons a {
+//   display: inline-block;
+//   margin-right: 10px;
+// }
+
+// .social-icons img {
+//   width: 24px;
+//   height: 24px;
+// }
+
+// .contact-form form {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .contact-form label {
+//   margin: 10px 0 5px;
+//   font-weight: 500;
+// }
+
+// .contact-form input,
+// .contact-form textarea {
+//   padding: 10px;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+// }
+
+// .contact-form button {
+//   margin-top: 20px;
+//   padding: 12px;
+//   background-color: #111;
+//   color: #fff;
+//   border: none;
+//   cursor: pointer;
+//   border-radius: 4px;
+// }
+
+// @media (max-width: 768px) {
+//   .contact-wrapper {
+//     flex-direction: column;
+//   }
+// }
 .contact-section {
   background: #fff;
   padding: 50px 20px;
@@ -69,6 +172,7 @@
   height: 24px;
 }
 
+/* Стилі для форми з підкресленням */
 .contact-form form {
   display: flex;
   flex-direction: column;
@@ -81,9 +185,19 @@
 
 .contact-form input,
 .contact-form textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 10px 0; /* Змінив padding - тільки зверху і знизу */
+  border: none; /* Прибираємо стандартний бордер */
+  border-bottom: 2px solid #ccc; /* Підкреслення знизу */
+  border-radius: 0; /* Прибираємо закруглення */
+  background-color: transparent; /* Прозорий фон */
+  outline: none; /* Прибираємо стандартний outline */
+  transition: border-bottom-color 0.3s ease; /* Плавна зміна кольору */
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-bottom-color: #fff1f0; /* Колір при фокусі */
+  background-color: rgba(255, 241, 240, 0.1); /* Легкий фон при фокусі */
 }
 
 .contact-form button {
@@ -94,6 +208,11 @@
   border: none;
   cursor: pointer;
   border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #333;
 }
 
 @media (max-width: 768px) {
