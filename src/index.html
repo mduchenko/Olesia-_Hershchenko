@@ -4400,6 +4400,17 @@
         margin: 0 auto;
       }
 
+      .leaflet-popup-content-wrapper {
+        background-color: white;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+        aspect-ratio: 9/16;
+        min-height: 300px;
+      }
+
       .card {
         background-color: white;
         border-radius: var(--border-radius);
@@ -4685,7 +4696,5 @@
         </p>
       </div>
     </div>
-
-    <script></script>
   </body>
 </html>
