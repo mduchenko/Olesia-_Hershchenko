@@ -2692,6 +2692,10 @@
           src="./logo/contact_2.png"
           alt="Photographer"
         />
+        <!-- Аудіо -->
+        <audio id="camera-sound" preload="auto">
+          <source src="./audio/shutter-sound.mp3" type="audio/mp3" />
+        </audio>
 
         <div class="flash-overlay" aria-hidden="true"></div>
       </button>
@@ -2771,6 +2775,13 @@
             gadget.classList.add("visible");
             gadget.setAttribute("aria-hidden", "false");
             animateFlash();
+
+            // 🔊 Відтворення звуку фотокамери
+            const sound = document.getElementById("camera-sound");
+            if (sound) {
+              sound.currentTime = 0; // перезапуск при кожному показі
+              sound.play().catch(() => {}); // щоб не викликало помилку, якщо браузер блокує
+            }
 
             clearTimeout(hideTimer);
             hideTimer = setTimeout(hideGadget, cfg.hideAfter);
