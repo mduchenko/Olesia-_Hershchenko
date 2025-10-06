@@ -2729,7 +2729,9 @@
 
         const gadget = document.getElementById("photo-gadget");
         const btn = document.getElementById("photo-gadget-btn");
+        if (!gadget || !btn) return; // захист якщо елементів нема
         const overlay = gadget.querySelector(".flash-overlay");
+        const sound = document.getElementById("camera-sound"); // <- важливо: визначили sound тут
 
         let flashTimer = null;
         let scrollStopTimer = null;
@@ -2779,11 +2781,11 @@
             animateFlash();
 
             // 🔊 Відтворення звуку фотокамери
-            const sound = document.getElementById("camera-sound");
-            if (sound) {
-              sound.currentTime = 0; // перезапуск при кожному показі
-              sound.play().catch(() => {}); // щоб не викликало помилку, якщо браузер блокує
-            }
+            // const sound = document.getElementById("camera-sound");
+            // if (sound) {
+            //   sound.currentTime = 0; // перезапуск при кожному показі
+            //   sound.play().catch(() => {}); // щоб не викликало помилку, якщо браузер блокує
+            // }
 
             clearTimeout(hideTimer);
             hideTimer = setTimeout(hideGadget, cfg.hideAfter);
@@ -2823,6 +2825,13 @@
           e.preventDefault();
           createRipple(e);
           animateFlash();
+
+          if (sound) {
+            sound.currentTime = 0;
+            const promise = sound.play();
+            if (promise && promise.catch) promise.catch(() => {}); // ігноруємо помилки політик браузера
+          }
+
           setTimeout(() => {
             window.location.href = cfg.clickUrl;
           }, 300);
