@@ -2767,7 +2767,9 @@
         function showGadget() {
           // якщо відкрите якесь модальне вікно — не показуємо
           if (
-            document.querySelector(".modal.open, .popup.open, .lightbox.open")
+            document.querySelector(
+              ".modal.open, .popup.open, .lightbox.open,.header__bottom.active"
+            )
           )
             return;
 
