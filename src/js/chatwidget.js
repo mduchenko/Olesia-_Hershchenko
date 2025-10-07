@@ -37,7 +37,7 @@ chatButton.addEventListener("pointerdown", function (e) {
   e.preventDefault();
   const isOpen = messengersList.classList.contains("show");
 
-  chatButton.querySelector("span").classList.toggle("icon-gift", isOpen);
+  chatButton.querySelector("span").classList.toggle("icon-camera", isOpen);
   chatButton.querySelector("span").classList.toggle("icon-cancel", !isOpen);
 
   messengersList.classList.toggle("show");
@@ -71,14 +71,14 @@ function openMessenger(messenger) {
   window.open(url, "_blank");
   messengersList.classList.remove("show");
   chatButton.querySelector("span").classList.remove("icon-cancel");
-  chatButton.querySelector("span").classList.add("icon-gift");
+  chatButton.querySelector("span").classList.add("icon-camera");
 }
 
 document.addEventListener("click", function (event) {
   if (!event.target.closest(".chat-widget")) {
     messengersList.classList.remove("show");
     chatButton.querySelector("span").classList.remove("icon-cancel");
-    chatButton.querySelector("span").classList.add("icon-gift");
+    chatButton.querySelector("span").classList.add("icon-camera");
   }
 });
 
