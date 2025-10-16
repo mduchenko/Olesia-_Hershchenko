@@ -19,8 +19,8 @@
 }
 
 .chat-button {
-  background-color: #4caf50;
-  color: white;
+  background-color: #fff1f0;
+  color: black;
   border: none;
   border-radius: 50%;
   width: 60px;
@@ -45,7 +45,7 @@
 @keyframes pulse {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+    box-shadow: 0 0 0 0 #fff1f0d7;
   }
   70% {
     transform: scale(1.2);
@@ -58,7 +58,7 @@
 }
 
 .chat-button:hover {
-  background-color: #45a049;
+  background-color: #fff1f0;
   animation: none;
   transform: scale(1.1);
 }
