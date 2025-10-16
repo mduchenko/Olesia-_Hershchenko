@@ -2504,7 +2504,7 @@
       </button>
     </div>
     <!-- Page-up Button  -->
-    <button id="pageUpBtn">↑</button>
+    <button id="pageUpBtn">&#11165;</button>
     <style>
       #pageUpBtn {
         position: fixed;
@@ -2521,7 +2521,8 @@
         border-radius: 50%;
         cursor: pointer;
         z-index: 1000;
-        text-align: center;
+        display: flex;
+        justify-content: center;
         transition: opacity 0.3s ease;
         @media screen and (max-width: 596px) {
           width: 40px;
@@ -2539,7 +2540,7 @@
 
         if (currentScrollPos < prevScrollPos && currentScrollPos > 100) {
           // Скролимо вгору
-          btn.style.display = "block";
+          btn.style.display = "flex";
         } else {
           // Скролимо вниз або на самому верху
           btn.style.display = "none";
