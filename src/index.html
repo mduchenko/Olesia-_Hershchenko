@@ -2508,18 +2508,24 @@
     <style>
       #pageUpBtn {
         position: fixed;
-        bottom: 20px;
+        bottom: 50px;
         left: 20px;
         display: none;
+        width: 60px;
+        height: 60px;
         padding: 10px 15px;
         font-size: 20px;
-        background-color: #33333378;
-        color: white;
+        background-color: #fff1f0;
+        color: rgb(23, 23, 23);
         border: none;
-        border-radius: 8px;
+        border-radius: 50%;
         cursor: pointer;
         z-index: 1000;
         transition: opacity 0.3s ease;
+        @media screen and (max-width: 596px) {
+          width: 40px;
+          height: 40px;
+        }
       }
     </style>
     <script>
