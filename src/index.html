@@ -2504,7 +2504,7 @@
       </button>
     </div>
     <!-- Page-up Button  -->
-    <button id="pageUpBtn">&#11165;</button>
+    <button id="pageUpBtn"><span class="icon-down-open-big"></span></button>
     <style>
       #pageUpBtn {
         position: fixed;
@@ -2523,12 +2523,18 @@
         z-index: 1000;
         display: flex;
         justify-content: center;
+        align-items: center;
         transition: opacity 0.3s ease;
         @media screen and (max-width: 596px) {
-          width: 40px;
-          height: 40px;
           bottom: calc(env(safe-area-inset-bottom, 0) + 56px);
         }
+      }
+      .icon-down-open-big {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: rotate(180deg);
+        font-size: 30px;
       }
     </style>
     <script>
