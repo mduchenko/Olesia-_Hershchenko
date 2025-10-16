@@ -1,6 +1,6 @@
 .chat-widget {
   position: fixed;
-  bottom: 90px;
+  bottom: 50px;
   right: 20px;
   z-index: 1000;
   transition: all 0.7s ease;
@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 596px) {
-    // bottom: 25px;
+    bottom: calc(env(safe-area-inset-bottom, 0) + 24px);
     right: 20px;
   }
 }
