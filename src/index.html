@@ -2527,7 +2527,7 @@
         transition: opacity 0.3s ease;
         @media screen and (max-width: 596px) {
           right: 14px;
-          bottom: 5px;
+          bottom: calc(env(safe-area-inset-bottom, 0) + 5px);
           left: auto;
           /* bottom: calc(env(safe-area-inset-bottom, 0) + 56px); */
           width: 48px;
