@@ -2521,10 +2521,12 @@
         border-radius: 50%;
         cursor: pointer;
         z-index: 1000;
+        text-align: center;
         transition: opacity 0.3s ease;
         @media screen and (max-width: 596px) {
           width: 40px;
           height: 40px;
+          bottom: calc(env(safe-area-inset-bottom, 0) + 56px);
         }
       }
     </style>
