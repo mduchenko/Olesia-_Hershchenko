@@ -4803,6 +4803,7 @@
         height: 100%;
         object-fit: cover;
         display: block;
+        transition: transform 0.4s ease;
       }
 
       .content-overlay {
@@ -4911,7 +4912,6 @@
 
       .work-item:hover img {
         transform: scale(1.05);
-        transition: transform 0.4s ease;
       }
 
       /* Адаптивність */
@@ -5178,27 +5178,27 @@
 
       function updateWorkItems() {
         const viewHeight = window.innerHeight;
-        const scrollY = window.scrollY;
-        const stackTop = worksStack.offsetTop;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const stackTop = worksStack.getBoundingClientRect().top + scrollY;
 
         workItems.forEach((item, index) => {
           const itemHeight = item.offsetHeight;
           const itemTop = stackTop + index * 100;
 
-          // Прогрес залежить від того, наскільки прокрутили відносно позиції картки
+          // Спрощений розрахунок прогресу для мобільних пристроїв
           let progress = Math.min(
             Math.max(
-              (scrollY - itemTop + viewHeight * 0.8) / (viewHeight * 0.6),
+              (scrollY - itemTop + viewHeight * 0.7) / (viewHeight * 0.8),
               0
             ),
             1
           );
 
-          // Перша картка починає анімацію трохи раніше
-          if (index === 0) {
+          // Для мобільних пристроїв зменшуємо інтенсивність ефекту
+          if (window.innerWidth <= 600) {
             progress = Math.min(
               Math.max(
-                (scrollY - itemTop + viewHeight * 0.6) / (viewHeight * 0.8),
+                (scrollY - itemTop + viewHeight * 0.6) / (viewHeight * 1.0),
                 0
               ),
               1
@@ -5210,11 +5210,23 @@
         });
       }
 
+      // Використовуємо requestAnimationFrame для плавності
+      let ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateWorkItems();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
       // Ініціалізація при завантаженні
       window.addEventListener("load", updateWorkItems);
 
       // Оновлення при скролі
-      window.addEventListener("scroll", updateWorkItems);
+      window.addEventListener("scroll", onScroll, { passive: true });
 
       // Оновлення при зміні розміру вікна
       window.addEventListener("resize", updateWorkItems);
