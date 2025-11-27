@@ -4742,7 +4742,6 @@
         </p>
       </div>
     </div>
-
     <style>
       * {
         margin: 0;
@@ -4788,84 +4787,79 @@
         transition: all 0.6s ease;
         margin-bottom: 40px;
         text-decoration: none;
-        color: white;
+        color: #000;
       }
 
-      .poster-container {
+      .image-container {
         position: relative;
-        width: 100%;
-        height: 500px;
         overflow: hidden;
       }
 
       .work-item img {
         width: 100%;
-        height: 100%;
+        height: 400px;
         object-fit: cover;
         display: block;
-        transition: transform 0.4s ease;
-      }
-
-      .content-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 40px;
-        background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.8) 0%,
-          rgba(0, 0, 0, 0.6) 30%,
-          rgba(0, 0, 0, 0.3) 60%,
-          rgba(0, 0, 0, 0) 100%
-        );
-        z-index: 1;
-      }
-
-      .work-content {
-        position: relative;
-        z-index: 2;
-      }
-
-      .work-item h3 {
-        font-size: 2.2rem;
-        margin-bottom: 15px;
-        font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      }
-
-      .work-item p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 20px;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        opacity: 0.9;
+        transition: filter 0.4s ease;
       }
 
       .view-icon {
-        display: inline-flex;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 10px;
-        padding: 12px 24px;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        border-radius: 25px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        transition: all 0.3s ease;
+        justify-content: center;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 2;
+        text-align: center;
       }
 
       .view-icon svg {
-        width: 20px;
-        height: 20px;
+        margin-bottom: 8px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
       }
 
       .view-icon span {
         font-size: 14px;
         font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        white-space: nowrap;
+      }
+
+      .work-content {
+        padding: 30px;
+        background: white;
+      }
+
+      .work-item h3 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      /* Кольори для різних типів зйомок */
+      .work-item:nth-child(1) {
+        background-color: #d7f9f4;
+      }
+      .work-item:nth-child(2) {
+        background-color: #fde6e6;
+      }
+      .work-item:nth-child(3) {
+        background-color: #fff7d6;
+      }
+      .work-item:nth-child(4) {
+        background-color: #e5e7fe;
+      }
+      .work-item:nth-child(5) {
+        background-color: #f3e7ff;
+      }
+      .work-item:nth-child(6) {
+        background-color: #e6f7e9;
       }
 
       /* Зсуви для ефекту наїзду */
@@ -4906,12 +4900,11 @@
 
       /* Ефекти при наведенні */
       .work-item:hover .view-icon {
-        background: rgba(255, 255, 255, 0.3);
-        transform: translateY(-2px);
+        opacity: 1;
       }
 
       .work-item:hover img {
-        transform: scale(1.05);
+        filter: brightness(0.7);
       }
 
       /* Адаптивність */
@@ -4920,16 +4913,8 @@
           min-height: 1500px;
         }
 
-        .poster-container {
-          height: 400px;
-        }
-
-        .content-overlay {
-          padding: 30px;
-        }
-
-        .work-item h3 {
-          font-size: 1.8rem;
+        .work-item img {
+          height: 300px;
         }
       }
 
@@ -4943,28 +4928,17 @@
           margin-bottom: 50px;
         }
 
-        .poster-container {
-          height: 350px;
-        }
-
-        .content-overlay {
-          padding: 20px;
-        }
-
-        .work-item h3 {
-          font-size: 1.5rem;
-        }
-
-        .work-item p {
-          font-size: 1rem;
-        }
-
-        .view-icon {
-          padding: 10px 20px;
+        .work-item img {
+          height: 250px;
         }
 
         .view-icon span {
           font-size: 12px;
+        }
+
+        .view-icon svg {
+          width: 24px;
+          height: 24px;
         }
       }
     </style>
@@ -4973,201 +4947,169 @@
       <h2>Мої роботи</h2>
       <div class="works-container" id="worksStack">
         <a href="#indiv" class="work-item" style="--i: 0">
-          <div class="poster-container">
-            <img
-              src="https://picsum.photos/1000/600?1"
-              alt="Індивідуальна зйомка"
-            />
-            <div class="content-overlay">
-              <div class="work-content">
-                <h3>Індивідуальна</h3>
-                <p>
-                  Професійна індивідуальна фотосесія, що підкреслює вашу
-                  унікальність та характер.
-                </p>
-                <div class="view-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                    ></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <span>Оглянути роботи</span>
-                </div>
-              </div>
+          <div class="image-container">
+            <img src="images/indiv.jpg" alt="Індивідуальна зйомка" />
+            <div class="view-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Оглянути роботи</span>
             </div>
+          </div>
+          <div class="work-content">
+            <h3>Індивідуальна</h3>
+            <p>
+              Професійна індивідуальна фотосесія, що підкреслює вашу
+              унікальність та характер.
+            </p>
           </div>
         </a>
 
         <a href="#family" class="work-item" style="--i: 1">
-          <div class="poster-container">
-            <img src="https://picsum.photos/1000/600?2" alt="Сімейна зйомка" />
-            <div class="content-overlay">
-              <div class="work-content">
-                <h3>Сімейна</h3>
-                <p>
-                  Теплі та щирі сімейні фото, що зберігають найкращі моменти
-                  вашого життя.
-                </p>
-                <div class="view-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                    ></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <span>Оглянути роботи</span>
-                </div>
-              </div>
+          <div class="image-container">
+            <img src="images/family.jpg" alt="Сімейна зйомка" />
+            <div class="view-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Оглянути роботи</span>
             </div>
+          </div>
+          <div class="work-content">
+            <h3>Сімейна</h3>
+            <p>
+              Теплі та щирі сімейні фото, що зберігають найкращі моменти вашого
+              життя.
+            </p>
           </div>
         </a>
 
         <a href="#love" class="work-item" style="--i: 2">
-          <div class="poster-container">
-            <img src="https://picsum.photos/1000/600?3" alt="Love Story" />
-            <div class="content-overlay">
-              <div class="work-content">
-                <h3>Love Story</h3>
-                <p>
-                  Романтичні фотоісторії, що передають всю глибину почуттів між
-                  двома людьми.
-                </p>
-                <div class="view-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                    ></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <span>Оглянути роботи</span>
-                </div>
-              </div>
+          <div class="image-container">
+            <img src="images/love.jpg" alt="Love Story" />
+            <div class="view-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Оглянути роботи</span>
             </div>
+          </div>
+          <div class="work-content">
+            <h3>Love Story</h3>
+            <p>
+              Романтичні фотоісторії, що передають всю глибину почуттів між
+              двома людьми.
+            </p>
           </div>
         </a>
 
         <a href="#pregnancy" class="work-item" style="--i: 3">
-          <div class="poster-container">
-            <img src="https://picsum.photos/1000/600?4" alt="Вагітність" />
-            <div class="content-overlay">
-              <div class="work-content">
-                <h3>Вагітність</h3>
-                <p>
-                  Ніжні та елегантні фото, що вловлюють магію очікування на
-                  дитину.
-                </p>
-                <div class="view-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                    ></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <span>Оглянути роботи</span>
-                </div>
-              </div>
+          <div class="image-container">
+            <img src="images/pregnancy.jpg" alt="Вагітність" />
+            <div class="view-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Оглянути роботи</span>
             </div>
+          </div>
+          <div class="work-content">
+            <h3>Вагітність</h3>
+            <p>
+              Ніжні та елегантні фото, що вловлюють магію очікування на дитину.
+            </p>
           </div>
         </a>
 
         <a href="#kids" class="work-item" style="--i: 4">
-          <div class="poster-container">
-            <img
-              src="https://picsum.photos/1000/600?5"
-              alt="Підлітки і немовлята"
-            />
-            <div class="content-overlay">
-              <div class="work-content">
-                <h3>Підлітки і немовлята</h3>
-                <p>
-                  Живі та природні фото дітей різного віку - від перших днів до
-                  підліткового періоду.
-                </p>
-                <div class="view-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                    ></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <span>Оглянути роботи</span>
-                </div>
-              </div>
+          <div class="image-container">
+            <img src="images/kids.jpg" alt="Підлітки і немовлята" />
+            <div class="view-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Оглянути роботи</span>
             </div>
+          </div>
+          <div class="work-content">
+            <h3>Підлітки і немовлята</h3>
+            <p>
+              Живі та природні фото дітей різного віку - від перших днів до
+              підліткового періоду.
+            </p>
           </div>
         </a>
 
         <a href="#report" class="work-item" style="--i: 5">
-          <div class="poster-container">
-            <img src="https://picsum.photos/1000/600?6" alt="Репортаж" />
-            <div class="content-overlay">
-              <div class="work-content">
-                <h3>Репортаж (Групова)</h3>
-                <p>
-                  Динамічні репортажні зйомки заходів, подій та групових
-                  проектів.
-                </p>
-                <div class="view-icon">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                    ></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                  <span>Оглянути роботи</span>
-                </div>
-              </div>
+          <div class="image-container">
+            <img src="images/report.jpg" alt="Репортаж" />
+            <div class="view-icon">
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span>Оглянути роботи</span>
             </div>
+          </div>
+          <div class="work-content">
+            <h3>Репортаж (Групова)</h3>
+            <p>
+              Динамічні репортажні зйомки заходів, подій та групових проектів.
+            </p>
           </div>
         </a>
       </div>
     </section>
 
-    <div style="padding: 100px 20px; background: #f0f0f0">
-      <p style="text-align: center; color: #666; font-size: 1.2rem">
+    <div style="padding: 50px 20px; background: #f0f0f0">
+      <p style="text-align: center; color: #666">
         Додатковий контент для демонстрації скролу
       </p>
     </div>
@@ -5178,27 +5120,27 @@
 
       function updateWorkItems() {
         const viewHeight = window.innerHeight;
-        const scrollY = window.scrollY || window.pageYOffset;
-        const stackTop = worksStack.getBoundingClientRect().top + scrollY;
+        const scrollY = window.scrollY;
+        const stackTop = worksStack.offsetTop;
 
         workItems.forEach((item, index) => {
           const itemHeight = item.offsetHeight;
           const itemTop = stackTop + index * 100;
 
-          // Спрощений розрахунок прогресу для мобільних пристроїв
+          // Прогрес залежить від того, наскільки прокрутили відносно позиції картки
           let progress = Math.min(
             Math.max(
-              (scrollY - itemTop + viewHeight * 0.7) / (viewHeight * 0.8),
+              (scrollY - itemTop + viewHeight * 0.8) / (viewHeight * 0.6),
               0
             ),
             1
           );
 
-          // Для мобільних пристроїв зменшуємо інтенсивність ефекту
-          if (window.innerWidth <= 600) {
+          // Перша картка починає анімацію трохи раніше
+          if (index === 0) {
             progress = Math.min(
               Math.max(
-                (scrollY - itemTop + viewHeight * 0.6) / (viewHeight * 1.0),
+                (scrollY - itemTop + viewHeight * 0.6) / (viewHeight * 0.8),
                 0
               ),
               1
@@ -5210,23 +5152,11 @@
         });
       }
 
-      // Використовуємо requestAnimationFrame для плавності
-      let ticking = false;
-      function onScroll() {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            updateWorkItems();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      }
-
       // Ініціалізація при завантаженні
       window.addEventListener("load", updateWorkItems);
 
       // Оновлення при скролі
-      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("scroll", updateWorkItems);
 
       // Оновлення при зміні розміру вікна
       window.addEventListener("resize", updateWorkItems);
