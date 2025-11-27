@@ -4941,6 +4941,12 @@
           height: 24px;
         }
       }
+      .works-container > .work-item.scrolled {
+        transform: scale(calc(1 - var(--progress, 0) * 0.1))
+          translateY(calc(var(--progress, 0) * var(--card-offset, -50px)))
+          translateX(calc(var(--progress, 0) * 10px)) !important;
+        z-index: calc(10 + var(--i)) !important;
+      }
     </style>
     <!-- Секція "Мої роботи" -->
     <section class="works-section">
@@ -5115,59 +5121,59 @@
     </div>
 
     <script>
-      const workItems = document.querySelectorAll(".work-item");
-      const worksStack = document.getElementById("worksStack");
+      document.addEventListener("DOMContentLoaded", function () {
+        const workItems = document.querySelectorAll(".work-item");
+        const worksStack = document.getElementById("worksStack");
 
-      function updateWorkItems() {
-        const viewHeight = window.innerHeight;
-        const scrollY = window.scrollY;
-        const stackTop = worksStack.offsetTop;
+        if (!worksStack || workItems.length === 0) {
+          console.log("Елементи не знайдені");
+          return;
+        }
 
-        workItems.forEach((item, index) => {
-          const itemHeight = item.offsetHeight;
-          const itemTop = stackTop + index * 100;
+        function updateWorkItems() {
+          const viewHeight = window.innerHeight;
+          const scrollY =
+            window.pageYOffset || document.documentElement.scrollTop;
+          const stackTop = worksStack.getBoundingClientRect().top + scrollY;
 
-          // Прогрес залежить від того, наскільки прокрутили відносно позиції картки
-          let progress = Math.min(
-            Math.max(
-              (scrollY - itemTop + viewHeight * 0.8) / (viewHeight * 0.6),
-              0
-            ),
-            1
-          );
+          workItems.forEach((item, index) => {
+            const itemTop = stackTop + index * 100;
 
-          // Перша картка починає анімацію трохи раніше
-          if (index === 0) {
-            progress = Math.min(
+            let progress = Math.min(
               Math.max(
-                (scrollY - itemTop + viewHeight * 0.6) / (viewHeight * 0.8),
+                (scrollY - itemTop + viewHeight * 0.8) / (viewHeight * 0.6),
                 0
               ),
               1
             );
-          }
 
-          item.classList.add("scrolled");
-          item.style.setProperty("--progress", progress.toFixed(3));
-        });
-      }
+            if (index === 0) {
+              progress = Math.min(
+                Math.max(
+                  (scrollY - itemTop + viewHeight * 0.6) / (viewHeight * 0.8),
+                  0
+                ),
+                1
+              );
+            }
 
-      // Ініціалізація при завантаженні
-      window.addEventListener("load", updateWorkItems);
+            item.classList.add("scrolled");
+            item.style.setProperty("--progress", progress);
+          });
+        }
 
-      // Оновлення при скролі
-      window.addEventListener("scroll", updateWorkItems);
+        // Дебаг інформація
+        console.log("Знайдено карток:", workItems.length);
+        console.log("Контейнер:", worksStack);
 
-      // Оновлення при зміні розміру вікна
-      window.addEventListener("resize", updateWorkItems);
+        // Ініціалізація
+        window.addEventListener("load", updateWorkItems);
+        window.addEventListener("scroll", updateWorkItems);
+        window.addEventListener("resize", updateWorkItems);
 
-      // Спочатку всі картки без ефекту
-      setTimeout(() => {
-        workItems.forEach((item) => {
-          item.classList.add("scrolled");
-        });
-        updateWorkItems();
-      }, 100);
+        // Початкова ініціалізація
+        setTimeout(updateWorkItems, 100);
+      });
     </script>
   </body>
 </html>
