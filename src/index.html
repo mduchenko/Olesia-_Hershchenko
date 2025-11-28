@@ -4742,437 +4742,310 @@
         </p>
       </div>
     </div>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Segoe UI", sans-serif;
-      }
-
-      body {
-        background: #f7f8fa;
-        color: #333;
-        overflow-x: hidden;
-      }
-
-      /* Секція "Мої роботи" */
-      .works-section {
-        padding: 100px 20px;
-        position: relative;
-      }
-
-      .works-container {
-        position: relative;
-        min-height: 2000px; /* Простір для скролу */
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      h2 {
-        text-align: center;
-        margin-bottom: 80px;
-        font-size: 2.5rem;
-        color: #2c3e50;
-      }
-
-      .work-item {
-        position: sticky;
-        top: 100px;
-        display: block;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-        transform-origin: center center;
-        transition: all 0.6s ease;
-        margin-bottom: 40px;
-        text-decoration: none;
-        color: #000;
-      }
-
-      .image-container {
-        position: relative;
-        overflow: hidden;
-      }
-
-      .work-item img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
-        display: block;
-        transition: filter 0.4s ease;
-      }
-
-      .view-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        z-index: 2;
-        text-align: center;
-      }
-
-      .view-icon svg {
-        margin-bottom: 8px;
-        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-      }
-
-      .view-icon span {
-        font-size: 14px;
-        font-weight: 600;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        white-space: nowrap;
-      }
-
-      .work-content {
-        padding: 30px;
-        background: white;
-      }
-
-      .work-item h3 {
-        font-size: 1.8rem;
-        margin-bottom: 10px;
-        text-align: center;
-      }
-
-      /* Кольори для різних типів зйомок */
-      .work-item:nth-child(1) {
-        background-color: #d7f9f4;
-      }
-      .work-item:nth-child(2) {
-        background-color: #fde6e6;
-      }
-      .work-item:nth-child(3) {
-        background-color: #fff7d6;
-      }
-      .work-item:nth-child(4) {
-        background-color: #e5e7fe;
-      }
-      .work-item:nth-child(5) {
-        background-color: #f3e7ff;
-      }
-      .work-item:nth-child(6) {
-        background-color: #e6f7e9;
-      }
-
-      /* Зсуви для ефекту наїзду */
-      .works-container > .work-item:nth-child(1) {
-        --card-offset: -60px;
-      }
-      .works-container > .work-item:nth-child(2) {
-        --card-offset: -50px;
-      }
-      .works-container > .work-item:nth-child(3) {
-        --card-offset: -40px;
-      }
-      .works-container > .work-item:nth-child(4) {
-        --card-offset: -30px;
-      }
-      .works-container > .work-item:nth-child(5) {
-        --card-offset: -20px;
-      }
-      .works-container > .work-item:nth-child(6) {
-        --card-offset: -10px;
-      }
-
-      /* Початковий стан - всі картки повністю видимі та чіткі */
-      .works-container > .work-item {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0px);
-        z-index: 10;
-      }
-
-      /* Ефект при скролі - верхні картки зменшуються */
-      .works-container > .work-item.scrolled {
-        transform: scale(calc(1 - var(--progress, 0) * 0.1))
-          translateY(calc(var(--progress, 0) * var(--card-offset, -50px)))
-          translateX(calc(var(--progress, 0) * 10px));
-        z-index: calc(10 + var(--i));
-      }
-
-      /* Ефекти при наведенні */
-      .work-item:hover .view-icon {
-        opacity: 1;
-      }
-
-      .work-item:hover img {
-        filter: brightness(0.7);
-      }
-
-      /* Адаптивність */
-      @media (max-width: 900px) {
-        .works-container {
-          min-height: 1500px;
-        }
-
-        .work-item img {
-          height: 300px;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .works-section {
-          padding: 60px 20px;
-        }
-
-        h2 {
-          font-size: 2rem;
-          margin-bottom: 50px;
-        }
-
-        .work-item img {
-          height: 250px;
-        }
-
-        .view-icon span {
-          font-size: 12px;
-        }
-
-        .view-icon svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
-      .works-container > .work-item.scrolled {
-        transform: scale(calc(1 - var(--progress, 0) * 0.1))
-          translateY(calc(var(--progress, 0) * var(--card-offset, -50px)))
-          translateX(calc(var(--progress, 0) * 10px)) !important;
-        z-index: calc(10 + var(--i)) !important;
-      }
-    </style>
-    <!-- Секція "Мої роботи" -->
+    <!-- SECTION "Мої роботи" -->
     <section class="works-section">
-      <h2>Мої роботи</h2>
-      <div class="works-container" id="worksStack">
-        <a href="#indiv" class="work-item" style="--i: 0">
-          <div class="image-container">
-            <img src="images/indiv.jpg" alt="Індивідуальна зйомка" />
-            <div class="view-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span>Оглянути роботи</span>
-            </div>
-          </div>
-          <div class="work-content">
+      <h2 class="works-title">Мої роботи</h2>
+
+      <div class="works-stack">
+        <a class="work-card" style="--i: 0" href="#indiv">
+          <img src="https://picsum.photos/1000/600?11" alt="" />
+          <div class="work-info">
             <h3>Індивідуальна</h3>
             <p>
               Професійна індивідуальна фотосесія, що підкреслює вашу
-              унікальність та характер.
+              унікальність.
             </p>
           </div>
         </a>
 
-        <a href="#family" class="work-item" style="--i: 1">
-          <div class="image-container">
-            <img src="images/family.jpg" alt="Сімейна зйомка" />
-            <div class="view-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span>Оглянути роботи</span>
-            </div>
-          </div>
-          <div class="work-content">
+        <a class="work-card" style="--i: 1" href="#family">
+          <img src="https://picsum.photos/1000/600?12" alt="" />
+          <div class="work-info">
             <h3>Сімейна</h3>
-            <p>
-              Теплі та щирі сімейні фото, що зберігають найкращі моменти вашого
-              життя.
-            </p>
+            <p>Теплі та щирі сімейні фото, що залишаються на роки.</p>
           </div>
         </a>
 
-        <a href="#love" class="work-item" style="--i: 2">
-          <div class="image-container">
-            <img src="images/love.jpg" alt="Love Story" />
-            <div class="view-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span>Оглянути роботи</span>
-            </div>
-          </div>
-          <div class="work-content">
+        <a class="work-card" style="--i: 2" href="#love">
+          <img src="https://picsum.photos/1000/600?13" alt="" />
+          <div class="work-info">
             <h3>Love Story</h3>
-            <p>
-              Романтичні фотоісторії, що передають всю глибину почуттів між
-              двома людьми.
-            </p>
+            <p>Романтичні фотосесії, що передають вашу історію кохання.</p>
           </div>
         </a>
 
-        <a href="#pregnancy" class="work-item" style="--i: 3">
-          <div class="image-container">
-            <img src="images/pregnancy.jpg" alt="Вагітність" />
-            <div class="view-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span>Оглянути роботи</span>
-            </div>
-          </div>
-          <div class="work-content">
+        <a class="work-card" style="--i: 3" href="#pregnancy">
+          <img src="https://picsum.photos/1000/600?14" alt="" />
+          <div class="work-info">
             <h3>Вагітність</h3>
-            <p>
-              Ніжні та елегантні фото, що вловлюють магію очікування на дитину.
-            </p>
+            <p>Ніжні фото, що зберігають магію очікування.</p>
           </div>
         </a>
 
-        <a href="#kids" class="work-item" style="--i: 4">
-          <div class="image-container">
-            <img src="images/kids.jpg" alt="Підлітки і немовлята" />
-            <div class="view-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span>Оглянути роботи</span>
-            </div>
-          </div>
-          <div class="work-content">
+        <a class="work-card" style="--i: 4" href="#kids">
+          <img src="https://picsum.photos/1000/600?15" alt="" />
+          <div class="work-info">
             <h3>Підлітки і немовлята</h3>
-            <p>
-              Живі та природні фото дітей різного віку - від перших днів до
-              підліткового періоду.
-            </p>
+            <p>Живі та природні фото дітей різного віку.</p>
           </div>
         </a>
 
-        <a href="#report" class="work-item" style="--i: 5">
-          <div class="image-container">
-            <img src="images/report.jpg" alt="Репортаж" />
-            <div class="view-icon">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span>Оглянути роботи</span>
-            </div>
-          </div>
-          <div class="work-content">
-            <h3>Репортаж (Групова)</h3>
-            <p>
-              Динамічні репортажні зйомки заходів, подій та групових проектів.
-            </p>
+        <a class="work-card" style="--i: 5" href="#report">
+          <img src="https://picsum.photos/1000/600?16" alt="" />
+          <div class="work-info">
+            <h3>Репортаж</h3>
+            <p>Динамічні зйомки заходів та подій.</p>
           </div>
         </a>
       </div>
     </section>
 
-    <div style="padding: 50px 20px; background: #f0f0f0">
-      <p style="text-align: center; color: #666">
-        Додатковий контент для демонстрації скролу
-      </p>
-    </div>
+    <style>
+      .works-section {
+        padding: 80px 20px;
+        position: relative;
+        background: #f8f9fa;
+        min-height: 100vh;
+      }
+
+      .works-title {
+        text-align: center;
+        margin-bottom: 80px;
+        font-size: 2.8rem;
+        color: #333;
+      }
+
+      /* Контейнер для стеку */
+      .works-stack {
+        position: relative;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        min-height: 3000px; /* Додаємо простір для скролу */
+      }
+
+      /* Картки */
+      .work-card {
+        position: sticky;
+        top: 100px;
+        display: block;
+        width: 100%;
+        border-radius: 22px;
+        overflow: hidden;
+        margin-bottom: 40px; /* Зменшуємо відступ між картками */
+        transform-origin: center;
+        transition: 0.45s ease-out;
+        filter: brightness(0.97);
+        opacity: 1; /* Змінюємо на 1 за замовчуванням */
+        visibility: visible;
+
+        /* БАЗОВЕ ЗМІЩЕННЯ — видно краєчки як у карткової колоди */
+        transform: translateY(calc(var(--i) * 20px))
+          translateX(calc(var(--i) * -14px)) scale(calc(1 - var(--i) * 0.03));
+
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+        z-index: calc(10 - var(--i));
+      }
+
+      /* Активна картка при скролі */
+      .work-card.active {
+        transform: translateY(calc(var(--progress) * -100px + var(--i) * 20px))
+          translateX(calc(var(--i) * (-14px + var(--progress) * -10px)))
+          rotate(calc(var(--i) * -2deg * var(--progress)))
+          scale(calc(1 - var(--i) * 0.03 - var(--progress) * 0.12));
+        z-index: calc(80 + var(--i));
+      }
+
+      /* Фото */
+      .work-card img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        display: block;
+        transition: 0.4s ease;
+      }
+
+      /* Текст */
+      .work-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 40px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: #fff;
+      }
+
+      .work-info h3 {
+        font-size: 2rem;
+        margin-bottom: 12px;
+      }
+
+      /* Ефекти hover — свічення + легкий гліч */
+      .work-card:hover {
+        box-shadow: 0 30px 70px rgba(255, 255, 255, 0.25),
+          0 0 25px rgba(255, 255, 255, 0.4);
+        filter: brightness(1.05);
+        z-index: 100 !important;
+      }
+
+      .work-card:hover img {
+        transform: scale(1.08) translateX(-2px);
+      }
+
+      /* Легкий гліч */
+      .work-card:hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(255, 255, 255, 0.05);
+        mix-blend-mode: overlay;
+        animation: glitchMove 0.25s steps(2) infinite;
+      }
+
+      @keyframes glitchMove {
+        0% {
+          transform: translate(0, 0);
+        }
+        50% {
+          transform: translate(3px, -3px);
+        }
+        100% {
+          transform: translate(0, 0);
+        }
+      }
+
+      /* Анімація появи */
+      .work-card.animate-in {
+        animation: cardAppear 0.8s ease-out forwards;
+        animation-delay: calc(var(--i) * 0.1s);
+      }
+
+      @keyframes cardAppear {
+        from {
+          opacity: 0;
+          transform: translateY(40px) scale(0.95)
+            translateX(calc(var(--i) * -14px));
+        }
+        to {
+          opacity: 1;
+          transform: translateY(calc(var(--i) * 20px))
+            translateX(calc(var(--i) * -14px)) scale(calc(1 - var(--i) * 0.03));
+        }
+      }
+
+      @media (max-width: 768px) {
+        .works-title {
+          font-size: 2rem;
+          margin-bottom: 50px;
+        }
+
+        .work-card img {
+          height: 350px;
+        }
+
+        .work-info {
+          padding: 25px;
+        }
+
+        .work-info h3 {
+          font-size: 1.5rem;
+        }
+
+        .work-card {
+          margin-bottom: 30px;
+          transform: translateY(calc(var(--i) * 15px)) translateX(0)
+            scale(calc(1 - var(--i) * 0.02));
+        }
+
+        .work-card.active {
+          transform: translateY(calc(var(--progress) * -50px + var(--i) * 15px))
+            translateX(0)
+            scale(calc(1 - var(--i) * 0.02 - var(--progress) * 0.08));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .works-section {
+          padding: 60px 15px;
+        }
+
+        .works-title {
+          font-size: 1.8rem;
+          margin-bottom: 40px;
+        }
+
+        .work-card img {
+          height: 300px;
+        }
+
+        .work-info {
+          padding: 20px;
+        }
+
+        .work-info h3 {
+          font-size: 1.3rem;
+        }
+
+        .work-card {
+          margin-bottom: 25px;
+          transform: translateY(calc(var(--i) * 10px)) translateX(0)
+            scale(calc(1 - var(--i) * 0.01));
+        }
+
+        .work-card.active {
+          transform: translateY(calc(var(--progress) * -30px + var(--i) * 10px))
+            translateX(0)
+            scale(calc(1 - var(--i) * 0.01 - var(--progress) * 0.05));
+        }
+      }
+    </style>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const workItems = document.querySelectorAll(".work-item");
-        const worksStack = document.getElementById("worksStack");
+        const cards = document.querySelectorAll(".work-card");
+        const stack = document.querySelector(".works-stack");
 
-        if (!worksStack || workItems.length === 0) {
-          console.log("Елементи не знайдені");
-          return;
-        }
+        // Спочатку додаємо класи для анімації
+        cards.forEach((card) => {
+          card.classList.add("active", "animate-in");
+        });
 
-        function updateWorkItems() {
-          const viewHeight = window.innerHeight;
-          const scrollY =
-            window.pageYOffset || document.documentElement.scrollTop;
-          const stackTop = worksStack.getBoundingClientRect().top + scrollY;
+        // ПАРАЛАКС + НАЇЗД
+        function updateCards() {
+          const vh = window.innerHeight;
+          const sy = window.scrollY;
+          const top = stack.offsetTop;
 
-          workItems.forEach((item, index) => {
-            const itemTop = stackTop + index * 100;
+          cards.forEach((card, i) => {
+            const start = top + i * 100; // Зменшуємо відстань між картками
+            let progress = (sy - start + vh * 0.5) / (vh * 0.8);
+            progress = Math.max(0, Math.min(progress, 1));
 
-            let progress = Math.min(
-              Math.max(
-                (scrollY - itemTop + viewHeight * 0.8) / (viewHeight * 0.6),
-                0
-              ),
-              1
-            );
+            // плавність + інерція
+            progress = Math.pow(progress, 1.25);
 
-            if (index === 0) {
-              progress = Math.min(
-                Math.max(
-                  (scrollY - itemTop + viewHeight * 0.6) / (viewHeight * 0.8),
-                  0
-                ),
-                1
-              );
-            }
-
-            item.classList.add("scrolled");
-            item.style.setProperty("--progress", progress);
+            // передаємо прогрес у CSS
+            card.style.setProperty("--progress", progress);
           });
         }
 
-        // Дебаг інформація
-        console.log("Знайдено карток:", workItems.length);
-        console.log("Контейнер:", worksStack);
+        // Запускаємо оновлення при скролі
+        window.addEventListener("scroll", updateCards);
+        window.addEventListener("resize", updateCards);
 
-        // Ініціалізація
-        window.addEventListener("load", updateWorkItems);
-        window.addEventListener("scroll", updateWorkItems);
-        window.addEventListener("resize", updateWorkItems);
+        // Ініціалізація при завантаженні
+        updateCards();
 
-        // Початкова ініціалізація
-        setTimeout(updateWorkItems, 100);
+        // GSAP плавна поява стеку
+        gsap.from(".work-card", {
+          opacity: 0,
+          y: 60,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.3,
+        });
       });
     </script>
   </body>
