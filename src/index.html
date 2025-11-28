@@ -5093,9 +5093,14 @@
       }
 
       .swiper {
-        /* padding: 200px; */
+        padding: 50px;
         width: 70vw;
-        height: 1000px;
+        height: 800px;
+        @media screen and (max-width: 576px) {
+          padding: 10px;
+          width: 70vw;
+          height: 400px;
+        }
       }
 
       .swiper-slide {
