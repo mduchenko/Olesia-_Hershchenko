@@ -4834,6 +4834,12 @@
       .swiper-slide:nth-child(10n) {
         background-color: rgb(54, 94, 77);
       }
+      .swiper-slide.selected {
+        transform: scale(1.1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        border: 2px solid #ff4081;
+        transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+      }
     </style>
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -4857,8 +4863,23 @@
       var swiper = new Swiper(".mySwiper", {
         effect: "cards",
         grabCursor: true,
-        perSlideOffset: 30,
         loop: true,
+      });
+
+      const slides = document.querySelectorAll(".swiper-slide");
+
+      slides.forEach((slide) => {
+        slide.addEventListener("click", () => {
+          // Отримуємо індекс слайду у Swiper
+          const index = slide.swiperSlideIndex;
+
+          // Переміщаємо слайд у верхній/центровий
+          swiper.slideToLoop(index);
+
+          // Додаємо клас для виділення
+          slides.forEach((s) => s.classList.remove("selected"));
+          slide.classList.add("selected");
+        });
       });
     </script>
   </body>
